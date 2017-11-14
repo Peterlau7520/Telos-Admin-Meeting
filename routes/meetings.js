@@ -21,16 +21,57 @@ var s3Bucket = new AWS.S3({
     accessKeyId: process.env.S3_KEY,
     secretAccessKey: process.env.secretAccessKey
 });
-router.get('/allMeetings',(req,res)=>{
-
-    res.render('meeting')
+router.get('/allMeetings', (req, res) => {
+    var meetings = [
+        {
+           title: "Meeting 1",
+           titleChn: "",
+           startTime: "2017-03-18T13:00",
+           endTime: "2017-03-10T13:00",
+           venue:"venue 1",
+           polls: [{
+               pollName: "Poll 1",
+               pollNameChn: "",
+               summary: "Summary 1",
+               summaryChn: "",
+               endTime: "",
+               options: "",
+               documents: "",
+            },{
+               pollName: "Poll 2",
+               pollNameChn: "",
+               summary: "Summary 2",
+               summaryChn: "",
+               endTime: "",
+               options: "",
+               documents: ""
+            }]           
+        },
+        {
+           title: "Meeting 2",
+           titleChn: "",
+           startTime: "2017-03-17T13:00",
+           endTime: "2018-03-11T13:00",
+           venue:"venue 2",
+           polls: [{
+               pollName: "Poll 1",
+               pollNameChn: "",
+               summary: "Summary 1",
+               summaryChn: "",
+               endTime: "",
+               options: "",
+               documents: ""
+            }]           
+        }
+    ]
+    res.render('meeting',{meetingsData:meetings});
     //check whether it's a past meeting or upcoming meeting. 
 
 })
 
 // 1. Milestonre 1 completed
 // 2. To-do: add polls into meeting. + organise files on S3
-router.post('/addMeeting',(req,res)=>{
+router.post('/addMeeting', (req, res) => {
     console.log('req.body', req.body);
     var startDay = req.body.startTime.substring(0, req.body.startTime.indexOf('T'));
     var startHour = req.body.startTime.substring(req.body.startTime.indexOf('T') + 1, req.body.startTime.indexOf('T') + 9);
@@ -44,11 +85,11 @@ router.post('/addMeeting',(req,res)=>{
     var meeting = new Meeting({
         title: req.body.title,
         titleChn: req.body.titleChn,
-        startTime:startFinal,
-        endTime: endFinal,    
+        startTime: startFinal,
+        endTime: endFinal,
         //polls
     });
-    meeting.save(function(err, meeting){
+    meeting.save(function (err, meeting) {
         Estate.findOne({
             "estateName": req.user.estateName
         }, function (err, estate) {
@@ -86,12 +127,15 @@ router.post('/addMeeting',(req,res)=>{
                 res.redirect('/allMeetings');
             }
         });
-    })    
+    })
 })
 
-router.post('/editMeeting',(req,res)=>{
-    
-
-    
+router.post('/editMeeting', (req, res) => {
 })
+
+router.get('/addMeeting',(req,res) => {
+    res.render('add_meeting');
+})
+
+
 module.exports = router;

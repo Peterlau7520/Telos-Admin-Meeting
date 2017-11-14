@@ -39,7 +39,7 @@
                     <a href="/about">
                         <i class="pe-7s-science"></i>
                         <p>Contractors and Consultants List
-                        <br>
+                            <br>
                             顧問及合約商</p>
                     </a>
                 </li>
@@ -47,7 +47,7 @@
                     <a href="/logout">
                         <i class="pe-7s-map-marker"></i>
                         <p>LOG OUT
-                        <br>
+                            <br>
                             登出</p>
                     </a>
                 </li>
@@ -55,7 +55,7 @@
         </div>
     </div>
     <div class="main-panel">
-		<nav class="navbar navbar-default navbar-fixed">
+        <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
@@ -64,32 +64,171 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Upcoming Meetings: Meeting 1</a>
+                    <a class="navbar-brand" href="#">Meeting</a>
                 </div>
                 <div class="collapse navbar-collapse">
                 </div>
             </div>
         </nav>
+        <div class="row page-wrapper">
+            <div class="side-menu">
+                <nav class="navbar navbar-default" role="navigation">
+                    <!-- Main Menu -->
+                    <div class="side-menu-container">
+                        <ul class="nav navbar-nav" >
+                            <li class="panel panel-default" id="dropdown">
+                                <a data-toggle="collapse" href="#dropdown-lvl1">
+                                </span>Upcoming Meetings<span class="caret"></span>
+                        </a>
+                        <div id="dropdown-lvl1" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <ul class="nav navbar-nav" role="tablist">
+                                    {{#each meetingsData}}
 
-   <div class="content" style="padding-bottom:0; min-height:800px">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="card">
-                                <div class="header">
-                                    <h4 class="title">Upcoming Meetings: Meeting 1</h4>
-                                </div>
-                                <div class="content">
-                                  
-                                </div>
+                                    {{#if @key}}
+                                    <li role="presentation" >
+                                        {{else}}
+                                    <li role="presentation" class="active">
+                                        {{/if}}
+                                        <a href="#tab_{{@key}}" aria-controls="home" role="tab" data-toggle="tab">{{title}}</a>
+                                    </li>
+                                    {{/each}}
+
+                                </ul>
                             </div>
                         </div>
-                       
-                    </div>
-
+                    </li>
+                    <li><a href="#">Past Meetings</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+        <div class="meeting-btn">
+            <a href="/addMeeting" class="btn btn-primary">Add a Meeting</a>
+        </div>      
+    </div>
+    <!-- Main Content -->
+    <div class="tab-content tab-wraper">
+        {{#each meetingsData}}
+        {{#if @key}}
+        <div role="tabpanel" class="tab-pane" id="tab_{{@key}}">
+            {{else}}
+            <div role="tabpanel" class="tab-pane active" id="tab_{{@key}}">
+                {{/if}}
+                <div class="div-wrapper">
+                    <form role="form">
+                        <div class="form-group col-sm-6">
+                            <label>Meeting Title</label>
+                            <input type="text" class="form-control" value="{{title}}">
+                        </div>
+                        <div class="form-group col-sm-6">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group col-sm-6">
+                            <label>Meeting Start Time</label>
+                            <input type="datetime-local" class="form-control" value="{{startTime}}">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Meeting End Time</label>
+                            <input type="datetime-local" class="form-control" value="{{endTime}}">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group col-sm-6">
+                            <label>Venue</label>
+                            <input type="text" class="form-control" value="{{venue}}">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Agenda</label>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Document name</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Agends.pdf</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
                 </div>
-            </div>
+                <div class="div-wrapper">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        {{#each polls}}
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#poll_{{@key}}" aria-expanded="true" aria-controls="collapseOne">
+                                        {{pollName}}
+                                    </a>
+                                </h4>
+                            </div>
+                            {{#if @key}}
+                            <div id="poll_{{@key}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                {{else}}
+                                <div id="poll_{{@key}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                    {{/if}}
+                                    <div class="panel-body">
+                                        <form role="form">
+                                            <div class="form-group col-sm-12">
+                                                <label>Summary</label>
+                                                <textarea class="form-control">
+                                                    {{summary}}
+                                                </textarea>
+                                            </div>
 
+                                            <div class="clearfix"></div>
+                                            <div class="form-group col-sm-6">
+                                                <label>Voting option</label>
+                                                <select class="form-control">
+                                                    <option value="yes">Yes</option>
+                                                    <option value="no">No</option>
+                                                    <option value="abstain">Abstain</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label>Uploaded Documents</label>
+                                                <table class="table table-bordered">
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Document name</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Agends.pdf</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="form-group col-sm-6">
+                                                <label>POll Results</label>
+                                                <table class="table table-bordered">
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Document name</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Agends.pdf</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div> 
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+        </div>
         <footer class="footer">
             <div class="container-fluid">
                 <nav class="pull-left">
@@ -111,7 +250,7 @@
                         </li>
                         <li>
                             <a href="#">
-                               Blog
+                                Blog
                             </a>
                         </li>
                     </ul>
@@ -121,6 +260,6 @@
                 </p>
             </div>
         </footer>
-
     </div>
+</div>
 </div>

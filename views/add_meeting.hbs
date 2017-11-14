@@ -1,0 +1,236 @@
+<div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
+
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="/" class="simple-text">
+                    The Beverly Hills
+                </a>
+                <a href="/" class="simple-text">
+                    比華利山莊
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li>
+                    <a href="/currentpolls.html">
+                        <i class="pe-7s-graph"></i>
+                        <p>NOTICEBOARD<br>
+                            通告
+                        </p>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="/currentpolls.html">
+                        <i class="pe-7s-graph"></i>
+                        <p>MEETINGS<br>
+                            會議
+                        </p>
+                    </a>
+                </li>
+                <li >
+                    <a href="/pastpolls.html">
+                        <i class="pe-7s-user"></i>
+                        <p>Surveys</p>
+                        <p>問卷</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/about">
+                        <i class="pe-7s-science"></i>
+                        <p>Contractors and Consultants List
+                            <br>
+                            顧問及合約商</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/logout">
+                        <i class="pe-7s-map-marker"></i>
+                        <p>LOG OUT
+                            <br>
+                            登出</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Add a Meeting | 添加会议</a>
+                </div> 
+                <div class="collapse navbar-collapse">
+                </div>
+            </div>
+        </nav>
+        <div class="row page-wrapper">
+
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/allMeetings">Meetings</a></li>
+                <li class="breadcrumb-item active">Add a meeting</li>
+            </ol>
+
+            <div class="div-wrapper">
+                <form role="form" name="pollform">
+                    <div class="form-group col-sm-6">
+                        <label>Meeting Title</label>
+                        <input type="text" class="form-control" name="meeting_title">
+                    </div>
+                    <div class="form-group col-sm-6">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-sm-6">
+                        <label>会议标题</label>
+                        <input type="text" class="form-control" name="meeting_title_chinese">
+                    </div>
+                    <div class="form-group col-sm-6">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-sm-6">
+                        <label>Meeting Start Time | 会议开始时间</label>
+                        <input type="datetime-local" class="form-control" name="stat_time">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Meeting End Time | 会议结束时间</label>
+                        <input type="datetime-local" class="form-control" name="end_time">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-sm-6">
+                        <label>Venue | 地点 </label>
+                        <input type="text" class="form-control" name="venue">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-sm-6">
+                        <label>Agenda | 议程</label>
+                        <input type="file" name="agenda"/> 
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-sm-6">
+                        <label>Poll end date and time</label>
+                        <input type="datetime-local" class="form-control" name="poll_end_date">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-sm-6">
+                        <label>Poll end date and time</label>
+                        <p>
+                            <input type="button" class="btn btn-primary" value="Add a Poll" id="open_model">
+                        </p>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label></label>   
+                        <p>
+                            <input type="hidden" name="poll_json" id="poll_json">
+                            <input type="submit" class="btn btn-success" value="Submit">
+                        </p>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Company
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Blog
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <p class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                </p>
+            </div>
+        </footer>
+    </div>
+</div>
+<div id="poll" class="modal  fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add a poll</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" name="#poll_form" id="poll_form">
+                    <div class="form-group col-sm-6">
+                        <label>Poll title</label>
+                        <input type="text" name="title" class="form-control">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>投票标题</label>
+                        <input type="text" name="title_chinese" class="form-control">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-sm-6">
+                        <label>Project Name</label>
+                        <input type="text" name="project_name" class="form-control">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>项目名</label>
+                        <input type="text" name="project_name_chinese" class="form-control">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-sm-6">
+                        <label>Summary</label>
+                        <textarea name="summary" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>概要</label>
+                        <textarea type="datetime-local" name="summary_chinese" class="form-control"></textarea>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-sm-6">
+                        <label>Voting options</label>
+                        <p>
+                            <input type="button" class="btn btn-primary" value="Add Options">
+                        </p>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Add Documents</label>
+                        <p>
+                            <input type="button" class="btn btn-primary" value="Add more Documents">
+                        </p>
+                        <input type="file" name="document">
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="close_model">Confirm</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    
+</script>
