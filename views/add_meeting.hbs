@@ -78,7 +78,7 @@
             </ol>
 
             <div class="div-wrapper">
-                <form role="form" name="pollform">
+                <form role="form" name="pollform" action="/saveMeeting" method="post">
                     <div class="form-group col-sm-6">
                         <label>Meeting Title</label>
                         <input type="text" class="form-control" name="meeting_title">
@@ -232,5 +232,23 @@
     </div>
 </div>
 <script type="text/javascript">
-    
+    $(document).ready(function () {
+        console.log("Dom is ready");
+        var polls_array = [];
+        $("#open_model").click(function () {
+            $('#poll_form')[0].reset();
+            $("#poll").modal();
+        })
+        $("#close_model").click(function () {
+            $("#poll").modal("hide");
+            var form_data_array = $("#poll_form").serializeArray();
+            console.log(form_data_array);
+            var form_json = {};
+            form_data_array.forEach(function (obj) {
+                form_json[obj.name] = obj.value;
+            });
+            polls_array.push(form_json);
+            $("#poll_json").val(JSON.stringify(polls_array));
+        })
+    })
 </script>

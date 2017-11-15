@@ -4,7 +4,7 @@
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="/" class="simple-text">
-                    The Beverly Hills
+                    The Beverly Hills 
                 </a>
                 <a href="/" class="simple-text">
                     比華利山莊
@@ -80,7 +80,7 @@
                                 <a data-toggle="collapse" href="#dropdown-lvl1">
                                 </span>Upcoming Meetings<span class="caret"></span>
                         </a>
-                        <div id="dropdown-lvl1" class="panel-collapse collapse">
+                        <div id="dropdown-lvl1" class="panel-collapse collapse in">
                             <div class="panel-body">
                                 <ul class="nav navbar-nav" role="tablist">
                                     {{#each meetingsData}}
@@ -108,33 +108,34 @@
     </div>
     <!-- Main Content -->
     <div class="tab-content tab-wraper">
-        {{#each meetingsData}}
+        {{#each meetingsData as |value meeting_key|}}
         {{#if @key}}
-        <div role="tabpanel" class="tab-pane" id="tab_{{@key}}">
+        <div role="tabpanel" class="tab-pane" id="tab_{{meeting_key}}">
             {{else}}
-            <div role="tabpanel" class="tab-pane active" id="tab_{{@key}}">
+            <div role="tabpanel" class="tab-pane active" id="tab_{{meeting_key}}">
                 {{/if}}
                 <div class="div-wrapper">
-                    <form role="form">
+                    <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}">
                         <div class="form-group col-sm-6">
                             <label>Meeting Title</label>
-                            <input type="text" class="form-control" value="{{title}}">
+                            <input type="text" class="form-control" name="title" value="{{title}}">
                         </div>
-                        <div class="form-group col-sm-6">
+                        <div class="form-group col-sm-6 text-right">
+                            <button class="btn btn-success edit_meeting" type="button" data-id="{{meeting_key}}">Edit Meeting</button>
                         </div>
                         <div class="clearfix"></div>
                         <div class="form-group col-sm-6">
                             <label>Meeting Start Time</label>
-                            <input type="datetime-local" class="form-control" value="{{startTime}}">
+                            <input type="datetime-local" name="start_time" class="form-control" value="{{startTime}}">
                         </div>
                         <div class="form-group col-sm-6">
                             <label>Meeting End Time</label>
-                            <input type="datetime-local" class="form-control" value="{{endTime}}">
+                            <input type="datetime-local" name="end_time" class="form-control" value="{{endTime}}">
                         </div>
                         <div class="clearfix"></div>
                         <div class="form-group col-sm-6">
                             <label>Venue</label>
-                            <input type="text" class="form-control" value="{{venue}}">
+                            <input type="text" class="form-control" name="venue" value="{{venue}}">
                         </div>
                         <div class="form-group col-sm-6">
                             <label>Agenda</label>
@@ -169,18 +170,16 @@
                                 <div id="poll_{{@key}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                     {{/if}}
                                     <div class="panel-body">
-                                        <form role="form">
+                                        <form role="form" name="poll_form_{{@key}}" id="poll_form_{{meeting_key}}_{{@key}}">
                                             <div class="form-group col-sm-12">
                                                 <label>Summary</label>
-                                                <textarea class="form-control">
-                                                    {{summary}}
-                                                </textarea>
+                                                <textarea class="form-control" name="summary">{{summary}}</textarea>
                                             </div>
 
                                             <div class="clearfix"></div>
                                             <div class="form-group col-sm-6">
                                                 <label>Voting option</label>
-                                                <select class="form-control">
+                                                <select class="form-control" name="voating_option">
                                                     <option value="yes">Yes</option>
                                                     <option value="no">No</option>
                                                     <option value="abstain">Abstain</option>
@@ -218,7 +217,7 @@
                                             </div>
 
                                         </form>
-                                    </div>
+                                    </div                                    >
                                 </div>
                             </div> 
                             {{/each}}
@@ -263,3 +262,38 @@
     </div>
 </div>
 </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log("Dom is ready");
+        function convertSerializeArrayToJson(serilizeArray) {
+            var form_json = {};
+            serilizeArray.forEach(function (obj) {
+                form_json[obj.name] = obj.value;
+            });
+            return form_json;
+        }
+        var originalData = '{{{stringify meetingsData}}}';
+        originalData = JSON.parse(originalData);
+        $(".edit_meeting").click(function () {
+            var index = $(this).data('id');
+            var meetingform = $("#edit_meeting_" + index).serializeArray();
+            var meetingData = convertSerializeArrayToJson(meetingform);
+            meetingData.polls = [];
+            originalData[index].polls.forEach(function (value, key) {
+                var poll_form = $("#poll_form_" + index + '_' + key).serializeArray();
+                meetingData.polls.push(convertSerializeArrayToJson(poll_form));
+            });
+            $.ajax({
+                url: "/editMeeting",
+                data: {"metting":JSON.stringify(meetingData)},
+                type: 'POST',
+                dataType: "json",
+                success: function (data, textStatus, jqXHR) {
+                    console.log("sumbited data:",data);
+                }
+
+            })
+        });
+    });
+</script>

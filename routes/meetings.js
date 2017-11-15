@@ -131,11 +131,21 @@ router.post('/addMeeting', (req, res) => {
 })
 
 router.post('/editMeeting', (req, res) => {
+    var data = JSON.parse(req.body.metting);
+    console.log(data);
+    res.json(data);
 })
 
 router.get('/addMeeting',(req,res) => {
     res.render('add_meeting');
 })
 
+router.post('/saveMeeting',(req,res) =>{
+    var data = req.body;
+    if(data.poll_json){
+        data.poll_json = JSON.parse(data.poll_json);
+    }
+    res.json(data);
+})
 
 module.exports = router;

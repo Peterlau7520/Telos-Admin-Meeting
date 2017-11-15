@@ -2,7 +2,7 @@
 // set the global Promise to Mongoose.
 mongoose.Promise = global.Promise;
 const connect = process.env.MONGODB_URI || "mongodb://upwork:upwork@ds117625.mlab.com:17625/telos";
-mongoose.connect(connect);
+mongoose.connect(connect,{ useMongoClient: true });
 
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
