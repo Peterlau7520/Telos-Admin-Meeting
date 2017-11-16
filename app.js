@@ -28,7 +28,7 @@ app.use('/', surveysRoutes);
 
 
 app.listen(process.env.PORT || 3000, function () {
-    console.log('server successfully started');
+    console.log('server successfully started on Port 3000');
 })
 
   

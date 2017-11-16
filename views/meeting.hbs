@@ -4,7 +4,7 @@
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="/" class="simple-text">
-                    The Beverly Hills 
+                    The Beverly Hills
                 </a>
                 <a href="/" class="simple-text">
                     比華利山莊
@@ -15,20 +15,20 @@
                 <li>
                     <a href="/currentpolls.html">
                         <i class="pe-7s-graph"></i>
-                        <p>NOTICEBOARD<br>
-                            通告
+                        <p>NOTICEBOARD
+                            <br> 通告
                         </p>
                     </a>
                 </li>
                 <li class="active">
                     <a href="/currentpolls.html">
                         <i class="pe-7s-graph"></i>
-                        <p>MEETINGS<br>
-                            會議
+                        <p>MEETINGS
+                            <br> 會議
                         </p>
                     </a>
                 </li>
-                <li >
+                <li>
                     <a href="/pastpolls.html">
                         <i class="pe-7s-user"></i>
                         <p>Surveys</p>
@@ -39,16 +39,16 @@
                     <a href="/about">
                         <i class="pe-7s-science"></i>
                         <p>Contractors and Consultants List
-                            <br>
-                            顧問及合約商</p>
+                            <br> 顧問及合約商
+                        </p>
                     </a>
                 </li>
                 <li>
                     <a href="/logout">
                         <i class="pe-7s-map-marker"></i>
                         <p>LOG OUT
-                            <br>
-                            登出</p>
+                            <br> 登出
+                        </p>
                     </a>
                 </li>
             </ul>
@@ -70,198 +70,200 @@
                 </div>
             </div>
         </nav>
-        <div class="row page-wrapper">
+        <div class="row page-wrapper custom_wrapper">
             <div class="side-menu">
                 <nav class="navbar navbar-default" role="navigation">
                     <!-- Main Menu -->
                     <div class="side-menu-container">
-                        <ul class="nav navbar-nav" >
+                        <ul class="nav navbar-nav">
                             <li class="panel panel-default" id="dropdown">
                                 <a data-toggle="collapse" href="#dropdown-lvl1">
-                                </span>Upcoming Meetings<span class="caret"></span>
-                        </a>
-                        <div id="dropdown-lvl1" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <ul class="nav navbar-nav" role="tablist">
-                                    {{#each meetingsData}}
-
-                                    {{#if @key}}
-                                    <li role="presentation" >
-                                        {{else}}
-                                    <li role="presentation" class="active">
-                                        {{/if}}
-                                        <a href="#tab_{{@key}}" aria-controls="home" role="tab" data-toggle="tab">{{title}}</a>
-                                    </li>
-                                    {{/each}}
-
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="#">Past Meetings</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-        <div class="meeting-btn">
-            <a href="/addMeeting" class="btn btn-primary">Add a Meeting</a>
-        </div>      
-    </div>
-    <!-- Main Content -->
-    <div class="tab-content tab-wraper">
-        {{#each meetingsData as |value meeting_key|}}
-        {{#if @key}}
-        <div role="tabpanel" class="tab-pane" id="tab_{{meeting_key}}">
-            {{else}}
-            <div role="tabpanel" class="tab-pane active" id="tab_{{meeting_key}}">
-                {{/if}}
-                <div class="div-wrapper">
-                    <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}">
-                        <div class="form-group col-sm-6">
-                            <label>Meeting Title</label>
-                            <input type="text" class="form-control" name="title" value="{{title}}">
-                        </div>
-                        <div class="form-group col-sm-6 text-right">
-                            <button class="btn btn-success edit_meeting" type="button" data-id="{{meeting_key}}">Edit Meeting</button>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="form-group col-sm-6">
-                            <label>Meeting Start Time</label>
-                            <input type="datetime-local" name="start_time" class="form-control" value="{{startTime}}">
-                        </div>
-                        <div class="form-group col-sm-6">
-                            <label>Meeting End Time</label>
-                            <input type="datetime-local" name="end_time" class="form-control" value="{{endTime}}">
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="form-group col-sm-6">
-                            <label>Venue</label>
-                            <input type="text" class="form-control" name="venue" value="{{venue}}">
-                        </div>
-                        <div class="form-group col-sm-6">
-                            <label>Agenda</label>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Document name</th>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Agends.pdf</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="clearfix"></div>
-                    </form>
-                </div>
-                <div class="div-wrapper">
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                        {{#each polls}}
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#poll_{{@key}}" aria-expanded="true" aria-controls="collapseOne">
-                                        {{pollName}}
-                                    </a>
-                                </h4>
-                            </div>
-                            {{#if @key}}
-                            <div id="poll_{{@key}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                {{else}}
-                                <div id="poll_{{@key}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                    {{/if}}
+                                    </span>Upcoming Meetings
+                                    <span class="caret"></span>
+                                </a>
+                                <div id="dropdown-lvl1" class="panel-collapse collapse in">
                                     <div class="panel-body">
-                                        <form role="form" name="poll_form_{{@key}}" id="poll_form_{{meeting_key}}_{{@key}}">
-                                            <div class="form-group col-sm-12">
-                                                <label>Summary</label>
-                                                <textarea class="form-control" name="summary">{{summary}}</textarea>
-                                            </div>
+                                        <ul class="nav navbar-nav" role="tablist">
+                                            {{#each meetingsData}} {{#if @key}}
+                                            <li role="presentation">
+                                                {{else}}
+                                                <li role="presentation" class="active">
+                                                    {{/if}}
+                                                    <a href="#tab_{{@key}}" aria-controls="home" role="tab" data-toggle="tab">{{title}}</a>
+                                                </li>
+                                                {{/each}}
 
-                                            <div class="clearfix"></div>
-                                            <div class="form-group col-sm-6">
-                                                <label>Voting option</label>
-                                                <select class="form-control" name="voating_option">
-                                                    <option value="yes">Yes</option>
-                                                    <option value="no">No</option>
-                                                    <option value="abstain">Abstain</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-sm-6">
-                                                <label>Uploaded Documents</label>
-                                                <table class="table table-bordered">
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Document name</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Agends.pdf</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="form-group col-sm-6">
-                                                <label>POll Results</label>
-                                                <table class="table table-bordered">
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Document name</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Agends.pdf</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div class="form-group col-sm-6">
-
-                                            </div>
-
-                                        </form>
-                                    </div                                    >
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div> 
-                            {{/each}}
+                                </li>
+                                <li>
+                                    <a href="#">Past Meetings</a>
+                                </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </nav>
+                <div class="meeting-btn">
+                    <a href="/addMeeting" class="btn btn-primary">Add a Meeting</a>
+                </div>
+            </div>
+            <!-- Main Content -->
+            <div class="tab-content tab-wraper">
+                {{#each meetingsData as |value meeting_key|}} {{#if @key}}
+                <div role="tabpanel" class="tab-pane" id="tab_{{meeting_key}}">
+                    {{else}}
+                    <div role="tabpanel" class="tab-pane active" id="tab_{{meeting_key}}">
+                        {{/if}}
+                        <div class="div-wrapper">
+                            <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}">
+                                <div class="form-group col-sm-6">
+                                    <label>Meeting Title</label>
+                                    <input type="text" class="form-control" name="title" value="{{title}}">
+                                </div>
+                                <div class="form-group col-sm-6 text-right">
+                                    <button class="btn btn-success edit_meeting" type="button" data-id="{{meeting_key}}">Edit Meeting</button>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group col-sm-6">
+                                    <label>Meeting Start Time</label>
+                                    <input type="datetime-local" name="start_time" class="form-control" value="{{startTime}}">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Meeting End Time</label>
+                                    <input type="datetime-local" name="end_time" class="form-control" value="{{endTime}}">
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group col-sm-6">
+                                    <label>Venue</label>
+                                    <input type="text" class="form-control" name="venue" value="{{venue}}">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Agenda</label>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Document name</th>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Agends.pdf</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="clearfix"></div>
+                            </form>
                         </div>
+                        <div class="div-wrapper">
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                {{#each polls}}
+                                <div class="panel panel-default">
+                                    <a role="button" data-toggle="collapse" style='color:black' data-parent="#accordion" href="#poll_{{@key}}" aria-expanded="true" aria-controls="collapseOne">
+                                        <div class="panel-heading" role="tab">
+                                            <h4 class="panel-title">
+                                                {{pollName}}
+                                            </h4>
+                                        </div>
+                                    </a>
+                                    {{#if @key}}
+                                    <div id="poll_{{@key}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        {{else}}
+                                        <div id="poll_{{@key}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                            {{/if}}
+                                            <div class="panel-body">
+                                                <form role="form" name="poll_form_{{@key}}" id="poll_form_{{meeting_key}}_{{@key}}">
+                                                    <div class="form-group col-sm-12">
+                                                        <label>Summary</label>
+                                                        <textarea class="form-control" name="summary">{{summary}}</textarea>
+                                                    </div>
+
+                                                    <div class="clearfix"></div>
+                                                    <div class="form-group col-sm-6">
+                                                        <label>Voting option</label>
+                                                        <select class="form-control" name="voating_option">
+                                                            <option value="yes">Yes</option>
+                                                            <option value="no">No</option>
+                                                            <option value="abstain">Abstain</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-sm-6">
+                                                        <label>Uploaded Documents</label>
+                                                        <table class="table table-bordered">
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>Document name</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Agends.pdf</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="form-group col-sm-6">
+                                                        <label>POll Results</label>
+                                                        <table class="table table-bordered">
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>Document name</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Agends.pdf</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div class="form-group col-sm-6">
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+
                     </div>
                 </div>
-                {{/each}}
-
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <nav class="pull-left">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Company
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Portfolio
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Blog
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <p class="copyright pull-right">
+                            &copy;
+                            <script>document.write(new Date().getFullYear())</script>
+                            <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                        </p>
+                    </div>
+                </footer>
             </div>
         </div>
-        <footer class="footer">
-            <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Company
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Portfolio
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Blog
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                </p>
-            </div>
-        </footer>
     </div>
-</div>
-</div>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -286,11 +288,11 @@
             });
             $.ajax({
                 url: "/editMeeting",
-                data: {"metting":JSON.stringify(meetingData)},
+                data: { "metting": JSON.stringify(meetingData) },
                 type: 'POST',
                 dataType: "json",
                 success: function (data, textStatus, jqXHR) {
-                    console.log("sumbited data:",data);
+                    console.log("sumbited data:", data);
                 }
 
             })

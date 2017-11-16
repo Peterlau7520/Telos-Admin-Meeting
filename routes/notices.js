@@ -18,6 +18,7 @@ router.use(busboyBodyParser({multi: true}));
 var oneSignal = require('onesignal')('NDVhODQwNTAtMDRiYy00N2FiLTg3MTYtMzVhZmRiNWRmNjZk', 'b10eb5eb-ae5d-497c-943e-9314a90bda1f', true);
 router.post('/noticeBoard', (req, res) => {
 
+    console.log(req.body);
     if(req.body.floor_info){
         floorInfo = JSON.parse(req.body.floor_info)
     }
@@ -26,6 +27,12 @@ router.post('/noticeBoard', (req, res) => {
     var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
     var endFinal = dateFormat( endDay + " " + endHour , 'shortdate');
 
+    // console.log('Floor',floor_info);
+    console.log('Post Date',postDate);
+    // console.log('End Hour',endHour);
+    // console.log('End Final',endFinal);
+   
+  
     if(req.body.audience == 'allResidents'){
         //case of all residents
         // Residents.find(function(err, residents){
@@ -45,8 +52,10 @@ router.post('/noticeBoard', (req, res) => {
         const audience = floorInfo.Blocks;
         console.log("Audience,", audience);
         const targetAudience = [];
-        for(var key in  audience){
-                if(audience.hasOwnProperty(key)){
+        for(var key in  audience)
+        {
+                if(audience.hasOwnProperty(key))
+                {
                     const subAudience = { 'block': key, 'floors': audience[key]};
                     targetAudience.push(subAudience);
                 }
@@ -79,6 +88,7 @@ router.post('/noticeBoard', (req, res) => {
         // })
     }
 
+    // console.log('TargetAudience',targetAudience)
 });
 router.get('/noticeBoard', (req, res) => {
 

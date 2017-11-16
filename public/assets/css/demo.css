@@ -384,3 +384,17 @@
     bottom: 50px;
     width: 300px;
 }
+
+
+.custom_panel_wrapper
+{
+        width: 50%;
+    float: right;
+    margin-right: 8px;
+}
+.row.page-wrapper.custom_wrapper {margin: 35px 25px 25px 47px;}
+.side-menu #dropdown > a span.caret {margin: 7px 0 0 0;}
+.side-menu #dropdown > a {    border-bottom: 1px solid #e7e7e7;padding: 17px 15px;line-height: 100%;color: #000;font-size: 15px;vertical-align: top;margin: 0;}
+.side-menu #dropdown .panel-body ul li a {padding: 17px 15px 17px 40px;line-height: 100%;color: #000;font-size: 14px;vertical-align: top;margin: 0 !important;border: 0;background: #fff;}
+.side-menu #dropdown .panel-body ul li.active a {background: #f3f3f3;    font-weight: bold;}  
+.side-menu #dropdown .panel-body ul li {padding: 0 !important;}  

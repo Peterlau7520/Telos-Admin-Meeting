@@ -183,7 +183,7 @@ residentSchema.methods.comparePassword = function (passwordAttempt, cb) {
 
 
 const Resident = mongoose.model('Resident', residentSchema);
-const Estate = mongoose.model('Estate', estateSchema);
+const Estate =   mongoose.model('Estate', estateSchema);
 const Poll = mongoose.model('Poll', pollsSchema);
 const Notice = mongoose.model('Notice', noticeSchema);
 const Survey = mongoose.model('Survey', surveySchema);
