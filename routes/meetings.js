@@ -69,6 +69,15 @@ router.get('/allMeetings', (req, res) => {
 
 })
 
+router.post('/addPollsOfMeeting', (req, res) => {
+    var MeetingPollData = JSON.parse(req.body.pollsofmetting);
+
+    ///save to databse logic//
+    res.json({ meetingsPollData: MeetingPollData })
+    // res.render('polls_of_meetings', { meetingsPollData: MeetingPollData });
+})
+
+
 // 1. Milestonre 1 completed
 // 2. To-do: add polls into meeting. + organise files on S3
 router.post('/addMeeting', (req, res) => {
@@ -76,11 +85,9 @@ router.post('/addMeeting', (req, res) => {
     var startDay = req.body.startTime.substring(0, req.body.startTime.indexOf('T'));
     var startHour = req.body.startTime.substring(req.body.startTime.indexOf('T') + 1, req.body.startTime.indexOf('T') + 9);
     var startFinal = startDay + " " + startHour;
-
     var endDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
     var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
     var endFinal = endDay + " " + endHour;
-
 
     var meeting = new Meeting({
         title: req.body.title,

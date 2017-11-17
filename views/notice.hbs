@@ -303,8 +303,9 @@
             }
         })
         $(document).on("change", ".floor", function () {
+            var key = $(this).data('id');
             if ($(this).is(":checked")) {
-                var key = $(this).data('id');
+                
                 selectedBlook = key;
                 var modeldata = {"name": key, data: data[selectedAudiance][key]};
                 var modelhtml = populate_modal(modeldata);
@@ -312,8 +313,12 @@
                 selectedData[selectedAudiance][key] = [];
                 $("#floor_model").modal();
             }else{
+                console.log("==>",key);
                 delete selectedData[selectedAudiance][key]
             }
+            console.log("===>",selectedData)
+            $("#floor_info").val(JSON.stringify(selectedData));
+            
         });
         
         $(document).on('click','#confirm',function(){

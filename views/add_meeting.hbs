@@ -127,13 +127,19 @@
                         <label></label>   
                         <p>
                             <input type="hidden" name="poll_json" id="poll_json">
-                            <input type="submit" class="btn btn-success" value="Submit">
+                            <input type="submit" class="btn btn-success custom_success_btn" value="Submit">
                         </p>
                     </div>
                     <div class="clearfix"></div>
                 </form>
               
             </div>
+          
+           
+                <div  class='panel-wrapper-custom'>
+
+                </div>
+        
             
         </div> 
         <footer class="footer">
@@ -221,8 +227,6 @@
                         <input type="file" name="document">
                     </div>
                     <div class="clearfix"></div>
-
-
                 </form>
             </div>
             <div class="modal-footer">
@@ -240,8 +244,11 @@
         $("#open_model").click(function () {
             $('#poll_form')[0].reset();
             $("#poll").modal();
+        
         })
+        
         $("#close_model").click(function () {
+            
             $("#poll").modal("hide");
             var form_data_array = $("#poll_form").serializeArray();
             console.log(form_data_array);
@@ -250,7 +257,39 @@
                 form_json[obj.name] = obj.value;
             });
             polls_array.push(form_json);
-            $("#poll_json").val(JSON.stringify(polls_array));
+            {{!-- alert(JSON.stringify(polls_array)) --}}
+            $.ajax({
+                url: "/addPollsOfMeeting",
+                data: { "pollsofmetting": JSON.stringify(polls_array) },
+                type: 'POST',
+                success: function (data, textStatus, jqXHR) 
+                {
+                    console.log(data.meetingsPollData);
+                        var html ='';
+                        for(i=0;i<data.meetingsPollData.length ; i++)
+                        {
+                                html+=`<div class="panel-group">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <a style='color:black' data-toggle="collapse" href="#collapse${i}">
+                                        <h4 class="panel-title">
+                                            ${data.meetingsPollData[i].title}
+                                        </h4>
+                                        </div>
+                                        </a>
+                                        <div id="collapse${i}" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                                  <p>Project Name:${data.meetingsPollData[i].project_name}</p>
+                                                  <p>Project_Name_Chinese :${data.meetingsPollData[i].project_name_chinese}</p >
+                                                  <p>Summary :${data.meetingsPollData[i].summary}</p>
+                                                  <p>Summary_chinese :${data.meetingsPollData[i].summary_chinese}</p>
+                                        </div>
+                                    </div>
+                                    </div>`
+                        }
+                    $('.panel-wrapper-custom').html(html);
+                }
+            })
         })
     })
 </script>
