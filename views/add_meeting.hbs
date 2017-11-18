@@ -72,7 +72,7 @@
         </nav>
         <div class="row page-wrapper">
 
-            <ol class="breadcrumb">
+            <ol class="breadcrumb  custom_breadcumb">
                 <li class="breadcrumb-item"><a href="/allMeetings">Meetings</a></li>
                 <li class="breadcrumb-item active">Add a meeting</li>
             </ol>
@@ -119,28 +119,24 @@
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>Poll end date and time</label>
-                        <p>
-                            <input type="button" class="btn btn-primary" value="Add a Poll" id="open_model">
+                        <p> 
+                            <input type="button" class="btn btn-primary poll-btn" value="添加投票 | Add a Poll" id="open_model">
                         </p>
                     </div>
                     <div class="form-group col-sm-6">
                         <label></label>   
                         <p>
                             <input type="hidden" name="poll_json" id="poll_json">
-                            <input type="submit" class="btn btn-success custom_success_btn" value="Submit">
+                            <input type="submit" class="btn btn-success custom_success_btn" value=" 保存 | Save">
                         </p>
                     </div>
                     <div class="clearfix"></div>
                 </form>
               
             </div>
-          
-           
-                <div  class='panel-wrapper-custom'>
+            <div  class='panel-wrapper-custom'>
 
-                </div>
-        
-            
+            </div>
         </div> 
         <footer class="footer">
             <div class="container-fluid">
@@ -216,21 +212,22 @@
                     <div class="form-group col-sm-6">
                         <label>Voting options</label>
                         <p>
-                            <input type="button" class="btn btn-primary" value="Add Options">
+                            <input type="button" class="btn btn-primary poll-btn" value="Add Options">
                         </p>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Add Documents</label>
                         <p>
-                            <input type="button" class="btn btn-primary" value="Add more Documents">
+                        <button class="add_documents btn btn-info btn-fill" style="margin-bottom:1%">Add documents/上傳文件</button>
+                        <div class="documents_wrapper">
+                        </div>
                         </p>
-                        <input type="file" name="document">
                     </div>
                     <div class="clearfix"></div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="close_model">Confirm</button>
+                <button type="button" class="btn btn-success" id="close_model"> 确认 | Confirm</button>
             </div>
         </div>
         
@@ -240,6 +237,18 @@
 <script type="text/javascript">
     $(document).ready(function () {
         console.log("Dom is ready");
+          var wrapper = $(".documents_wrapper")
+        var x = 0;
+        var max_fields = 5;
+        var add_button = $(".add_documents");
+        $(add_button).click(function (e) { //on add input button click
+            e.preventDefault();
+            if (x < max_fields) { //max input box allowed
+                x++; //text box increment
+                console.log(x);
+                $(wrapper).append(`<input type="file" name="filefield"><br />`); //add choose file box
+            }
+        });
         var polls_array = [];
         $("#open_model").click(function () {
             $('#poll_form')[0].reset();
@@ -269,7 +278,7 @@
                         for(i=0;i<data.meetingsPollData.length ; i++)
                         {
                                 html+=`<div class="panel-group">
-                                    <div class="panel panel-default">
+                                    <div class="panel panel-default" '>
                                         <div class="panel-heading">
                                             <a style='color:black' data-toggle="collapse" href="#collapse${i}">
                                         <h4 class="panel-title">
