@@ -503,6 +503,10 @@ input.btn.btn-success.custom_success_btn:hover{
     font-weight: 600 !important;
         color: #1D1D26 !important;
 }
+.col-sm-6.custom_panel_div {
+    width: 100%;
+    text-align: center;
+}
 .mCSB_scrollTools .mCSB_draggerRail{width: 4px !important;}
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{background:#9F9F9F !important;}
 .mCSB_scrollTools .mCSB_draggerRail{background: transparent !important;}
