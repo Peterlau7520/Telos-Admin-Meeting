@@ -442,7 +442,7 @@ button#close_model:hover {
     border-color: #496CF5;
     background:transparent;
 }
-.panel-wrapper-custom{ width: 50%;float: right;margin-right: 6px;}
+/*.panel-wrapper-custom{ width: 50%;float: right;margin-right: 6px;}*/
 input.btn.btn-success.custom_success_btn {  border-color: #496CF5;background: #496CF5;font-size: 13pt;color:white;font-weight: 500;width: 33%;}
 input.btn.btn-success.custom_success_btn:hover{
      background:transparent;
@@ -508,3 +508,7 @@ input.btn.btn-success.custom_success_btn:hover{
 .mCSB_scrollTools .mCSB_draggerRail{background: transparent !important;}
 .div-wrapper .panel-group{margin: 0 1%;}
 /*18-11-2017*/
+/*20-11-2017*/
+.panel-wrapper-custom  .panel-group{margin: 0;}
+.save_btn_wrap{float: right;     text-align: right;}
+/*20-11-2017*/
