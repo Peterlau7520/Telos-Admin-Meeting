@@ -144,6 +144,10 @@
             </div>
             
         </div> 
+
+        </div>
+        </div>
+        
         <footer class="footer">
             <div class="container-fluid">
                 <nav class="pull-left">
@@ -243,7 +247,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         console.log("Dom is ready");
-          var wrapper = $(".documents_wrapper")
+        var wrapper = $(".documents_wrapper")
         var x = 0;
         var max_fields = 5;
         var add_button = $(".add_documents");
@@ -272,7 +276,7 @@
                 form_json[obj.name] = obj.value;
             });
             polls_array.push(form_json);
-            {{!-- alert(JSON.stringify(polls_array)) --}}
+            $("#poll_json").val(JSON.stringify(polls_array));
             $.ajax({
                 url: "/addPollsOfMeeting",
                 data: { "pollsofmetting": JSON.stringify(polls_array) },
