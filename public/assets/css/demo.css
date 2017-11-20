@@ -491,12 +491,7 @@ input.btn.btn-success.custom_success_btn:hover{
     height: 770px !important;
     overflow: hidden;
 }
-.main-panel > .footer {
-    
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-}
+
 .div-wrapper .panel.panel-default{
     margin-bottom: 20px;
     -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.15) !important;

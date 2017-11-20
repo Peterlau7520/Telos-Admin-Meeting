@@ -1,6 +1,5 @@
 <div class="wrapper">
     <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
-
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="/" class="simple-text">
@@ -10,7 +9,6 @@
                     比華利山莊
                 </a>
             </div>
-
             <ul class="nav">
                 <li>
                     <a href="/noticeboard">
@@ -76,9 +74,9 @@
                     <!-- Main Menu -->
                     <div class="side-menu-container">
                         <ul class="nav navbar-nav">
-                            <li class="panel panel-default"  id="dropdown">
+                            <li class="panel panel-default" id="dropdown">
                                 <a data-toggle="collapse" href="#dropdown-lvl1">
-                                    </span>Upcoming Meetings
+                                    <span>Upcoming Meetings</span>
                                     <span class="caret"></span>
                                 </a>
                                 <div id="dropdown-lvl1" class="panel-collapse collapse in">
@@ -91,22 +89,26 @@
                                                     {{/if}}
                                                     <a class='meeting_li' href="#tab_{{@key}}" aria-controls="home" role="tab" data-toggle="tab">{{title}}</a>
                                                 </li>
-                                                {{/each}}
+                                            </li>
+                                            {{/each}}
                                         </ul>
                                     </div>
                                 </div>
-                                </li>
-                                <li>
-                                    <a href="#">Past Meetings</a>
-                                </li>
+                            </li>
+
+                            <li>
+                                <a href="#">Past Meetings</a>
+                            </li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
                 </nav>
+
                 <div class="meeting-btn">
                     <a href="/addMeeting" class="btn btn-primary"> 添加一个会议 | Add a Meeting</a>
                 </div>
             </div>
+
             <!-- Main Content -->
             <div class="custom_scroll_wrap">
                 <div class="tab-content tab-wraper">
@@ -119,42 +121,42 @@
                                 <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}">
                                     <div class="form-group col-sm-6">
                                         <label class='custom_label'>會議標題 | Meeting Title</label>
-                                        <input style ='display:none' type="text" class="form-control" name="title" value="{{title}}">
-                                        <div id='title_div'  class='display_meetings_detail'>{{title}}</div>
+                                        <input style='display:none' type="text" class="form-control" name="title" value="{{title}}">
+                                        <div id='title_div' class='display_meetings_detail'>{{title}}</div>
                                     </div>
                                     <div class="form-group col-sm-6 text-right">
-                                        <button  class="btn btn-success edit_meeting" type="button" data-id="{{meeting_key}}">編輯會議 | Edit Meeting</button>
-                                        <button  style = 'display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
+                                        <button class="btn btn-success edit_meeting" type="button" data-id="{{meeting_key}}">編輯會議 | Edit Meeting</button>
+                                        <button style='display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="form-group col-sm-6">
                                         <label class='custom_label'> 會議開始時間 | Meeting Start Time</label>
-                                        <input style ='display:none' type="datetime-local" name="start_time" class="form-control" value="{{startTime}}">
-                                        <div  id='stime_div' class='display_meetings_detail'>{{startTime}}</div>
-                                
+                                        <input style='display:none' type="datetime-local" name="start_time" class="form-control" value="{{startTime}}">
+                                        <div id='stime_div' class='display_meetings_detail'>{{startTime}}</div>
+
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label class='custom_label'>會議結束時間 | Meeting End Time</label>
-                                        <input style ='display:none' type="datetime-local" name="end_time" class="form-control" value="{{endTime}}">
-                                        <div  id='etime_div' class='display_meetings_detail'>{{endTime}}</div>
-                                
+                                        <input style='display:none' type="datetime-local" name="end_time" class="form-control" value="{{endTime}}">
+                                        <div id='etime_div' class='display_meetings_detail'>{{endTime}}</div>
+
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="form-group col-sm-6">
                                         <label class='custom_label'>地點 | Venue</label>
-                                        <input style ='display:none' type="text" class="form-control" name="venue" value="{{venue}}">
-                                        <div  id='venue_div' class='display_meetings_detail'>{{venue}}</div>
+                                        <input style='display:none' type="text" class="form-control" name="venue" value="{{venue}}">
+                                        <div id='venue_div' class='display_meetings_detail'>{{venue}}</div>
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label class='custom_label'>議程Agenda</label>
                                         <table class="table table-bordered table_custom_Wrapper">
                                             <tr>
-                                            <th>
-                                                <label>ID</label>
-                                            </th>
-                                            <th>
-                                                <label>Document name</label>
-                                            </th>
+                                                <th>
+                                                    <label>ID</label>
+                                                </th>
+                                                <th>
+                                                    <label>Document name</label>
+                                                </th>
                                             </tr>
                                             <tr>
                                                 <td>1</td>
@@ -169,10 +171,11 @@
                                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                     {{#each polls}}
                                     <div class="panel panel-default" style='box-shadow:-5px 6px 9px -8px #888888;'>
-                                        <a role="button" data-toggle="collapse" style='color:black' data-parent="#accordion" href="#poll_{{@key}}" aria-expanded="true" aria-controls="collapseOne">
+                                        <a role="button" data-toggle="collapse" style='color:black' data-parent="#accordion" href="#poll_{{@key}}" aria-expanded="true"
+                                            aria-controls="collapseOne">
                                             <div class="panel-heading" role="tab">
                                                 <h4 class="panel-title">
-                                                    {{pollName}}    
+                                                    {{pollName}}
                                                 </h4>
                                             </div>
                                         </a>
@@ -184,8 +187,8 @@
                                                 <div class="panel-body">
                                                     <form role="form" name="poll_form_{{@key}}" id="poll_form_{{meeting_key}}_{{@key}}">
                                                         <div class="form-group col-sm-12">
-                                                            <label  class='custom_label' >Summary</label>
-                                                            <textarea style='display:none'  class="form-control" name="summary">{{summary}}</textarea>
+                                                            <label class='custom_label'>Summary</label>
+                                                            <textarea style='display:none' class="form-control" name="summary">{{summary}}</textarea>
                                                             <div id='summary_div' class='display_meetings_detail'>{{summary}}</div>
                                                         </div>
 
@@ -202,12 +205,12 @@
                                                             <label>Uploaded Documents</label>
                                                             <table class="table table-bordered table_custom_Wrapper">
                                                                 <tr>
-                                                                <th>
-                                                                    <label>ID</label>
-                                                                </th>
-                                                                <th>
-                                                                    <label>Document name</label>
-                                                                </th>
+                                                                    <th>
+                                                                        <label>ID</label>
+                                                                    </th>
+                                                                    <th>
+                                                                        <label>Document name</label>
+                                                                    </th>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>1</td>
@@ -220,8 +223,12 @@
                                                             <label class='custom_label'>POll Results</label>
                                                             <table class="table table-bordered table_custom_Wrapper">
                                                                 <tr>
-                                                                    <th><label>ID</label></th>
-                                                                    <th><label>Document name</label></th>
+                                                                    <th>
+                                                                        <label>ID</label>
+                                                                    </th>
+                                                                    <th>
+                                                                        <label>Document name</label>
+                                                                    </th>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>1</td>
@@ -240,44 +247,44 @@
                                 </div>
                             </div>
                             {{/each}}
-
                         </div>
                     </div>
                 </div>
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <nav class="pull-left">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        Home
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Company
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Portfolio
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Blog
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <p class="copyright pull-right">
-                            &copy;
-                            <script>document.write(new Date().getFullYear())</script>
-                            <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                        </p>
-                    </div>
-                </footer>
             </div>
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav class="pull-left">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Company
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Portfolio
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Blog
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <p class="copyright pull-right">
+                        &copy;
+                        <script>document.write(new Date().getFullYear())</script>
+                        <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                    </p>
+                </div>
+            </footer>
         </div>
     </div>
 </div>
@@ -294,12 +301,10 @@
         var originalData = '{{{stringify meetingsData}}}';
         originalData = JSON.parse(originalData);
 
-{{!-- $('.meeting_li').click(function()
-{
-     $('.save_meeting').show()  
-}) --}}
-        $(".edit_meeting").click(function()
-        {
+            {{!-- $('.meeting_li').click(function () {
+                    $('.save_meeting').show()
+                })  --}}
+        $(".edit_meeting").click(function () {
             $('.form-control').show()
             $('.display_meetings_detail').hide()
             $('.save_meeting').show()
@@ -308,9 +313,9 @@
         $(".save_meeting").click(function () {
 
             $('.display_meetings_detail').show()
-               $('.form-control').hide()
-             $('.save_meeting').hide()
-              $('.edit_meeting').show()
+            $('.form-control').hide()
+            $('.save_meeting').hide()
+            $('.edit_meeting').show()
             var index = $(this).data('id');
             var meetingform = $("#edit_meeting_" + index).serializeArray();
             var meetingData = convertSerializeArrayToJson(meetingform);
@@ -324,21 +329,20 @@
                 data: { "metting": JSON.stringify(meetingData) },
                 type: 'POST',
                 dataType: "json",
-                success: function (data, textStatus, jqXHR) 
-                {
-                       $("[name = title]").val(data.title)
-                       $('#title_div').text(data.title)
-                       $("[name = start_time ]").val(data.start_time)
-                       $('#stime_div').text(data.start_time)
-                       $("[name = end_time]").val(data.end_time)
-                       $('#etime_div').text(data.end_time)
-                       $("[name = venue]").val(data.venue)
-                       $('#venue_div').text(data.venue)
-                        console.log(data.title)
+                success: function (data, textStatus, jqXHR) {
+                    $("[name = title]").val(data.title)
+                    $('#title_div').text(data.title)
+                    $("[name = start_time ]").val(data.start_time)
+                    $('#stime_div').text(data.start_time)
+                    $("[name = end_time]").val(data.end_time)
+                    $('#etime_div').text(data.end_time)
+                    $("[name = venue]").val(data.venue)
+                    $('#venue_div').text(data.venue)
+                    console.log(data.title)
                 }
 
             })
         });
-         $(".custom_scroll_wrap").mCustomScrollbar();
+        $(".custom_scroll_wrap").mCustomScrollbar();
     });
 </script>
