@@ -294,11 +294,49 @@
                                         </div>
                                         </a>
                                         <div id="collapse${i}" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                                  <p>Project Name:${data.meetingsPollData[i].project_name}</p>
-                                                  <p>Project_Name_Chinese :${data.meetingsPollData[i].project_name_chinese}</p >
-                                                  <p>Summary :${data.meetingsPollData[i].summary}</p>
-                                                  <p>Summary_chinese :${data.meetingsPollData[i].summary_chinese}</p>
+                                        <div class="panel-body" style='text-align:left'>
+                                            <div class="form-group col-sm-6">
+                                                   <label class='custom_label'>Project Name</label>
+                                                   <p>${data.meetingsPollData[i].project_name}</p>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                    <label class='custom_label'>Summary</label>
+                                                    <textarea class="form-control input_fields_{{meeting_key}}" name="summary">${data.meetingsPollData[i].summary}</textarea>
+                                                    {{!-- <div id='summary_div' class='display_meetings_detail_{{meeting_key}}'>${data.meetingsPollData[i].summary}</div> --}}
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                   <label class='custom_label'>项目名</label>
+                                                   <p>${data.meetingsPollData[i].project_name_chinese}</p>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                    <label class='custom_label'>概要</label>
+                                                    <textarea class="form-control input_fields_{{meeting_key}}" name="summary">${data.meetingsPollData[i].summary_chinese}</textarea>
+                                            </div>
+                                                     <div class="form-group col-sm-6">
+                                                            <label class='custom_label'>Voting option</label>
+                                                            <select class="form-control show" name="voating_option">
+                                                                <option value="yes">Yes</option>
+                                                                <option value="no">No</option>
+                                                                <option value="abstain">Abstain</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <label>Uploaded Documents</label>
+                                                            <table class="table table-bordered table_custom_Wrapper">
+                                                                <tr>
+                                                                    <th>
+                                                                        <label>ID</label>
+                                                                    </th>
+                                                                    <th>
+                                                                        <label>Document name</label>
+                                                                    </th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Agends.pdf</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
                                         </div>
                                     </div>
                                     </div>`
