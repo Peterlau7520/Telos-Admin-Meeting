@@ -78,7 +78,7 @@
             </ol>
 
             <div class="div-wrapper">
-                <form role="form" name="pollform" action="/saveMeeting" method="post">
+                <form role="form" name="pollform" enctype="multipart/form-data" action="/saveMeeting" method="post">
                     <div class="form-group col-sm-6">
                         <label>Meeting Title</label>
                         <input type="text" class="form-control" name="meeting_title">
@@ -110,7 +110,7 @@
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>Agenda | 议程</label>
-                        <input type="file" name="agenda"/> 
+                        <input type="file" name="filefield"/> 
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
@@ -218,9 +218,10 @@
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>Voting options</label>
-                        <p>
-                            <input type="button" class="btn btn-primary poll-btn" value="Add Options">
-                        </p>
+                            <div class="input_fields_wrap">
+                                <button class="add_field_button btn btn-info btn-fill" style="margin-bottom:2%">Add Options/增加選項</button>
+                                    <div><input style="display:flex; border-radius: 0px;margin-bottom: 2px !important;" type="text" name="option" placeholder="E.g. Yes/是" required></div>
+                            </div>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Add Documents</label>
@@ -243,19 +244,26 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        console.log("Dom is ready");
-        var wrapper = $(".documents_wrapper")
-        var x = 0;
-        var max_fields = 5;
-        var add_button = $(".add_documents");
-        $(add_button).click(function (e) { //on add input button click
+        //Add documents
+        var docWrapper = $(".documents_wrapper")
+        var add_document_button = $(".add_documents");
+        $(add_document_button).click(function (e) { //on add input button click
             e.preventDefault();
-            if (x < max_fields) { //max input box allowed
-                x++; //text box increment
-                console.log(x);
-                $(wrapper).append(`<input type="file" name="filefield"><br />`); //add choose file box
-            }
+                $(docWrapper).append(`<input type="file" name="filefield"><br />`); //add choose file box
         });
+        //Add options
+            var optionWrapper         = $(".input_fields_wrap"); //Fields wrapper
+            var add_option_button      = $(".add_field_button"); //Add button ID
+            $(add_option_button).click(function(e){ //on add input button click
+                e.preventDefault();
+                    $(optionWrapper).append('<div><input type="text" name="option"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+
+            });
+            $(optionWrapper).on("click",".remove_field", function(e){ //user click on remove text
+                e.preventDefault(); $(this).parent('div').remove(); x--;
+            })
+
+
         var polls_array = [];
         $("#open_model").click(function () {
             $('#poll_form')[0].reset();

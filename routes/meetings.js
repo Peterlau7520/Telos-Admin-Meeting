@@ -71,6 +71,7 @@ router.get('/allMeetings', (req, res) => {
 
 router.post('/addPollsOfMeeting', (req, res) => {
     var MeetingPollData = JSON.parse(req.body.pollsofmetting);
+    console.log(MeetingPollData)
 
     ///save to databse logic//
     res.json({ meetingsPollData: MeetingPollData })
