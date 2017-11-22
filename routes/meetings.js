@@ -66,13 +66,11 @@ router.get('/allMeetings', (req, res) => {
     ]
     res.render('meeting',{meetingsData:meetings});
     //check whether it's a past meeting or upcoming meeting. 
-
 })
 
 router.post('/addPollsOfMeeting', (req, res) => {
     var MeetingPollData = JSON.parse(req.body.pollsofmetting);
     console.log(MeetingPollData)
-
     ///save to databse logic//
     res.json({ meetingsPollData: MeetingPollData })
     // res.render('polls_of_meetings', { meetingsPollData: MeetingPollData });
@@ -81,67 +79,9 @@ router.post('/addPollsOfMeeting', (req, res) => {
 
 // 1. Milestonre 1 completed
 // 2. To-do: add polls into meeting. + organise files on S3
-router.post('/addMeeting', (req, res) => {
-    console.log('req.body', req.body);
-    var startDay = req.body.startTime.substring(0, req.body.startTime.indexOf('T'));
-    var startHour = req.body.startTime.substring(req.body.startTime.indexOf('T') + 1, req.body.startTime.indexOf('T') + 9);
-    var startFinal = startDay + " " + startHour;
-    var endDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
-    var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
-    var endFinal = endDay + " " + endHour;
-
-    var meeting = new Meeting({
-        title: req.body.title,
-        titleChn: req.body.titleChn,
-        startTime: startFinal,
-        endTime: endFinal,
-        //polls
-    });
-    meeting.save(function (err, meeting) {
-        Estate.findOne({
-            "estateName": req.user.estateName
-        }, function (err, estate) {
-            if (err) {
-                res.redirect('/error');
-            }
-            if (!estate) {
-                res.redirect('/error');
-            } else {
-                estate.currentMeetings.push(meeting);
-                estate.save();
-                var files = req.files && req.files.filefield ? req.files.filefield : false;
-                if (files && files[0].size != 0) {
-                    for (var i = 0; i < files.length; i++) {
-                        var info = files[i].data;
-                        var name = files[i].name;
-                        meeting.fileLinks.push(name);
-                        var data = {
-                            Key: `${req.user.estateName}/${req.body.title}/${name}`,
-                            Body: info,
-                            ContentType: 'application/pdf',
-                            ContentDisposition: 'inline'
-                        }; // req.user.estateName
-                        s3Bucket.putObject(data, function (err, data) {
-                            if (err) {
-                                console.log('Error uploading data: ', err);
-                            } else {
-                                console.log('succesfully uploaded the pdf!');
-                            }
-                        });
-                    }
-                    meeting.save();
-                }
-
-                res.redirect('/allMeetings');
-            }
-        });
-    })
-})
-
 router.post('/editMeeting', (req, res) => {
     var data = JSON.parse(req.body.metting);
     console.log(data);
-    res.json(data);
 })
 
 router.get('/addMeeting',(req,res) => {
@@ -153,7 +93,66 @@ router.post('/saveMeeting',(req,res) =>{
     if(data.poll_json){
         data.poll_json = JSON.parse(data.poll_json);
     }
-    res.json(data);
+    console.log(data);
 })
 
 module.exports = router;
+
+
+
+// router.post('/addMeeting', (req, res) => {
+//     console.log('req.body', req.body);
+//     var startDay = req.body.startTime.substring(0, req.body.startTime.indexOf('T'));
+//     var startHour = req.body.startTime.substring(req.body.startTime.indexOf('T') + 1, req.body.startTime.indexOf('T') + 9);
+//     var startFinal = startDay + " " + startHour;
+//     var endDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
+//     var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
+//     var endFinal = endDay + " " + endHour;
+
+//     var meeting = new Meeting({
+//         title: req.body.title,
+//         titleChn: req.body.titleChn,
+//         startTime: startFinal,
+//         endTime: endFinal,
+//         //polls
+//     });
+//     meeting.save(function (err, meeting) {
+//         Estate.findOne({
+//             "estateName": req.user.estateName
+//         }, function (err, estate) {
+//             if (err) {
+//                 res.redirect('/error');
+//             }
+//             if (!estate) {
+//                 res.redirect('/error');
+//             } else {
+//                 estate.currentMeetings.push(meeting);
+//                 estate.save();
+//                 var files = req.files && req.files.filefield ? req.files.filefield : false;
+//                 if (files && files[0].size != 0) {
+//                     for (var i = 0; i < files.length; i++) {
+//                         var info = files[i].data;
+//                         var name = files[i].name;
+//                         meeting.fileLinks.push(name);
+//                         var data = {
+//                             Key: `${req.user.estateName}/${req.body.title}/${name}`,
+//                             Body: info,
+//                             ContentType: 'application/pdf',
+//                             ContentDisposition: 'inline'
+//                         }; // req.user.estateName
+//                         s3Bucket.putObject(data, function (err, data) {
+//                             if (err) {
+//                                 console.log('Error uploading data: ', err);
+//                             } else {
+//                                 console.log('succesfully uploaded the pdf!');
+//                             }
+//                         });
+//                     }
+//                     meeting.save();
+//                 }
+
+//                 res.redirect('/allMeetings');
+//             }
+//         });
+//     })
+// })
