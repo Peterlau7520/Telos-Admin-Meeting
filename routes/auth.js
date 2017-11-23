@@ -33,6 +33,7 @@ module.exports = function(passport) {
   })
 
   router.get('/login', (req,res) => {
+    console.log('as');
     var mess = req.flash('error');
     res.render('login', {
       title: 'Log in',

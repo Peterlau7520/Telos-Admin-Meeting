@@ -92,9 +92,39 @@ router.post('/saveMeeting',(req,res) =>{
     var data = req.body;
     if(data.poll_json){
         data.poll_json = JSON.parse(data.poll_json);
+        models.Poll.create({
+        	projectName: data.poll_json[0].project_name,
+        	projectNameChn: data.poll_json[0].project_name_chinese,
+        	summary: data.poll_json[0].summary,
+        	summaryChn: data.poll_json[0].summary_chinese,
+        	options: data.poll_json[0].option,
+        	endTime: data.poll_json[0].project_name,
+        }, function (err, Poll){
+        	if (err) return handleError(err);
+        	insertMeeting(Poll.id, data);
+        	res.redirect('/addMeeting');
+        });
+    } else {
+    	insertMeeting(null, data);
+    	res.redirect('/addMeeting');
     }
-    console.log(data);
-})
+    
+
+});
+function insertMeeting(poll_id, data, res) {
+
+	models.Meeting.create({
+		title     : data.meeting_title,
+		titleChn  : data.meeting_title_chinese,
+		startTime : data.stat_time,
+		endTime   : data.end_time,
+		venue     : data.venue,
+		polls	  : poll_id
+	}, function (err, meeting) {
+		if (err) return handleError(err);
+		//res.json(small);
+	});
+} 
 
 module.exports = router;
 

@@ -1,8 +1,11 @@
  const mongoose = require('mongoose');
 // set the global Promise to Mongoose.
+// 
 mongoose.Promise = global.Promise;
-const connect = process.env.MONGODB_URI || "mongodb://upwork:upwork@ds117625.mlab.com:17625/telos";
-mongoose.connect(connect,{ useMongoClient: true });
+const connect = process.env.MONGODB_URI || "mongodb://admin:admin@ds117625.mlab.com:17625/telos";
+mongoose.connect(connect,{ useMongoClient: true }).
+then(() =>  console.log('connection succesful'))
+  .catch((err) => console.error(err));;
 
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
