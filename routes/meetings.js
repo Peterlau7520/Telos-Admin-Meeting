@@ -77,8 +77,6 @@ router.post('/addPollsOfMeeting', (req, res) => {
 })
 
 
-// 1. Milestonre 1 completed
-// 2. To-do: add polls into meeting. + organise files on S3
 router.post('/editMeeting', (req, res) => {
     var data = JSON.parse(req.body.metting);
     console.log(data);
@@ -90,6 +88,20 @@ router.get('/addMeeting',(req,res) => {
 
 router.post('/saveMeeting',(req,res) =>{
     var data = req.body;
+    console.log(data);
+    //meeting start time
+    var meetingStartDay = req.body.startTime.substring(0, req.body.startTime.indexOf('T'));
+    var meetingStartHour = req.body.startTime.substring(req.body.startTime.indexOf('T') + 1, req.body.startTime.indexOf('T') + 9);
+    var meetingStartFinal = startDay + " " + startHour;
+    //meeting end time
+    var meetingEndDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
+    var meetingEndHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
+    var meetingEndFinal = endDay + " " + endHour;
+    //poll end time
+    var pollEndDay = req.body.pollEndTime.substring(0, req.body.pollEndTime.indexOf('T'));
+    var pollEndHour = req.body.pollEndTime.substring(req.body.pollEndTime.indexOf('T') + 1, req.body.pollEndTime.indexOf('T') + 9);
+    var pollEndFina = pollEndDay + " " + pollEndHour;
+    
     if(data.poll_json){
         data.poll_json = JSON.parse(data.poll_json);
         models.Poll.create({
@@ -98,7 +110,7 @@ router.post('/saveMeeting',(req,res) =>{
         	summary: data.poll_json[0].summary,
         	summaryChn: data.poll_json[0].summary_chinese,
         	options: data.poll_json[0].option,
-        	endTime: data.poll_json[0].project_name,
+        	endTime: data.poll_json[0].poll_end_time,
         }, function (err, Poll){
         	if (err) return handleError(err);
         	insertMeeting(Poll.id, data);
@@ -116,7 +128,7 @@ function insertMeeting(poll_id, data, res) {
 	models.Meeting.create({
 		title     : data.meeting_title,
 		titleChn  : data.meeting_title_chinese,
-		startTime : data.stat_time,
+		startTime : data.start_time,
 		endTime   : data.end_time,
 		venue     : data.venue,
 		polls	  : poll_id
