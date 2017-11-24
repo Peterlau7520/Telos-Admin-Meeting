@@ -21,8 +21,20 @@ var s3Bucket = new AWS.S3({
     accessKeyId: process.env.S3_KEY,
     secretAccessKey: process.env.secretAccessKey
 });
-AWS.config.region = 'eu-west-1';
 router.get('/allMeetings', (req, res) => {
+	models.Meeting.find(function (err, todos) {
+        if (err) {
+            res.send(err);
+        }
+        todos.forEach(function(item,index) {
+        	if(item.polls != null) {
+        		models.Poll.findById(item.polls[0],function(err,polls){
+        			if(err) return next(err);
+        			console.log('data', polls);
+        		});
+        	}
+        });
+    });
     var meetings = [
         {
            title: "Meeting 1",
@@ -91,8 +103,7 @@ router.get('/addMeeting',(req,res) => {
 
 router.post('/saveMeeting',(req,res) =>{
     var data = req.body;
-    console.log('files', req.files.filefield[0].name);
-    /*if(data.poll_json){
+    if(data.poll_json){
         data.poll_json = JSON.parse(data.poll_json);
         models.Poll.create({
         	projectName: data.poll_json[0].project_name,
@@ -109,7 +120,7 @@ router.post('/saveMeeting',(req,res) =>{
     } else {
     	insertMeeting(null, data);
     	res.redirect('/addMeeting');
-    }*/
+    }
     
 
 });
