@@ -93,6 +93,7 @@ router.post('/saveMeeting',(req,res) =>{
     var meetingStartDay = req.body.startTime.substring(0, req.body.startTime.indexOf('T'));
     var meetingStartHour = req.body.startTime.substring(req.body.startTime.indexOf('T') + 1, req.body.startTime.indexOf('T') + 9);
     var meetingStartFinal = startDay + " " + startHour;
+
     //meeting end time
     var meetingEndDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
     var meetingEndHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
@@ -100,8 +101,8 @@ router.post('/saveMeeting',(req,res) =>{
     //poll end time
     var pollEndDay = req.body.pollEndTime.substring(0, req.body.pollEndTime.indexOf('T'));
     var pollEndHour = req.body.pollEndTime.substring(req.body.pollEndTime.indexOf('T') + 1, req.body.pollEndTime.indexOf('T') + 9);
-    var pollEndFina = pollEndDay + " " + pollEndHour;
-    
+    var pollEndFinal = pollEndDay + " " + pollEndHour;
+
     if(data.poll_json){
         data.poll_json = JSON.parse(data.poll_json);
         models.Poll.create({
