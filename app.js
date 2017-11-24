@@ -10,6 +10,7 @@ const flash = require('connect-flash');
 
 //----------------MODELS----------------
 const models = require('./models/models');
+var multer  = require('multer');
 
 
 

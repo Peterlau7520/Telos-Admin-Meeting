@@ -104,7 +104,8 @@ const pollsSchema = new Schema({
         }
     ],
     results: [{choice: String, name: String}],
-    votes: Array
+    votes: Array,
+    created_at : String
 });
 
 const noticeSchema = new Schema({
@@ -135,7 +136,8 @@ const meetingSchema = new Schema({
             ref: 'Poll'
         }
     ],
-    active: Boolean
+    active: Boolean,
+    created_at : String
 })
 
 residentSchema.pre('save', function (next) {

@@ -117,14 +117,16 @@
                         <div role="tabpanel" class="tab-pane active" id="tab_{{meeting_key}}">
                             {{/if}}
                             <div class="div-wrapper">
-                                <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}">
+                                <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}" action="/delete_meeting" method="post">
                                     <div class="form-group col-sm-6">
                                         <label class='custom_label'>會議標題 | Meeting Title</label>
+                                        <input name="meeting_id" type="hidden" value="{{id}}">
                                         <input id ='title_{{meeting_key}}'  style='display:none' type="text" class="form-control input_fields_{{meeting_key}}" name="title" value="{{title}}">
                                         <div id='title_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{title}}</div>
                                     </div>
                                     <div class="form-group col-sm-6 text-right">
-                                        <button class="btn btn-success edit_meeting" type="button" data-id="{{meeting_key}}">編輯會議 | Edit Meeting</button>
+                                        <button class="btn btn-success edit_meeting" type="button" data-id="{{meeting_key}}" data-time="{{created_at}}">編輯會議 | Edit Meeting</button>
+                                        <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" data-time="{{created_at}}">Delete Meeting</button>
                                         <button style='display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
                                     </div>
                                     <div class="clearfix"></div>
@@ -166,6 +168,7 @@
                                     <div class="clearfix"></div>
                                 </form>
                             </div>
+                            <button class="btn btn-success add_pole" type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a pole</button>
                             <div class="div-wrapper">
                                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                     {{#each polls}}
@@ -187,6 +190,7 @@
                                                     <form role="form" name="poll_form_{{@key}}" id="poll_form_{{meeting_key}}_{{@key}}">
                                                         <div class="form-group col-sm-12">
                                                             <label class='custom_label'>Summary</label>
+                                                            <input type="hidden" name="poll_id" value="{{pollId}}">
                                                             <textarea style='display:none' class="form-control input_fields_{{meeting_key}}" name="summary">{{summary}}</textarea>
                                                             <div id='summary_div' class='display_meetings_detail_{{meeting_key}}'>{{summary}}</div>
                                                         </div>
@@ -305,12 +309,25 @@
                 }) 
         $(".edit_meeting").click(function () {
             var index = $(this).data('id');
-            var classvar = '.display_meetings_detail_' + index
-            var clasvarforinputfield = '.input_fields_' + index
-            $(clasvarforinputfield).show()
-            $(classvar).hide()
-            $('.save_meeting').show()
-            $(this).hide()
+            // current date
+            var newDate = new Date();
+            newDate = newDate.getFullYear()+"-"+(newDate.getMonth()+1)+"-"+newDate.getDate();
+            //date with +3days
+            var time = $(this).data('time');
+            var someDate = new Date(time);
+            someDate.setDate(someDate.getDate() + 3); 
+            var dateFormated = someDate.toISOString().substr(0,10);
+            if(newDate < dateFormated) {
+                var classvar = '.display_meetings_detail_' + index
+                var clasvarforinputfield = '.input_fields_' + index
+                $(clasvarforinputfield).show()
+                $(classvar).hide()
+                $('.save_meeting').show()
+                $(this).hide()    
+            } else {
+                alert('You can not edit this');
+            }
+            
         })
         $(".save_meeting").click(function () {
             var index = $(this).data('id');
@@ -332,7 +349,7 @@
                 data: { "metting": JSON.stringify(meetingData) },
                 type: 'POST',
                 dataType: "json",
-                success: function (data, textStatus, jqXHR) {
+                success: function (data) {
                     $("#title_"+index).val(data.title)
                     $('#title_div_'+index).text(data.title)
                     $("#start_time"+index).val(data.start_time)
@@ -344,8 +361,48 @@
                     console.log(data.title)
                 }
 
-            })
+            });
+            setTimeout(function() {
+                location.reload();
+            },1500);
         });
+        //for delete meeting
+        $('.delete_meeting').click(function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            // current date
+            var newDate = new Date();
+            newDate = newDate.getFullYear()+"-"+(newDate.getMonth()+1)+"-"+newDate.getDate();
+            //date with +3days
+            var time = $(this).data('time');
+            var someDate = new Date(time);
+            someDate.setDate(someDate.getDate() + 3); 
+            var dateFormated = someDate.toISOString().substr(0,10);
+            if(newDate < dateFormated) {
+                var val = confirm('Are you sure want to delete ?');
+                if(val == true) {
+                    $('#edit_meeting_'+id).submit();
+                }
+            } else {
+                alert('You can not delete this meeting');
+            }
+        });
+        //for add pole
+        $('.add_pole').click(function() {
+            // current date
+            var newDate = new Date();
+            newDate = newDate.getFullYear()+"-"+(newDate.getMonth()+1)+"-"+newDate.getDate();
+            //date with +3days
+            var time = $(this).data('time');
+            var someDate = new Date(time);
+            someDate.setDate(someDate.getDate() + 3); 
+            var dateFormated = someDate.toISOString().substr(0,10);
+            if(newDate > dateFormated) {
+                alert('You can add pole');
+            } else {
+                alert('You can not add a pole after 3 days you add meeting');
+            }
+        })
         $(".custom_scroll_wrap").mCustomScrollbar();
     });
 </script>
