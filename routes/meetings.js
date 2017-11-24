@@ -22,62 +22,47 @@ var s3Bucket = new AWS.S3({
     secretAccessKey: process.env.secretAccessKey
 });
 router.get('/allMeetings', (req, res) => {
-	models.Meeting.find(function (err, todos) {
-        if (err) {
-            res.send(err);
-        }
-        todos.forEach(function(item,index) {
+	//get data from meeting schema
+	models.Meeting.find(function (err, meeting) {
+        if (err) { res.send(err); }
+        //get data from poll schema
+        var myArray = new Array();
+        meeting.forEach(function(item) {
         	if(item.polls != null) {
-        		models.Poll.findById(item.polls[0],function(err,polls){
+        		models.Poll.findById(item.polls[0],function(err,poll){
         			if(err) return next(err);
-        			console.log('data', polls);
+        			myArray.push({
+        				title 		: item.title,
+           				titleChn 	: item.titleChn,
+           				startTime 	: item.startTime,
+           				endTime 	: item.endTime,
+           				venue 		: item.venue,
+           				polls 		: [{
+							pollId 		: poll._id,
+           					pollName  	: poll.projectName,
+           					pollNameChn : poll.projectNameChn,
+           					summary 	: poll.summary,
+           					summaryChn 	: poll.summaryChn,
+           					endTime 	: poll.endTime,
+           					options 	: poll.options
+            			}]  
+        			});
+        		});
+        		setTimeout(function () {
+        			res.render('meeting',{meetingsData:myArray});
+        		},1500)
+        	} else {
+        		myArray.push({
+        			id  		: item.id,
+        			title 		: item.title,
+        			titleChn 	: item.titleChn,
+        			startTime 	: item.startTime,
+        			endTime 	: item.endTime,
+        			venue 		: item.venue,
         		});
         	}
         });
     });
-    var meetings = [
-        {
-           title: "Meeting 1",
-           titleChn: "",
-           startTime: "2017-03-18T13:00",
-           endTime: "2017-03-10T13:00",
-           venue:"venue 1",
-           polls: [{
-               pollName: "Poll 1",
-               pollNameChn: "",
-               summary: "Summary 1",
-               summaryChn: "",
-               endTime: "",
-               options: "",
-               documents: "",
-            },{
-               pollName: "Poll 2",
-               pollNameChn: "",
-               summary: "Summary 2",
-               summaryChn: "",
-               endTime: "",
-               options: "",
-               documents: ""
-            }]           
-        },
-        {
-           title: "Meeting 2",
-           titleChn: "",
-           startTime: "2017-03-17T13:00",
-           endTime: "2018-03-11T13:00",
-           venue:"venue 2",
-           polls: [{
-               pollName: "Poll 1",
-               pollNameChn: "",
-               summary: "Summary 1",
-               summaryChn: "",
-               endTime: "",
-               options: "",
-               documents: ""
-            }]           
-        }
-    ]
-    res.render('meeting',{meetingsData:meetings});
     //check whether it's a past meeting or upcoming meeting. 
 })
 
@@ -118,6 +103,7 @@ router.post('/saveMeeting',(req,res) =>{
 
     if(data.poll_json){
         data.poll_json = JSON.parse(data.poll_json);
+        //insert into database in poll schema
         models.Poll.create({
         	projectName: data.poll_json[0].project_name,
         	projectNameChn: data.poll_json[0].project_name_chinese,
@@ -127,11 +113,13 @@ router.post('/saveMeeting',(req,res) =>{
         	endTime: data.poll_json[0].poll_end_time,
         }, function (err, Poll){
         	if (err) return handleError(err);
+        	//insert into database in meeting schema
         	insertMeeting(Poll.id, data);
         	res.redirect('/addMeeting');
         });
     } else {
-    	insertMeeting(null, data);
+    	//insert into database in meeting schema
+    	insertMeeting(null, data);  //if poll id not exist then poll id is null
     	res.redirect('/addMeeting');
     }
     
