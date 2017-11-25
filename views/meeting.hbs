@@ -87,7 +87,7 @@
                                                 {{else}}
                                                 <li role="presentation" class="active">
                                                     {{/if}}
-                                                    <a class='meeting_li' href="#tab_{{@key}}" aria-controls="home" role="tab" data-toggle="tab">{{title}}</a>
+                                                    <a class='meeting_li' href="#tab_{{id}}" aria-controls="home" role="tab" data-toggle="tab">{{title}}</a>
                                                 </li>
                                             </li>
                                             {{/each}}
@@ -95,8 +95,22 @@
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <a href="#">Past Meetings</a>
+                            <li class="panel panel-default" id="dropdown2">
+                                <a data-toggle="collapse" href="#dropdown-lvl2"> 
+                                    <span>Past Meetings</span>
+                                    <span class="caret"></span>
+                                </a>
+                                <div id="dropdown-lvl2" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <ul class="nav navbar-nav" role="tablist">
+                                            {{#each pastMeetingsData}}
+                                            <li role="presentation">
+                                                <a class='meeting_li' href="#tab_{{id}}" aria-controls="home" role="tab" data-toggle="tab">{{title}}</a>
+                                            </li>
+                                            {{/each}}
+                                        </ul>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -112,9 +126,9 @@
             <div class="custom_scroll_wrap">
                 <div class="tab-content tab-wraper">
                     {{#each meetingsData as |value meeting_key|}} {{#if @key}}
-                    <div role="tabpanel" class="tab-pane" id="tab_{{meeting_key}}">
+                    <div role="tabpanel" class="tab-pane" id="tab_{{id}}">
                         {{else}}
-                        <div role="tabpanel" class="tab-pane active" id="tab_{{meeting_key}}">
+                        <div role="tabpanel" class="tab-pane active" id="tab_{{id}}">
                             {{/if}}
                             <div class="div-wrapper">
                                 <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}" action="/delete_meeting" method="post">
@@ -161,7 +175,7 @@
                                             </tr>
                                             <tr>
                                                 <td>1</td>
-                                                <td>Agends.pdf</td>
+                                                <td>{{document}}</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -250,6 +264,148 @@
                                 </div>
                             </div>
                             {{/each}}
+                                
+                    {{#each pastMeetingsData as |value meeting_key|}} {{#if @key}}
+                    <div role="tabpanel" class="tab-pane" id="tab_{{id}}">
+                        {{else}}
+                        <div role="tabpanel" class="tab-pane active" id="tab_{{id}}">
+                            {{/if}}
+                            <div class="div-wrapper">
+                                <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}" action="/delete_meeting" method="post">
+                                    <div class="form-group col-sm-6">
+                                        <label class='custom_label'>會議標題 | Meeting Title</label>
+                                        <input name="meeting_id" type="hidden" value="{{id}}">
+                                        <input id ='title_{{meeting_key}}'  style='display:none'  type="text" class="form-control input_fields_{{meeting_key}}" name="title" value="{{title}}">
+                                        <div id='title_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{title}}</div>
+                                    </div>
+                                    <div class="form-group col-sm-6 text-right">
+                                        <button class="btn btn-success edit_meeting" type="button" data-id="{{meeting_key}}" data-time="{{created_at}}">編輯會議 | Edit Meeting</button>
+                                        <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" data-time="{{created_at}}">Delete Meeting</button>
+                                        <button style='display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group col-sm-6">
+                                        <label class='custom_label'> 會議開始時間 | Meeting Start Time</label>
+                                        <input id ='start_time_{{meeting_key}}' style='display:none' type="datetime-local" name="start_time" class="form-control input_fields_{{meeting_key}}" value="{{startTime}}">
+                                        <div id='stime_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{startTime}}</div>
+
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class='custom_label'>會議結束時間 | Meeting End Time</label>
+                                        <input id ='end_time_{{meeting_key}}' style='display:none' type="datetime-local" name="end_time" class="form-control input_fields_{{meeting_key}}" value="{{endTime}}">
+                                        <div id='etime_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{endTime}}</div>
+
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group col-sm-6">
+                                        <label class='custom_label'>地點 | Venue</label>
+                                        <input t id ='venue_{{meeting_key}}' style='display:none' type="text" class="form-control input_fields_{{meeting_key}}" name="venue" value="{{venue}}">
+                                        <div id='venue_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{venue}}</div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class='custom_label'>議程Agenda</label>
+                                        <table class="table table-bordered table_custom_Wrapper">
+                                            <tr>
+                                                <th>
+                                                    <label>ID</label>
+                                                </th>
+                                                <th>
+                                                    <label>Document name</label>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>{{document}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                            <button class="btn btn-success add_pole" type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a pole</button>
+                            <div class="div-wrapper">
+                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    {{#each polls}}
+                                    <div class="panel panel-default" style='box-shadow:-5px 6px 9px -8px #888888;'>
+                                        <a role="button" data-toggle="collapse" style='color:black' data-parent="#accordion" href="#poll_{{@key}}" aria-expanded="true"
+                                            aria-controls="collapseOne">
+                                            <div class="panel-heading" role="tab">
+                                                <h4 class="panel-title">
+                                                    {{pollName}}
+                                                </h4>
+                                            </div>
+                                        </a>
+                                        {{#if @key}}
+                                        <div id="poll_{{@key}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                            {{else}}
+                                            <div id="poll_{{@key}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                                {{/if}}
+                                                <div class="panel-body">
+                                                    <form role="form" name="poll_form_{{@key}}" id="poll_form_{{meeting_key}}_{{@key}}">
+                                                        <div class="form-group col-sm-12">
+                                                            <label class='custom_label'>Summary</label>
+                                                            <input type="hidden" name="poll_id" value="{{pollId}}">
+                                                            <textarea style='display:none' class="form-control input_fields_{{meeting_key}}" name="summary">{{summary}}</textarea>
+                                                            <div id='summary_div' class='display_meetings_detail_{{meeting_key}}'>{{summary}}</div>
+                                                        </div>
+
+                                                        <div class="clearfix"></div>
+                                                        <div class="form-group col-sm-6">
+                                                            <label class='custom_label'>Voting option</label>
+                                                            <select class="form-control show" name="voating_option">
+                                                                <option value="yes">Yes</option>
+                                                                <option value="no">No</option>
+                                                                <option value="abstain">Abstain</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <label>Uploaded Documents</label>
+                                                            <table class="table table-bordered table_custom_Wrapper">
+                                                                <tr>
+                                                                    <th>
+                                                                        <label>ID</label>
+                                                                    </th>
+                                                                    <th>
+                                                                        <label>Document name</label>
+                                                                    </th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Agends.pdf</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="form-group col-sm-6">
+                                                            <label class='custom_label'>POll Results</label>
+                                                            <table class="table table-bordered table_custom_Wrapper">
+                                                                <tr>
+                                                                    <th>
+                                                                        <label>ID</label>
+                                                                    </th>
+                                                                    <th>
+                                                                        <label>Document name</label>
+                                                                    </th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Agends.pdf</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+
+
                         </div>
                     </div>
                 </div>
@@ -403,6 +559,13 @@
                 alert('You can not add a pole after 3 days you add meeting');
             }
         })
+
+        $('#dropdown ul>li').click(function () {
+            $('#dropdown2 ul>li').removeClass('active');
+        });
+        $('#dropdown2 ul>li').click(function () {
+            $('#dropdown ul>li').removeClass('active');
+        });
         $(".custom_scroll_wrap").mCustomScrollbar();
     });
 </script>

@@ -81,36 +81,36 @@
                 <form role="form" name="pollform" enctype="multipart/form-data" action="/saveMeeting" method="post">
                     <div class="form-group col-sm-6">
                         <label>Meeting Title</label>
-                        <input type="text" class="form-control" name="meeting_title">
+                        <input type="text" class="form-control" name="meeting_title" required>
                     </div>
                     <div class="form-group col-sm-6">
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>会议标题</label>
-                        <input type="text" class="form-control" name="meeting_title_chinese">
+                        <input type="text" class="form-control" name="meeting_title_chinese" required>
                     </div>
                     <div class="form-group col-sm-6">
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>Meeting Start Time | 会议开始时间</label>
-                        <input type="datetime-local" class="form-control" name="startTime">
+                        <input type="datetime-local" class="form-control" name="startTime" required>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Meeting End Time | 会议结束时间</label>
-                        <input type="datetime-local" class="form-control" name="endTime">
+                        <input type="datetime-local" class="form-control" name="endTime" required>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>Venue | 地点 </label>
-                        <input type="text" class="form-control" name="venue">
+                        <input type="text" class="form-control" name="venue" required>
                     </div>
                     
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>Agenda | 议程</label>
-                        <input type="file" name="filefield"/> 
+                        <input type="file" name="filefield" required/> 
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">

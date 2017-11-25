@@ -8,6 +8,8 @@ const exphbs = require('express-handlebars');
 var hbs = require('hbs');
 const flash = require('connect-flash');
 
+hbs.registerHelper('dateFormat', require('handlebars-dateformat'));
+
 //----------------MODELS----------------
 const models = require('./models/models');
 var multer  = require('multer');
