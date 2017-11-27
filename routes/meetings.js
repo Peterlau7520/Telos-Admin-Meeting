@@ -260,7 +260,6 @@ router.post('/saveMeeting',uploaded.any('doc'),(req,res) =>{
     var data = req.body;
     //if any file uploaded 
     if(req.files.length > 0) {
-        console.log('asd');
         docFileName = req.files[0].originalname;
         dataFile = req.files[0].path;
 

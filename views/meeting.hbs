@@ -268,7 +268,7 @@
                     {{#each pastMeetingsData as |value meeting_key|}} {{#if @key}}
                     <div role="tabpanel" class="tab-pane" id="tab_{{id}}">
                         {{else}}
-                        <div role="tabpanel" class="tab-pane active" id="tab_{{id}}">
+                        <div role="tabpanel" class="tab-pane" id="tab_{{id}}">
                             {{/if}}
                             <div class="div-wrapper">
                                 <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}" action="/delete_meeting" method="post">
