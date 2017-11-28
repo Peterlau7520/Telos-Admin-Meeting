@@ -72,6 +72,8 @@ let currentDate = currDate.getFullYear()+"-"+(currDate.getMonth()+1)+"-"+currDat
 
 
 router.get('/allMeetings', (req, res) => {
+    console.log('process', process.env.MONGODB_URI);
+
     //get data from meeting schema
     models.Meeting.find(function (err, meetings) {
         if (err) { res.send(err); }
@@ -218,7 +220,7 @@ router.get('/allMeetings', (req, res) => {
 
 router.post('/addPollsOfMeeting', (req, res) => {
     var MeetingPollData = JSON.parse(req.body.pollsofmetting);
-    console.log(MeetingPollData)
+    console.log('MeetingPollData',MeetingPollData)
     ///save to databse logic//
     res.json({ meetingsPollData: MeetingPollData })
     // res.render('polls_of_meetings', { meetingsPollData: MeetingPollData });
@@ -226,10 +228,12 @@ router.post('/addPollsOfMeeting', (req, res) => {
 
 
 router.post('/editMeeting', (req, res) => {
+    console.log('editmeeting');
     var data = JSON.parse(req.body.metting);
     var myquery = { _id:data.meeting_id };
     var newvalues = { title: data.title, startTime: data.start_time, endTime: data.end_time, venue:data.venue };
     models.Meeting.updateOne(myquery,newvalues,function(err,meeting){
+        console.log();
         if(err) return next(err);
         if(data.polls) {
             var myquery = { _id:data.polls[0].poll_id };

@@ -496,6 +496,7 @@
             var meetingform = $("#edit_meeting_" + index).serializeArray();
             var meetingData = convertSerializeArrayToJson(meetingform);
             meetingData.polls = [];
+            console.log('originalData', originalData, 'id', index, originalData[index]);
             originalData[index].polls.forEach(function (value, key) {
                 var poll_form = $("#poll_form_" + index + '_' + key).serializeArray();
                 meetingData.polls.push(convertSerializeArrayToJson(poll_form));
@@ -553,7 +554,7 @@
             var someDate = new Date(time);
             someDate.setDate(someDate.getDate() + 3); 
             var dateFormated = someDate.toISOString().substr(0,10);
-            if(newDate > dateFormated) {
+            if(newDate < dateFormated) {
                 alert('You can add pole');
             } else {
                 alert('You can not add a pole after 3 days you add meeting');
