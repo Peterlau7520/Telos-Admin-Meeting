@@ -35,61 +35,62 @@ const bucket = new AWS.S3({params: {Bucket: BucketName}});
 let currDate = new Date(); 
 let currentDate = currDate.getFullYear()+"-"+(currDate.getMonth()+1)+"-"+currDate.getDate()+" "+currDate.getHours()+":"+currDate.getMinutes()+":"+currDate.getSeconds();
 router.get('/allMeetings', (req, res) => {
-    console.log(req.body)
+    //res.render('meeting')
     Meeting.find().populate('polls').then(function(meetings, err){
+        const promiseArr = []
         var currentMeetings = []
         var pastMeetings = []
         if(meetings.length > 0) {
-               _.filter(meetings, function(item, key, a){    
+            promiseArr.push(new Promise(function(resolve, reject){
+               forEach(meetings, function(item, key, a){    
                 if(item.fileLinks.length > 0) {
                       let fileLinks = [];
-                        let Key = `${req.user.estateName}/${item.title}/${item.fileLinks[0]}`;
+                        //let Key = `${req.user.estateName}/${item.title}/${item.fileLinks[0]}`;
                         fileLinks.push({
                           name: item.fileLinks[0],
-                          url: "https://"+BucketName+".s3.amazonaws.com/"+Key
+                          //url: "https://"+BucketName+".s3.amazonaws.com/"+Key
                         })
                       item.fileLinks = fileLinks;
                 }   
                 if(item.polls){
-                _.filter(item.polls, function(poll, key, a){  
+                forEach(item.polls, function(poll, key, a){  
                 if(poll.fileLinks){ 
-                    _.filter(poll.fileLinks, function(name, key, a){   
+                    forEach(poll.fileLinks, function(name, key, a){   
                         let polefileLinks = [];
-                        let Key = `${req.user.estateName}/${poll.title}/${name}`;
+                        //let Key = `${req.user.estateName}/${poll.title}/${name}`;
                         polefileLinks.push({
                           name: name,
-                          url: "https://"+BucketName+".s3.amazonaws.com/"+Key
+                          //url: "https://"+BucketName+".s3.amazonaws.com/"+Key
                         })
                       poll.fileLinks = polefileLinks;
                     })
                 }
                 })
             }
-                console.log(item)
-                    if(item.endTime > currentDate) {
+                    if(item.endTime > currDate || item.endTime == currDate) {
                         currentMeetings.push(item)
                     }
                     else{
                         pastMeetings.push(item)
                     }
-                    var data = {meetingsData:currentMeetings,pastMeetingsData:pastMeetings}
-                    renderData(req, res, data)
-                    //res.render('meeting',data);
+                    resolve({meetingsData: currentMeetings, pastMeetingsData: pastMeetings})
                })
-                
+           }))
+            Promise.all(promiseArr)
+            .then(function(data){
+                console.log(data[0])
+                 res.render('meeting', data[0]);
+            })
         }
         if(err){
             console.log(err)
+            res.render('meeting')
         }
     })
-
-function renderData(req, res, data){
-   res.render('meeting', data);
-}
 })
 
 router.post('/addPollsOfMeeting', (req, res) => {
-    if(req.body.meetingId != ''){
+    if(req.body.meetingId){
         const data = req.body
         const filesArr = []
         var pollFileLinks = []
@@ -168,8 +169,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
 
 
 router.post('/editMeeting', (req, res) => {
-    var data = req.body
-    var id = req.body._id
+    var data = req.body.meeting
     var fileLinks = []
     if(req.files) {
         var files = req.files && req.files.filefield ? req.files.filefield : false;
@@ -191,6 +191,7 @@ router.post('/editMeeting', (req, res) => {
                     console.log('Error uploading data: ', err);
                 } else {
                     console.log('succesfully uploaded the pdf!');
+                    save(req, res, fileLinks)
                       bucket.deleteObject({
                       Bucket: BucketName,
                       Key: req.body.fileLinks[0].url
@@ -203,7 +204,14 @@ router.post('/editMeeting', (req, res) => {
     }
     else{
         fileLinks = req.body.fileLinks
+          save(req, res, '')
     }
+    function save(req, res, file){
+        console.log(req.body, "rrrrrrrrr")
+        const data = JSON.parse(req.body.meeting)
+
+        var id = data.meeting_id
+        console.log(data, "data")
     Meeting.findOneAndUpdate({
       _id: id
     }, {
@@ -213,25 +221,27 @@ router.post('/editMeeting', (req, res) => {
         startTime: data.start_time, 
         endTime: data.end_time, 
         venue:data.venue,
-        fileLinks: fileLinks
+        //fileLinks: fileLinks
       }
     },{ 
       new: true 
     })
     .then((meeting) => {
+        console.log(meeting)
         if(!meeting){
-            return res.json({
+         res.json({
           success: false,
           message: "Got some issue"
         }); 
         }
-        else{
-        return res.json({
+        else{ 
+         res.json({
           success: true,
           message: "Meeting updated Successfully"
         });
     }
     })
+}
 })
 
 router.post('/editPoll', (req, res) => {
@@ -374,8 +384,7 @@ function saveMeeting(req, res, fileLinks){
     console.log(Polls)
         if(Polls.length  > 0){
             forEach(Polls, function(values){
-                 promiseArr.push(new Promise(function(resolve, reject) {
-                    if(values.fileLinks.length != 0 ){
+                    if(values.fileLinks){
                     forEach(values.fileLinks, function(file){
                         filesArr.push(new Promise(function(resolve, reject){
                         var files = req.files && req.files.filefield ? req.files.filefield : false;
@@ -405,19 +414,20 @@ function saveMeeting(req, res, fileLinks){
                 }
                 Promise.all(filesArr) 
                 .then(function(data){
+                    console.log(data)
                 var pollIds = []
                  promiseArr.push(new Promise(function(resolve, reject) {
                 var poll = new Poll({
-                    projectName: data.projectName,
-                     projectNameChn: data.projectNameChn,
-                     pollName: data.pollName,
-                     pollNameChn: data.pollNameChn,
+                    projectName: data. project_name,
+                     projectNameChn: data.project_name_chinese,
+                     pollName: data.title,
+                     pollNameChn: data.title_chinese,
                      summary: data.summary,
                      summaryChn: data.summaryChn,
-                     fileLinks: files,
-                     estateName: data.estateName,
-                     options: data.options,
-                     endTime: data.pollEndTime,
+                     fileLinks: filesArr,
+                     estateName: "HKU",
+                     options: data.option,
+                     endTime: '',
                      active: true,
                      voted: [],
                      finalResult: "",
@@ -426,13 +436,12 @@ function saveMeeting(req, res, fileLinks){
                     });
                 poll.save()
                 .then(function(poll){
-                    console.log(polls)
+                    console.log(poll)
                     pollIds.push(poll._id)
                     resolve(pollIds)
                     })
                 })) 
             })
-        }))
         })
     }
         Promise.all(promiseArr)
@@ -448,7 +457,8 @@ function saveMeeting(req, res, fileLinks){
                 active: true
             });
             meeting.save(function(err, meeting){
-                console.log(meeting)
+                console.log(meeting, "meeting")
+                res.json({message: "succesfully saved"})
     })
 })
 }

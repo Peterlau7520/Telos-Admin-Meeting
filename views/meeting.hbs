@@ -1,9 +1,11 @@
 <html>
 <head>
+     <link href="assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   </head>
 
+   </head>
+<body>
 <div class="wrapper">
     <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
         <div class="sidebar-wrapper">
@@ -145,7 +147,7 @@
                                         <div id='title_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{title}}</div>
                                     </div>
                                     <div class="form-group col-sm-6 text-right">
-                                        <button class="btn btn-success edit_meeting" type="button" data-id="{{meeting_key}}" data-time="{{created_at}}">編輯會議 | Edit Meeting</button>
+                                        <button class="btn btn-success edit_meeting1" id={{meeting_key}} type="button" data-id="{{meeting_key}}" data-time="{{created_at}}">編輯會議 | Edit Meeting</button>
                                         <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" data-time="{{created_at}}">Delete Meeting</button>
                                         <button style='display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
                                     </div>
@@ -285,7 +287,7 @@
                                         <div id='title_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{title}}</div>
                                     </div>
                                     <div class="form-group col-sm-6 text-right">
-                                        <button class="btn btn-success edit_meeting" type="button" data-id="{{meeting_key}}" data-time="{{created_at}}">編輯會議 | Edit Meeting</button>
+                                        <button class="btn btn-success edit_meeting1" type="button" id= "{{meeting_key}}" data-id="{{meeting_key}}" data-time="{{created_at}}">編輯會議 | Edit Meeting</button>
                                         <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" data-time="{{created_at}}">Delete Meeting</button>
                                         <button style='display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
                                     </div>
@@ -324,6 +326,7 @@
                                                 <td>{{document}}</td>
                                             </tr>
                                         </table>
+                                        <div class = "add" id= "addAgenda"> </div>
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>
@@ -346,62 +349,8 @@
                                             {{else}}
                                             <div id="poll_{{@key}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                                 {{/if}}
-                                                <div class="panel-body">
-                                                    <form role="form" name="poll_form_{{@key}}" id="poll_form_{{meeting_key}}_{{@key}}">
-                                                        <div class="form-group col-sm-12">
-                                                            <label class='custom_label'>Summary</label>
-                                                            <input type="hidden" name="poll_id" value="{{pollId}}">
-                                                            <textarea style='display:none' class="form-control input_fields_{{meeting_key}}" name="summary">{{summary}}</textarea>
-                                                            <div id='summary_div' class='display_meetings_detail_{{meeting_key}}'>{{summary}}</div>
-                                                        </div>
-
-                                                        <div class="clearfix"></div>
-                                                        <div class="form-group col-sm-6">
-                                                            <label class='custom_label'>Voting option</label>
-                                                            <select class="form-control show" name="voating_option">
-                                                                <option value="yes">Yes</option>
-                                                                <option value="no">No</option>
-                                                                <option value="abstain">Abstain</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-sm-6">
-                                                            <label>Uploaded Documents</label>
-                                                            <table class="table table-bordered table_custom_Wrapper">
-                                                                <tr>
-                                                                    <th>
-                                                                        <label>ID</label>
-                                                                    </th>
-                                                                    <th>
-                                                                        <label>Document name</label>
-                                                                    </th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>Agends.pdf</td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                        <div class="clearfix"></div>
-                                                        <div class="form-group col-sm-6">
-                                                            <label class='custom_label'>POll Results</label>
-                                                            <table class="table table-bordered table_custom_Wrapper">
-                                                                <tr>
-                                                                    <th>
-                                                                        <label>ID</label>
-                                                                    </th>
-                                                                    <th>
-                                                                        <label>Document name</label>
-                                                                    </th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>Agends.pdf</td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                        <div class="form-group col-sm-6">
-                                                        </div>
-                                                    </form>
+                                                <div class="panel-body" id= "meetingdiv" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -416,7 +365,7 @@
                     </div>
                 </div>
            
-
+               
             <footer class="footer">
                 <div class="container-fluid">
                     <nav class="pull-left">
@@ -453,6 +402,12 @@
         </div>
     </div>
 </div>
+ <div id="edit_model" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog dialogModal" style="width: 60%">
+                    
+                </div>
+            </div>
+</body>
 </html>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -470,47 +425,136 @@
             $('.meeting_li').click(function () {
                     $('.save_meeting').hide()
                 }) 
-        $(".edit_meeting").click(function () {
+
+
+        function edit_popup(data){
+            console.log(data, "hhhhhh")
+            var html = '<div class="div-wrapper" style="padding: 10px;">'+
+            '<h3 class= "heading">' + "Upcoming Meeting"+ '</h3>' + '                                        <button class=" btn delete_meeting deletebtn" type="submit" data-id="" data-time="">取消會議 | Delete Meeting</button>' + '<hr>' +
+            
+'                                <form role="form" enctype="multipart/form-data" name="edit_meeting_popup" id="edit_meeting_popup" action="/delete_meeting" method="post">'+
+'                                    <div class="form-group col-sm-6">'+
+'                                        <label class="">???? | Meeting Title</label>'+
+'                                        <input name="meeting_id" type="hidden" value="'+data._id+'">'+
+'                                        <input id ="title" type="text" class="form-control input_fields" name="title" value="'+data.title+'">'+
+'                                        <div id="" class=""></div>'+
+'                                    </div>'+
+'                                    <div class="form-group col-sm-6 text-right">'+
+'                                    </div>'+
+'                                    <div class="clearfix"></div>'+
+'                                    <div class="form-group col-sm-6">'+
+'                                        <label class=""> ?????? | Meeting Start Time</label>'+
+'                                        <input id ="" type="datetime-local" name="start_time" class="form-control input_fields_" value="'+data.start_time+'">'+
+'                                        <div id="" class=""></div>'+
+''+
+'                                    </div>'+
+'                                    <div class="form-group col-sm-6">'+
+'                                        <label class="">?????? | Meeting End Time</label>'+
+'                                        <input id =""  type="datetime-local" name="end_time" class="form-control input_fields" value="'+data.end_time+'">'+
+'                                        <div id="" class=""></div>'+
+''+
+'                                    </div>'+
+'                                    <div class="clearfix"></div>'+
+'                                    <div class="form-group col-sm-6">'+
+'                                        <label class="">?? | Venue</label>'+
+'                                        <input t id ="" type="text" class="form-control input_fields" name="venue" value="'+data.venue+'">'+
+'                                        <div id="" class=""></div>'+
+'                                    </div>'+
+'                                    <div class="form-group col-sm-6">'+
+'                                        <label class="">??Agenda</label>'+
+'                                        <table class="table table-bordered table_custom_Wrapper">'+
+'                                            <tr>'+
+'                                                <th>'+
+'                                                    <label>ID</label>'+
+'                                                </th>'+
+'                                                <th>'+
+'                                                    <label>Document name</label>'+
+'                                                </th>'+
+'                                            </tr>'+
+'                                            <tr>'+
+'                                                <td id="hide1">1</td>'+
+                                                    '<input name="fileLinks" type="hidden" value="'+data.fileLinks[0].name+'">'+
+'                                                <td id="hide">'+ data.fileLinks[0].name + '                                        <button  class="remove_file" type="button" data-id=""> X </button>'+
+'</td>'+
+'                                            </tr>'+
+'                                        </table>'+
+'                                        <div class = "add" id= "addAgenda">'+ '<input name="fileField" id ="addFile" type="file" class="form-control input_fields />' + '</div>'+
+'                                    </div>'+
+'                                    <div class="clearfix"></div>'+
+'                                        <button  class=" btn save_meeting savebtn" type="button" data-id=""> 儲存 | Save</button>'+
+'                                        <button  class="btn save_meeting savebtn" type="button" data-id="">取消 | Cancel</button>'+
+'                                </form>'+
+'                            </div>';
+    
+
+                return html; 
+        }
+        $(document).on('click','.edit_meeting1',function(event){
+            event.preventDefault();
+             var modelhtml = edit_popup(originalData[event.target.id]);
+              $("#edit_model .modal-dialog").html(modelhtml);
+                $("#edit_model").modal();
+                 $('#addFile').hide()
+        })
+        $(document).on('click','.remove_file',function(event){
+            event.preventDefault();
+           $('#hide').hide()
+           $('#hide1').hide()
+           $('#addFile').show()
+        })
+       /* $(".edit_meeting").click(function () {
+            console.log('here')
+             var modelhtml = edit_popup();
+             console.log(modelhtml)
+                $("#edit_model .modal-dialog").html(modelhtml);
+                $("#edit_model").modal();
             var index = $(this).data('id');
             // current date
             var newDate = new Date();
-            newDate = newDate.getFullYear()+"-"+(newDate.getMonth()+1)+"-"+newDate.getDate();
+            //newDate = newDate.getFullYear()+"-"+(newDate.getMonth()+1)+"-"+newDate.getDate();
             //date with +3days
             var time = $(this).data('time');
-            var someDate = new Date(time);
-            someDate.setDate(someDate.getDate() + 3); 
-            var dateFormated = someDate.toISOString().substr(0,10);
-            if(newDate < dateFormated) {
+            var someDate = time ;
+
+            //someDate.setDate(someDate.getDate() + 3); 
+            //var dateFormated = someDate.toISOString().substr(0,10);
+            if(newDate > someDate) {
                 var classvar = '.display_meetings_detail_' + index
                 var clasvarforinputfield = '.input_fields_' + index
                 $(clasvarforinputfield).show()
+               
+                /*$("#addAgenda").append(html)
                 $(classvar).hide()
                 $('.save_meeting').show()
                 $(this).hide()    
             } else {
                 alert('You can not edit this');
-            }
+            }*/
             
-        })
-        $(".save_meeting").click(function () {
-            var index = $(this).data('id');
-            var classvar = '.display_meetings_detail_' + index
-            var clasvarforinputfield = '.input_fields_' + index
-            $(classvar).show()
-            $(clasvarforinputfield).hide()
-            $('.save_meeting').hide()
-            $('.edit_meeting').show()
-            var meetingform = $("#edit_meeting_" + index).serializeArray();
+       // }
+   // })*/
+
+        $(document).on('click','.save_meeting',function(event){
+             $("#edit_model").modal('hide');
+            //var index = $(this).data('id');
+            //var classvar = '.display_meetings_detail_' + index
+            //var clasvarforinputfield = '.input_fields_' + index
+            //$(classvar).show()
+            //$(clasvarforinputfield).hide()
+            //$('.save_meeting').hide()
+            //$('.edit_meeting').show()
+            var meetingform = $("#edit_meeting_popup").serializeArray();
             var meetingData = convertSerializeArrayToJson(meetingform);
-            meetingData.polls = [];
-            console.log('originalData', originalData, 'id', index, originalData[index]);
+            console.log('originalData', meetingData);
+            /*if(originalData[index].polls){
             originalData[index].polls.forEach(function (value, key) {
                 var poll_form = $("#poll_form_" + index + '_' + key).serializeArray();
                 meetingData.polls.push(convertSerializeArrayToJson(poll_form));
             });
+            }*/
             $.ajax({
                 url: "/editMeeting",
-                data: { "metting": JSON.stringify(meetingData) },
+                data: { "meeting": JSON.stringify(meetingData) },
                 type: 'POST',
                 dataType: "json",
                 success: function (data) {
@@ -523,12 +567,10 @@
                     $("#venue"+index).val(data.venue)
                     $('#venue_div_'+index).text(data.venue)
                     console.log(data.title)
+                    location.reload()
                 }
 
             });
-            setTimeout(function() {
-                location.reload();
-            },1500);
         });
         //for delete meeting
         $('.delete_meeting').click(function(e) {

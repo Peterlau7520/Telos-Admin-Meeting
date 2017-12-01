@@ -42,6 +42,21 @@
     color: rgb(161,161,161);
     font-weight: normal !important;
 }
+.deletebtn{
+      float: right !important;
+    margin-top: -43px !important;
+    margin-right: 13px !important;
+    /* position: absolute; */
+    text-decoration-color: white !important;
+    background-color: red !important;
+    color: white !important;
+}
+.savebtn{
+  background-color: dodgerblue !important;
+    color: white !important;
+    float: right !important;
+    margin-right: 10px !important;
+}
 .ModelStyle .form-control {
     background-color: #FFFFFF;
     border: 1px solid #E3E3E3;

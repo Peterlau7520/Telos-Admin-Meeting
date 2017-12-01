@@ -111,7 +111,7 @@
                     <div class="form-group col-sm-6">
                         <label>Agenda | 议程</label>
                         <div class="documents_wrapper">
-                        <input type="file" name="filefield" accept="application/pdf">      
+                        <input type="file" name="filefield" accept="application/pdf" id="fileValue">      
                     </div>
                     </div>
                     <div class="clearfix"></div>
@@ -138,7 +138,7 @@
                         <label></label>   
                         <p>
                             <input type="hidden" name="poll_json" id="poll_json">
-                            <input type="submit" class="btn btn-success custom_success_btn" value=" 保存 | Save">
+                            <input type="submit" class="btn btn-success custom_success_btn"  id="save"value=" 保存 | Save">
                         </p>
                     </div>
                     <div class="clearfix"></div>
@@ -272,9 +272,12 @@
             $("#poll").modal();
         
         })
+        /*$("#save").click(function (event) {
+        event.preventDefault();
+        console.log($("#fileValue").val())        
+        })*/
         
         $("#close_model").click(function () {
-            
             $("#poll").modal("hide");
             var form_data_array = $("#poll_form").serializeArray();
             console.log(form_data_array);
