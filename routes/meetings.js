@@ -5,6 +5,11 @@ const express = require('express');
 const models = require('../models/models');
 const Estate = models.Estate;
 const Notice = models.Notice;
+const Meeting = models.Meeting;
+const Poll = models.Poll;
+const forEach = require('async-foreach').forEach;
+var Promise = require('bluebird');
+const _ = require('lodash');
 //var Busboy = require('busboy');
 //const busboyBodyParser = require('busboy-body-parser');
 const fs = require('fs');
@@ -13,389 +18,465 @@ const fs = require('fs');
 var multer  = require('multer');
 var uploaded = multer({dest: './uploads'});
 const router = express.Router();
+const dateFormat = require('dateformat');
 
 // AWS.config.loadFromPath('./key.json');
 var AWS = require('aws-sdk');
 const async = require('async');
-const bucketName = "telospdf";
 let docFileName,pathParams,dataFile;
-
-/** Load Config File */
-AWS.config.loadFromPath('./models/config.json');
-/** After config file load, create object for s3*/
-var s3 = new AWS.S3({ region: 'us-east-1' });
-var createMainBucket = (callback) => {
-    // Create the parameters for calling createBucket
-    var bucketParams = {
-       Bucket : bucketName
-    };
-    s3.headBucket(bucketParams, function (err, data) {
-        if (err) {
-            console.log("ErrorHeadBucket", err)
-            s3.createBucket(bucketParams, function (err, data) {
-                if (err) {
-                    console.log("Error", err)
-                    callback(err, null)
-                } else {
-                    callback(null, data)
-                }
-            });
-        } else {
-            callback(null, data)
-        }
-    });
-}
-
-const createItemObject = (callback) => {
-    const params = {
-          Bucket: bucketName,
-          Key: `${docFileName}`,
-          ACL: 'public-read',
-          Body:dataFile
-      };
-      s3.putObject(params, function (err, data) {
-          if (err) {
-              console.log("Error uploading image: ", err);
-              callback(err, null)
-          } else {
-              console.log("Successfully uploaded image on S3", data);
-              callback(null, data)
-          }
-      })
-  }
-
+const BucketName = 'telospdf';
+AWS.config.update({
+  accessKeyId: process.env.S3_KEY,
+  secretAccessKey: process.env.secretAccessKey
+});
+const bucket = new AWS.S3({params: {Bucket: BucketName}});
 
 
 let currDate = new Date(); 
 let currentDate = currDate.getFullYear()+"-"+(currDate.getMonth()+1)+"-"+currDate.getDate()+" "+currDate.getHours()+":"+currDate.getMinutes()+":"+currDate.getSeconds();
-
-
-
 router.get('/allMeetings', (req, res) => {
-    console.log('process', process.env.MONGODB_URI);
-
-    //get data from meeting schema
-    models.Meeting.find(function (err, meetings) {
-        if (err) { res.send(err); }
-        var currentMeetings = new Array();
-        var pastMeetings = new Array();
+    console.log(req.body)
+    Meeting.find().populate('polls').then(function(meetings, err){
+        var currentMeetings = []
+        var pastMeetings = []
         if(meetings.length > 0) {
-            //get data from poll schema
-            meetings.forEach(function(item) {
-                //for current meeting
-                if(item.endTime > currentDate) {
-                    if(item.polls != null) {
-                        models.Poll.findById(item.polls[0],function(err,poll){
-                            if(err) return next(err);
-                            currentMeetings.push({
-                                id          : item.id,
-                                title       : item.title,
-                                titleChn    : item.titleChn,
-                                startTime   : item.startTime,
-                                endTime     : item.endTime,
-                                venue       : item.venue,
-                                created_at  : item.created_at,
-                                document    : item.fileLinks[0],
-                                polls       : [{
-                                    pollId      : poll._id,
-                                    pollName    : poll.projectName,
-                                    pollNameChn : poll.projectNameChn,
-                                    summary     : poll.summary,
-                                    summaryChn  : poll.summaryChn,
-                                    endTime     : poll.endTime,
-                                    options     : poll.options
-                                }]  
-                            });
-                        });
-                    } else {
-                        currentMeetings.push({
-                            id          : item.id,
-                            title       : item.title,
-                            titleChn    : item.titleChn,
-                            startTime   : item.startTime,
-                            endTime     : item.endTime,
-                            venue       : item.venue,
-                            created_at  : item.created_at,
-                            document    : item.fileLinks[0],
-                        });
-                    }
-                } else {  
-                    //for past meeting
-                    if(item.polls != null) {
-                        models.Poll.findById(item.polls[0],function(err,poll){
-                            if(err) return next(err);
-                            pastMeetings.push({
-                                id          : item.id,
-                                title       : item.title,
-                                titleChn    : item.titleChn,
-                                startTime   : item.startTime,
-                                endTime     : item.endTime,
-                                venue       : item.venue,
-                                created_at  : item.created_at,
-                                document    : item.fileLinks[0],
-                                polls       : [{
-                                    pollId      : poll._id,
-                                    pollName    : poll.projectName,
-                                    pollNameChn : poll.projectNameChn,
-                                    summary     : poll.summary,
-                                    summaryChn  : poll.summaryChn,
-                                    endTime     : poll.endTime,
-                                    options     : poll.options
-                                }]  
-                            });
-                        });
-                    } else {
-                        pastMeetings.push({
-                            id          : item.id,
-                            title       : item.title,
-                            titleChn    : item.titleChn,
-                            startTime   : item.startTime,
-                            endTime     : item.endTime,
-                            venue       : item.venue,
-                            created_at  : item.created_at,
-                            document    : item.fileLinks[0],
-                        });
-                    }
+               _.filter(meetings, function(item, key, a){    
+                if(item.fileLinks.length > 0) {
+                      let fileLinks = [];
+                        let Key = `${req.user.estateName}/${item.title}/${item.fileLinks[0]}`;
+                        fileLinks.push({
+                          name: item.fileLinks[0],
+                          url: "https://"+BucketName+".s3.amazonaws.com/"+Key
+                        })
+                      item.fileLinks = fileLinks;
+                }   
+                if(item.polls){
+                _.filter(item.polls, function(poll, key, a){  
+                if(poll.fileLinks){ 
+                    _.filter(poll.fileLinks, function(name, key, a){   
+                        let polefileLinks = [];
+                        let Key = `${req.user.estateName}/${poll.title}/${name}`;
+                        polefileLinks.push({
+                          name: name,
+                          url: "https://"+BucketName+".s3.amazonaws.com/"+Key
+                        })
+                      poll.fileLinks = polefileLinks;
+                    })
                 }
+                })
+            }
+                console.log(item)
+                    if(item.endTime > currentDate) {
+                        currentMeetings.push(item)
+                    }
+                    else{
+                        pastMeetings.push(item)
+                    }
+                    var data = {meetingsData:currentMeetings,pastMeetingsData:pastMeetings}
+                    renderData(req, res, data)
+                    //res.render('meeting',data);
+               })
                 
-            });
-            setTimeout(function () {
-                //console.log('pastMeetings',pastMeetings, 'currentMeetings', currentMeetings);
-                res.render('meeting',{meetingsData:currentMeetings,pastMeetingsData:pastMeetings,now: new Date() });
-            },1500);
-        } else {
-            res.render('meeting',{meetingsData:currentMeetings});
         }
-        
-    });
-    //check whether it's a past meeting or upcoming meeting. 
+        if(err){
+            console.log(err)
+        }
+    })
+
+function renderData(req, res, data){
+   res.render('meeting', data);
+}
 })
 
-/*router.get('/allMeetings', (req, res) => {
-    var meetings = [
-        {
-           title: "Meeting 1",
-           titleChn: "",
-           startTime: "2017-03-18T13:00",
-           endTime: "2017-03-10T13:00",
-           venue:"venue 1",
-           polls: [{
-               pollName: "Poll 1",
-               pollNameChn: "",
-               summary: "Summary 1",
-               summaryChn: "",
-               endTime: "",
-               options: "",
-               documents: "",
-            },{
-               pollName: "Poll 2",
-               pollNameChn: "",
-               summary: "Summary 2",
-               summaryChn: "",
-               endTime: "",
-               options: "",
-               documents: ""
-            }]           
-        },
-        {
-           title: "Meeting 2",
-           titleChn: "",
-           startTime: "2017-03-17T13:00",
-           endTime: "2018-03-11T13:00",
-           venue:"venue 2",
-           polls: [{
-               pollName: "Poll 1",
-               pollNameChn: "",
-               summary: "Summary 1",
-               summaryChn: "",
-               endTime: "",
-               options: "",
-               documents: ""
-            }]           
-        }
-    ]
-    res.render('meeting',{meetingsData:meetings});
-    //check whether it's a past meeting or upcoming meeting.
-})*/
-
 router.post('/addPollsOfMeeting', (req, res) => {
+    if(req.body.meetingId != ''){
+        const data = req.body
+        const filesArr = []
+        var pollFileLinks = []
+                    if(data.fileLinks.length != 0 ){
+                        forEach(data.fileLinks, function(file){
+                            filesArr.push(new Promise(function(resolve, reject){
+                            
+                                    var info = file.data;
+                                    var name = file.name;
+                                    //meeting.fileLinks.push(name);
+                                    pollFileLinks.push(name)
+                                    var data = {
+                                        Bucket: BucketName,
+                                        Key: `"Meetings"/${name}`,
+                                        Body: info,
+                                        ContentType: 'application/pdf',
+                                        ContentDisposition: 'inline',
+                                        ACL: "public-read"
+                                    }; // req.user.estateName
+                                    bucket.putObject(data, function (err, data) {
+                                        if (err) {
+                                            console.log('Error uploading data: ', err);
+                                        } else {
+                                            console.log('succesfully uploaded the pdf!');
+                                            resolve(pollFileLinks)
+                                        }
+                                    });
+                            }))
+                        })
+                        Promise.all(filesArr)
+                        .then(function(files){
+                            savePoll(req, res, files)
+                        })
+                    }
+                    else{
+                        savePoll(req, res, pollFileLinks)
+                    }
+    }
+    else{
     var MeetingPollData = JSON.parse(req.body.pollsofmetting);
-    console.log('MeetingPollData',MeetingPollData)
-    ///save to databse logic//
+    console.log('MeetingPollData',MeetingPollData, req.files)
     res.json({ meetingsPollData: MeetingPollData })
-    // res.render('polls_of_meetings', { meetingsPollData: MeetingPollData });
+    }
+
+    function savePoll(req, res, files){
+        const data = req.body
+        var poll = new Poll({
+                            projectName: data.project_name,
+                            projectNameChn: data.project_name_chinese,
+                            pollName: data.meetingStartFinal,
+                            pollNameChn: data.title_chinese,
+                            summary: data.summary,
+                            summaryChn: data.summary_chinese,
+                            fileLinks: files,
+                            estateName: data.estateName,
+                            options: data.options,
+                            endTime: data.pollEndTime,
+                            active: true,
+                            voted: [],
+                            finalResult: "",
+                            results: [],
+                            votes: []
+                            });
+                            poll.save()
+                                .then(function(poll){
+                                    Meeting.update(
+                                        { _id: req.body.meetingId },
+                                        { $push: { polls:  poll._id} } 
+                                    )
+                                    .then(function(result){
+                                        res.json({ meetingsPollData: result, message: "Poll Added Successfully" })
+                                    })
+                                })
+    }
 })
 
 
 router.post('/editMeeting', (req, res) => {
-    console.log('editmeeting');
-    var data = JSON.parse(req.body.metting);
-    var myquery = { _id:data.meeting_id };
-    var newvalues = { title: data.title, startTime: data.start_time, endTime: data.end_time, venue:data.venue };
-    models.Meeting.updateOne(myquery,newvalues,function(err,meeting){
-        console.log();
-        if(err) return next(err);
-        if(data.polls) {
-            var myquery = { _id:data.polls[0].poll_id };
-            var newvalues = {summary:data.polls[0].summary};
-            models.Poll.updateOne(myquery,newvalues,function(err,Poll){
-                if(err) return next(err);
-                console.log('update succesfully');
+    var data = req.body
+    var id = req.body._id
+    var fileLinks = []
+    if(req.files) {
+        var files = req.files && req.files.filefield ? req.files.filefield : false;
+        for (var i = 0; i < files.length; i++) {
+            var info = files[i].data;
+            var name = files[i].name;
+            //meeting.fileLinks.push(name);
+            fileLinks.push(name)
+            var data = {
+                Bucket: BucketName,
+                Key: `${req.user.estateName}/${req.body.title}/${name}`,
+                Body: info,
+                ContentType: 'application/pdf',
+                ContentDisposition: 'inline',
+                ACL: "public-read"
+            }; // req.user.estateName
+            bucket.putObject(data, function (err, data) {
+                if (err) {
+                    console.log('Error uploading data: ', err);
+                } else {
+                    console.log('succesfully uploaded the pdf!');
+                      bucket.deleteObject({
+                      Bucket: BucketName,
+                      Key: req.body.fileLinks[0].url
+                    }, function(err, filed){
+                        console.log(filed)
+                    })
+                }
             });
-        } else {
-            console.log('update succesfully');
         }
-    });
-    return 1;
+    }
+    else{
+        fileLinks = req.body.fileLinks
+    }
+    Meeting.findOneAndUpdate({
+      _id: id
+    }, {
+      $set: { 
+        title: data.title,
+        titleChn: data.titleChn,
+        startTime: data.start_time, 
+        endTime: data.end_time, 
+        venue:data.venue,
+        fileLinks: fileLinks
+      }
+    },{ 
+      new: true 
+    })
+    .then((meeting) => {
+        if(!meeting){
+            return res.json({
+          success: false,
+          message: "Got some issue"
+        }); 
+        }
+        else{
+        return res.json({
+          success: true,
+          message: "Meeting updated Successfully"
+        });
+    }
+    })
 })
 
-router.post('/delete_meeting',(req,res) => {
-    models.Meeting.remove({_id: req.body.meeting_id}, function (err, todo) {
-        if (err) res.send(err);
-        res.redirect('/allMeetings');
-    });
-});
+router.post('/editPoll', (req, res) => {
+    var data = req.body
+    var id = req.body._id
+    var fileLinks = []
+    var pollFileLinks = []
+    if(req.body.addedFiles) {
+        forEach(data.fileLinks, function(file){
+            filesArr.push(new Promise(function(resolve, reject){        
+                var info = file.data;
+                var name = file.name;
+                pollFileLinks.push(name)
+                var data = {
+                    Bucket: BucketName,
+                    Key: `${req.user.estateName}/${req.body.meetingName}/${req.body.pollName}/${name}`,
+                    Body: info,
+                    ContentType: 'application/pdf',
+                    ContentDisposition: 'inline',
+                    ACL: "public-read"
+                    }; // req.user.estateName
+                    bucket.putObject(data, function (err, data) {
+                    if (err) {
+                    console.log('Error uploading data: ', err);
+                    } else {
+                    console.log('succesfully uploaded the pdf!');
+                    resolve(pollFileLinks)
+                    }
+                    });
+            }))
+        })
+        Promise.all(filesArr)
+        .then(function(files){
+        updatePoll(req, res, files)
+        })
+
+    }
+    else{
+        updatePoll(req, res, pollFileLinks)
+    }
+    
+    function updatePoll(req, res, files){
+        const data = req.body
+        Poll.findOneAndUpdate({_id: id
+    }, {
+      $set: { 
+         projectName: data.projectName,
+         projectNameChn: data.projectNameChn,
+         pollName: data.pollName,
+         pollNameChn: data.pollNameChn,
+         summary: data.summary,
+         summaryChn: data.summaryChn,
+         fileLinks: files,
+         estateName: data.estateName,
+         options: data.options,
+         endTime: data.pollEndTime,
+         active: true,
+         voted: [],
+         finalResult: "",
+         results: [],
+         votes: []
+      }
+    },{ 
+      new: true 
+    })
+    .then(function(poll){
+        if(!poll){
+            res.json({message: 'Could Not Update'})
+        }
+        else{
+            res.json({message: 'Updated Successfully'})
+        }
+    })                         
+}
+})
 
 router.get('/addMeeting',(req,res) => {
     res.render('add_meeting');
 })
 
 router.post('/saveMeeting',uploaded.any('doc'),(req,res) =>{
+    console.log(req.body,"req.bodyyyy", req.files, "re")
     var data = req.body;
-    //if any file uploaded 
-    if(req.files.length > 0) {
-        docFileName = req.files[0].originalname;
-        dataFile = req.files[0].path;
-
-        async.series([
-            createMainBucket,
-            createItemObject
-            ], (err, result) => {
+    if(req.files.length !=0 ){
+        console.log("hello")
+        uploadFile(req,res)
+    }
+    else{
+        console.log("hello1")
+        saveMeeting(req, res, "")
+    }
+function uploadFile(req, res){
+    var files = req.files && req.files.filefield ? req.files.filefield : false;
+    var fileLinks = []
+        for (var i = 0; i < files.length; i++) {
+            var info = files[i].data;
+            var name = files[i].name;
+            fileLinks.push(name)
+            var data = {
+                Bucket: BucketName,
+                Key: `${req.user.estateName}/${req.body.title}/${name}`,
+                Body: info,
+                ContentType: 'application/pdf',
+                ContentDisposition: 'inline',
+                ACL: "public-read"
+            }; // req.user.estateName
+            bucket.putObject(data, function (err, data) {
                 if (err) {
-                    return res.send(err);
-                }
-                else {
-                    console.log('Successfully Uploaded');
+                    console.log('Error uploading data: ', err);
+                } else {
+                    console.log('succesfully uploaded the pdf!');
+                    saveMeeting(req, res, fileLinks);
+
                 }
             });
-    }
-    //meeting start time
-    /*if(req.body.startTime) {
+        }
+}
+
+function saveMeeting(req, res, fileLinks){
+    let promiseArr=[]
+    let filesArr = []
+    if(req.body.startTime) {
         var meetingStartDay = req.body.startTime.substring(0, req.body.startTime.indexOf('T'));
         var meetingStartHour = req.body.startTime.substring(req.body.startTime.indexOf('T') + 1, req.body.startTime.indexOf('T') + 9);
-        var meetingStartFinal = startDay + " " + startHour;
+        var meetingStartFinal = dateFormat(meetingStartDay + " " + meetingStartHour, 'shortDate');
     }
-
     //meeting end time
     if(req.body.endTime) {
         var meetingEndDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
         var meetingEndHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
-        var meetingEndFinal = endDay + " " + endHour;
+        var meetingEndFinal = dateFormat(meetingEndDay + " " + meetingEndHour, 'shortDate');
     }
     //poll end time
     if(req.body.pollEndTime) {
         var pollEndDay = req.body.pollEndTime.substring(0, req.body.pollEndTime.indexOf('T'));
         var pollEndHour = req.body.pollEndTime.substring(req.body.pollEndTime.indexOf('T') + 1, req.body.pollEndTime.indexOf('T') + 9);
-        var pollEndFinal = pollEndDay + " " + pollEndHour;
-    }*/
-
-    if(data.poll_json){
-        data.poll_json = JSON.parse(data.poll_json);
-        //insert into database in poll schema
-        models.Poll.create({
-            projectName     : data.poll_json[0].project_name,
-            projectNameChn  : data.poll_json[0].project_name_chinese,
-            summary         : data.poll_json[0].summary,
-            summaryChn      : data.poll_json[0].summary_chinese,
-            options         : data.poll_json[0].option,
-            created_at      : currentDate,
-        }, function (err, Poll){
-            if (err) return handleError(err);
-            //insert into database in meeting schema
-            insertMeeting(Poll.id, data);
-            res.redirect('/addMeeting');
-        });
-    } else {
-        //insert into database in meeting schema
-        insertMeeting(null, data);  //if poll id not exist then poll id is null
-        res.redirect('/addMeeting');
+        var pollEndFinal = dateFormat(pollEndDay + " " + pollEndHour, 'shortDate');
     }
-    
+    const Polls = JSON.parse(req.body.poll_json)
+    console.log(Polls)
+        if(Polls.length  > 0){
+            forEach(Polls, function(values){
+                 promiseArr.push(new Promise(function(resolve, reject) {
+                    if(values.fileLinks.length != 0 ){
+                    forEach(values.fileLinks, function(file){
+                        filesArr.push(new Promise(function(resolve, reject){
+                        var files = req.files && req.files.filefield ? req.files.filefield : false;
+                        var pollFileLinks = []
+                                var info = file.data;
+                                var name = file.name;
+                                //meeting.fileLinks.push(name);
+                                pollFileLinks.push(name)
+                                var data = {
+                                    Bucket: BucketName,
+                                    Key: `${req.user.estateName}/${req.body.title}/${values.title}/${name}`,
+                                    Body: info,
+                                    ContentType: 'application/pdf',
+                                    ContentDisposition: 'inline',
+                                    ACL: "public-read"
+                                }; // req.user.estateName
+                                bucket.putObject(data, function (err, data) {
+                                    if (err) {
+                                        console.log('Error uploading data: ', err);
+                                    } else {
+                                        console.log('succesfully uploaded the pdf!');
+                                        resolve(pollFileLinks)
+                                    }
+                                });
+                        }))
+                    })
+                }
+                Promise.all(filesArr) 
+                .then(function(data){
+                var pollIds = []
+                 promiseArr.push(new Promise(function(resolve, reject) {
+                var poll = new Poll({
+                    projectName: data.projectName,
+                     projectNameChn: data.projectNameChn,
+                     pollName: data.pollName,
+                     pollNameChn: data.pollNameChn,
+                     summary: data.summary,
+                     summaryChn: data.summaryChn,
+                     fileLinks: files,
+                     estateName: data.estateName,
+                     options: data.options,
+                     endTime: data.pollEndTime,
+                     active: true,
+                     voted: [],
+                     finalResult: "",
+                     results: [],
+                     votes: []
+                    });
+                poll.save()
+                .then(function(poll){
+                    console.log(polls)
+                    pollIds.push(poll._id)
+                    resolve(pollIds)
+                    })
+                })) 
+            })
+        }))
+        })
+    }
+        Promise.all(promiseArr)
+        .then(function(d){ 
+        var meeting = new Meeting({
+                title: req.body.meeting_title,
+                titleChn: req.body.meeting_title_chinese,
+                startTime: meetingStartFinal,
+                endTime: meetingEndFinal,
+                venue: req.body.venue,
+                fileLinks: fileLinks,
+                polls: d,
+                active: true
+            });
+            meeting.save(function(err, meeting){
+                console.log(meeting)
+    })
+})
+}
+
 
 });
-function insertMeeting(poll_id, data, res) {
-    models.Meeting.create({
-        title     : data.meeting_title,
-        titleChn  : data.meeting_title_chinese,
-        startTime : data.startTime,
-        endTime   : data.endTime,
-        venue     : data.venue,
-        polls     : poll_id,
-        fileLinks : docFileName,
-        created_at: currentDate
-    }, function (err, meeting) {
-        if (err) return handleError(err);
-        //res.json(small);
+
+router.post('/delete_meeting',(req,res) => {
+    Meeting.deleteOne({_id: req.body.meeting_id}, function (err, todo) {
+        if (err) res.send(err);
+        res.redirect('/allMeetings');
     });
-} 
+});
+
+router.post('/delete_poll',(req,res) => {
+     Poll.deleteOne({_id: req.body.pollId}, function (err, todo) {
+        if (err) res.send(err);
+        Meeting.update(
+            { _id: req.body.meetingId },
+            { $pop: { polls:  req.body.pollId} } 
+        )
+        .then(function(err, result){
+            if (err) res.send(err);
+           res.redirect('/allMeetings');
+        })
+    });
+});
+
 
 module.exports = router;
 
-
-
-// router.post('/addMeeting', (req, res) => {
-//     console.log('req.body', req.body);
-//     var startDay = req.body.startTime.substring(0, req.body.startTime.indexOf('T'));
-//     var startHour = req.body.startTime.substring(req.body.startTime.indexOf('T') + 1, req.body.startTime.indexOf('T') + 9);
-//     var startFinal = startDay + " " + startHour;
-//     var endDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
-//     var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
-//     var endFinal = endDay + " " + endHour;
-
-//     var meeting = new Meeting({
-//         title: req.body.title,
-//         titleChn: req.body.titleChn,
-//         startTime: startFinal,
-//         endTime: endFinal,
-//         //polls
-//     });
-//     meeting.save(function (err, meeting) {
-//         Estate.findOne({
-//             "estateName": req.user.estateName
-//         }, function (err, estate) {
-//             if (err) {
-//                 res.redirect('/error');
-//             }
-//             if (!estate) {
-//                 res.redirect('/error');
-//             } else {
-//                 estate.currentMeetings.push(meeting);
-//                 estate.save();
-//                 var files = req.files && req.files.filefield ? req.files.filefield : false;
-//                 if (files && files[0].size != 0) {
-//                     for (var i = 0; i < files.length; i++) {
-//                         var info = files[i].data;
-//                         var name = files[i].name;
-//                         meeting.fileLinks.push(name);
-//                         var data = {
-//                             Key: `${req.user.estateName}/${req.body.title}/${name}`,
-//                             Body: info,
-//                             ContentType: 'application/pdf',
-//                             ContentDisposition: 'inline'
-//                         }; // req.user.estateName
-//                         s3Bucket.putObject(data, function (err, data) {
-//                             if (err) {
-//                                 console.log('Error uploading data: ', err);
-//                             } else {
-//                                 console.log('succesfully uploaded the pdf!');
-//                             }
-//                         });
-//                     }
-//                     meeting.save();
-//                 }
-
-//                 res.redirect('/allMeetings');
-//             }
-//         });
-//     })
-// })

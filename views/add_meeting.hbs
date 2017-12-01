@@ -78,7 +78,7 @@
             </ol>
 
             <div class="div-wrapper">
-                <form role="form" name="pollform" enctype="multipart/form-data" action="/saveMeeting" method="post">
+                <form name="pollform" enctype="multipart/form-data" action="/saveMeeting" method="post">
                     <div class="form-group col-sm-6">
                         <label>Meeting Title</label>
                         <input type="text" class="form-control" name="meeting_title" required>
@@ -110,7 +110,9 @@
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>Agenda | 议程</label>
-                        <input type="file" name="filefield"/> 
+                        <div class="documents_wrapper">
+                        <input type="file" name="filefield" accept="application/pdf">      
+                    </div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
@@ -188,7 +190,7 @@
                 <h4 class="modal-title">Add a poll</h4>
             </div>
             <div class="modal-body">
-                <form role="form" name="#poll_form" id="poll_form">
+                <form role="form" name="#poll_form" id="poll_form" enctype="multipart/form-data">
                     <div class="form-group col-sm-6">
                         <label>Poll title</label>
                         <input type="text" name="title" class="form-control">
@@ -249,7 +251,7 @@
         var add_document_button = $(".add_documents");
         $(add_document_button).click(function (e) { //on add input button click
             e.preventDefault();
-                $(docWrapper).append(`<input type="file" name="filefield"><br />`); //add choose file box
+                $(docWrapper).append(`<input type="file" name="filefield1"><br />`); //add choose file box
         });
         //Add options
             var optionWrapper         = $(".input_fields_wrap"); //Fields wrapper
@@ -280,6 +282,7 @@
             form_data_array.forEach(function (obj) {
                 form_json[obj.name] = obj.value;
             });
+
             polls_array.push(form_json);
             $("#poll_json").val(JSON.stringify(polls_array));
             $.ajax({

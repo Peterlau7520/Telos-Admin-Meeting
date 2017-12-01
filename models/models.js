@@ -1,15 +1,12 @@
  const mongoose = require('mongoose');
 // set the global Promise to Mongoose.
-// 
 mongoose.Promise = global.Promise;
-const connect = process.env.MONGODB_URI || "mongodb://admin:admin@ds117625.mlab.com:17625/telos";
-mongoose.connect(connect,{ useMongoClient: true }).
-then(() =>  console.log('connection succesful'))
-  .catch((err) => console.error(err));;
-
+const connect = process.env.MONGODB_URI || "mongodb://admin:admin@ds117625.mlab.com:17625/telos";;
+mongoose.connect(connect);
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 
+//RESIDENTS
 const residentSchema = new Schema({
     name: String,
     email: String,
@@ -34,6 +31,7 @@ const residentSchema = new Schema({
     owner: Boolean
 });
 
+//ESTATE
 const estateSchema = new Schema({
     estateName: String,
     username: String,
@@ -41,18 +39,6 @@ const estateSchema = new Schema({
     emailAddress: String,
     chairmanName: String,
     inviteCode: String,
-    currentPolls: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Poll'
-        }
-    ],
-    pastPolls: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Poll'
-        }
-    ],
     surveys: [
         {
             type: Schema.Types.ObjectId,
@@ -85,7 +71,8 @@ const estateSchema = new Schema({
     ]
 });
 
-const pollsSchema = new Schema({
+//POLL
+const pollSchema = new Schema({
     projectName: String,
     projectNameChn: String,
     pollName: String,
@@ -95,7 +82,7 @@ const pollsSchema = new Schema({
     fileLinks: Array,
     estateName: String,
     options: Array,
-    endTime: String,
+    endTime: Date,
     active: Boolean,
     voted: [
         {
@@ -103,11 +90,12 @@ const pollsSchema = new Schema({
             ref: 'Resident'
         }
     ],
+    finalResult: String,
     results: [{choice: String, name: String}],
-    votes: Array,
-    created_at : String
+    votes: Array
 });
 
+//NOTICE
 const noticeSchema = new Schema({
     title: String,
     titleChn: String,
@@ -118,16 +106,44 @@ const noticeSchema = new Schema({
     targetAudience: [{block: String, floors: Array}],
 })
 
-
+//SURVEY
 const surveySchema = new Schema({
+    title: String,
+    titleChn: String,
+    effectiveTo: Date,
+    postDate: {type: Date, default: new Date()},
+    targetAudience: [{block: String, floors: Array}],
 })
 
-//Need to change the structure of Estate Schema REGARDING POLLS
+const questionSchema = new Schema({
+    questionEn: String,
+    questionChn: String,
+    optionIds: [{ type: Schema.ObjectId, ref: 'Options' }],
+    surveyId: { type: Schema.ObjectId, ref: 'Survey' },
+})
+
+const optionSchema = new Schema({
+    questionId: { type: Schema.ObjectId, ref: 'Question' },
+    optionNameEn: String,
+    optionNameChn: String,
+    optionsEn: [],
+    optionsChn: []
+})
+
+const userAnswersSchema = new Schema({
+    questionId: { type: Schema.ObjectId, ref: 'Question' },
+    surveyId: { type: Schema.ObjectId, ref: 'Survey' },
+    optionId: { type: Schema.ObjectId, ref: 'Option' },
+    userId: { type: Schema.ObjectId, ref: 'User' },
+})
+
+
+//MEETING SCHEMA
 const meetingSchema = new Schema({
     title: String,
     titleChn: String,
-    startTime: String,
-    endTime: String,
+    startTime: Date,
+    endTime: Date,
     venue: String,
     fileLinks: Array,
     polls: [
@@ -136,62 +152,18 @@ const meetingSchema = new Schema({
             ref: 'Poll'
         }
     ],
-    active: Boolean,
-    created_at : String
+    active: Boolean
 })
-
-residentSchema.pre('save', function (next) {
-
-    var user = this;
-    var SALT_FACTOR = 5;
-
-    if (!user.isModified('password')) {
-        return next();
-    }
-
-    bcrypt
-        .genSalt(SALT_FACTOR, function (err, salt) {
-
-            if (err) {
-                return next(err);
-            }
-
-            bcrypt
-                .hash(user.password, salt, null, function (err, hash) {
-
-                    if (err) {
-                        return next(err);
-                    }
-
-                    user.password = hash;
-                    next();
-
-                });
-
-        });
-
-});
-
-residentSchema.methods.comparePassword = function (passwordAttempt, cb) {
-
-    bcrypt
-        .compare(passwordAttempt, this.password, function (err, isMatch) {
-
-            if (err) {
-                return cb(err);
-            } else {
-                cb(null, isMatch);
-            }
-        });
-
-}
 
 
 const Resident = mongoose.model('Resident', residentSchema);
 const Estate =   mongoose.model('Estate', estateSchema);
-const Poll = mongoose.model('Poll', pollsSchema);
+const Poll = mongoose.model('Poll', pollSchema);
 const Notice = mongoose.model('Notice', noticeSchema);
 const Survey = mongoose.model('Survey', surveySchema);
+const Question = mongoose.model('Question', questionSchema);
+const UserAnswers = mongoose.model('UserAnswers', userAnswersSchema)
+const Options = mongoose.model('Options', optionSchema);
 const Meeting = mongoose.model('Meeting', meetingSchema);
 
 module.exports = {
@@ -200,5 +172,8 @@ module.exports = {
     Poll,
     Notice,
     Survey,
+    Question,
+    UserAnswers,
+    Options,
     Meeting
 }

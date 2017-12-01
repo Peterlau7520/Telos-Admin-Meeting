@@ -33,7 +33,6 @@ module.exports = function(passport) {
   })
 
   router.get('/login', (req,res) => {
-    console.log('as');
     var mess = req.flash('error');
     res.render('login', {
       title: 'Log in',
@@ -44,7 +43,7 @@ module.exports = function(passport) {
 
 
   router.post('/login', passport.authenticate('local', {
-    successRedirect : '/noticeBoard',
+    successRedirect : '/addMeeting',
     failureRedirect : '/login',
     failureFlash : true
   }));

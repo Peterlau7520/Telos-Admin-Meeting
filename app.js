@@ -8,11 +8,8 @@ const exphbs = require('express-handlebars');
 var hbs = require('hbs');
 const flash = require('connect-flash');
 
-hbs.registerHelper('dateFormat', require('handlebars-dateformat'));
-
 //----------------MODELS----------------
 const models = require('./models/models');
-var multer  = require('multer');
 
 
 
@@ -77,8 +74,8 @@ app.use(passport.session());
 
 
 //----------------ROUTING----------------
-// app.use('/', auth(passport));
-// app.use('/', index);
+app.use('/', auth(passport));
+app.use('/', index);
 app.use('/', meetingRoutes);
 
 //----------------ERRORS----------------
