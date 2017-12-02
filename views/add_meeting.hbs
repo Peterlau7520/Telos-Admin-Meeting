@@ -78,7 +78,7 @@
             </ol>
 
             <div class="div-wrapper">
-                <form name="pollform" enctype="multipart/form-data" action="/saveMeeting" method="post">
+                <form name="pollform" action="/saveMeeting" method="post" enctype="multipart/form-data" >
                     <div class="form-group col-sm-6">
                         <label>Meeting Title</label>
                         <input type="text" class="form-control" name="meeting_title" required>
@@ -192,21 +192,12 @@
             <div class="modal-body">
                 <form role="form" name="#poll_form" id="poll_form" enctype="multipart/form-data">
                     <div class="form-group col-sm-6">
-                        <label>Poll title</label>
+                        <label>Poll Title</label>
                         <input type="text" name="title" class="form-control">
                     </div>
                     <div class="form-group col-sm-6">
                         <label>投票标题</label>
                         <input type="text" name="title_chinese" class="form-control">
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="form-group col-sm-6">
-                        <label>Project Name</label>
-                        <input type="text" name="project_name" class="form-control">
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label>项目名</label>
-                        <input type="text" name="project_name_chinese" class="form-control">
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
@@ -221,15 +212,15 @@
                     <div class="form-group col-sm-6">
                         <label>Voting options</label>
                             <div class="input_fields_wrap">
-                                <button class="add_field_button btn btn-info btn-fill" style="margin-bottom:2%">Add Options/增加選項</button>
+                                <button class="add_field_button btn addoptionbtn " style="margin-bottom:2%">Add Options/增加選項</button>
                                     <div><input style="display:flex; border-radius: 0px;margin-bottom: 2px !important;" type="text" name="option" placeholder="E.g. Yes/是" required></div>
                             </div>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Add Documents</label>
                         <p>
-                        <button class="add_documents btn btn-info btn-fill" style="margin-bottom:1%">Add documents/上傳文件</button>
-                        <div class="documents_wrapper">
+                        <button class="add_documents btn addoptionbtn" style="margin-bottom:1%">Add documents/上傳文件</button>
+                        <div class="documents_wrapper" id="documents_file">
                         </div>
                         </p>
                     </div>
@@ -247,11 +238,12 @@
 <script type="text/javascript">
     $(document).ready(function () {
         //Add documents
+        var files = []
         var docWrapper = $(".documents_wrapper")
         var add_document_button = $(".add_documents");
         $(add_document_button).click(function (e) { //on add input button click
             e.preventDefault();
-                $(docWrapper).append(`<input type="file" name="filefield1"><br />`); //add choose file box
+                $(docWrapper).append(`<input type="file" name="file1" class=" fileValue" id="fileValues" value=""/><br />`); //add choose file box
         });
         //Add options
             var optionWrapper         = $(".input_fields_wrap"); //Fields wrapper
@@ -261,32 +253,50 @@
                     $(optionWrapper).append('<div><input type="text" name="option"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
 
             });
+
             $(optionWrapper).on("click",".remove_field", function(e){ //user click on remove text
                 e.preventDefault(); $(this).parent('div').remove(); x--;
             })
-
-
         var polls_array = [];
         $("#open_model").click(function () {
             $('#poll_form')[0].reset();
             $("#poll").modal();
-        
         })
-        /*$("#save").click(function (event) {
-        event.preventDefault();
-        console.log($("#fileValue").val())        
-        })*/
-        
+
         $("#close_model").click(function () {
             $("#poll").modal("hide");
             var form_data_array = $("#poll_form").serializeArray();
             console.log(form_data_array);
             var form_json = {};
+            var formData = new FormData();
             form_data_array.forEach(function (obj) {
+                formData.append(obj.name, obj.value)
                 form_json[obj.name] = obj.value;
             });
-
+            for (var pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+            }
+            var option = []
+            $.each($(".input_fields_wrap :input[name*='option']"), function(data, key){  
+              option.push($(this).val())
+            });
+            formData.append('options', option)
+            var file = []
+            var filesName = []
+            $.each($("#documents_file :input[name*='file1']"), function(data, key){ 
+                console.log(this.files[0])
+                var fileData = this.files[0]
+                filesName.push(this.files[0].name)
+              file.push(fileData)
+            });
+            formData.append('files', file)
+            formData.append('filesName', filesName)
+            console.log(file,filesName, "files")
+            form_json["option"] = option
+            form_json["files"] = file
+            form_json["filesName"] = filesName
             polls_array.push(form_json);
+            console.log(polls_array)
             $("#poll_json").val(JSON.stringify(polls_array));
             $.ajax({
                 url: "/addPollsOfMeeting",

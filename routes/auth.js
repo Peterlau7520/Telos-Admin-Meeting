@@ -4,10 +4,7 @@ var models = require('../models/models');
 var Estate = models.Estate;
 
 module.exports = function(passport) {
-
   // main login routes
-
-
   router.post('/register', (req, res) => {
     Estate.findOne({"estateName" : req.body.estateName.trim()}, function(err, estate){
       if(estate){

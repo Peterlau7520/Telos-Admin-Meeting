@@ -57,6 +57,14 @@
     float: right !important;
     margin-right: 10px !important;
 }
+.addoptionbtn{
+  background-color: dodgerblue !important;
+    color: white !important;
+}
+.page{
+      margin-top: -172px !important;
+    margin-right: -39px !important;
+}
 .ModelStyle .form-control {
     background-color: #FFFFFF;
     border: 1px solid #E3E3E3;
@@ -282,6 +290,9 @@
     height: 20px;
     line-height: 17px;
     border-radius: 2px;
+}
+.div_w{
+  margin-top: 2px !important;
 }
 .errorField{
   color: black;

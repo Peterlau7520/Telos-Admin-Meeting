@@ -10,14 +10,13 @@ const Poll = models.Poll;
 const forEach = require('async-foreach').forEach;
 var Promise = require('bluebird');
 const _ = require('lodash');
-//var Busboy = require('busboy');
-//const busboyBodyParser = require('busboy-body-parser');
+var Busboy = require('busboy');
+const busboyBodyParser = require('busboy-body-parser');
+
 const fs = require('fs');
 //router.use(busboyBodyParser({multi: true}));
-
-var multer  = require('multer');
-var uploaded = multer({dest: './uploads'});
 const router = express.Router();
+router.use(busboyBodyParser({multi: true}));
 const dateFormat = require('dateformat');
 
 // AWS.config.loadFromPath('./key.json');
@@ -26,8 +25,8 @@ const async = require('async');
 let docFileName,pathParams,dataFile;
 const BucketName = 'telospdf';
 AWS.config.update({
-  accessKeyId: process.env.S3_KEY,
-  secretAccessKey: process.env.secretAccessKey
+  accessKeyId: 'AKIAIMLMZLII2XCKU6UA',
+  secretAccessKey: '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'
 });
 const bucket = new AWS.S3({params: {Bucket: BucketName}});
 
@@ -78,7 +77,6 @@ router.get('/allMeetings', (req, res) => {
            }))
             Promise.all(promiseArr)
             .then(function(data){
-                console.log(data[0])
                  res.render('meeting', data[0]);
             })
         }
@@ -130,9 +128,8 @@ router.post('/addPollsOfMeeting', (req, res) => {
                     }
     }
     else{
-    var MeetingPollData = JSON.parse(req.body.pollsofmetting);
-    console.log('MeetingPollData',MeetingPollData, req.files)
-    res.json({ meetingsPollData: MeetingPollData })
+        console.log(req.body)
+    res.json({ meetingsPollData: JSON.parse(req.body.pollsofmetting) })
     }
 
     function savePoll(req, res, files){
@@ -207,11 +204,9 @@ router.post('/editMeeting', (req, res) => {
           save(req, res, '')
     }
     function save(req, res, file){
-        console.log(req.body, "rrrrrrrrr")
         const data = JSON.parse(req.body.meeting)
 
         var id = data.meeting_id
-        console.log(data, "data")
     Meeting.findOneAndUpdate({
       _id: id
     }, {
@@ -227,7 +222,6 @@ router.post('/editMeeting', (req, res) => {
       new: true 
     })
     .then((meeting) => {
-        console.log(meeting)
         if(!meeting){
          res.json({
           success: false,
@@ -294,15 +288,15 @@ router.post('/editPoll', (req, res) => {
          pollNameChn: data.pollNameChn,
          summary: data.summary,
          summaryChn: data.summaryChn,
-         fileLinks: files,
-         estateName: data.estateName,
+        // fileLinks: files,
+       //  estateName: data.estateName,
          options: data.options,
-         endTime: data.pollEndTime,
+         //endTime: data.pollEndTime,
          active: true,
-         voted: [],
-         finalResult: "",
-         results: [],
-         votes: []
+         //voted: [],
+        // finalResult: "",
+         //results: [],
+        // votes: []
       }
     },{ 
       new: true 
@@ -322,27 +316,31 @@ router.get('/addMeeting',(req,res) => {
     res.render('add_meeting');
 })
 
-router.post('/saveMeeting',uploaded.any('doc'),(req,res) =>{
-    console.log(req.body,"req.bodyyyy", req.files, "re")
+router.post('/saveMeeting',(req,res) =>{
     var data = req.body;
+    var body = {
+    fields: {},
+    files: []
+  };
     if(req.files.length !=0 ){
-        console.log("hello")
         uploadFile(req,res)
     }
     else{
-        console.log("hello1")
-        saveMeeting(req, res, "")
+        savePoll(req, res, "")
     }
 function uploadFile(req, res){
     var files = req.files && req.files.filefield ? req.files.filefield : false;
     var fileLinks = []
+    if (files && files[0].size != 0) {
         for (var i = 0; i < files.length; i++) {
             var info = files[i].data;
             var name = files[i].name;
+            //meeting.fileLinks.push(name);
             fileLinks.push(name)
             var data = {
                 Bucket: BucketName,
-                Key: `${req.user.estateName}/${req.body.title}/${name}`,
+                Key:  `Meetings/${name}`,
+                //Key: `${req.user.estateName}/Meetings/${req.body.title}/${name}`,
                 Body: info,
                 ContentType: 'application/pdf',
                 ContentDisposition: 'inline',
@@ -352,17 +350,19 @@ function uploadFile(req, res){
                 if (err) {
                     console.log('Error uploading data: ', err);
                 } else {
-                    console.log('succesfully uploaded the pdf!');
-                    saveMeeting(req, res, fileLinks);
+                    console.log('succesfully uploaded the pdf!', data);
+                    savePoll(req, res, fileLinks);
 
                 }
             });
         }
-}
+    } else {
+        savePoll(req, res, fileLinks);
+    }
+        }
 
-function saveMeeting(req, res, fileLinks){
-    let promiseArr=[]
-    let filesArr = []
+function savePoll(req, res, fileLinks){
+    const promiseArr = []
     if(req.body.startTime) {
         var meetingStartDay = req.body.startTime.substring(0, req.body.startTime.indexOf('T'));
         var meetingStartHour = req.body.startTime.substring(req.body.startTime.indexOf('T') + 1, req.body.startTime.indexOf('T') + 9);
@@ -380,53 +380,19 @@ function saveMeeting(req, res, fileLinks){
         var pollEndHour = req.body.pollEndTime.substring(req.body.pollEndTime.indexOf('T') + 1, req.body.pollEndTime.indexOf('T') + 9);
         var pollEndFinal = dateFormat(pollEndDay + " " + pollEndHour, 'shortDate');
     }
-    const Polls = JSON.parse(req.body.poll_json)
-    console.log(Polls)
-        if(Polls.length  > 0){
+     const Polls = JSON.parse(req.body.poll_json)
+      if(Polls.length  > 0){
             forEach(Polls, function(values){
-                    if(values.fileLinks){
-                    forEach(values.fileLinks, function(file){
-                        filesArr.push(new Promise(function(resolve, reject){
-                        var files = req.files && req.files.filefield ? req.files.filefield : false;
-                        var pollFileLinks = []
-                                var info = file.data;
-                                var name = file.name;
-                                //meeting.fileLinks.push(name);
-                                pollFileLinks.push(name)
-                                var data = {
-                                    Bucket: BucketName,
-                                    Key: `${req.user.estateName}/${req.body.title}/${values.title}/${name}`,
-                                    Body: info,
-                                    ContentType: 'application/pdf',
-                                    ContentDisposition: 'inline',
-                                    ACL: "public-read"
-                                }; // req.user.estateName
-                                bucket.putObject(data, function (err, data) {
-                                    if (err) {
-                                        console.log('Error uploading data: ', err);
-                                    } else {
-                                        console.log('succesfully uploaded the pdf!');
-                                        resolve(pollFileLinks)
-                                    }
-                                });
-                        }))
-                    })
-                }
-                Promise.all(filesArr) 
-                .then(function(data){
-                    console.log(data)
+             promiseArr.push(new Promise(function(resolve, reject) {
                 var pollIds = []
-                 promiseArr.push(new Promise(function(resolve, reject) {
                 var poll = new Poll({
-                    projectName: data. project_name,
-                     projectNameChn: data.project_name_chinese,
-                     pollName: data.title,
-                     pollNameChn: data.title_chinese,
-                     summary: data.summary,
-                     summaryChn: data.summaryChn,
-                     fileLinks: filesArr,
+                     pollName: values.title,
+                     pollNameChn: values.title_chinese,
+                     summary: values.summary,
+                     summaryChn: values.summaryChn,
+                     fileLinks: values.filesName,
                      estateName: "HKU",
-                     options: data.option,
+                     options: values.option,
                      endTime: '',
                      active: true,
                      voted: [],
@@ -436,16 +402,14 @@ function saveMeeting(req, res, fileLinks){
                     });
                 poll.save()
                 .then(function(poll){
-                    console.log(poll)
                     pollIds.push(poll._id)
                     resolve(pollIds)
                     })
-                })) 
+                }))
             })
-        })
-    }
         Promise.all(promiseArr)
         .then(function(d){ 
+            //saveMeeting(req, res, fileLinks, polls)
         var meeting = new Meeting({
                 title: req.body.meeting_title,
                 titleChn: req.body.meeting_title_chinese,
@@ -453,16 +417,22 @@ function saveMeeting(req, res, fileLinks){
                 endTime: meetingEndFinal,
                 venue: req.body.venue,
                 fileLinks: fileLinks,
-                polls: d,
+                polls: d[0],
                 active: true
             });
             meeting.save(function(err, meeting){
                 console.log(meeting, "meeting")
+                uploadPollFiles(req, res)
                 res.json({message: "succesfully saved"})
     })
 })
 }
+}
 
+function uploadPollFiles(req, res){
+      const Polls = JSON.parse(req.body.poll_json)
+      console.log(Polls, "polls")
+}
 
 });
 
