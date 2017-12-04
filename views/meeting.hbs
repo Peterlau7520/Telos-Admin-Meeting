@@ -139,7 +139,7 @@
                         <div role="tabpanel" class="tab-pane active" id="tab_{{id}}">
                             {{/if}}
                             <div class="div-wrapper">
-                                <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}" action="/delete_meeting" method="post">
+                                <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}" action="/deleteMeeting" method="post">
                                     <div class="form-group col-sm-6">
                                         <label class='custom_label'>會議標題 | Meeting Title</label>
                                         <input name="meeting_id" type="hidden" value="{{id}}">
@@ -148,7 +148,7 @@
                                     </div>
                                     <div class="form-group col-sm-6 text-right">
                                         <button class="btn btn-success edit_meeting1" id={{meeting_key}} type="button" data-id="{{meeting_key}}" data-time="{{created_at}}">編輯會議 | Edit Meeting</button>
-                                        <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" data-time="{{created_at}}">Delete Meeting</button>
+                                        <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" id="{{_id}}" data-time="{{created_at}}">Delete Meeting</button>
                                         <button style='display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
                                     </div>
                                     <div class="clearfix"></div>
@@ -190,7 +190,7 @@
                                     <div class="clearfix"></div>
                                 </form>
                             </div>
-                            <button class="btn btn-success add_pole" type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a pole</button>
+                            <button class="btn btn-success add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a pole</button>
                             <div class="div-wrapper">
                                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                     {{#each polls}}
@@ -246,7 +246,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td>1</td>
-                                                                    <td>Agends.pdf</td>
+                                                                    <td>Agnts</td>
                                                                 </tr>
                                                             </table>
                                                         </div>
@@ -273,6 +273,7 @@
                                                     </form>
                                                     <div class="input_fields_wrap" id="{{meeting_key}}">
                                                         <button value="{{@polls}}" onclick="edit_poll(event)" class="edit_pole_button btn btn-info btn-fill" id="{{@key}}" style="margin-bottom:2%">修改投票 | Edit Poll</button>
+                                                         <button value="{{@polls}}"  class="delete_poll_btn btn btn-info btn-fill" id="{{@key}}" style="margin-bottom:2%">修改投票 | Delete Poll</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -289,7 +290,7 @@
                         <div role="tabpanel" class="tab-pane" id="tab_{{id}}">
                             {{/if}}
                             <div class="div-wrapper">
-                                <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}" action="/delete_meeting" method="post">
+                                <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}" action="/deleteMeeting" method="post">
                                     <div class="form-group col-sm-6">
                                         <label class='custom_label'>會議標題 | Meeting Title</label>
                                         <input name="meeting_id" type="hidden" value="{{id}}">
@@ -298,7 +299,7 @@
                                     </div>
                                     <div class="form-group col-sm-6 text-right">
                                         <button class="btn btn-success edit_meeting1" type="button" id= "{{meeting_key}}" data-id="{{meeting_key}}" data-time="{{created_at}}">編輯會議 | Edit Meeting</button>
-                                        <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" data-time="{{created_at}}">Delete Meeting</button>
+                                        <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" id="{{_id}}" data-time="{{created_at}}">Delete Meeting</button>
                                         <button style='display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
                                     </div>
                                     <div class="clearfix"></div>
@@ -341,7 +342,7 @@
                                     <div class="clearfix"></div>
                                 </form>
                             </div>
-                            <button class="btn btn-success add_pole" type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a pole</button>
+                            <button class="btn btn-success add_pole" type="button" data-id="{{meeting_key}}" id="{{_id}}" data-time="{{createdAt}}"> Add a pole</button>
                             <div class="div-wrapper">
                                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                     {{#each polls}}
@@ -484,7 +485,64 @@
         
     </div>
       
-</div>            
+</div>    
+<div id="poll2" class="modal  fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add a poll</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" name="#poll_form" id="poll_form" action="/addPollsOfMeeting"  method="post" enctype="multipart/form-data">
+                    <div class="form-group col-sm-6">
+                        <label>Poll Title</label>
+                        <input type = "hidden" name="meetingId" value="{{id}}"
+                        <input type="text" name="title" class="form-control">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>投票标题</label>
+                        <input type="text" name="title_chinese" class="form-control">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-sm-6">
+                        <label>Summary</label>
+                        <textarea name="summary" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>概要</label>
+                        <textarea type="datetime-local" name="summary_chinese" class="form-control"></textarea>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-sm-6">
+                        <label>Voting options</label>
+                                                        <div class="input_fields_wrap voting_opt">
+                                <button class="add_field_button btn btn-info btn-fill" style="margin-bottom:2%">Add Options/增加選項</button>
+                                    <div><input style="display:flex; border-radius: 0px;margin-bottom: 2px !important;" type="text" name="option" id="option" placeholder="E.g. Yes/是" required></div>
+                            </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Add Documents</label>
+                        <p>
+                        <button class="add_documents btn addoptionbtn" style="margin-bottom:1%">Add documents/上傳文件</button>
+                        <div class="documents_wrapper" id="documents_file">
+                        </div>
+                        </p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <button type="submit" class="btn btn-success" id="close_model2"> 确认 | Confirm</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+        
+    </div>
+      
+</div>        
 </body>
 </html>
 <script type="text/javascript">
@@ -514,7 +572,8 @@
 
     }
     
-
+     
+    
             
 
     $(document).ready(function () {
@@ -534,7 +593,31 @@
             $('.save_meeting').hide()
         }) 
 
+        $(".delete_poll_btn").on('click' , function(event){
+        var parentId = event.target.parentElement.id;
+        var childId = event.target.id;
+         var originalData = '{{{stringify meetingsData}}}';
+         originalData = JSON.parse(originalData);
+            var poll = originalData[parentId].polls[childId]
+            const data = {}
+            data.meetingId = originalData[parentId]._id
+            data.pollId = originalData[parentId].polls[childId]._id
+            const HostName = "http://localhost:3000"
+            $.ajax({
+                url: HostName + "/deletePoll",
+                data: data,
+                type: 'POST',
+                success: function (data) {
+                    location.reload()
+                },
+                err: function(err){
+                    console.log(err)
+                }
 
+            });
+            
+
+    })
         $("#close_model").click(function () {
             $("#poll").modal("hide");
             var form_data_array = $("#poll_form").serializeArray();
@@ -578,7 +661,6 @@
             e.preventDefault();
             $(optionWrapper).append('<div><input type="text" name="option"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
         });
-
         $(optionWrapper).on("click",".remove_field", function(e){ //user click on remove text
             e.preventDefault(); $(this).parent('div').remove();
         })
@@ -586,13 +668,15 @@
         function edit_popup(data){
             console.log(data, "hhhhhh")
             var html = '<div class="div-wrapper" style="padding: 10px;">'+
-            '<h3 class= "heading">' + "Upcoming Meeting"+ '</h3>' + '                                        <button class=" btn delete_meeting deletebtn" type="submit" data-id="" data-time="">取消會議 | Delete Meeting</button>' + '<hr>' +
+            '<h3 class= "heading">' + "Upcoming Meeting"+ '</h3>' + '                                        <button class=" btn deleteMeeting deletebtn" type="submit" id={{data._id}} data-id={{data._id}} data-time="">取消會議 | Delete Meeting</button>' + '<hr>' +
             
-'                                <form role="form" enctype="multipart/form-data" name="edit_meeting_popup" id="edit_meeting_popup" action="/delete_meeting" method="post">'+
+'                                <form role="form" enctype="multipart/form-data" name="edit_meeting_popup" id="edit_meeting_popup" action="/deleteMeeting" method="post">'+
 '                                    <div class="form-group col-sm-6">'+
 '                                        <label class="">???? | Meeting Title</label>'+
 '                                        <input name="meeting_id" type="hidden" value="'+data._id+'">'+
 '                                        <input id ="title" type="text" class="form-control input_fields" name="title" value="'+data.title+'">'+
+'                                        <label class="">???? | Meeting Chinese Title</label>'+
+'                                        <input id ="titleChn" type="text" class="form-control input_fields" name="title" value="'+data.titleChn+'">'+
 '                                        <div id="" class=""></div>'+
 '                                    </div>'+
 '                                    <div class="form-group col-sm-6 text-right">'+
@@ -730,41 +814,31 @@
             });
         });
         //for delete meeting
-        $('.delete_meeting').click(function(e) {
+       /* $('.delete_meeting').click(function(e) {
             e.preventDefault();
-            var id = $(this).data('id');
-            // current date
-            var newDate = new Date();
-            newDate = newDate.getFullYear()+"-"+(newDate.getMonth()+1)+"-"+newDate.getDate();
-            //date with +3days
-            var time = $(this).data('time');
-            var someDate = new Date(time);
-            someDate.setDate(someDate.getDate() + 3); 
-            var dateFormated = someDate.toISOString().substr(0,10);
-            if(newDate < dateFormated) {
-                var val = confirm('Are you sure want to delete ?');
-                if(val == true) {
-                    $('#edit_meeting_'+id).submit();
+            console.log(event.target.id)
+            const meeting_id = event.target.id
+            console.log(meeting_id)
+            const HostName = "http://localhost:3000"
+            $.ajax({
+                url: HostName + "/deleteMeeting",
+                data: meeting_id,
+                type: 'POST',
+                success: function (data) {
+                    location.reload()
                 }
-            } else {
-                alert('You can not delete this meeting');
-            }
-        });
+                err: function(err){
+                    console.log(err)
+                }
+
+            });
+
+        });*/
         //for add pole
-        $('.add_pole').click(function() {
-            // current date
-            var newDate = new Date();
-            newDate = newDate.getFullYear()+"-"+(newDate.getMonth()+1)+"-"+newDate.getDate();
-            //date with +3days
-            var time = $(this).data('time');
-            var someDate = new Date(time);
-            someDate.setDate(someDate.getDate() + 3); 
-            var dateFormated = someDate.toISOString().substr(0,10);
-            if(newDate < dateFormated) {
-                alert('You can add pole');
-            } else {
-                alert('You can not add a pole after 3 days you add meeting');
-            }
+        $('.add_pole').click(function(event) {
+            console.log(event.target.id)
+            const id = event.target.id
+            $("#poll2").modal();
         })
 
         $('#dropdown ul>li').click(function () {

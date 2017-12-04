@@ -40,7 +40,7 @@ module.exports = function(passport) {
 
 
   router.post('/login', passport.authenticate('local', {
-    successRedirect : '/allMeetings',
+    successRedirect : '/addMeeting',
     failureRedirect : '/login',
     failureFlash : true
   }));

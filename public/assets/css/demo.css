@@ -229,10 +229,10 @@
 .side-menu {
     float: left;
     width: 300px;
-    height: 100%;
+    min-height: 100vh;
     background-color: #fff;
     border-right: 1px solid #e7e7e7;
-
+    position: relative;
 }
 .side-menu .navbar {
     border: none;
@@ -274,6 +274,9 @@
 }
 .side-menu #dropdown > a {
     border-bottom: 1px solid #e7e7e7;
+}
+.side-menu #dropdown > a:last-child{
+    border-bottom: 0px!important;
 }
 .side-menu #dropdown .panel-body {
     padding: 0;
@@ -352,6 +355,48 @@
     background-color: #f3f3f3;
     padding: 15px 18px;
 }
+
+/* siderbar css ::START */
+.sidebar-nav{
+    width: 100%;
+}
+
+.sidebar-nav li .arrow-img:after {
+    background-image: url('.../assets/img/forward-arrow.png');
+    float: right;
+}
+.breadcrumb{
+    margin-bottom: 0px;
+}
+.sidebar-rt-arrow{
+    position: absolute;
+    right: 10px;
+    vertical-align: middle;
+}
+/* siderbar css ::END */
+
+/* upload file css ::START */
+#fileValue::-webkit-file-upload-button{
+    border-color: #1e90ff;
+    color: #fff; 
+    background-color: #1e90ff;
+    border-radius: 2px;
+    padding: 12px 50px;
+    border: 0px;
+    opacity: 0.8;
+}
+
+/* upload file css ::END */
+/* right sidebar css::START */
+.rightsidebar .form-group label{
+    font-size: 13px;
+    color: #969696;
+    font-weight: 300;
+}
+.rightsidebar .form-group{
+    margin-bottom: 22px;
+}
+/* right sidebar css::END */
 /* Main body section */
 .side-body {
     margin-left: 310px;
@@ -382,9 +427,12 @@
     text-align: right;
     position: absolute;
     bottom: 50px;
-    width: 300px;
+    width: 200px;
+    right: 20px;
 }
-
+.meeting-btn .btn{
+    width: 100%;
+}
 
 .custom_panel_wrapper
 {
@@ -394,7 +442,28 @@
 }
 .row.page-wrapper.custom_wrapper {margin: 35px 25px 25px 47px;}
 .side-menu #dropdown > a span.caret {margin: 7px 0 0 0;}
-.side-menu #dropdown > a {    border-bottom: 1px solid #e7e7e7;padding: 17px 15px;line-height: 100%;color: #000;font-size: 15px;vertical-align: top;margin: 0;}
+.side-menu #dropdown > a {    /* border-bottom: 1px solid #e7e7e7; */padding: 17px 15px;line-height: 100%;color: #000;font-size: 15px;vertical-align: top;margin: 0;}
 .side-menu #dropdown .panel-body ul li a {padding: 17px 15px 17px 40px;line-height: 100%;color: #000;font-size: 14px;vertical-align: top;margin: 0 !important;border: 0;background: #fff;}
 .side-menu #dropdown .panel-body ul li.active a {background: #f3f3f3;    font-weight: bold;}  
 .side-menu #dropdown .panel-body ul li {padding: 0 !important;}  
+
+
+
+
+@media only screen and (max-width: 767px)  {
+    .side-menu{
+        width: 100%;
+    }
+    .row.page-wrapper.custom_wrapper{
+        margin: 0px;
+    }
+    .meeting-btn{
+        margin: 0 30px;
+        width: 84%;
+        left: auto;
+        right: auto;
+    }
+    .btn{
+        width: 100%;
+    }
+}

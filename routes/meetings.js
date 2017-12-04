@@ -41,32 +41,32 @@ router.get('/allMeetings', (req, res) => {
         var pastMeetings = []
         if(meetings.length > 0) {
             promiseArr.push(new Promise(function(resolve, reject){
-               forEach(meetings, function(item, key, a){    
-                if(item.fileLinks.length > 0) {
+               forEach(meetings, function(item, key, a){
+                if( item.fileLinks && item.fileLinks.length > 0) {
                       let fileLinks = [];
-                        //let Key = `${req.user.estateName}/${item.title}/${item.fileLinks[0]}`;
+                        let Key = `${req.user.estateName}/${item.title}/${item.fileLinks[0]}`;
                         fileLinks.push({
                           name: item.fileLinks[0],
-                          //url: "https://"+BucketName+".s3.amazonaws.com/"+Key
+                          url: "https://"+BucketName+".s3.amazonaws.com/"+Key
                         })
                       item.fileLinks = fileLinks;
                 }   
                 if(item.polls){
                 forEach(item.polls, function(poll, key, a){  
                 if(poll.fileLinks){ 
-                    forEach(poll.fileLinks, function(name, key, a){   
+                    forEach(poll.fileLinks, function(name, key, a){ 
                         let polefileLinks = [];
-                        //let Key = `${req.user.estateName}/${poll.title}/${name}`;
+                        let Key = `${req.user.estateName}/${poll.title}/${name}`;
                         polefileLinks.push({
                           name: name,
-                          //url: "https://"+BucketName+".s3.amazonaws.com/"+Key
+                          url: "https://"+BucketName+".s3.amazonaws.com/"+Key
                         })
                       poll.fileLinks = polefileLinks;
                     })
                 }
                 })
             }
-                    if(item.endTime > currDate || item.endTime == currDate) {
+                    if(item.endTime > currDate || item.endTime == currDate || item.endTime != null) {
                         currentMeetings.push(item)
                     }
                     else{
@@ -81,7 +81,6 @@ router.get('/allMeetings', (req, res) => {
             })
         }
         if(err){
-            console.log(err)
             res.render('meeting')
         }
     })
@@ -128,8 +127,30 @@ router.post('/addPollsOfMeeting', (req, res) => {
                     }
     }
     else{
-        console.log(req.body)
-    res.json({ meetingsPollData: JSON.parse(req.body.pollsofmetting) })
+          let formData = req.body;
+        for (var key in req.files) {
+            var info = req.files[key][0].data;
+            var name = req.files[key][0].name;
+            //meeting.fileLinks.push(name);
+            //Let key = `${req.user.estateName}/${req.body.title}/${name}`
+            //fileLinks.push(name)
+            var data = {
+                Bucket: BucketName,
+                Key: `${req.user.estateName}/${req.body.title}/${name}`,
+                Body: info,
+                ContentType: 'application/pdf',
+                ContentDisposition: 'inline',
+                ACL: "public-read"
+            }; // req.user.estateName
+            bucket.putObject(data, function (err, data) {
+                if (err) {
+                    console.log('Error uploading data: ', err);
+                } else {
+                    console.log('succesfully uploaded the pdf!');
+                }
+            });
+        }       
+    //res.json({ meetingsPollData: JSON.parse(req.body) })
     }
 
     function savePoll(req, res, files){
@@ -200,12 +221,11 @@ router.post('/editMeeting', (req, res) => {
         }
     }
     else{
-        fileLinks = req.body.fileLinks
+        fileLinks.push(req.body.fileLinks)
           save(req, res, '')
     }
     function save(req, res, file){
         const data = JSON.parse(req.body.meeting)
-
         var id = data.meeting_id
     Meeting.findOneAndUpdate({
       _id: id
@@ -216,7 +236,7 @@ router.post('/editMeeting', (req, res) => {
         startTime: data.start_time, 
         endTime: data.end_time, 
         venue:data.venue,
-        //fileLinks: fileLinks
+        fileLinks: fileLinks
       }
     },{ 
       new: true 
@@ -339,7 +359,7 @@ function uploadFile(req, res){
             fileLinks.push(name)
             var data = {
                 Bucket: BucketName,
-                Key:  `Meetings/${name}`,
+                Key:  `${req.user.estateName}/${req.body.title}/${name}`,
                 //Key: `${req.user.estateName}/Meetings/${req.body.title}/${name}`,
                 Body: info,
                 ContentType: 'application/pdf',
@@ -391,7 +411,7 @@ function savePoll(req, res, fileLinks){
                      summary: values.summary,
                      summaryChn: values.summaryChn,
                      fileLinks: values.filesName,
-                     estateName: "HKU",
+                     estateName: req.user.estateName,
                      options: values.option,
                      endTime: '',
                      active: true,
@@ -421,29 +441,22 @@ function savePoll(req, res, fileLinks){
                 active: true
             });
             meeting.save(function(err, meeting){
-                console.log(meeting, "meeting")
-                uploadPollFiles(req, res)
-                res.json({message: "succesfully saved"})
+                res.redirect('/allMeetings')
     })
 })
 }
 }
-
-function uploadPollFiles(req, res){
-      const Polls = JSON.parse(req.body.poll_json)
-      console.log(Polls, "polls")
-}
-
 });
 
-router.post('/delete_meeting',(req,res) => {
+router.post('/deleteMeeting',(req,res) => {
+    console.log(req.body)
     Meeting.deleteOne({_id: req.body.meeting_id}, function (err, todo) {
         if (err) res.send(err);
         res.redirect('/allMeetings');
     });
 });
 
-router.post('/delete_poll',(req,res) => {
+router.post('/deletePoll',(req,res) => {
      Poll.deleteOne({_id: req.body.pollId}, function (err, todo) {
         if (err) res.send(err);
         Meeting.update(

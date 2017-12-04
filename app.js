@@ -88,7 +88,9 @@ app.use(function(err, req, res, next) {
   
     // render the error page
     res.status(500).send('Something broke!')
+    if(err){
     res.render('error', {layout: 'errorLayout.hbs'});
+  }
   });
   
 
