@@ -195,12 +195,12 @@
                                                     <label>Document name</label>
                                                 </th>
                                             </tr>
-                                            <tr>
                                             {{#each fileLinks}}
+                                            <tr>
                                                 <td>1</td>
                                                 <td>{{this.name}}</td>
-                                                {{/each}}
                                             </tr>
+                                            {{/each}}
                                         </table>
                                     </div>
                                     <div class="clearfix"></div>
@@ -260,12 +260,14 @@
                                                                         <label>Document name</label>
                                                                     </th>
                                                                 </tr>
+                                                                {{#each fileLinks}}
                                                                 <tr>
-                                                                   {{#each fileLinks}}
+                                                                   
                                                                     <td>1</td>
                                                                     <td>{{this.name}}</td>
-                                                                    {{/each}}
+                                                                    
                                                                 </tr>
+                                                                {{/each}}
                                                             </table>
                                                         </div>
                                                         <div class="clearfix"></div>
@@ -351,12 +353,14 @@
                                                     <label>Document name</label>
                                                 </th>
                                             </tr>
+                                            {{#each fileLinks}}
                                             <tr>
-                                                {{#each fileLinks}}
+                                                
                                                                     <td>1</td>
                                                                     <td>{{this.name}}</td>
-                                                                    {{/each}}
+                                                                    
                                             </tr>
+                                            {{/each}}
                                         </table>
                                         <div class = "add" id= "addAgenda"> </div>
                                     </div>
@@ -508,7 +512,8 @@
                 <h4 class="modal-title">Add a poll</h4>
             </div>
             <div class="modal-body">
-                <form role="form" name="#poll_form" id="poll_form" action="/addPollsOfMeeting"  method="post" enctype="multipart/form-data">
+                <form role="form" name="#poll_form" id="poll_form" 
+                action="/addPollsOfMeeting"  method="post" enctype="multipart/form-data">
                     <div class="form-group col-sm-6 formlabel">
                         <label>Poll Title</label>
                         <input type="text" name="title" class="form-control">
@@ -542,10 +547,7 @@
                         </div>
                         </p>
                     </div>
-                    <div class="clearfix"></div>
-                    <div class="modal-footer">
-                    <button type="submit" class=" add_field_button btn btn-success btn-info btn-fill" id="close_model2"> 确认 | Confirm</button>
-                    </div>
+                    <button type="submit" class="  btn btn-success btn-info btn-fill" id="close_model2"> 确认 | Confirm</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -582,7 +584,7 @@ function edit_poll(event){
             $(".voting_opt1 .remove_field").remove();
             var optionWrapper = $(".voting_opt1");
             $.each(poll.options, function( index, value ) {
-                $(optionWrapper).append('<div><input type="text" value="'+value+'" name="option"/><a href="#" class="remove_field">Remove</a></div>');
+                $(optionWrapper).append('<div><input type="text" value="'+value+'" name="option1"/><a href="#" class="remove_field">Remove</a></div>');
             });
             $.each(poll.fileLinks, function( index, value ) {
                 $('.added_files').append('<div name="'+value.name+'"><input type="text" value="'+value.name+'" name="fileLinks"/><a href="#" class="remove_file">Remove</a></div>');
@@ -638,40 +640,29 @@ function edit_poll(event){
             
 
     })
-//         var downloadPDF = function() {
-//       DocRaptor.createAndDownloadDoc("YOUR_API_KEY_HERE", {
-//         test: true, // test documents are free, but watermarked
-//         type: "pdf",
-//         document_content: document.querySelector('html').innerHTML, // use this page's HTML
-//         // document_content: "<h1>Hello world!</h1>",               // or supply HTML directly
-//         // document_url: "http://example.com/your-page",            // or use a URL
-//         // javascript: true,                                        // enable JavaScript processing
-//         // prince_options: {
-//         //   media: "screen",                                       // use screen styles instead of print styles
-//         // }
-//       })
-//     }
-//     document.getElementsById("dwn-btn").addEventListener("click", function(){
-//     // Generate download of hello.txt file with some content
-//     var text = "Hiii, Poll File it is"
-//     var filename = "poll.pdf";
-    
-//     download(filename, text);
-// }, false);
+//        
         $("#close_model2").click(function () {
             $("#poll2").modal("hide");
+             $.each($(".voting_opt :input[name*='option']"), function(data, key){  
+              options1.push($(this).val())
+            });
+              var newArray = options1.filter(function(v){return v!==''});
+              newArray = jQuery.unique(newArray)
+              $(".voting_opt").append(`<input type ="hidden" name="options" value=${newArray} />`)
+               index1 = index1 + 1
         })    
 
         $("#close_model").click(function () {
-            optionEdit=[]
-            // $.each($(".voting_opt1 :input[name*='option']"), function(data, key){  
-            //   optionEdit.push($(this).val())
-            // });
-            //   var newArray = []
-            //   newArray = optionEdit.filter(function(v){return v!==''});
-            //   newArray = jQuery.unique(newArray)
-            //    $('#options_field').val(JSON.stringify(newArray));
-            //   //$(".voting_opt1").append(`<input type ="hidden" name="options" value=${newArray}>`)
+            //optionEdit=[]
+            var optionEdit = []
+            $.each($(".voting_opt1 :input[name*='option1']"), function(data, key){  
+              optionEdit.push($(this).val())
+            });
+              var newArray = optionEdit.filter(function(v){return v!==''});
+              newArray = jQuery.unique(newArray)
+              console.log(newArray)
+               //$('#options_field').val(JSON.stringify(newArray));
+              $(".voting_opt1").append(`<input type ="hidden" name="options" value=${newArray}>`)
             //    index1 = index1 + 1
 
         $("#poll").modal("hide");
@@ -681,15 +672,15 @@ function edit_poll(event){
         var add_option_button1 = $(".add_field_button1"); //Add button ID
         $(add_option_button1).click(function(e){ //on add input button click
             e.preventDefault();
-            $(optionWrapper1).append('<div><input type="text" name="option"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
-             $.each($(".voting_opt1 :input[name*='option']"), function(data, key){  
+            $(optionWrapper1).append('<div><input type="text" name="option1"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            /* $.each($(".voting_opt1 :input[name*='option1']"), function(data, key){  
                 optionEdit.push($(this).val())
             });
               var newArray = optionEdit.filter(function(v){return v!==''});
               newArray = jQuery.unique(newArray)
               console.log(newArray, "newArray")
             $(".voting_opt1").append(`<input type ="hidden" name="options" value=${newArray}>`)
-               index1 = index1 + 1
+               index1 = index1 + 1*/
         }); 
         var docWrapper = $(".documents_wrapper")
         var add_document_button = $(".add_documents");
@@ -708,13 +699,7 @@ function edit_poll(event){
         $(add_option_button).click(function(e){ //on add input button click
             e.preventDefault();
             $(optionWrapper).append('<div><input type="text" name="option"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
-              $.each($(".voting_opt :input[name*='option']"), function(data, key){  
-              options1.push($(this).val())
-            });
-              var newArray = options1.filter(function(v){return v!==''});
-              newArray = jQuery.unique(newArray)
-              $(".voting_opt").append(`<input type ="hidden" name="options" value=${newArray} />`)
-               index1 = index1 + 1
+             
         });
        
         $(optionWrapper).on("click",".remove_field", function(e){ //user click on remove text
@@ -740,7 +725,7 @@ function edit_poll(event){
 '                                        <input name="meeting_id" type="hidden" value="'+data._id+'">'+
 '                                        <input id ="title" type="text" class="form-control input_fields" name="title" value="'+data.title+'">'+
 '                                        <label class="">???? | Meeting Chinese Title</label>'+
-'                                        <input id ="titleChn" type="text" class="form-control input_fields" name="title" value="'+data.titleChn+'">'+
+'                                        <input id ="titleChn" type="text" class="form-control input_fields" name="titleChn" value="'+data.titleChn+'">'+
 '                                        <div id="" class=""></div>'+
 '                                    </div>'+
 '                                    <div class="form-group col-sm-6 text-right">'+

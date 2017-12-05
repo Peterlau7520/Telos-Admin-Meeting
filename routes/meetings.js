@@ -35,7 +35,7 @@ let currDate = new Date();
 let currentDate = currDate.getFullYear()+"-"+(currDate.getMonth()+1)+"-"+currDate.getDate()+" "+currDate.getHours()+":"+currDate.getMinutes()+":"+currDate.getSeconds();
 router.get('/allMeetings', (req, res) => {
     //res.render('meeting')
-    Meeting.find().populate('polls').then(function(meetings, err){
+    Meeting.find().populate('polls').lean().then(function(meetings, err){
         const promiseArr = []
         var currentMeetings = []
         var pastMeetings = []
@@ -52,15 +52,16 @@ router.get('/allMeetings', (req, res) => {
                       item.fileLinks = fileLinks;
                 }   
                 if(item.polls){
-                forEach(item.polls, function(poll, key, a){  
+                forEach(item.polls, function(poll, key, a){ 
+                let polefileLinks = []; 
                 if(poll.fileLinks){ 
                     forEach(poll.fileLinks, function(name, key, a){ 
-                        let polefileLinks = [];
                         let Key = `${req.user.estateName}/${poll.title}/${name}`;
                         polefileLinks.push({
                           name: name,
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
                         })
+                        console.log(polefileLinks)
                       poll.fileLinks = polefileLinks;
                     })
                 }
@@ -72,12 +73,12 @@ router.get('/allMeetings', (req, res) => {
                     else{
                         pastMeetings.push(item)
                     }
+                    console.log(currentMeetings, "currentMeetings")
                     resolve({meetingsData: currentMeetings, pastMeetingsData: pastMeetings})
                })
            }))
             Promise.all(promiseArr)
             .then(function(data){
-                console.log(data)
                  res.render('meeting', data[0]);
             })
         }
@@ -90,7 +91,6 @@ router.get('/allMeetings', (req, res) => {
 })
 
 router.post('/addPollsOfMeeting', (req, res) => {
-    console.log(req.body, req.files)
     if(req.body.meeting_id){
         const fileLinks = []
         var pollFileLinks = []
@@ -151,7 +151,13 @@ router.post('/addPollsOfMeeting', (req, res) => {
     }
 
     function savePoll(req, res, files){
-        console.log(req.body)
+        if(req.body.options){
+        var options = req.body.options
+         array = options.split(',')
+    }
+    else{
+        array = req.body.option
+    }
         var poll = new Poll({
                             pollName: req.body.title,
                             pollNameChn: req.body.title_chinese,
@@ -159,7 +165,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
                             summaryChn: req.body.summary_chinese,
                             fileLinks: files,
                             estateName: req.user.estateName,
-                            options: req.body.options,
+                            options: array,
                             endTime: req.body.pollEndTime,
                             active: true,
                             voted: [],
@@ -183,6 +189,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
 
 
 router.post('/editMeeting', (req, res) => {
+    console.log(req.body)
     var data = req.body.meeting
     var fileLinks = []
     if(req.files) {
@@ -218,7 +225,7 @@ router.post('/editMeeting', (req, res) => {
     }
     else{
         fileLinks.push(req.body.fileLinks)
-          save(req, res, '')
+          save(req, res, fileLinks)
     }
     function save(req, res, file){
         const data = JSON.parse(req.body.meeting)
@@ -280,7 +287,18 @@ router.post('/editPoll', (req, res) => {
                     console.log('Error uploading data: ', err);
                 } else {
                     console.log('succesfully uploaded the pdf!');
-                    updatePoll(req, res, fileLinks)
+                     Poll.findOneAndUpdate({_id: id
+                        }, {
+                          $push: { 
+                             fileLinks: fileLinks,
+                          }
+                        },{ 
+                          new: true 
+                        })
+                        .then(function (data, err) {
+                            console.log(data, "data")
+                            updatePoll(req, res, fileLinks)
+                        })
                 }
             });
         }     
@@ -317,9 +335,6 @@ router.post('/editPoll', (req, res) => {
          summaryChn: data.summaryChn,
          options: array,
          active: true,
-      },
-      $push: {
-        fileLinks: files
       }
     },{ 
       new: true 
@@ -453,7 +468,6 @@ function savePoll(req, res, fileLinks){
 });
 
 router.post('/deleteMeeting',(req,res) => {
-    console.log(req.body)
     Meeting.deleteOne({_id: req.body.meeting_id}, function (err, todo) {
         if (err) res.send(err);
         res.redirect('/allMeetings');
