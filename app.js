@@ -81,14 +81,15 @@ app.use('/', meetingRoutes);
 
 //----------------ERRORS----------------
 app.use(function(err, req, res, next) {
-    console.log(typeof req.render);
+    //console.log(typeof req.render);
     // set locals, only providing error in development
     //res.locals.message = err.message;
     //res.locals.error = req.app.get('env') === 'development' ? err : {};
   
     // render the error page
-    res.status(500).send('Something broke!')
+    //res.status(500).send('Something broke!')
     if(err){
+      console.log(err, "err")
     res.render('error', {layout: 'errorLayout.hbs'});
   }
   });
