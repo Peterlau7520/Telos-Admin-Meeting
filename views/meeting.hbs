@@ -141,7 +141,7 @@
                     <div class="content-header">
                         <div class="row">
                             <div class="col-md-5">
-                                <h3>Upcoming Meeting: Me</h3>
+                                <h3>Upcoming Meeting </h3>
                             </div>
                             <div class="col-md-7">
                                 <p id="endhour">剩下的時間可以取消或修改投票 | Hours remaining to edit or delete polls: 48</p>
@@ -162,7 +162,7 @@
                                         <div id='title_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{title}}</div>
                                     </div>
                                     <div class="form-group col-sm-6 text-right">
-                                        <button class="btn btn btn-info btn-fill edit_meeting1" id={{meeting_key}} type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"  >編輯會議 | Edit Meeting</button>
+                                        <button class="btn btn-info btn-fill edit_meeting1" id={{meeting_key}} type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"  >編輯會議 | Edit Meeting</button>
                                         <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" id="{{_id}}" data-time="{{created_at}}">Delete Meeting</button>
                                         <button style='display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
                                     </div>
@@ -207,7 +207,7 @@
                                     <div class="clearfix"></div>
                                 </form>
                             </div>
-                            <button class="btn btn btn-info btn-fill add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a pole</button>
+                            <button class="btn btn btn-info btn-fill add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a poll</button>
                             <div class="div-wrapper">
                                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                     {{#each polls}}
