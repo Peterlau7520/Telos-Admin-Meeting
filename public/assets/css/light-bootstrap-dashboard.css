@@ -37,6 +37,11 @@
     color: rgb(161,161,161);
     font-weight: 500;
 }
+.removebtn{
+      border: 0;
+    background-color: transparent;
+    color: deepskyblue;
+}
 .ModelStyle label {
     font-size: 11px;
     color: rgb(161,161,161);
@@ -164,6 +169,11 @@
     padding: 7px 0;
     color: rgb(161,161,161);
     font-size: 13px;
+}
+.modal-footer{
+  padding: 15px !important;
+    text-align: right !important;
+    border-top: 0px solid #e5e5e5 !important;
 }
 .quesBtn {
     background: none;

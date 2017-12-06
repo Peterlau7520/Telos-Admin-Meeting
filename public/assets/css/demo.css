@@ -435,12 +435,15 @@ textarea {
     float: right;
 }
 .input_fields_wrap .btn{
-    width: 100%;
+  /*  width: 100%;*/
 }
 /* right sidebar css::END */
 /* Main body section */
 .side-body {
     margin-left: 310px;
+}
+.input_div{
+        width: 55%;
 }
 /* small screen */
 .tab-wraper{

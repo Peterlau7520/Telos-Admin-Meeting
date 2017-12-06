@@ -64,20 +64,84 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    <a class="navbar-brand" href="#">Meeting | 添加会议</a>
+                </div> 
+                <div class="collapse navbar-collapse">
+                </div>
+            </div>
+        </nav>
+        <div class="row page-wrapper custom_wrapper">
+        <div class="side-menu">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="side-menu-container">
+                        <ul class="nav navbar-nav sidebar-nav">
+                            <li class="panel panel-default" id="dropdown">
+                                <a data-toggle="collapse" href="#dropdown-lvl12" aria-expanded="true" class="arrow-img">
+                                    <span>將來會議 | Upcoming Meet</span>
+                                    <span class="sidebar-rt-arrow">
+                                        <i class="fa fa-angle-right" style="font-size:27px;"></i>
+                                    </span>
+                                </a>
+                                <div id="dropdown-lvl12" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                    <div class="panel-body">
+                                        <ul class="nav navbar-nav" role="tablist">
+                                        {{#each meetingsData}} {{#if @key}}
+                                        <li role="presentation">
+                                                {{else}}
+                                            <li role="presentation" class="active">
+                                            {{/if}}
+                                                 <a class='meeting_li' href='/allMeetings' aria-controls="home" role="tab" data-toggle="tab">{{title}}</a>
+                                            </li>
+                                            </li>
+                                            {{/each}}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li> 
+                            <li class="panel panel-default" id="dropdown">
+                                <a data-toggle="collapse" href="#dropdown-lvl13" aria-expanded="true" class="arrow-img">
+                                    <span>以往會議 | Past Meetings</span>
+                                    <span class="sidebar-rt-arrow">
+                                        <i class="fa fa-angle-right" style="font-size:27px;"></i>
+                                    </span>
+                                </a>
+                                <div id="dropdown-lvl13" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                    <div class="panel-body">
+                                        <ul class="nav navbar-nav" role="tablist">
+                                        {{#each pastMeetingsData}}
+                                            <li role="presentation">
+                                             <a class='meeting_li' href="/allMeetings" aria-controls="home" role="tab" data-toggle="tab">{{title}}</a>
+                                            </li>
+                                            {{/each}}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>                             
+                        </ul>
+
+                    </div>
+                 </nav>
+                <div class="meeting-btn pull-left">
+                    <a href="/addMeeting" class="btn btn-primary">舉行會議 | Add a Meeting</a>
+                </div>
+            </div>
+ <div class="custom_scroll_wrap rightsidebar">
+            <div class=" tab-content tab-wraper">
+            <nav class="navbar navbar-default navbar-fixed" style="margin-bottom: 13px;">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <a class="navbar-brand" href="#">Add a Meeting | 添加会议</a>
                 </div> 
                 <div class="collapse navbar-collapse">
                 </div>
             </div>
         </nav>
-        <div class="row page-wrapper">
-
-            <ol class="breadcrumb  custom_breadcumb">
-                <li class="breadcrumb-item"><a href="/allMeetings">Meetings</a></li>
-                <li class="breadcrumb-item active">Add a meeting</li>
-            </ol>
-
-            <div class="div-wrapper">
                 <form name="pollform" action="/saveMeeting" method="post" enctype="multipart/form-data" >
                     <div class="form-group col-sm-6">
                         <label>Meeting Title</label>
@@ -95,7 +159,7 @@
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>Meeting Start Time | 会议开始时间</label>
-                        <input type="datetime-local" class="form-control" name="startTime" required>
+                        <input type="datetime-local" class="form-control" name="startTime" id="startTime" required>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Meeting End Time | 会议结束时间</label>
@@ -117,34 +181,37 @@
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>Poll end date and time</label>
-                        <input type="datetime-local" class="form-control" name="pollEndTime">
+                        <input type="datetime-local" class="form-control" name="pollEndTime" id="pollEndTime">
                     </div>
                     <div class="clearfix"></div>
-                    <div class="col-sm-6 custom_panel_div">
-                        <div class='panel-wrapper-custom'>
-                    
-                        </div>
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label>Poll end date and time</label>
+                    <div class="form-group col-sm-12">
                         <p> 
                             <input type="button" class="btn btn-primary poll-btn" value="添加投票 | Add a Poll" id="open_model">
                         </p>
                     </div>
+                    <div class="form-group col-sm-12 currentpolls">
+                        <label>現行投票 | CURRENT POLLS : </label>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="custom_panel_div">
+                        <div class='panel-wrapper-custom' style="width: 100%;padding-right: 30px;padding-left: 30px;">
+                    
+                        </div>
+                    </div>
                     <div class="clearfix"></div>
                    
                     <div class="clearfix"></div>
-                    <div class="form-group col-sm-6 save_btn_wrap">
+                    <div class="form-group save_btn_wrap">
                         <label></label>   
                         <p>
                             <input type="hidden" name="poll_json" id="poll_json">
-                            <input type="submit" class="btn btn-success custom_success_btn"  id="save"value=" 保存 | Save">
+                            <input type="submit" class="btn btn-success btn-primary custom_success_btn pull-right" style="margin-right: 16px;" id="save"value=" 保存 | Save">
                         </p>
                     </div>
                     <div class="clearfix"></div>
                 </form>
             </div>
-            
+            </div>
         </div> 
 
         <footer class="footer">
@@ -213,7 +280,7 @@
                         <label>Voting options</label>
                             <div class="input_fields_wrap">
                                 <button class="add_field_button btn addoptionbtn " style="margin-bottom:2%">Add Options/增加選項</button>
-                                    <div><input style="display:flex; border-radius: 0px;margin-bottom: 2px !important;" type="text" name="option" placeholder="E.g. Yes/是" required></div>
+                                    <div><input style="display:flex;margin-left: 10px; border-radius: 0px;margin-bottom: 2px !important; width: 40%;" type="text" name="option" placeholder="E.g. Yes/是" required></div>
                             </div>
                     </div>
                     <div class="form-group col-sm-6">
@@ -225,7 +292,8 @@
                         </p>
                     </div>
                     <div class="clearfix"></div>
-                    <button type="submti" class="btn btn-success" id="close_model"> 确认 | Confirm</button>
+                    <hr>
+                    <button type="submit" class="btn btn-success pull-right" id="close_model" > 确认 | Confirm</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -245,7 +313,7 @@
         var add_document_button = $(".add_documents");
         $(add_document_button).click(function (e) { //on add input button click
             e.preventDefault();
-                $(docWrapper).append(`<input type="file" name=${index} class="fileValue" id="fileValues" value=""/><br />`); //add choose file box
+                $(docWrapper).append(`<input type="file" name=${index} class="fileValue" id="fileValues" value="" required/><br />`); //add choose file box
             index = index + 1
         });
         //Add options
@@ -253,7 +321,7 @@
             var add_option_button      = $(".add_field_button"); //Add button ID
             $(add_option_button).click(function(e){ //on add input button click
                 e.preventDefault();
-                    $(optionWrapper).append('<div><input type="text" name="option"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                    $(optionWrapper).append('<div style="width: 55%; margin-bottom: 2px;"><input type="text" name="option" placeholder="E.g. Yes/是" /><a href="#" class="remove_field">Remove</a></div>'); //add input box
 
             });
 
@@ -265,7 +333,26 @@
             $('#poll_form')[0].reset();
             $("#poll").modal();
         })
+        $("#save").click(function(event){
+            const startTime = $('#startTime').val()
+            const endTime = $('#pollEndTime').val()
+            console.log(startTime, endTime)
+            /*var timeDiff = Math.abs(startTime.getTime() - endTime.getTime());
+            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+            alert(diffDays);*/
+            var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+            var firstDate = new Date(startTime);
+            var secondDate = new Date(endTime);
 
+            var diffDays = Math.round(Math.abs((secondDate.getTime() - firstDate.getTime())/(oneDay)));
+                if(diffDays <= 7){
+                    event.preventDefault();
+                    alert("The poll deadline has to be at least 1 week (7 days) before the meeting start time")
+                }
+                if($("#poll_json").val() == ''){
+                    alert("Please Add a poll")
+                }
+               })
         $("#close_model").click(function () {
             $("#poll").modal("hide");
             var form_data_array = $("#poll_form").serializeArray();
@@ -286,7 +373,7 @@
             formData.append('options', option)
             var file = []
             var filesName = []
-            $.each($("#documents_file :input[name*='file1']"), function(data, key){ 
+            $.each($("#documents_file :input[type='file']"), function(data, key){ 
                 console.log(this.files[0])
                 var fileData = this.files[0]
                 filesName.push(this.files[0].name)
@@ -300,6 +387,7 @@
             form_json["filesName"] = filesName
             console.log(form_json, "foe")
             polls_array.push(form_json);
+            var length = polls_array.length
             console.log(JSON.stringify(polls_array), "poll")
             $("#poll_json").val(JSON.stringify(polls_array));
             var html ='';
@@ -307,10 +395,10 @@
                         {
                                 html+=`<div class="panel-group">
                                     <div class="panel panel-default" '>
-                                        <div class="panel-heading">
+                                        <div class="panel-heading" style="background-color: #ffffff;">
                                             <a style='color:black' data-toggle="collapse" href="#collapse${i}">
-                                        <h4 class="panel-title">
-                                            ${polls_array[i].title}
+                                        <h4 class="panel-title" style="text-align: center;">
+                                            ${polls_array[i].title} | ${polls_array[i].title_chinese}
                                         </h4>
                                         </div>
                                         </a>
@@ -363,6 +451,7 @@
                                     </div>`
                         }
                     $('.panel-wrapper-custom').html(html);
+                    $('.currentpolls').html(`<label> 現行投票 | CURRENT POLLS : ${length}</label>`)
         })
     })
 </script>

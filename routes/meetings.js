@@ -61,7 +61,6 @@ router.get('/allMeetings', (req, res) => {
                           name: name,
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
                         })
-                        console.log(polefileLinks)
                       poll.fileLinks = polefileLinks;
                     })
                 }
@@ -73,7 +72,6 @@ router.get('/allMeetings', (req, res) => {
                     else{
                         pastMeetings.push(item)
                     }
-                    console.log(currentMeetings, "currentMeetings")
                     resolve({meetingsData: currentMeetings, pastMeetingsData: pastMeetings})
                })
            }))
@@ -84,7 +82,6 @@ router.get('/allMeetings', (req, res) => {
         }
        else{
               console.log(err, "err")
-
             res.render('meeting')
         }
     })
@@ -262,7 +259,7 @@ router.post('/editMeeting', (req, res) => {
 })
 
 router.post('/editPoll', (req, res) => {
-    console.log(req.body, "req.body")
+    console.log(req.files, "req.body", req.body)
     var data = req.body
     var id = req.body.id
     var fileLinks = []
@@ -290,7 +287,7 @@ router.post('/editPoll', (req, res) => {
                      Poll.findOneAndUpdate({_id: id
                         }, {
                           $push: { 
-                             fileLinks: fileLinks,
+                             fileLinks: name,
                           }
                         },{ 
                           new: true 
@@ -308,6 +305,8 @@ router.post('/editPoll', (req, res) => {
     }
     function updatePoll(req, res, files){
         var array = []
+        var promiseArr = [] 
+        var filearray = []
         if(req.body.options){
         var options = req.body.options
          array = options.split(',')
@@ -315,17 +314,34 @@ router.post('/editPoll', (req, res) => {
     else{
         array = req.body.option
     }
+    
      if(req.body.removedfile){
-         Poll.findOneAndUpdate({_id: id
+        var file = req.body.removedfile
+         filearray = file.split(',')
+    promiseArr.push(new Promise(function(resolve, reject){
+    forEach(filearray, function(item){
+        console.log(item, "item", req.body.id)
+         Poll.findOneAndUpdate({_id: req.body.id
     }, {
-      $pop: { 
-         fileLinks: req.body.removedfile,
+      $pull: { 
+         fileLinks: item,
       }
-    },{ 
-      new: true 
     })
-    }
-        const data = req.body
+         .then(function(d, err){
+            console.log(d, "d")
+            resolve(d)
+    })
+        })
+        })) 
+     Promise.all(promiseArr)
+    .then(function(dd){
+     update(req, res)
+    })
+    }else{
+        update(req, res)
+}  
+    function update(req, res){
+         const data = req.body
         Poll.findOneAndUpdate({_id: id
     }, {
       $set: { 
@@ -344,16 +360,66 @@ router.post('/editPoll', (req, res) => {
             res.json({message: 'Could Not Update'})
         }
         else{
+            console.log(poll, "poll")
             res.redirect('/allMeetings')
             //res.json({message: 'Updated Successfully'})
         }
-    })                         
+    })    
+    }
 }
 })
 
 router.get('/addMeeting',(req,res) => {
-    res.render('add_meeting');
+      Meeting.find().populate('polls').lean().then(function(meetings, err){
+        const promiseArr = []
+        var currentMeetings = []
+        var pastMeetings = []
+        if(meetings.length > 0) {
+            promiseArr.push(new Promise(function(resolve, reject){
+               forEach(meetings, function(item, key, a){
+                if( item.fileLinks && item.fileLinks.length > 0) {
+                      let fileLinks = [];
+                        let Key = `${req.user.estateName}/${item.title}/${item.fileLinks[0]}`;
+                        fileLinks.push({
+                          name: item.fileLinks[0],
+                          url: "https://"+BucketName+".s3.amazonaws.com/"+Key
+                        })
+                      item.fileLinks = fileLinks;
+                }   
+                if(item.polls){
+                forEach(item.polls, function(poll, key, a){ 
+                let polefileLinks = []; 
+                if(poll.fileLinks){ 
+                    forEach(poll.fileLinks, function(name, key, a){ 
+                        let Key = `${req.user.estateName}/${poll.title}/${name}`;
+                        polefileLinks.push({
+                          name: name,
+                          url: "https://"+BucketName+".s3.amazonaws.com/"+Key
+                        })
+                        console.log(polefileLinks)
+                      poll.fileLinks = polefileLinks;
+                    })
+                }
+                })
+            }
+                    if(item.endTime > currDate || item.endTime == currDate || item.endTime != null) {
+                        currentMeetings.push(item)
+                    }
+                    else{
+                        pastMeetings.push(item)
+                    }
+                    console.log(currentMeetings, "currentMeetings")
+                    resolve({meetingsData: currentMeetings, pastMeetingsData: pastMeetings})
+               })
+           }))
+            Promise.all(promiseArr)
+            .then(function(data){
+                res.render('add_meeting', data[0]);
+            })
+        }
+    
 })
+  })
 
 router.post('/saveMeeting',(req,res) =>{
     var data = req.body;
@@ -441,6 +507,7 @@ function savePoll(req, res, fileLinks){
                     });
                 poll.save()
                 .then(function(poll){
+                    console.log(poll)
                     pollIds.push(poll._id)
                     resolve(pollIds)
                     })
