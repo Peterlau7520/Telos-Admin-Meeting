@@ -11,6 +11,7 @@ const forEach = require('async-foreach').forEach;
 var Promise = require('bluebird');
 const _ = require('lodash');
 var Busboy = require('busboy');
+var moment = require("moment");
 const busboyBodyParser = require('busboy-body-parser');
 
 const fs = require('fs');
@@ -66,10 +67,16 @@ router.get('/allMeetings', (req, res) => {
                 }
                 })
             }
-                    if(item.endTime > currDate || item.endTime == currDate || item.endTime != null) {
+                    var endTime = moment(new Date(item.endTime));
+                    var startTime = moment(new Date(item.startTime));
+                    item.startTime =  startTime.format("D/MM/YYYY");
+                    if(item.endTime > currDate || item.endTime == currDate || item.endTime != null) {          
+                        item.endTime =  endTime.format("D/MM/YYYY");
+
                         currentMeetings.push(item)
                     }
                     else{
+                        item.endTime =  endTime.format("D/MM/YYYY");
                         pastMeetings.push(item)
                     }
                     resolve({meetingsData: currentMeetings, pastMeetingsData: pastMeetings})
