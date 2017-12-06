@@ -3147,3 +3147,18 @@ body > .navbar-collapse {
     overflow-y: hidden;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     -webkit-overflow-scrolling: touch; } }
+.panel-shadow{
+  box-shadow: none;
+  border:0;
+  border-radius: 0;
+}
+.voting-box{
+  border: 0.5px solid #E3E3E3;
+  margin-top: 16px;
+  padding: 23px;
+}
+.voting-box h6{
+  font-weight: 500;
+  color: rgb(29,29,38);
+  margin-bottom: 16px;
+}

@@ -84,7 +84,7 @@
                     <div class="side-menu-container">
                         <ul class="nav navbar-nav sidebar-nav">
                             <li class="panel panel-default" id="dropdown">
-                                <a data-toggle="collapse" href="#dropdown-lvl1" class="dropdown-list">
+                                <a data-toggle="collapse" href="#dropdown-lvl1" class="dropdown-list" style="    border-bottom: 1px solid #e7e7e7;">
                                     <span>Upcoming Meetings</span>
                                     <span class="sidebar-rt-arrow">
                                         <i class="fa fa-angle-right" style="font-size:27px;"></i>
@@ -106,19 +106,19 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="panel panel-default" id="dropdown2">
-                                <a data-toggle="collapse" href="#dropdown-lvl2" class="dropdown-list"> 
+                            <li class="panel panel-default panel-shadow" id="dropdown2" >
+                                <a data-toggle="collapse" href="#dropdown-lvl2" class="dropdown-list" style="border-bottom: 0px;box-shadow: none;"> 
                                     <span>Past Meetings</span>
-                                    <span class="sidebar-rt-arrow">
+                                    <span class="sidebar-rt-arrow ">
                                         <i class="fa fa-angle-right" style="font-size:27px;"></i>
                                     </span>
                                 </a>
-                                <div id="dropdown-lvl2" class="panel-collapse collapse in">
+                                <div id="dropdown-lvl2" class="panel-collapse collapse ">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav" role="tablist">
                                             {{#each pastMeetingsData}}
                                             <li role="presentation">
-                                                <a class='meeting_li' href="#tab_{{_id}}" aria-controls="home" role="tab" data-toggle="tab">{{title}}</a>
+                                                <a class='meeting_li' href="#tab_{{_id}}" aria-controls="home" role="tab" data-toggle="tab" >{{title}}</a>
                                             </li>
                                             {{/each}}
                                         </ul>
@@ -234,24 +234,26 @@
                                                             <label class='custom_label'>Summary</label>
                                                             <input type="hidden" name="poll_id" value="{{pollId}}">
                                                             <textarea class="form-control input_fields_{{meeting_key}}" name="summary">{{summary}}</textarea>
-                                                            <div id='summary_div' class='display_meetings_detail_{{meeting_key}}'>{{summary}}</div>
+                                                            <div id='summary_div' class='display_meetings_detail_{{meeting_key}}'></div>
                                                         </div>
 
                                                         <div class="form-group col-sm-12">
                                                             <label class='custom_label'>概要</label>
                                                             <input type="hidden" name="poll_id" value="{{pollId}}">
-                                                            <textarea class="form-control input_fields_{{meeting_key}}" name="summary">{{summary}}</textarea>
-                                                            <div id='summary_div' class='display_meetings_detail_{{meeting_key}}'>{{summary}}</div>
+                                                            <textarea class="form-control input_fields_{{meeting_key}}" name="summary">{{summaryChn}}</textarea>
+                                                            <div id='summary_div' class='display_meetings_detail_{{meeting_key}}'></div>
                                                         </div>
 
                                                         <div class="clearfix"></div>
                                                         <div class="form-group col-sm-6">
                                                             <label class='custom_label'>投票選項 | VOTING OPTIONS</label>
-                                                                <select class="form-control show" name="voating_option">
-                                                                <option value="yes">Yes</option>
-                                                                <option value="no">No</option>
-                                                                <option value="abstain">Abstain</option>
-                                                            </select>
+                                                            <div class="voting-box" >
+                                                                {{#each options as |value|}}
+                                                                {{#if @key}}
+                                                                <h6>- {{value}}</h6>
+                                                                {{/if}}
+                                                                {{/each}}
+                                                            </div>
                                                         </div>
                                                         <div class="form-group col-sm-6">
                                                             <label>Uploaded Documents</label>
