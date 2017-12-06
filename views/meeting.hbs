@@ -137,7 +137,7 @@
 
             <!-- Main Content -->
             <div class="custom_scroll_wrap">
-                <div class="tab-content tab-wraper">   
+                <div class="tab-content tab-wraper tls-wrapper">   
                     <div class="content-header">
                         <div class="row">
                             <div class="col-md-5">
@@ -162,7 +162,7 @@
                                         <div id='title_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{title}}</div>
                                     </div>
                                     <div class="form-group col-sm-6 text-right">
-                                        <button class="btn btn btn-info btn-fill edit_meeting1" id={{meeting_key}} type="button" data-id="{{meeting_key}}" data-time="{{created_at}}" style="margin-bottom:2%">編輯會議 | Edit Meeting</button>
+                                        <button class="btn btn btn-info btn-fill edit_meeting1" id={{meeting_key}} type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"  >編輯會議 | Edit Meeting</button>
                                         <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" id="{{_id}}" data-time="{{created_at}}">Delete Meeting</button>
                                         <button style='display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
                                     </div>
@@ -233,26 +233,39 @@
                                                         <div class="form-group col-sm-12">
                                                             <label class='custom_label'>Summary</label>
                                                             <input type="hidden" name="poll_id" value="{{pollId}}">
-                                                            <textarea class="form-control input_fields_{{meeting_key}}" name="summary">{{summary}}</textarea>
+                                                            <textarea rows="3" class="form-control input_fields_{{meeting_key}}" name="summary">{{summary}}</textarea>
                                                             <div id='summary_div' class='display_meetings_detail_{{meeting_key}}'>{{summary}}</div>
                                                         </div>
 
                                                         <div class="form-group col-sm-12">
                                                             <label class='custom_label'>概要</label>
                                                             <input type="hidden" name="poll_id" value="{{pollId}}">
-                                                            <textarea class="form-control input_fields_{{meeting_key}}" name="summary">{{summary}}</textarea>
+                                                            <textarea rows="3" class="form-control input_fields_{{meeting_key}}" name="summary">{{summary}}</textarea>
                                                             <div id='summary_div' class='display_meetings_detail_{{meeting_key}}'>{{summary}}</div>
                                                         </div>
 
                                                         <div class="clearfix"></div>
-                                                        <div class="form-group col-sm-6">
+                                                        <div class="col-sm-6">
+                                                            <div class="tls-voting-option-box">
+                                                                 <label class='custom_label'>投票選項 | VOTING OPTIONS</label>
+                                                                <ul>
+                                                                    <li><a href="">-Yes/wqe</a></li>
+                                                                    <li><a href="">-No/wqe</a></li>
+                                                                    <li><a href="">-Abstain/asa</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- <div class="form-group col-sm-6">
                                                             <label class='custom_label'>投票選項 | VOTING OPTIONS</label>
                                                                 <select class="form-control show" name="voating_option">
                                                                 <option value="yes">Yes</option>
                                                                 <option value="no">No</option>
                                                                 <option value="abstain">Abstain</option>
                                                             </select>
-                                                        </div>
+                                                        </div> -->
+                                                        
+                                                        
                                                         <div class="form-group col-sm-6">
                                                             <label>Uploaded Documents</label>
                                                             <table class="table table-bordered table_custom_Wrapper">
@@ -306,8 +319,8 @@
                                                     </div>
                                                     <div class= "col-sm-4 pull-right">
                                                         <div class="input_fields_wrap " id="{{meeting_key}}">
-                                                        <button value="{{@polls}}" class="edit_pole_button btn btn-info btn-fill" id="{{@key}}" style="margin-bottom:2%">修改投票 | Edit Poll</button>
-                                                         <button value="{{@polls}}"  class="delete_poll_btn btn btn-danger btn-fill" id="{{@key}}" style="margin-bottom:2%">修改投票 | Delete Poll</button>
+                                                        <button value="{{@polls}}" class="edit_pole_button btn btn-info btn-fill" id="{{@key}}">修改投票 | Edit Poll</button>
+                                                         <button value="{{@polls}}"  class="delete_poll_btn btn btn-danger btn-fill" id="{{@key}}">修改投票 | Delete Poll</button>
                                                     </div>
                                                     </div>
                                                 </div>
@@ -492,14 +505,14 @@
                     <div class="form-group col-sm-6">
                         <label>投票選項 | VOTING OPTION</label>
                             <div class="input_fields_wrap voting_opt1">
-                                <button class="add_field_button1 btn btn-info btn-fill" style="margin-bottom:2%">Add Options/增加選項</button>
-                                    <div><input style="display:flex; border-radius: 0px;margin-bottom: 2px !important;" type="text" name="option" id="option" placeholder="E.g. Yes/是" required></div>
+                                <button class="add_field_button1 btn btn-info btn-fill">Add Options/增加選項</button>
+                                    <div><input style="display:flex; border-radius: 0px;" type="text" name="option" id="option" placeholder="E.g. Yes/是" required></div>
                             </div>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Add Documents</label>
                         <p>
-                        <button class="add_documents btn btn-info btn-fill" style="margin-bottom:1%">Add documents/上傳文件</button>
+                        <button class="add_documents btn btn-info btn-fill">Add documents/上傳文件</button>
                         <div class="documents_wrapper">
                         <div class ="added_files" ></div>
                         </div>
@@ -548,14 +561,14 @@
                     <div class="form-group col-sm-6">
                         <label>投票選項 | VOTING OPTION</label>
                                 <div class="input_fields_wrap voting_opt">
-                                <button class="add_field_button btn btn-info btn-fill" style="margin-bottom:2%">Add Options/增加選項</button>
-                                    <div><input style="display:flex; border-radius: 0px;margin-bottom: 2px !important;" type="text" name="option0" id="option" placeholder="E.g. Yes/是" required></div>
+                                <button class="add_field_button btn btn-info btn-fill">Add Options/增加選項</button>
+                                    <div><input style="display:flex; border-radius: 0px;" type="text" name="option0" id="option" placeholder="E.g. Yes/是" required></div>
                             </div>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Add Documents</label>
                         <p>
-                        <button class="add_documents btn addoptionbtn btn-info btn-fill" style="margin-bottom:1%">Add documents/上傳文件</button>
+                        <button class="add_documents btn addoptionbtn btn-info btn-fill">Add documents/上傳文件</button>
                         <div class="documents_wrapper" id="documents_file">
                         </div>
                         </p>
@@ -750,7 +763,7 @@ function edit_poll(event){
         function edit_popup(data){
             console.log(data, "hhhhhh")
             var html = '<div class="div-wrapper" style="padding: 10px;">'+
-            '<h3 class= "heading">' + "Upcoming Meeting"+ '</h3>' + '                                        <button class=" btn deleteMeeting deletebtn" type="submit" id={{data._id}} data-id={{data._id}} data-time="">取消會議 | Delete Meeting</button>' + '<hr>' +
+            '<h3 class= "heading">' + "Upcoming Meeting"+ '</h3>' + '                                        <button class=" btn btn-danger deleteMeeting deletebtn btn-danger" type="submit" id={{data._id}} data-id={{data._id}} data-time="">取消會議 | Delete Meeting</button>' + '<hr>' +
             
 '                                <form role="form" enctype="multipart/form-data" name="edit_meeting_popup" id="edit_meeting_popup" action="/deleteMeeting" method="post">'+
 '                                    <div class="form-group col-sm-6">'+

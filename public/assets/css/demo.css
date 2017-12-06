@@ -229,9 +229,9 @@
 .side-menu {
     float: left;
     width: 300px;
-    min-height: 190vh;
+    min-height: auto;
     background-color: #fff;
-    border-right: 1px solid #e7e7e7;
+    /* border-right: 1px solid #e7e7e7; */
     position: relative;
 }
 .side-menu .navbar {
@@ -367,7 +367,7 @@
 }
 .sidebar-nav{
     width: 100%;
-    max-height: 1100px;
+     max-height: 730px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -386,7 +386,7 @@
 }
 .content-header{
     border-bottom: 1px solid #e7e7e7;
-    padding: 10px 0;
+    padding: 10px 15px;
     width: 100%;
 }
 .content-header h3{
@@ -451,8 +451,32 @@ textarea {
     width: auto;
     overflow: hidden;
    /*  padding: 15px; */
-/*     border-left: 1px solid #e7e7e7; */
+    border-left: 1px solid #e7e7e7;
 }
+.tls-wrapper .tab-pane{
+    padding: 0 15px;
+}
+
+.tls-wrapper .panel-heading{
+    box-shadow: 0px 1px 6px #dadada;
+}
+.tls-voting-option-box ul{
+    margin: 0px;
+    padding: 8px 15px;
+    border:  0.5px solid #E3E3E3;
+}
+.tls-voting-option-box ul li{
+    list-style: none;
+}
+.tls-voting-option-box ul li a{
+    font-size: 12px;
+    color: #000;
+    line-height: 28px;
+}
+.tls-voting-option-box ul li a:hover{
+    opacity: 0.8;
+}
+
 .tab-wraper .custome-tab-pane{
     padding: 15px;
 }
@@ -481,10 +505,12 @@ textarea {
 
 .meeting-btn{
     text-align: right;
-    position: absolute;
+    /* position: absolute; */
     bottom: 50px;
-    width: 220px;
     right: 20px;
+    width: 220px;
+    margin: 0 auto;
+    margin-top: 3px;
 }
 .meeting-btn .btn{
     width: 100%;
