@@ -55,7 +55,7 @@ router.get('/allMeetings', (req, res) => {
                 if(item.polls){
                 forEach(item.polls, function(poll, key, a){ 
                     var pollEndTime = moment(new Date(poll.endTime));
-                    item.polls[key].endTime = pollEndTime.format("D-MM-YYYY");
+                    item.polls[key].endTime = pollEndTime.format("D-MM-YYYY HH:MM");
                 let polefileLinks = []; 
                 if(poll.fileLinks){ 
                     forEach(poll.fileLinks, function(name, key, a){ 
@@ -162,6 +162,10 @@ router.post('/addPollsOfMeeting', (req, res) => {
     else{
         array = req.body.option
     }
+    Meeting.findOne(
+            { _id: req.body.meeting_id })
+    .then(function(m, err){
+        console.log(m)
         var poll = new Poll({
                             pollName: req.body.title,
                             pollNameChn: req.body.title_chinese,
@@ -170,7 +174,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
                             fileLinks: files,
                             estateName: req.user.estateName,
                             options: array,
-                            endTime: req.body.pollEndTime,
+                            endTime: m.pollEndTime,
                             active: true,
                             voted: [],
                             finalResult: "",
@@ -179,6 +183,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
                             });
                             poll.save()
                                 .then(function(poll){
+                                    console.log(poll)
                                     Meeting.update(
                                         { _id: req.body.meeting_id },
                                         { $push: { polls:  poll._id} } 
@@ -188,6 +193,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
                                         //res.json({ meetingsPollData: result, message: "Poll Added Successfully" })
                                     })
                                 })
+            })
     }
 })
 
@@ -521,6 +527,7 @@ function savePoll(req, res, fileLinks){
                 titleChn: req.body.meeting_title_chinese,
                 startTime: meetingStartFinal,
                 endTime: meetingEndFinal,
+                pollEndTime: pollEndFinal,
                 venue: req.body.venue,
                 fileLinks: fileLinks,
                 polls: d[0],

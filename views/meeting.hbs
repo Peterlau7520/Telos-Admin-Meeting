@@ -118,7 +118,7 @@
                                         <ul class="nav navbar-nav" role="tablist">
                                             {{#each pastMeetingsData}}
                                             <li role="presentation">
-                                                <a class='meeting_li' href="#tab_{{_id}}" aria-controls="home" role="tab" data-toggle="tab" >{{title}}</a>
+                                                <a class='past-meeting' href="#tab_{{_id}}" aria-controls="home" role="tab" data-toggle="tab" >{{title}}</a>
                                             </li>
                                             {{/each}}
                                         </ul>
@@ -141,20 +141,23 @@
                     <div class="content-header">
                         <div class="row">
                             <div class="col-md-5">
-                                <h3>Upcoming Meeting </h3>
+                                <h3 id="heading3">Upcoming Meeting </h3>
                             </div>
-                            <div class="col-md-7">
-                                <p id="endhour">剩下的時間可以取消或修改投票 | Hours remaining to edit or delete polls: 48</p>
+                            <div id="headingBottom" class="col-md-7">
+                                <p id="endhour"> </p>
+                            </div>
+                            <div id="headingBottom2" class="col-md-4">
                             </div>
                         </div>
-                    </div>                    
+                    </div>      
                     {{#each meetingsData as |value meeting_key|}} {{#if @key}}
                     <div role="tabpanel" class="tab-pane" id="tab_{{_id}}">
                         {{else}}
                         <div role="tabpanel" class="tab-pane active" id="tab_{{_id}}">
                             {{/if}}
                             <div class="div-wrapper">
-                                <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}" action="/deleteMeeting" method="post">
+                                <div class="tls-content-box">
+                                    <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}" action="/deleteMeeting" method="post">
                                     <div class="form-group col-sm-6">
                                         <label class='custom_label'>會議標題 | Meeting Title</label>
                                         <input name="meeting_id" type="hidden" value="{{_id}}">
@@ -162,7 +165,7 @@
                                         <div id='title_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{title}}</div>
                                     </div>
                                     <div class="form-group col-sm-6 text-right">
-                                        <button class="btn btn-info btn-fill edit_meeting1" id={{meeting_key}} type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"  >編輯會議 | Edit Meeting</button>
+                                        <button class="btn edit_meeting1 btn-primary" id={{meeting_key}} type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"  >編輯會議 | Edit Meeting</button>
                                         <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" id="{{_id}}" data-time="{{created_at}}">Delete Meeting</button>
                                         <button style='display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
                                     </div>
@@ -199,17 +202,20 @@
                                             {{#each fileLinks}}
                                             <tr>
                                                 <td>1</td>
-                                                <td>{{this.name}}</td>
+                                                <td><a href="{{this.url}}">{{this.name}}</a></td>
                                             </tr>
                                             {{/each}}
                                         </table>
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>
+                                 <button class="btn btn-primary add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a poll</button>
+                               </div>
                             </div>
-                            <button class="btn btn btn-info btn-fill add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a poll</button>
+                           
                             <div class="div-wrapper">
-                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="tls-content-box">
+                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                     {{#each polls}}
                                     <div class="panel panel-default" style='box-shadow:-5px 6px 9px -8px #888888;'>
                                         <a role="button" data-toggle="collapse" style='color:black' data-parent="#accordion" href="#poll_{{_id}}" aria-expanded="true"
@@ -234,7 +240,7 @@
                                                             <label class='custom_label'>Summary</label>
                                                             <input type="hidden" name="poll_id" value="{{pollId}}">
 
-                                                            <textarea rows="3" class="form-control input_fields_{{meeting_key}}" name="summary">{{summary}}</textarea>
+                                                            <textarea rows="3" class="form-control input_fields_{{meeting_key}}" name="summary" readonly="true">{{summary}}</textarea>
                                                             <div id='summary_div' class='display_meetings_detail_{{meeting_key}}'></div>
 
                                                         </div>
@@ -243,7 +249,7 @@
                                                             <label class='custom_label'>概要</label>
                                                             <input type="hidden" name="poll_id" value="{{pollId}}">
 
-                                                            <textarea rows="3" class="form-control input_fields_{{meeting_key}}" name="summary">{{summary}}</textarea>
+                                                            <textarea rows="3" class="form-control input_fields_{{meeting_key}}" name="summary" readonly="true">{{summaryChn}}</textarea>
                                                             <div id='summary_div' class='display_meetings_detail_{{meeting_key}}'></div>
                                                         </div>
 
@@ -254,7 +260,7 @@
                                                                 <ul>
                                                                     {{#each options as |value|}}
                                                                     {{#if @key}}
-                                                                    <li><a href="">- {{value}}</a></li>
+                                                                    <li>- {{value}}</li>
                                                                     {{/if}}
                                                                     {{/each}}
                                                                 </ul>
@@ -274,7 +280,7 @@
                                                                 {{#each fileLinks as |value file_key|}}
                                                                 <tr>
                                                                     <td>{{file_key}}</td>
-                                                                    <td>{{this.name}}</td>
+                                                                    <td><a href ={{this.url}}>{{this.name}}</a></td>
                                                                    
                                                                 </tr>
                                                                 {{/each}}
@@ -312,8 +318,8 @@
                                                     </div>
                                                     <div class= "col-sm-4 pull-right">
                                                         <div class="input_fields_wrap " id="{{meeting_key}}">
-                                                        <button value="{{@polls}}" class="edit_pole_button btn btn-info btn-fill" id="{{@key}}">修改投票 | Edit Poll</button>
-                                                         <button value="{{@polls}}"  class="delete_poll_btn btn btn-danger btn-fill" id="{{@key}}">修改投票 | Delete Poll</button>
+                                                        <button value="{{@polls}}" class="edit_pole_button  btn btn-primary" id="{{@key}}">修改投票 | Edit Poll</button>
+                                                         <button value="{{@polls}}"  class="delete_poll_btn btn btn-danger" id="{{@key}}">修改投票 | Delete Poll</button>
                                                     </div>
                                                     </div>
                                                 </div>
@@ -321,6 +327,7 @@
                                         </div>
                                         {{/each}}
                                     </div>
+                                </div>
                                 </div>
                             </div>
                             {{/each}}
@@ -339,8 +346,7 @@
                                         <div id='title_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{title}}</div>
                                     </div>
                                     <div class="form-group col-sm-6 text-right">
-                                    <a href="assets/pdf-sample" download="pdffile">
-                                        <button class="btn btn-success dwn-btn" type="button" id= "dwn-btn" data-id="{{meeting_key}}" data-time="{{created_at}}">編輯會議 | Download Poll Report</button> </a>
+                                    
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="form-group col-sm-6">
@@ -376,7 +382,7 @@
                                             <tr>
                                                 
                                                                     <td>1</td>
-                                                                    <td>{{this.name}}</td>
+                                                                    <td><a href ="{{this.url}}">{{this.name}}</a></td>
                                                                     
                                             </tr>
                                             {{/each}}
@@ -388,23 +394,107 @@
                             </div>
                             <div class="div-wrapper">
                                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                    {{#each polls}}
+                                      {{#each polls}}
                                     <div class="panel panel-default" style='box-shadow:-5px 6px 9px -8px #888888;'>
                                         <a role="button" data-toggle="collapse" style='color:black' data-parent="#accordion" href="#poll_{{_id}}" aria-expanded="true"
                                             aria-controls="collapseOne">
                                             <div class="panel-heading" role="tab">
                                                 <h4 class="panel-title">
-                                                    {{pollName}}
+                                                    {{pollNameChn}} | {{pollName}} 
                                                 </h4>
+                                                <h6 class="pull-right" style="margin-top: -23px">
+                                                Vote by: {{endTime}}
+                                                </h6>
                                             </div>
                                         </a>
                                         {{#if @key}}
-                                        <div id="poll_{{@key}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <div id="poll_{{_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                             {{else}}
-                                            <div id="poll_{{@key}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                            <div id="poll_{{_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                                 {{/if}}
-                                                <div class="panel-body" id= "meetingdiv" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-                                                    
+                                                <div class="panel-body">
+                                                    <form role="form" name="poll_form_{{@key}}" id="poll_form_{{meeting_key}}_{{@key}}">
+                                                        <div class="form-group col-sm-12">
+                                                            <label class='custom_label'>Summary</label>
+                                                            <input type="hidden" name="poll_id" value="{{pollId}}">
+
+                                                            <textarea rows="3" class="form-control input_fields_{{meeting_key}}" name="summary" readonly="true">{{summary}}</textarea>
+                                                            <div id='summary_div' class='display_meetings_detail_{{meeting_key}}'></div>
+
+                                                        </div>
+
+                                                        <div class="form-group col-sm-12">
+                                                            <label class='custom_label'>概要</label>
+                                                            <input type="hidden" name="poll_id" value="{{pollId}}">
+
+                                                            <textarea rows="3" class="form-control input_fields_{{meeting_key}}" name="summary" readonly="true">{{summaryChn}}</textarea>
+                                                            <div id='summary_div' class='display_meetings_detail_{{meeting_key}}'></div>
+                                                        </div>
+
+                                                        <div class="clearfix"></div>
+                                                        <div class="col-sm-6">
+                                                            <div class="tls-voting-option-box">
+                                                                 <label class='custom_label'>投票選項 | VOTING OPTIONS</label>
+                                                                <ul>
+                                                                    {{#each options as |value|}}
+                                                                    {{#if @key}}
+                                                                    <li>- {{value}}</li>
+                                                                    {{/if}}
+                                                                    {{/each}}
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <label>Uploaded Documents</label>
+                                                            <table class="table table-bordered table_custom_Wrapper">
+                                                                <tr>
+                                                                    <th>
+                                                                        <label>ID</label>
+                                                                    </th>
+                                                                    <th>
+                                                                        <label>Document name</label>
+                                                                    </th>
+                                                                </tr>
+                                                                {{#each fileLinks as |value file_key|}}
+                                                                <tr>
+                                                                    <td>{{file_key}}</td>
+                                                                    <td><a href ={{this.url}}>{{this.name}}</a></td>
+                                                                   
+                                                                </tr>
+                                                                {{/each}}
+                                                            </table>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <!--<div class="form-group col-sm-6">
+                                                            <label class='custom_label'>POll Results</label>
+                                                            <table class="table table-bordered table_custom_Wrapper">
+                                                                <tr>
+                                                                    <th>
+                                                                        <label>ID</label>
+                                                                    </th>
+                                                                    <th>
+                                                                        <label>Document name</label>
+                                                                    </th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Agends.pdf</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>-->
+                                                        <div class="form-group col-sm-6">
+                                                        </div>
+                                                    </form>
+                                                    <div id="dialog1" title="Alert message" style="display: none; ">
+                                                        <div class="ui-dialog-content ui-widget-content">
+                                                            <p>
+                                                                <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0"></span>
+                                                                <label id="lblMessage1">
+                                                                </label>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -515,13 +605,13 @@
                     <div class="form-group col-sm-6">
                         <label>Add Documents</label>
                         <p>
-                        <button class="add_documents btn btn-info btn-fill">Add documents/上傳文件</button>
+                        <button class="add_documents btn btn-primary">Add documents/上傳文件</button>
                         <div class="documents_wrapper">
                         <div class ="added_files" ></div>
                         </div>
                         </p>
                     </div>
-                                    <button type="submit" class="btn btn-success" id="close_model" style="float: right;"> 确认 | Confirm</button>
+                                    <button type="submit" class="btn btn-primary" id="close_model" style="float: right;"> 确认 | Confirm</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -579,12 +669,12 @@
                     <div class="form-group col-sm-6">
                         <label>Add Documents</label>
                         <p>
-                        <button class="add_documents btn addoptionbtn btn-info btn-fill">Add documents/上傳文件</button>
+                        <button class="add_documents addoptionbtn btn btn-primary">Add documents/上傳文件</button>
                         <div class="documents_wrapper" id="documents_file">
                         </div>
                         </p>
                     </div>
-                    <button type="submit" class="  btn btn-success btn-info btn-fill" id="close_model2" style="float: right;"> 确认 | Confirm</button>
+                    <button type="submit" class="btn btn-primary btn-success" id="close_model2" style="float: right;"> 确认 | Confirm</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -654,6 +744,9 @@ function edit_poll(event){
 
         $('.meeting_li').click(function (event) {
             $('.save_meeting').hide()
+            $('#heading3').text('Upcoming Meeting')
+            var html = ''
+            $('#headingBottom2').html('')
             var id = event.target.id
              var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
             var firstDate = new Date(originalData[id].createdAt);
@@ -670,6 +763,13 @@ function edit_poll(event){
             var hours = Math.round(Math.abs(firstDate - secondDate) / 36e5);
             hours = '剩下的時間可以取消或修改投票 | Hours remaining to edit or delete polls: ' + hours;
             $( "#endhour" ).text(hours)
+        }) 
+        $('.past-meeting').click(function (event) {
+            $('.save_meeting').hide()
+            $('#heading3').text('Past Meeting')
+            $( "#endhour" ).text('')
+            var html= '<a href="assets/pdf-sample" download="pdffile"><button class="btn btn-success headingbtn dwn-btn" type="button" id= "dwn-btn">編輯會議 | Download Poll Report</button> </a>'
+            $('#headingBottom2').append(html)
         }) 
 
         $(".delete_poll_btn").on('click' , function(event){
@@ -985,10 +1085,11 @@ function edit_poll(event){
                 $(".voting_opt1 .remove_field").remove();
                 var optionWrapper = $(".voting_opt1");
                 $.each(poll.options, function( index, value ) {
-                $(optionWrapper).append('<div class="input_div tls-Vot-box"><input class="pull-left tls-Voting-options" type="text" value="'+value+'" name="option1"/><a href="#" class="remove_field">Remove</a></div>');
+                $(optionWrapper).append('<div class="input_div tls-Vot-box"><input class="pull-left tls-Voting-options" type="text" value="'+value+'" name="option1" readonly/><a href="#" class="remove_field">Remove</a></div>');
                 });
+                $('.added_files').html('');
                 $.each(poll.fileLinks, function( index, value ) {
-                $('.added_files').append('<div name="'+value.name+'"><input type="text" value="'+value.name+'" name="fileLinks"/><a href="#" class="remove_file removebtn">Remove</a></div>');
+                $('.added_files').append('<div name="'+value.name+'"><input type="text" value="'+value.name+'" name="fileLinks" readonly/><a href="#" class="remove_file removebtn">Remove</a></div>');
                 });
  
             }

@@ -153,6 +153,7 @@ const meetingSchema = new Schema({
             ref: 'Poll'
         }
     ],
+    pollEndTime: Date,
     active: Boolean
 })
 

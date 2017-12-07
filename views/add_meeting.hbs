@@ -79,7 +79,7 @@
                                 <a data-toggle="collapse" href="#dropdown-lvl12" aria-expanded="true" class="arrow-img">
                                     <span>將來會議 | Upcoming Meet</span>
                                     <span class="sidebar-rt-arrow">
-                                        <i class="fa fa-angle-right" style="font-size:27px;"></i>
+                                        <i id="ispan2" class="fa fa-angle-right" style="font-size:27px;"></i>
                                     </span>
                                 </a>
                                 <div id="dropdown-lvl12" class="panel-collapse collapse" aria-expanded="true" style="">
@@ -102,7 +102,7 @@
                                 <a data-toggle="collapse" href="#dropdown-lvl13" aria-expanded="true" class="arrow-img" style="border-bottom: 0px; box-shadow: none;border-top: 1px solid #e7e7e7;">
                                     <span>以往會議 | Past Meetings</span>
                                     <span class="sidebar-rt-arrow">
-                                        <i class="fa fa-angle-right" style="font-size:27px;"></i>
+                                        <i class="fa fa-angle-right" style="font-size:27px;" id="ispan"></i>
                                     </span>
                                 </a>
                                 <div id="dropdown-lvl13" class="panel-collapse collapse" aria-expanded="true" style="">
@@ -142,24 +142,25 @@
                 </div>
             </div>
         </nav>
+            <div class="tls-content-box">
                 <form name="pollform" action="/saveMeeting" method="post" enctype="multipart/form-data" >
                     <div class="form-group col-sm-6">
                         <label>Meeting Title</label>
-                        <input type="text" class="form-control" name="meeting_title" required>
+                        <input type="text" class="form-control" name="meeting_title" required/>
                     </div>
                     <div class="form-group col-sm-6">
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>会议标题</label>
-                        <input type="text" class="form-control" name="meeting_title_chinese" required>
+                        <input type="text" class="form-control" name="meeting_title_chinese" required/>
                     </div>
                     <div class="form-group col-sm-6">
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>Meeting Start Time | 会议开始时间</label>
-                        <input type="datetime-local" class="form-control" name="startTime" id="startTime" required>
+                        <input type="datetime-local" class="form-control" name="startTime" id="startTime" required/>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Meeting End Time | 会议结束时间</label>
@@ -168,14 +169,14 @@
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>Venue | 地点 </label>
-                        <input type="text" class="form-control" name="venue" required>
+                        <input type="text" class="form-control" name="venue" required/>
                     </div>
                     
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>Agenda | 议程</label>
                         <div class="documents_wrapper1">
-                        <input type="file" name="filefield" accept="application/pdf" id="fileValue">      
+                        <input type="file" name="filefield" accept="application/pdf" id="fileValue"/>      
                     </div>
                     </div>
                     <div class="clearfix"></div>
@@ -186,7 +187,7 @@
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-12">
                         <p> 
-                            <input type="button" class="btn btn-primary poll-btn" value="添加投票 | Add a Poll" id="open_model">
+                            <input type="button" class="btn btn-primary poll-btn" value="添加投票 | Add a Poll" id="open_model"/>
                         </p>
                     </div>
                     <div class="form-group col-sm-12 currentpolls">
@@ -203,16 +204,18 @@
                     <div class="clearfix"></div>
                     <div class="form-group save_btn_wrap">
                         <label></label>   
-                        <p>
-                            <input type="hidden" name="poll_json" id="poll_json">
-                            <input type="submit" class="btn btn-primary custom_success_btn pull-right" style="margin-right: 16px;" id="save"value=" 保存 | Save">
+                        <p class="text-right">
+                            <input type="hidden" name="poll_json" id="poll_json"/>
+                            <input type="submit" class="btn btn-primary custom_success_btn" style="margin-right: 16px;" id="save"value=" 保存 | Save"/>
                         </p>
                     </div>
                     <div class="clearfix"></div>
-                </form>
+                </form>                
             </div>
-            </div>
-        </div> 
+                
+        </div>
+    </div>
+</div> 
 
         <footer class="footer">
             <div class="container-fluid">
@@ -337,6 +340,15 @@
             $('#poll_form')[0].reset();
             $("#poll").modal();
         })
+
+        $(".arrow-img").click(function(event){
+            $( "#ispan" ).addClass( "right-arrow-add" );
+            
+        })
+         $(".arrow-img").click(function(event){
+            $( "#ispan2" ).addClass( "right-arrow-add" );
+            
+        })
         $("#save").click(function(event){
             const startTime = $('#startTime').val()
             const endTime = $('#pollEndTime').val()
@@ -430,7 +442,7 @@
                                                                  <label class='custom_label'>投票選項 | VOTING OPTIONS</label>
                                                                 <ul> `
                                                                     for (j=0; j< polls_array[i].option.length ; j++){
-                                                              html+=   `<li><a href="">- ${polls_array[i].option[j]}</a></li>`
+                                                              html+=   `<li>- ${polls_array[i].option[j]}</li>`
                                                             }
                                                             html+=`    </ul>
                                                             </div>
