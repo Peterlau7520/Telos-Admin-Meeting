@@ -535,6 +535,7 @@ function savePoll(req, res, fileLinks){
 });
 
 router.post('/deleteMeeting',(req,res) => {
+    console.log(req.body)
     Meeting.deleteOne({_id: req.body.meeting_id}, function (err, todo) {
         if (err) res.send(err);
         res.redirect('/allMeetings');
@@ -542,11 +543,12 @@ router.post('/deleteMeeting',(req,res) => {
 });
 
 router.post('/deletePoll',(req,res) => {
+    console.log(req.body)
      Poll.deleteOne({_id: req.body.pollId}, function (err, todo) {
-        if (err) res.send(err);
+        if (err) { res.redirect('/allMeetings')}
         Meeting.update(
             { _id: req.body.meetingId },
-            { $pop: { polls:  req.body.pollId} } 
+            { $pull: { polls:  req.body.pollId} } 
         )
         .then(function(err, result){
             if (err) res.send(err);
