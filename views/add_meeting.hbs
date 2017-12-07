@@ -15,7 +15,7 @@
                 <li>
                     <a href="/currentpolls.html">
                         <i class="pe-7s-graph"></i>
-                        <p>NOTICEBOARD<br>
+                        <p>NOTICEBOARD<br/>
                             通告
                         </p>
                     </a>
@@ -23,7 +23,7 @@
                 <li class="active">
                     <a href="/currentpolls.html">
                         <i class="pe-7s-graph"></i>
-                        <p>MEETINGS<br>
+                        <p>MEETINGS<br/>
                             會議
                         </p>
                     </a>
@@ -39,7 +39,7 @@
                     <a href="/about">
                         <i class="pe-7s-science"></i>
                         <p>Contractors and Consultants List
-                            <br>
+                            <br/>
                             顧問及合約商</p>
                     </a>
                 </li>
@@ -47,7 +47,7 @@
                     <a href="/logout">
                         <i class="pe-7s-map-marker"></i>
                         <p>LOG OUT
-                            <br>
+                            <br/>
                             登出</p>
                     </a>
                 </li>
@@ -90,7 +90,7 @@
                                                 {{else}}
                                             <li role="presentation" class="active">
                                             {{/if}}
-                                                 <a class='meeting_li' href='/allMeetings' aria-controls="home" role="tab" data-toggle="tab">{{title}}</a>
+                                                 <a class='meeting_li' href='' aria-controls="home" role="tab" data-toggle="tab">{{title}}</a>
                                             </li>
                                             </li>
                                             {{/each}}
@@ -110,7 +110,7 @@
                                         <ul class="nav navbar-nav" role="tablist">
                                         {{#each pastMeetingsData}}
                                             <li role="presentation">
-                                             <a class='meeting_li' href="/allMeetings" aria-controls="home" role="tab" data-toggle="tab">{{title}}</a>
+                                             <a class='meeting_li' href="" aria-controls="home" role="tab" data-toggle="tab">{{title}}</a>
                                             </li>
                                             {{/each}}
                                         </ul>
@@ -205,7 +205,7 @@
                         <label></label>   
                         <p>
                             <input type="hidden" name="poll_json" id="poll_json">
-                            <input type="submit" class="btn btn-success btn-primary custom_success_btn pull-right" style="margin-right: 16px;" id="save"value=" 保存 | Save">
+                            <input type="submit" class="btn btn-primary custom_success_btn pull-right" style="margin-right: 16px;" id="save"value=" 保存 | Save">
                         </p>
                     </div>
                     <div class="clearfix"></div>
@@ -260,40 +260,44 @@
                 <form role="form" name="#poll_form" id="poll_form" action="/addPollsOfMeeting"  method="post" enctype="multipart/form-data">
                     <div class="form-group col-sm-6">
                         <label>Poll Title</label>
-                        <input type="text" name="title" class="form-control">
+                        <input type="text" name="title" class="form-control"/>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>投票标题</label>
-                        <input type="text" name="title_chinese" class="form-control">
+                        <input type="text" name="title_chinese" class="form-control"/>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>Summary</label>
-                        <textarea name="summary" class="form-control"></textarea>
+                        <textarea name="summary" rows="3" class="form-control"></textarea>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>概要</label>
-                        <textarea type="datetime-local" name="summary_chinese" class="form-control"></textarea>
+                        <textarea type="text" rows="3" name="summary_chinese" class="form-control"></textarea>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>Voting options</label>
-                            <div class="input_fields_wrap">
-                                <button class="add_field_button btn addoptionbtn " style="margin-bottom:2%">Add Options/增加選項</button>
-                                    <div><input style="display:flex;margin-left: 10px; border-radius: 0px;margin-bottom: 2px !important; width: 40%;" type="text" name="option" placeholder="E.g. Yes/是" required></div>
-                            </div>
+                        <br/>
+                        <button class="add_field_button btn btn-primary addoptionbtn pull-right" style="margin-bottom:2%">Add Options/增加選項</button>
+                        <div class="input_fields_wrap tls-Vot-box-main">
+                            <div class="tls-Vot-box">
+                                <input class="pull-left tls-Voting-options" type="text" name="option" placeholder="E.g. Yes/是" required />
+                            </div> 
+
+                        </div>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Add Documents</label>
                         <p>
-                        <button class="add_documents btn addoptionbtn" style="margin-bottom:1%">Add documents/上傳文件</button>
+                        <button class="add_documents btn btn-primary addoptionbtn" style="margin-bottom:1%">Add documents/上傳文件</button>
                         <div class="documents_wrapper" id="documents_file">
                         </div>
                         </p>
                     </div>
                     <div class="clearfix"></div>
                     <hr>
-                    <button type="submit" class="btn btn-success pull-right" id="close_model" > 确认 | Confirm</button>
+                    <button type="submit" class="btn btn-primary pull-right" id="close_model" > 确认 | Confirm</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -321,7 +325,7 @@
             var add_option_button      = $(".add_field_button"); //Add button ID
             $(add_option_button).click(function(e){ //on add input button click
                 e.preventDefault();
-                    $(optionWrapper).append('<div style="width: 55%; margin-bottom: 2px;"><input type="text" name="option" placeholder="E.g. Yes/是" /><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                    $(optionWrapper).append('<div class="tls-Vot-box"><input class="tls-Voting-options" type="text" name="option" placeholder="E.g. Yes/是" /><a href="#" class="remove_field">Remove</a></div>'); //add input box
 
             });
 
@@ -422,12 +426,14 @@
                                                     <textarea class="form-control input_fields_{{i}}" name="summary">${polls_array[i].summary_chinese}</textarea>
                                             </div>
                                                      <div class="form-group col-sm-6">
-                                                            <label class='custom_label'>Voting option</label>
-                                                            <select class="form-control show" name="voating_option">
-                                                                <option value="yes">Yes</option>
-                                                                <option value="no">No</option>
-                                                                <option value="abstain">Abstain</option>
-                                                            </select>
+                                                            <div class="tls-voting-option-box">
+                                                                 <label class='custom_label'>投票選項 | VOTING OPTIONS</label>
+                                                                <ul> `
+                                                                    for (j=0; j< polls_array[i].option.length ; j++){
+                                                              html+=   `<li><a href="">- ${polls_array[i].option[j]}</a></li>`
+                                                            }
+                                                            html+=`    </ul>
+                                                            </div>
                                                         </div>
                                                         <div class="form-group col-sm-6">
                                                             <label>Uploaded Documents</label>
@@ -440,10 +446,13 @@
                                                                         <label>Document name</label>
                                                                     </th>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>Agends.pdf</td>
-                                                                </tr>
+                                                                `
+                                                                for (k=0; k< polls_array[i].filesName.length ; k++){
+                                                              html+= `<tr><td>${k + 1}</td>
+                                                                    <td>${polls_array[i].filesName[k]}</td> </tr>`
+                                                            }
+                                                              html+=`       
+                                                                
                                                             </table>
                                                         </div>
                                         </div>

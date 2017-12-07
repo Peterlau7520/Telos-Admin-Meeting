@@ -54,6 +54,8 @@ router.get('/allMeetings', (req, res) => {
                 }   
                 if(item.polls){
                 forEach(item.polls, function(poll, key, a){ 
+                    var pollEndTime = moment(new Date(poll.endTime));
+                    item.polls[key].endTime = pollEndTime.format("D-MM-YYYY");
                 let polefileLinks = []; 
                 if(poll.fileLinks){ 
                     forEach(poll.fileLinks, function(name, key, a){ 
@@ -69,14 +71,13 @@ router.get('/allMeetings', (req, res) => {
             }
                     var endTime = moment(new Date(item.endTime));
                     var startTime = moment(new Date(item.startTime));
-                    item.startTime =  startTime.format("D/MM/YYYY");
+                    item.startTime =  startTime.format("D/MM/YYYY hh:mm");
                     if(item.endTime > currDate || item.endTime == currDate || item.endTime != null) {          
-                        item.endTime =  endTime.format("D/MM/YYYY");
-
+                        item.endTime =  endTime.format("D/MM/YYYY hh:mm");
                         currentMeetings.push(item)
                     }
                     else{
-                        item.endTime =  endTime.format("D/MM/YYYY");
+                        item.endTime =  endTime.format("D/MM/YYYY hh:mm");
                         pastMeetings.push(item)
                     }
                     resolve({meetingsData: currentMeetings, pastMeetingsData: pastMeetings})
@@ -88,7 +89,6 @@ router.get('/allMeetings', (req, res) => {
             })
         }
        else{
-            console.log(err, "err")
             res.render('meeting')
         }
     })
@@ -193,17 +193,16 @@ router.post('/addPollsOfMeeting', (req, res) => {
 
 
 router.post('/editMeeting', (req, res) => {
-    console.log(req.body)
     var data = req.body.meeting
     var fileLinks = []
-    if(req.files) {
-        var files = req.files && req.files.filefield ? req.files.filefield : false;
+    if(req.files && req.files.fileField) {
+        var files = req.files.fileField
         for (var i = 0; i < files.length; i++) {
             var info = files[i].data;
             var name = files[i].name;
             //meeting.fileLinks.push(name);
             fileLinks.push(name)
-            var data = {
+                var data = {
                 Bucket: BucketName,
                 Key: `${req.user.estateName}/${req.body.title}/${name}`,
                 Body: info,
@@ -217,12 +216,12 @@ router.post('/editMeeting', (req, res) => {
                 } else {
                     console.log('succesfully uploaded the pdf!');
                     save(req, res, fileLinks)
-                      bucket.deleteObject({
+                      /*bucket.deleteObject({
                       Bucket: BucketName,
                       Key: req.body.fileLinks[0].url
                     }, function(err, filed){
                         console.log(filed)
-                    })
+                    })*/
                 }
             });
         }
@@ -232,7 +231,7 @@ router.post('/editMeeting', (req, res) => {
           save(req, res, fileLinks)
     }
     function save(req, res, file){
-        const data = JSON.parse(req.body.meeting)
+        const data = req.body
         var id = data.meeting_id
     Meeting.findOneAndUpdate({
       _id: id
@@ -256,17 +255,13 @@ router.post('/editMeeting', (req, res) => {
         }); 
         }
         else{ 
-         res.json({
-          success: true,
-          message: "Meeting updated Successfully"
-        });
+    res.redirect('/allMeetings')
     }
     })
 }
 })
 
 router.post('/editPoll', (req, res) => {
-    console.log(req.files, "req.body", req.body)
     var data = req.body
     var id = req.body.id
     var fileLinks = []
@@ -327,7 +322,6 @@ router.post('/editPoll', (req, res) => {
          filearray = file.split(',')
     promiseArr.push(new Promise(function(resolve, reject){
     forEach(filearray, function(item){
-        console.log(item, "item", req.body.id)
          Poll.findOneAndUpdate({_id: req.body.id
     }, {
       $pull: { 
@@ -335,7 +329,6 @@ router.post('/editPoll', (req, res) => {
       }
     })
          .then(function(d, err){
-            console.log(d, "d")
             resolve(d)
     })
         })
@@ -367,7 +360,6 @@ router.post('/editPoll', (req, res) => {
             res.json({message: 'Could Not Update'})
         }
         else{
-            console.log(poll, "poll")
             res.redirect('/allMeetings')
             //res.json({message: 'Updated Successfully'})
         }
@@ -381,7 +373,6 @@ router.get('/addMeeting',(req,res) => {
         const promiseArr = []
         var currentMeetings = []
         var pastMeetings = []
-        console.log(meetings, "meetings")
         if(meetings.length > 0) {
             promiseArr.push(new Promise(function(resolve, reject){
                forEach(meetings, function(item, key, a){
@@ -404,7 +395,6 @@ router.get('/addMeeting',(req,res) => {
                           name: name,
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
                         })
-                        console.log(polefileLinks)
                       poll.fileLinks = polefileLinks;
                     })
                 }
@@ -416,13 +406,11 @@ router.get('/addMeeting',(req,res) => {
                     else{
                         pastMeetings.push(item)
                     }
-                    console.log(currentMeetings, "currentMeetings")
                     resolve({meetingsData: currentMeetings, pastMeetingsData: pastMeetings})
                })
            }))
             Promise.all(promiseArr)
             .then(function(data){
-                console.log(data)
                 res.render('add_meeting', data[0]);
             })
         }
@@ -479,6 +467,7 @@ function uploadFile(req, res){
         }
 
 function savePoll(req, res, fileLinks){
+    console.log(req.body)
     const promiseArr = []
     if(req.body.startTime) {
         var meetingStartDay = req.body.startTime.substring(0, req.body.startTime.indexOf('T'));
@@ -510,7 +499,7 @@ function savePoll(req, res, fileLinks){
                      fileLinks: values.filesName,
                      estateName: req.user.estateName,
                      options: values.option,
-                     endTime: '',
+                     endTime: pollEndFinal,
                      active: true,
                      voted: [],
                      finalResult: "",
@@ -519,7 +508,6 @@ function savePoll(req, res, fileLinks){
                     });
                 poll.save()
                 .then(function(poll){
-                    console.log(poll)
                     pollIds.push(poll._id)
                     resolve(pollIds)
                     })

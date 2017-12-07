@@ -540,9 +540,7 @@ textarea {
 .side-body {
     margin-left: 310px;
 }
-.input_div{
-        width: 55%;
-}
+ 
 /* small screen */
 .tab-wraper{
     display: block;
@@ -556,7 +554,9 @@ textarea {
 }
 
 .tls-wrapper .panel-heading{
-    box-shadow: 0px 1px 6px #dadada;
+    box-shadow: 0px 4px 6px #f5f5f5;
+    border-radius: 0;
+    border-color: #fff;
 }
 .tls-voting-option-box ul{
     margin: 0px;
@@ -573,6 +573,42 @@ textarea {
 }
 .tls-voting-option-box ul li a:hover{
     opacity: 0.8;
+}
+.tls-Vot-box-main{
+    max-width: 220px;
+    float: left;
+}
+.tls-Vot-box-main .tls-Vot-box{
+    text-align: left;
+    float: left;
+}
+ .tls-Vot-box{
+    text-align: left;
+    float: left;
+}
+.tls-Voting-options{
+    border-radius: 0px;
+    margin-bottom: 2px !important;
+    border: 0.5px solid #E3E3E3;
+    padding: 2px 5px;
+    max-width: 140px;
+    display: inline-block;
+}
+
+.edit-voting{
+    border-color: #fff;
+    max-width: 100px;
+}
+.tls-Vot-box .remove_field{
+margin-left: 10px;
+}
+ 
+
+.panel-wrapper-custom .panel-group .panel{
+    margin-bottom: 5px;
+    border-radius: 0;
+    box-shadow: 0px 0px 5px #f5f5f5;
+    border-color: #fff;
 }
 
 .tab-wraper .custome-tab-pane{
@@ -696,6 +732,9 @@ textarea {
 /* Add poll Sec Css::END */
 
 @media only screen and (max-width: 767px)  {
+    .tls-Vot-box-main{
+        max-width: 100%;
+    }
     .side-menu{
         width: 100%;
     }

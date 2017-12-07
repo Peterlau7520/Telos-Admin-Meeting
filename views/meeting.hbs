@@ -219,14 +219,14 @@
                                                     {{pollNameChn}} | {{pollName}} 
                                                 </h4>
                                                 <h6 class="pull-right" style="margin-top: -23px">
-                                                Vote by: 2017-04-12
+                                                Vote by: {{endTime}}
                                                 </h6>
                                             </div>
                                         </a>
                                         {{#if @key}}
                                         <div id="poll_{{@key}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                             {{else}}
-                                            <div id="poll_{{@key}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                            <div id="poll_{{@key}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                                 {{/if}}
                                                 <div class="panel-body">
                                                     <form role="form" name="poll_form_{{@key}}" id="poll_form_{{meeting_key}}_{{@key}}">
@@ -271,12 +271,11 @@
                                                                         <label>Document name</label>
                                                                     </th>
                                                                 </tr>
-                                                                {{#each fileLinks}}
+                                                                {{#each fileLinks as |value file_key|}}
                                                                 <tr>
-                                                                   
-                                                                    <td>1</td>
+                                                                    <td>{{file_key}}</td>
                                                                     <td>{{this.name}}</td>
-                                                                    
+                                                                   
                                                                 </tr>
                                                                 {{/each}}
                                                             </table>
@@ -496,12 +495,22 @@
                         <textarea type="datetime-local" name="summaryChn" id="summary_chinese" class="form-control"></textarea>
                     </div>
                     <div class="clearfix"></div>
-                    <div class="form-group col-sm-6">
+                    <!-- <div class="form-group col-sm-6">
                         <label>投票選項 | VOTING OPTION</label>
                             <div class="input_fields_wrap voting_opt1">
                                 <button class="add_field_button1 btn btn-info btn-fill">Add Options/增加選項</button>
                                     <div><input style="display:flex; border-radius: 0px;" type="text" name="option" id="option" placeholder="E.g. Yes/是" required></div>
                             </div>
+                    </div> -->
+                    <div class="form-group col-sm-6">
+                        <label>投票選項 | VOTING OPTION</label>
+                        <br/>
+                        <button class="add_field_button1 btn btn-primary">Add Options/增加選項</button>
+                        <div class="input_fields_wrap voting_opt1 tls-Vot-box-main">
+                            <div class="tls-Vot-box">   
+                                <input  class="pull-left tls-Voting-options" type="text" name="option" id="option" placeholder="E.g. Yes/是" required/>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Add Documents</label>
@@ -552,13 +561,21 @@
                         <textarea type="datetime-local" name="summary_chinese" class="form-control"></textarea>
                     </div>
                     <div class="clearfix"></div>
+                    
                     <div class="form-group col-sm-6">
                         <label>投票選項 | VOTING OPTION</label>
-                                <div class="input_fields_wrap voting_opt">
-                                <button class="add_field_button btn btn-info btn-fill">Add Options/增加選項</button>
-                                    <div><input style="display:flex; border-radius: 0px;" type="text" name="option0" id="option" placeholder="E.g. Yes/是" required></div>
-                            </div>
+                        <br/> 
+                        <button class="add_field_button btn btn-primary addoptionbtn pull-right" style="margin-bottom:2%">Add Options/增加選項</button>
+
+                        <div class="input_fields_wrap voting_opt tls-Vot-box-main">
+                            <div class="tls-Vot-box">
+                                 <input   class="pull-left tls-Voting-options"  type="text" name="option0" id="option" placeholder="E.g. Yes/是" required>
+                            </div>  
+                        </div>
                     </div>
+
+
+
                     <div class="form-group col-sm-6">
                         <label>Add Documents</label>
                         <p>
@@ -712,7 +729,7 @@ function edit_poll(event){
         var add_option_button1 = $(".add_field_button1"); //Add button ID
         $(add_option_button1).click(function(e){ //on add input button click
             e.preventDefault();
-            $(optionWrapper1).append('<div class="input_div"><input type="text" name="option1"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            $(optionWrapper1).append('<div class="input_div tls-Vot-box"><input class="pull-left tls-Voting-options" placeholder="E.g. Yes/是" type="text" name="option1"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
             /* $.each($(".voting_opt1 :input[name*='option1']"), function(data, key){  
                 optionEdit.push($(this).val())
             });
@@ -738,7 +755,7 @@ function edit_poll(event){
            
         $(add_option_button).click(function(e){ //on add input button click
             e.preventDefault();
-            $(optionWrapper).append('<div class="input_div"><input type="text" name="option"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            $(optionWrapper).append('<div class="input_div tls-Vot-box"><input type="text" class="pull-left tls-Voting-options" name="option"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
              
         });
        
@@ -759,7 +776,7 @@ function edit_poll(event){
             var html = '<div class="div-wrapper" style="padding: 10px;">'+
             '<h3 class= "heading">' + "Upcoming Meeting"+ '</h3>' + '                                        <button class=" btn btn-danger deleteMeeting deletebtn btn-danger" type="submit" id={{data._id}} data-id={{data._id}} data-time="">取消會議 | Delete Meeting</button>' + '<hr>' +
             
-'                                <form role="form" enctype="multipart/form-data" name="edit_meeting_popup" id="edit_meeting_popup" action="/deleteMeeting" method="post">'+
+'                                <form role="form" enctype="multipart/form-data" name="edit_meeting_popup" id="edit_meeting_popup" action="/editMeeting" method="post">'+
 '                                    <div class="form-group col-sm-6">'+
 '                                        <label class="">取消會議 | Meeting Title</label>'+
 '                                        <input name="meeting_id" type="hidden" value="'+data._id+'">'+
@@ -810,7 +827,7 @@ function edit_poll(event){
 '                                        <div class = "add" id= "addAgenda">'+ '<input name="fileField" id ="addFile" type="file" class="form-control input_fields />' + '</div>'+
 '                                    </div>'+
 '                                    <div class="clearfix"></div>'+
-'                                        <button  class=" btn save_meeting savebtn" type="button" data-id=""> 儲存 | Save</button>'+
+'                                        <button  class=" btn save_meeting savebtn" type="submit" data-id=""> 儲存 | Save</button>'+
 '                                        <button  class="btn cancel_meeting savebtn" type="button" data-id="">取消 | Cancel</button>'+
 '                                </form>'+
 '                            </div>';
@@ -883,7 +900,7 @@ function edit_poll(event){
                 meetingData.polls.push(convertSerializeArrayToJson(poll_form));
             });
             }*/
-            $.ajax({
+          /*  $.ajax({
                 url: "/editMeeting",
                 data: { "meeting": JSON.stringify(meetingData) },
                 type: 'POST',
@@ -902,7 +919,7 @@ function edit_poll(event){
                     location.reload()
                 }
 
-            });
+            });*/
         });
         //for delete meeting
        /* $('.delete_meeting').click(function(e) {
@@ -968,7 +985,7 @@ function edit_poll(event){
                 $(".voting_opt1 .remove_field").remove();
                 var optionWrapper = $(".voting_opt1");
                 $.each(poll.options, function( index, value ) {
-                $(optionWrapper).append('<div class="input_div"><input type="text" value="'+value+'" name="option1"/><a href="#" class="remove_field">Remove</a></div>');
+                $(optionWrapper).append('<div class="input_div tls-Vot-box"><input class="pull-left tls-Voting-options" type="text" value="'+value+'" name="option1"/><a href="#" class="remove_field">Remove</a></div>');
                 });
                 $.each(poll.fileLinks, function( index, value ) {
                 $('.added_files').append('<div name="'+value.name+'"><input type="text" value="'+value.name+'" name="fileLinks"/><a href="#" class="remove_file removebtn">Remove</a></div>');
