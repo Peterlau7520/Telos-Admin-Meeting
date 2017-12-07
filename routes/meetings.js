@@ -88,7 +88,7 @@ router.get('/allMeetings', (req, res) => {
             })
         }
        else{
-              console.log(err, "err")
+            console.log(err, "err")
             res.render('meeting')
         }
     })
@@ -381,6 +381,7 @@ router.get('/addMeeting',(req,res) => {
         const promiseArr = []
         var currentMeetings = []
         var pastMeetings = []
+        console.log(meetings, "meetings")
         if(meetings.length > 0) {
             promiseArr.push(new Promise(function(resolve, reject){
                forEach(meetings, function(item, key, a){
@@ -421,8 +422,12 @@ router.get('/addMeeting',(req,res) => {
            }))
             Promise.all(promiseArr)
             .then(function(data){
+                console.log(data)
                 res.render('add_meeting', data[0]);
             })
+        }
+        else{
+            res.render('add_meeting');
         }
     
 })
