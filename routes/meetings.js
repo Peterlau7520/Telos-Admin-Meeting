@@ -27,7 +27,8 @@ let docFileName,pathParams,dataFile;
 const BucketName = 'telospdf';
 AWS.config.update({
   accessKeyId: 'AKIAIMLMZLII2XCKU6UA',
-  secretAccessKey: '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'
+  secretAccessKey: 'elD95wpngb2NiAfJSSCYOKhVmEAp+X2rnTSKIZ00',
+  region: 'ap-southeast-1'
 });
 const bucket = new AWS.S3({params: {Bucket: BucketName}});
 
@@ -71,13 +72,13 @@ router.get('/allMeetings', (req, res) => {
             }
                     var endTime = moment.utc(new Date(item.endTime));
                     var startTime = moment.utc(new Date(item.startTime));
-                    item.startTime =  startTime.format("D/MM/YYYY hh:mm");
+                    item.startTime =  startTime.format("D/MM/YYYY hh:mm a");
                     if(item.endTime > currDate || item.endTime == currDate) { 
-                        item.endTime =  endTime.format("D/MM/YYYY hh:mm");
+                        item.endTime =  endTime.format("D/MM/YYYY hh:mm a");
                         currentMeetings.push(item)
                     }
                     else{
-                        item.endTime =  endTime.format("D/MM/YYYY hh:mm");
+                        item.endTime =  endTime.format("D/MM/YYYY hh:mm a");
                         pastMeetings.push(item)
                     }
                    // console.log(currentMeetings, pastMeetings, "current")
@@ -130,6 +131,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
 }
     else{
           let formData = req.body;
+          console.log(req.body.title, "reeee")
         for (var key in req.files) {
             var info = req.files[key][0].data;
             var name = req.files[key][0].name;
@@ -467,7 +469,7 @@ function uploadFile(req, res){
             fileLinks.push(name)
             var data = {
                 Bucket: BucketName,
-                Key:  `${req.user.estateName}/${req.body.title}/${name}`,
+                Key:  `${req.user.estateName}/${req.body.meeting_title}/${name}`,
                 //Key: `${req.user.estateName}/Meetings/${req.body.title}/${name}`,
                 Body: info,
                 ContentType: 'application/pdf',
@@ -513,12 +515,11 @@ function savePoll(req, res, fileLinks){
       if(Polls.length  > 0){
             forEach(Polls, function(values){
              promiseArr.push(new Promise(function(resolve, reject) {
-                var pollIds = []
                 var poll = new Poll({
                      pollName: values.title,
                      pollNameChn: values.title_chinese,
                      summary: values.summary,
-                     summaryChn: values.summaryChn,
+                     summaryChn: values.summary_chinese,
                      fileLinks: values.filesName,
                      estateName: req.user.estateName,
                      options: values.option,
@@ -531,13 +532,13 @@ function savePoll(req, res, fileLinks){
                     });
                 poll.save()
                 .then(function(poll){
-                    pollIds.push(poll._id)
-                    resolve(pollIds)
+                    resolve(poll._id)
                     })
                 }))
             })
         Promise.all(promiseArr)
         .then(function(d){ 
+            console.log(d)
             //saveMeeting(req, res, fileLinks, polls)
         var meeting = new Meeting({
                 title: req.body.meeting_title,
@@ -547,7 +548,7 @@ function savePoll(req, res, fileLinks){
                 pollEndTime: pollEndFinal,
                 venue: req.body.venue,
                 fileLinks: fileLinks,
-                polls: d[0],
+                polls: d,
                 active: true
             });
             meeting.save(function(err, meeting){

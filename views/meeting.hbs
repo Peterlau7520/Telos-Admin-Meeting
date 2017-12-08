@@ -771,7 +771,7 @@ function edit_poll(event){
         }) 
 
         $(".up-meeting").click(function(event){
-            //$( "#ispan" ).removeClass( "right-arrow-add" );
+            $( "#ispan" ).removeClass( "right-arrow-add" );
             
         })
          $(".past-meeting").click(function(event){
@@ -1176,11 +1176,11 @@ function edit_poll(event){
                 $(".voting_opt1 .remove_field").remove();
                 var optionWrapper = $(".voting_opt1");
                 $.each(poll.options, function( index, value ) {
-                $(optionWrapper).append('<div class="input_div tls-Vot-box"><input class="pull-left tls-Voting-options" type="text" value="'+value+'" name="option1" readonly/><a href="#" class="remove_field">Remove</a></div>');
+                $(optionWrapper).append('<div class="input_div tls-Vot-box"><input class="pull-left tls-Voting-options" type="text" value="'+value+'" name="option1"/><a href="#" class="remove_field">Remove</a></div>');
                 });
                 $('.added_files').html('');
                 $.each(poll.fileLinks, function( index, value ) {
-                $('.added_files').append('<div name="'+value.name+'"><input type="text" value="'+value.name+'" name="fileLinks" readonly/><a href="#" class="remove_file removebtn">Remove</a></div>');
+                $('.added_files').append('<div name="'+value.name+'"><input type="hidden" value="'+value.name+'" name="fileLinks" readonly/><span style="padding-right: 10px;">' + value.name  + '</span><a href="#" class="remove_file removebtn"> Remove </a></div>');
                 });
  
             }

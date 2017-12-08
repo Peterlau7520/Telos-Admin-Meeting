@@ -263,20 +263,20 @@
                 <form role="form" name="#poll_form" id="poll_form" action="/addPollsOfMeeting"  method="post" enctype="multipart/form-data">
                     <div class="form-group col-sm-6">
                         <label>Poll Title</label>
-                        <input type="text" name="title" class="form-control"/>
+                        <input type="text" name="title" class="form-control" required/>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>投票标题</label>
-                        <input type="text" name="title_chinese" class="form-control"/>
+                        <input type="text" name="title_chinese" class="form-control" required/>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
                         <label>Summary</label>
-                        <textarea name="summary" rows="3" class="form-control"></textarea>
+                        <textarea name="summary" rows="3" class="form-control" required></textarea>
                     </div>
                     <div class="form-group col-sm-6">
                         <label>概要</label>
-                        <textarea type="text" rows="3" name="summary_chinese" class="form-control"></textarea>
+                        <textarea type="text" rows="3" name="summary_chinese" class="form-control" required></textarea>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
@@ -372,15 +372,27 @@
                 }
                })
         $("#close_model").click(function () {
-            $("#poll").modal("hide");
             var form_data_array = $("#poll_form").serializeArray();
             console.log(form_data_array);
             var form_json = {};
             var formData = new FormData();
+            var alerted = false
+            var validated = false
             form_data_array.forEach(function (obj) {
+                if(obj.value == '' && alerted == false){
+                    event.preventDefault()
+                    alert("please Enter all Values")
+                    alerted = true
+                    validated = true
+                }
+                else{
                 formData.append(obj.name, obj.value)
                 form_json[obj.name] = obj.value;
+            }
             });
+            if(validated === true){
+                return false
+            }
             for (var pair of formData.entries()) {
             console.log(pair[0]+ ', ' + pair[1]); 
             }
@@ -408,6 +420,7 @@
             var length = polls_array.length
             console.log(JSON.stringify(polls_array), "poll")
             $("#poll_json").val(JSON.stringify(polls_array));
+            $("#poll").modal("hide");
             var html ='';
                         for(i=0;i<polls_array.length ; i++)
                         {
