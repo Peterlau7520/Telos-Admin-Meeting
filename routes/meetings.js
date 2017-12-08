@@ -59,12 +59,14 @@ router.get('/allMeetings', (req, res) => {
                     item.polls[key].endTime = pollEndTime.format("D-MM-YYYY");
                 let polefileLinks = []; 
                 if(poll.fileLinks){ 
-                    forEach(poll.fileLinks, function(name, key, a){ 
+                    forEach(poll.fileLinks, function(name, key, a){
+                        console.log(name)
                         let Key = `${req.user.estateName}/${poll.pollName}/${name}`;
                         polefileLinks.push({
                           name: name,
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
                         })
+                        console.log(polefileLinks)
                       poll.fileLinks = polefileLinks;
                     })
                 }
@@ -103,7 +105,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
                     if(req.files && !(_.isEmpty(req.files))){
                        for (var key in req.files) {
             var info = req.files[key][0].data;
-            var name = req.files[key][0].name;
+            var name = req.files[key][0].name.replace(/ /g,'');
             //meeting.fileLinks.push(name);
             //Let key = `${req.user.estateName}/${req.body.title}/${name}`
             fileLinks.push(name)
@@ -134,7 +136,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
           console.log(req.body.title, "reeee")
         for (var key in req.files) {
             var info = req.files[key][0].data;
-            var name = req.files[key][0].name;
+            var name = req.files[key][0].name.replace(/ /g,'');
             //meeting.fileLinks.push(name);
             //Let key = `${req.user.estateName}/${req.body.title}/${name}`
             //fileLinks.push(name)
@@ -208,7 +210,7 @@ router.post('/editMeeting', (req, res) => {
         var files = req.files.fileField
         for (var i = 0; i < files.length; i++) {
             var info = files[i].data;
-            var name = files[i].name;
+            var name = files[i].name.replace(/ /g,'');;
             //meeting.fileLinks.push(name);
             fileLinks.push(name)
                 var data = {
@@ -294,7 +296,7 @@ router.post('/editPoll', (req, res) => {
     if(req.files && !(_.isEmpty(req.files))){
          for (var key in req.files) {
             var info = req.files[key][0].data;
-            var name = req.files[key][0].name;
+            var name = req.files[key][0].name.replace(/ /g,'');;
             //meeting.fileLinks.push(name);
             //Let key = `${req.user.estateName}/${req.body.title}/${name}`
             fileLinks.push(name)
@@ -464,7 +466,7 @@ function uploadFile(req, res){
     if (files && files[0].size != 0) {
         for (var i = 0; i < files.length; i++) {
             var info = files[i].data;
-            var name = files[i].name;
+            var name = files[i].name.replace(/ /g,'');;
             //meeting.fileLinks.push(name);
             fileLinks.push(name)
             var data = {
