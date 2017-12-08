@@ -84,10 +84,10 @@
                     <div class="side-menu-container">
                         <ul class="nav navbar-nav sidebar-nav">
                             <li class="panel panel-default" id="dropdown">
-                                <a data-toggle="collapse" href="#dropdown-lvl1" class="dropdown-list" style="    border-bottom: 1px solid #e7e7e7;">
+                                <a data-toggle="collapse" href="#dropdown-lvl1" class="dropdown-list up-meeting" style="    border-bottom: 1px solid #e7e7e7;">
                                     <span>Upcoming Meetings</span>
                                     <span class="sidebar-rt-arrow">
-                                        <i class="fa fa-angle-right" style="font-size:27px;"></i>
+                                        <i id="ispan" class="fa fa-angle-right" style="font-size:27px;"></i>
                                     </span>
                                 </a>
                                <div id="dropdown-lvl1" class="panel-collapse collapse in">
@@ -107,10 +107,10 @@
                                 </div>
                             </li>
                             <li class="panel panel-default panel-shadow" id="dropdown2" >
-                                <a data-toggle="collapse" href="#dropdown-lvl2" class="dropdown-list" style="border-bottom: 0px;box-shadow: none;"> 
+                                <a data-toggle="collapse" href="#dropdown-lvl2" class="dropdown-list past-meeting" style="border-bottom: 0px;box-shadow: none;"> 
                                     <span>Past Meetings</span>
                                     <span class="sidebar-rt-arrow ">
-                                        <i class="fa fa-angle-right" style="font-size:27px;"></i>
+                                        <i id="ispan2" class="fa fa-angle-right" style="font-size:27px;"></i>
                                     </span>
                                 </a>
                                 <div id="dropdown-lvl2" class="panel-collapse collapse ">
@@ -146,7 +146,7 @@
                             <div id="headingBottom" class="col-md-7">
                                 <p id="endhour"> </p>
                             </div>
-                            <div id="headingBottom2" class="col-md-4">
+                            <div id="headingBottom2" class="col-md-12">
                             </div>
                         </div>
                     </div>      
@@ -655,8 +655,8 @@
                     <div class="form-group col-sm-6">
                         <label>投票選項 | VOTING OPTION</label>
                         <br/> 
-                        <button class="add_field_button btn btn-primary addoptionbtn pull-right" style="margin-bottom:2%">Add Options/增加選項</button>
-
+                        <button class="add_field_button btn btn-primary addoptionbtn pull-left" style="margin-bottom:2%">Add Options/增加選項</button>
+                        <br/><br/><br/>
                         <div class="input_fields_wrap voting_opt tls-Vot-box-main">
                             <div class="tls-Vot-box">
                                  <input   class="pull-left tls-Voting-options"  type="text" name="option0" id="option" placeholder="E.g. Yes/是" required>
@@ -768,9 +768,20 @@ function edit_poll(event){
             $('.save_meeting').hide()
             $('#heading3').text('Past Meeting')
             $( "#endhour" ).text('')
-            var html= '<a href="assets/pdf-sample" download="pdffile"><button class="btn btn-success headingbtn dwn-btn" type="button" id= "dwn-btn">編輯會議 | Download Poll Report</button> </a>'
+            var html = ''
+             $('#headingBottom2').html('')
+             html= '<a href="assets/pdf-sample" download="pdffile"><button class="btn btn-primary headingbtn dwn-btn" style=" width: 74% !important;max-width: 208px; margin-top: -4%;" type="button" id= "dwn-btn">編輯會議 | Download Poll Report</button> </a>'
             $('#headingBottom2').append(html)
         }) 
+
+        $(".up-meeting").click(function(event){
+            $( "#ispan" ).addClass( "right-arrow-add" );
+            
+        })
+         $(".past-meeting").click(function(event){
+            $( "#ispan2" ).addClass( "right-arrow-add" );
+            
+        })
 
         $(".delete_poll_btn").on('click' , function(event){
         var parentId = event.target.parentElement.id;
