@@ -321,7 +321,7 @@
         var add_document_button = $(".add_documents");
         $(add_document_button).click(function (e) { //on add input button click
             e.preventDefault();
-                $(docWrapper).append(`<input type="file" name=${index} class="fileValue" id="fileValues" value="" required/><br />`); //add choose file box
+                $(docWrapper).append(`<input type="file" name=${index} class="fileValue" id="fileValues" value=""  accept="application/pdf" required/><br />`); //add choose file box
             index = index + 1
         });
         //Add options
@@ -367,6 +367,7 @@
                     alert("The poll deadline has to be at least 1 week (7 days) before the meeting start time")
                 }
                 if($("#poll_json").val() == ''){
+                    event.preventDefault();
                     alert("Please Add a poll")
                 }
                })

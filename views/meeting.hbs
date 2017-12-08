@@ -259,9 +259,7 @@
                                                                  <label class='custom_label'>投票選項 | VOTING OPTIONS</label>
                                                                 <ul>
                                                                     {{#each options as |value|}}
-                                                                    {{#if @key}}
                                                                     <li>- {{value}}</li>
-                                                                    {{/if}}
                                                                     {{/each}}
                                                                 </ul>
                                                             </div>
@@ -437,9 +435,7 @@
                                                                  <label class='custom_label'>投票選項 | VOTING OPTIONS</label>
                                                                 <ul>
                                                                     {{#each options as |value|}}
-                                                                    {{#if @key}}
                                                                     <li>- {{value}}</li>
-                                                                    {{/if}}
                                                                     {{/each}}
                                                                 </ul>
                                                             </div>
@@ -855,7 +851,7 @@ function edit_poll(event){
         var index = 0 
         $(add_document_button).click(function (e) { //on add input button click
             e.preventDefault();
-            $(docWrapper).append(`<input type="file" name=${index} class=" fileValue" id="fileValues" value=""/><br />`); //add choose file box
+            $(docWrapper).append(`<input type="file" name=${index} class=" fileValue" id="fileValues" value=""  accept="application/pdf"/><br />`); //add choose file box
             index = index + 1
         });
 
@@ -884,6 +880,16 @@ function edit_poll(event){
         })
         function edit_popup(data){
             console.log(data, "hhhhhh")
+            var file = ''
+            if(data.fileLinks[0]){
+                console.log("yess")
+                file = data.fileLinks[0]
+            }
+            else{
+                console.log("nooo")
+                //$('.hide1').hide()
+                file = ''
+            }
             var html = '<div class="div-wrapper" style="padding: 10px;">'+
             '<h3 class= "heading">' + "Upcoming Meeting"+ '</h3>' + '                                        <button class=" btn btn-danger deleteMeeting deletebtn btn-danger" type="submit" id={{data._id}} data-id={{data._id}} data-time="">取消會議 | Delete Meeting</button>' + '<hr>' +
             
@@ -929,13 +935,14 @@ function edit_poll(event){
 '                                                </th>'+
 '                                            </tr>'+
 '                                            <tr>'+
-'                                                <td id="hide1">1</td>'+
-                                                    '<input name="fileLinks" type="hidden" value="'+data.fileLinks[0].name+'">'+
-'                                                <td id="hide">'+ data.fileLinks[0].name + '                                        <button  class="remove_file removebtn" type="button" data-id=""> X </button>'+
+'                                                <td id="hide1" class="hide1">1</td>'+
+                                                    '<input name="fileLinks" type="hidden" value="'+file.name+'" class="hide1">'+
+'                                                <td id="hide">'+ file.name + '                                        <button  class="remove_file removebtn hide1" type="button" id="'+ file.name + '"> X </button>'+
 '</td>'+
 '                                            </tr>'+
 '                                        </table>'+
-'                                        <div class = "add" id= "addAgenda">'+ '<input name="fileField" id ="addFile" type="file" class="form-control input_fields />' + '</div>'+
+'                                         <div id="removedfiles">'+ '</div>' +
+'                                        <div class = "add" id= "addAgenda">'+ '<input name="fileField" id ="addFile" type="file" class="form-control input_fields  accept="application/pdf"/>' + '</div>'+
 '                                    </div>'+
 '                                    <div class="clearfix"></div>'+
 '                                        <button  class=" btn save_meeting savebtn" type="submit" data-id=""> 儲存 | Save</button>'+
@@ -955,6 +962,10 @@ function edit_poll(event){
         })
         $(document).on('click','.remove_file',function(event){
             event.preventDefault();
+            var removedfile = event.target.id
+            console.log(removedfile)
+            var html = '<input type="hidden" name="removedfiles" value="'+removedfile+'"/> '
+            $('#removedfiles').append(html)
            $('#hide').hide()
            $('#hide1').hide()
            $('#addFile').show()

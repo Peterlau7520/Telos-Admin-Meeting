@@ -72,14 +72,18 @@ router.get('/allMeetings', (req, res) => {
                     var endTime = moment(new Date(item.endTime));
                     var startTime = moment(new Date(item.startTime));
                     item.startTime =  startTime.format("D/MM/YYYY hh:mm");
-                    if(item.endTime > currDate || item.endTime == currDate || item.endTime != null) {          
+                    console.log(item.endTime, currDate, "hhhh" )
+                    if(item.endTime > currDate || item.endTime == currDate) {          
                         item.endTime =  endTime.format("D/MM/YYYY hh:mm");
+                        console.log("true")
                         currentMeetings.push(item)
                     }
                     else{
                         item.endTime =  endTime.format("D/MM/YYYY hh:mm");
+                        console.log("false")
                         pastMeetings.push(item)
                     }
+                   // console.log(currentMeetings, pastMeetings, "current")
                     resolve({meetingsData: currentMeetings, pastMeetingsData: pastMeetings})
                })
            }))
@@ -199,7 +203,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
 
 
 router.post('/editMeeting', (req, res) => {
-    var data = req.body.meeting
+    console.log(req.body, "rrrr")
     var fileLinks = []
     if(req.files && req.files.fileField) {
         var files = req.files.fileField
@@ -239,6 +243,7 @@ router.post('/editMeeting', (req, res) => {
     function save(req, res, file){
         const data = req.body
         var id = data.meeting_id
+         console.log('removedfile', data)
     Meeting.findOneAndUpdate({
       _id: id
     }, {
@@ -261,7 +266,22 @@ router.post('/editMeeting', (req, res) => {
         }); 
         }
         else{ 
-    res.redirect('/allMeetings')
+            if(data.removedfiles){
+            console.log('removedfile')
+             Meeting.findOneAndUpdate({_id: id
+    }, {
+      $pull: { 
+         fileLinks: data.removedfiles,
+      }
+    })
+             .then(function(r, err){
+                res.redirect('/allMeetings')
+             })
+        }
+        else{
+            res.redirect('/allMeetings')
+        }
+    
     }
     })
 }
@@ -406,7 +426,7 @@ router.get('/addMeeting',(req,res) => {
                 }
                 })
             }
-                    if(item.endTime > currDate || item.endTime == currDate || item.endTime != null) {
+                    if(item.endTime > currDate || item.endTime == currDate) {
                         currentMeetings.push(item)
                     }
                     else{
