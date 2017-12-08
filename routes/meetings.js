@@ -60,7 +60,7 @@ router.get('/allMeetings', (req, res) => {
                 let polefileLinks = []; 
                 if(poll.fileLinks){ 
                     forEach(poll.fileLinks, function(name, key, a){ 
-                        let Key = `${req.user.estateName}/${poll.title}/${name}`;
+                        let Key = `${req.user.estateName}/${poll.pollName}/${name}`;
                         polefileLinks.push({
                           name: name,
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
