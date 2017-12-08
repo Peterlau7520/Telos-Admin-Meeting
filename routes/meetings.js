@@ -55,7 +55,7 @@ router.get('/allMeetings', (req, res) => {
                 if(item.polls){
                 forEach(item.polls, function(poll, key, a){ 
                     var pollEndTime = moment(new Date(poll.endTime));
-                    item.polls[key].endTime = pollEndTime.format("D-MM-YYYY HH:MM");
+                    item.polls[key].endTime = pollEndTime.format("D-MM-YYYY");
                 let polefileLinks = []; 
                 if(poll.fileLinks){ 
                     forEach(poll.fileLinks, function(name, key, a){ 
@@ -69,18 +69,15 @@ router.get('/allMeetings', (req, res) => {
                 }
                 })
             }
-                    var endTime = moment(new Date(item.endTime));
-                    var startTime = moment(new Date(item.startTime));
+                    var endTime = moment.utc(new Date(item.endTime));
+                    var startTime = moment.utc(new Date(item.startTime));
                     item.startTime =  startTime.format("D/MM/YYYY hh:mm");
-                    console.log(item.endTime, currDate, "hhhh" )
-                    if(item.endTime > currDate || item.endTime == currDate) {          
+                    if(item.endTime > currDate || item.endTime == currDate) { 
                         item.endTime =  endTime.format("D/MM/YYYY hh:mm");
-                        console.log("true")
                         currentMeetings.push(item)
                     }
                     else{
                         item.endTime =  endTime.format("D/MM/YYYY hh:mm");
-                        console.log("false")
                         pastMeetings.push(item)
                     }
                    // console.log(currentMeetings, pastMeetings, "current")
@@ -267,22 +264,22 @@ router.post('/editMeeting', (req, res) => {
         }
         else{ 
             if(data.removedfiles){
-            console.log('removedfile')
-             Meeting.findOneAndUpdate({_id: id
-    }, {
-      $pull: { 
-         fileLinks: data.removedfiles,
-      }
-    })
-             .then(function(r, err){
+                console.log('removedfile')
+                 Meeting.findOneAndUpdate({_id: id
+                }, {
+                  $pull: { 
+                     fileLinks: data.removedfiles,
+                  }
+                })
+                 .then(function(r, err){
+                    res.redirect('/allMeetings')
+                 })
+            }
+            else{
                 res.redirect('/allMeetings')
-             })
-        }
-        else{
-            res.redirect('/allMeetings')
-        }
+            }
     
-    }
+        }
     })
 }
 })
@@ -545,8 +542,8 @@ function savePoll(req, res, fileLinks){
         var meeting = new Meeting({
                 title: req.body.meeting_title,
                 titleChn: req.body.meeting_title_chinese,
-                startTime: meetingStartFinal,
-                endTime: meetingEndFinal,
+                startTime: req.body.startTime ,//meetingStartFinal,
+                endTime: req.body.endTime, //meetingEndFinal,
                 pollEndTime: pollEndFinal,
                 venue: req.body.venue,
                 fileLinks: fileLinks,
@@ -554,6 +551,7 @@ function savePoll(req, res, fileLinks){
                 active: true
             });
             meeting.save(function(err, meeting){
+                console.log(meeting)
                 res.redirect('/allMeetings')
     })
 })

@@ -87,7 +87,7 @@
                                 <a data-toggle="collapse" href="#dropdown-lvl1" class="dropdown-list up-meeting" style="    border-bottom: 1px solid #e7e7e7;">
                                     <span>Upcoming Meetings</span>
                                     <span class="sidebar-rt-arrow">
-                                        <i id="ispan" class="fa fa-angle-right" style="font-size:27px;"></i>
+                                        <i id="ispan" class="fa fa-angle-right right-arrow-add" style="font-size:27px;"></i>
                                     </span>
                                 </a>
                                <div id="dropdown-lvl1" class="panel-collapse collapse in">
@@ -771,7 +771,7 @@ function edit_poll(event){
         }) 
 
         $(".up-meeting").click(function(event){
-            $( "#ispan" ).addClass( "right-arrow-add" );
+            //$( "#ispan" ).removeClass( "right-arrow-add" );
             
         })
          $(".past-meeting").click(function(event){
@@ -878,7 +878,7 @@ function edit_poll(event){
             removedFile.push(name)
             $('.added_files').append(`<input type = "hidden" name="removedfile" value=${removedFile}>`)
         })
-        function edit_popup(data){
+        /*function edit_popup(data){
             console.log(data, "hhhhhh")
             var file = ''
             if(data.fileLinks[0]){
@@ -949,13 +949,82 @@ function edit_poll(event){
 '                                        <button  class="btn cancel_meeting savebtn" type="button" data-id="">取消 | Cancel</button>'+
 '                                </form>'+
 '                            </div>';
+                return html; 
+        }*/
+
+        function edit_popup(data){
+            var html = '<div class="div-wrapper" style="padding: 10px;">'+
+            '<h3 class= "heading">' + "Upcoming Meeting"+ '</h3>' + '                                        <button class=" btn btn-danger deleteMeeting deletebtn btn-danger" type="submit" id={{data._id}} data-id={{data._id}} data-time="">取消會議 | Delete Meeting</button>' + '<hr>' +
+            
+'                                <form role="form" enctype="multipart/form-data" name="edit_meeting_popup" id="edit_meeting_popup" action="/editMeeting" method="post">'+
+'                                    <div class="form-group col-sm-6">'+
+'                                        <label class="">取消會議 | Meeting Title</label>'+
+'                                        <input name="meeting_id" type="hidden" value="'+data._id+'">'+
+'                                        <input id ="title" type="text" class="form-control input_fields" name="title" value="'+data.title+'">'+
+'                                        <label class="">取消會議 | Meeting Chinese Title</label>'+
+'                                        <input id ="titleChn" type="text" class="form-control input_fields" name="titleChn" value="'+data.titleChn+'">'+
+'                                        <div id="" class=""></div>'+
+'                                    </div>'+
+'                                    <div class="form-group col-sm-6 text-right">'+
+'                                    </div>'+
+'                                    <div class="clearfix"></div>'+
+'                                    <div class="form-group col-sm-6">'+
+'                                        <label class=""> 取消會議 | Meeting Start Time</label>'+
+'                                        <input id ="" type="datetime-local" name="start_time" class="form-control input_fields_" value="'+data.start_time+'">'+
+'                                        <div id="" class=""></div>'+
+''+
+'                                    </div>'+
+'                                    <div class="form-group col-sm-6">'+
+'                                        <label class="">取消會議 | Meeting End Time</label>'+
+'                                        <input id =""  type="datetime-local" name="end_time" class="form-control input_fields" value="'+data.end_time+'">'+
+'                                        <div id="" class=""></div>'+
+''+
+'                                    </div>'+
+'                                    <div class="clearfix"></div>'+
+'                                    <div class="form-group col-sm-6">'+
+'                                        <label class="">取消會議 | Venue</label>'+
+'                                        <input t id ="" type="text" class="form-control input_fields" name="venue" value="'+data.venue+'">'+
+'                                        <div id="" class=""></div>'+
+'                                    </div>'+
+'                                   <div id="removedfiles">'+ '</div>' +
+'                                    <div class="form-group col-sm-6">'+
+'                                        <label class="">取消會議 | Agenda</label>';
+                                      if(data.fileLinks[0]){
+                          html = html + '<table class="table table-bordered table_custom_Wrapper">'+
+'                                            <tr>'+
+'                                                <th>'+
+'                                                    <label>ID</label>'+
+'                                                </th>'+
+'                                                <th>'+
+'                                                    <label>Document name</label>'+
+'                                                </th>'+
+'                                            </tr>'+
+'                                            <tr>'+
+'                                                <td id="hide1">1</td>'+
+                                                    '<input name="fileLinks" type="hidden" value="'+ data.fileLinks[0].name +'">'+
+'                                                <td id="hide">'+ data.fileLinks[0].name + '                                        <button  class="remove_file removebtn" type="button" id="'+ data.fileLinks[0].name +'"> X </button>'+
+'</td>'+
+'                                            </tr>'+
+'                                        </table>';
+                                      }else{
+                                        html = html +    '<div class = "add" id= "addAgenda">'+ '<input name="fileField" id ="addFile" type="file" class="form-control input_fields />' + '</div>';
+                                      }
+            html = html +    '<div class = "add" id= "addAgenda">'+ '<input name="fileField" id ="addFile" type="file" class="form-control input_fields />' + '</div>'+
+'                                    </div>'+
+'                                    <div class="clearfix"></div>'+
+'                                        <button  class=" btn save_meeting savebtn" type="submit" data-id=""> 儲存 | Save</button>'+
+'                                        <button  class="btn cancel_meeting savebtn" type="button" data-id="">取消 | Cancel</button>'+
+'                                </form>'+
+'                            </div>';
     
 
                 return html; 
         }
         $(document).on('click','.edit_meeting1',function(event){
             event.preventDefault();
+            var data = originalData[event.target.id]
              var modelhtml = edit_popup(originalData[event.target.id]);
+
               $("#edit_model .modal-dialog").html(modelhtml);
                 $("#edit_model").modal();
                  $('#addFile').hide()
