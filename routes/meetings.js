@@ -494,6 +494,7 @@ function uploadFile(req, res){
         }
 
 function savePoll(req, res, fileLinks){
+    
     console.log(req.body)
     const promiseArr = []
     if(req.body.startTime) {
@@ -549,6 +550,7 @@ function savePoll(req, res, fileLinks){
                 endTime: req.body.endTime, //meetingEndFinal,
                 pollEndTime: pollEndFinal,
                 venue: req.body.venue,
+                estateName: req.user.estateName,
                 fileLinks: fileLinks,
                 polls: d,
                 active: true

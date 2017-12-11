@@ -154,7 +154,8 @@ const meetingSchema = new Schema({
         }
     ],
     pollEndTime: Date,
-    active: Boolean
+    active: Boolean,
+    estateName: String,
 })
 
 
