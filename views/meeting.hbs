@@ -1178,6 +1178,7 @@ function edit_poll(event){
             lastDate = new Date(lastDate)
             if(lastDate <= new Date()){
                 ShowCustomDialog1('you are not allowed to edit the poll.')
+                event.preventDefault()
             }else{
                 
                 $('#editpoll_form')[0].reset();
