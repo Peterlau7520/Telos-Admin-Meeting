@@ -548,7 +548,7 @@ textarea {
     width: auto;
     overflow: hidden;
    /*  padding: 15px; */
-    /*border-left: 1px solid #e7e7e7;*/
+    border-left: 1px solid #e7e7e7;
 }
  
 .collapsed .right-arrow-add{

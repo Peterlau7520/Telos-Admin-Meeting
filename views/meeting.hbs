@@ -728,6 +728,20 @@ function edit_poll(event){
     
 
     $(document).ready(function () {
+         var tabSelected = localStorage.getItem("tab");       
+        if(tabSelected){
+            var tabDiv = localStorage.getItem("divTab");
+            var a = 'a[id='+tabSelected+']';
+            var a0 = 'div[id='+tabDiv+']';
+            var a1 = "li[class='active']";
+            var a2 = "div[class='active']";
+            $( "div.active" ).removeClass('active')
+            $(a1).removeClass()
+            $(a).parent().addClass('active');
+            $(a0).addClass('active');
+            localStorage.removeItem("tab");
+            localStorage.removeItem("divTab");
+        }
          
         function convertSerializeArrayToJson(serilizeArray) {
             var form_json = {};
@@ -745,6 +759,9 @@ function edit_poll(event){
             var html = ''
             $('#headingBottom2').html('')
             var id = event.target.id
+            var ids = 'tab_'+originalData[id]._id;
+            localStorage.setItem("tab", id);
+            localStorage.setItem("divTab", ids);
              var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
             var firstDate = new Date(originalData[id].createdAt);
             var secondDate = new Date(originalData[id].createdAt);

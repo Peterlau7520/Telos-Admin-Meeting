@@ -99,7 +99,7 @@
                                 </div>
                             </li> 
                             <li class="panel panel-default" id="dropdown">
-                                <a data-toggle="collapse" href="#dropdown-lvl13" aria-expanded="true" class="arrow-img2" style="border-bottom: 0px; box-shadow: none;border-top: 1px solid #e7e7e7;">
+                                <a data-toggle="collapse" href="#dropdown-lvl13" aria-expanded="true" class="arrow-img2" style="border-bottom: 1px solid #e7e7e7; box-shadow: none;border-top: 1px solid #e7e7e7;">
                                     <span>以往會議 | Past Meetings</span>
                                     <span class="sidebar-rt-arrow">
                                         <i class="fa fa-angle-right" style="font-size:27px;" id="ispan"></i>
@@ -121,9 +121,9 @@
 
                     </div>
                  </nav>
-                <div class="meeting-btn">
+               <!--  <div class="meeting-btn">
                     <a href="/addMeeting" class="btn btn-primary">舉行會議 | Add a Meeting</a>
-                </div>
+                </div> -->
             </div>
             <!--Start-->
 
@@ -208,7 +208,7 @@
                         <label></label>   
                         <p class="text-right">
                             <input type="hidden" name="poll_json" id="poll_json"/>
-                            <input type="submit" class="btn btn-primary custom_success_btn" style="margin-right: 16px;" id="save"value=" 保存 | Save"/>
+                            <input type="submit" class="btn btn-primary custom_success_btn" style="margin-right: 16px;" id="save" value=" 保存 | Save"/>
                         </p>
                     </div>
                     <div class="clearfix"></div>
@@ -226,10 +226,13 @@
                             <div class="col-md-5">
                                 <h3 id="heading3"></h3>
                             </div>
+                            <div class="meeting-btn add-meeting-btn">
+                               <a href="/addMeeting" class="btn btn-primary"> 添加一个会议 | Add a Meeting</a>
+                            </div>
                             <div id="headingBottom" class="col-md-7">
                                 <p id="endhour"> </p>
                             </div>
-                            <div id="headingBottom2" class="col-md-12">
+                            <div id="headingBottom2" class="col-md-9">
                             </div>
                         </div>
                     </div>      
@@ -627,9 +630,9 @@
                     <div class="form-group col-sm-6">
                         <label>Voting options</label>
                         <br/>
-                        <button class="add_field_button btn btn-primary addoptionbtn pull-left" style="margin-bottom:2%">Add Options/增加選項</button>
+                        <button class="add_field_button_add btn btn-primary addoptionbtn pull-left" style="margin-bottom:2%">Add Options/增加選項</button>
                         <br/><br/><br/>
-                        <div class="input_fields_wrap tls-Vot-box-main">
+                        <div class="input_fields_wrap_add tls-Vot-box-main">
                             <div class="tls-Vot-box">
                                 <input class="pull-left tls-Voting-options" type="text" name="option" placeholder="E.g. Yes/是" required />
                             </div> 
@@ -639,7 +642,7 @@
                     <div class="form-group col-sm-6">
                         <label>Add Documents</label>
                         <p>
-                        <button class="add_documents btn btn-primary addoptionbtn" style="margin-bottom:1%">Add documents/上傳文件</button>
+                        <button class="add_documents_add btn btn-primary addoptionbtn" style="margin-bottom:1%">Add documents/上傳文件</button>
                         <div class="documents_wrapper" id="documents_file">
                         </div>
                         </p>
@@ -803,31 +806,29 @@
 
             
 <script type="text/javascript">
-    $(document).ready(function () {
-
-
-        
+    $(document).ready(function () {    
         //Add documents
         var index = 0 
         var files = []
         var docWrapper = $(".documents_wrapper")
-        var add_document_button = $(".add_documents");
+        var add_document_button = $(".add_documents_add");
         $(add_document_button).click(function (e) { //on add input button click
             e.preventDefault();
                 $(docWrapper).append(`<input type="file" name=${index} class="fileValue" id="fileValues" value=""  accept="application/pdf" required/><br />`); //add choose file box
             index = index + 1
         });
         //Add options
-            var optionWrapper         = $(".input_fields_wrap"); //Fields wrapper
-            var add_option_button      = $(".add_field_button"); //Add button ID
+            var optionWrapper         = $(".input_fields_wrap_add"); //Fields wrapper
+            var add_option_button      = $(".add_field_button_add"); //Add button ID
             $(add_option_button).click(function(e){ //on add input button click
+                console.log('here')
                 e.preventDefault();
-                    $(optionWrapper).append('<div class="tls-Vot-box"><input class="tls-Voting-options" type="text" name="option" placeholder="E.g. Yes/是" /><a href="#" class="remove_field">Remove</a></div>'); //add input box
+                    $(".input_fields_wrap_add").append('<div class="tls-Vot-box"><input class="tls-Voting-options" type="text" name="option" placeholder="E.g. Yes/是" /><a href="#" class="remove_field">Remove</a></div>'); //add input box
 
             });
 
             $(optionWrapper).on("click",".remove_field", function(e){ //user click on remove text
-                e.preventDefault(); $(this).parent('div').remove(); x--;
+                e.preventDefault(); $(this).parent('div').remove();
             })
         var polls_array = [];
         $("#open_model").click(function () {
@@ -864,7 +865,8 @@
                     alert("Please Add a poll")
                 }
                })
-        $("#close_model").click(function () {
+        $("#close_model").click(function (event) {
+            event.preventDefault()
             var form_data_array = $("#poll_form").serializeArray();
             console.log(form_data_array);
             var form_json = {};
@@ -890,7 +892,7 @@
             console.log(pair[0]+ ', ' + pair[1]); 
             }
             var option = []
-            $.each($(".input_fields_wrap :input[name*='option']"), function(data, key){  
+            $.each($(".input_fields_wrap_add :input[name*='option']"), function(data, key){  
               option.push($(this).val())
             });
             formData.append('options', option)
@@ -999,6 +1001,9 @@ var originalData = '{{{stringify meetingsData}}}';
             console.log(id)
              var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
             var firstDate = new Date(originalData[id].createdAt);
+            var ids = 'tab_'+originalData[id]._id;
+            localStorage.setItem("tab", id);
+            localStorage.setItem("divTab", ids);
             var secondDate = new Date(originalData[id].createdAt);
             secondDate = new Date(secondDate.setDate(firstDate.getDate() + 3));
             console.log(firstDate, 'firstDate')
@@ -1021,7 +1026,7 @@ var originalData = '{{{stringify meetingsData}}}';
             $( "#endhour" ).text('')
             var html = ''
              $('#headingBottom2').html('')
-             html= '<a href="assets/pdf-sample" download="pdffile"><button class="btn btn-primary headingbtn dwn-btn" style=" width: 74% !important;max-width: 208px; margin-top: -4%;" type="button" id= "dwn-btn">編輯會議 | Download Poll Report</button> </a>'
+             html= '<a href="assets/pdf-sample" download="pdffile"><button class="btn btn-primary headingbtn dwn-btn" style=" width: 74% !important;max-width: 208px; margin-top: -44.5px;" type="button" id= "dwn-btn">編輯會議 | Download Poll Report</button> </a>'
             $('#headingBottom2').append(html)
         })
 

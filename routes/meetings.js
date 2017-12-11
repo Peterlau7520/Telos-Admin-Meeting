@@ -410,6 +410,8 @@ router.get('/addMeeting',(req,res) => {
                 }   
                 if(item.polls){
                 forEach(item.polls, function(poll, key, a){ 
+                    var pollEndTime = moment(new Date(poll.endTime));
+                    item.polls[key].endTime = pollEndTime.format("D-MM-YYYY");
                 let polefileLinks = []; 
                 if(poll.fileLinks){ 
                     forEach(poll.fileLinks, function(name, key, a){ 
@@ -423,10 +425,15 @@ router.get('/addMeeting',(req,res) => {
                 }
                 })
             }
+                    var endTime = moment.utc(new Date(item.endTime));
+                    var startTime = moment.utc(new Date(item.startTime));
+                    item.startTime =  startTime.format("D/MM/YYYY hh:mm");
                     if(item.endTime > currDate || item.endTime == currDate) {
+                        item.endTime =  endTime.format("D/MM/YYYY hh:mm");
                         currentMeetings.push(item)
                     }
                     else{
+                        item.endTime =  endTime.format("D/MM/YYYY hh:mm");
                         pastMeetings.push(item)
                     }
                     resolve({meetingsData: currentMeetings, pastMeetingsData: pastMeetings})
