@@ -138,17 +138,19 @@
                 <div class="tab-content tab-wraper tls-wrapper">   
                     <div class="content-header">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-lg-5">
                                 <h3 id="heading3">Upcoming Meeting </h3>
                             </div>
+                            
+                            <div id="headingBottom" class="col-lg-7">
                             <div class="meeting-btn add-meeting-btn">
                                <a href="/addMeeting" class="btn btn-primary"> 添加一个会议 | Add a Meeting</a>
                             </div>
-                            <div id="headingBottom" class="col-md-7">
+                            <div id="headingBottom2" >
+                            </div>
                                 <p id="endhour"> </p>
                             </div>
-                            <div id="headingBottom2" class="col-md-9">
-                            </div>
+                            
                         </div>
                     </div>      
                     {{#each meetingsData as |value meeting_key|}} {{#if @key}}
@@ -742,6 +744,11 @@ function edit_poll(event){
             localStorage.removeItem("tab");
             localStorage.removeItem("divTab");
         }
+
+        $(".delete_meeting").click(function(event){
+            localStorage.removeItem("tab");
+            localStorage.removeItem("divTab");
+          })
          
         function convertSerializeArrayToJson(serilizeArray) {
             var form_json = {};
@@ -784,7 +791,7 @@ function edit_poll(event){
             $( "#endhour" ).text('')
             var html = ''
              $('#headingBottom2').html('')
-             html= '<a href="assets/pdf-sample" download="pdffile"><button class="btn btn-primary headingbtn dwn-btn" style=" width: 74% !important;max-width: 208px; margin-top: -44.5px;" type="button" id= "dwn-btn">編輯會議 | Download Poll Report</button> </a>'
+             html= '<a href="assets/pdf-sample" download="pdffile"><button class="btn btn-primary headingbtn dwn-btn download-btn"  type="button" id= "dwn-btn">編輯會議 | Download Poll Report</button> </a>'
             $('#headingBottom2').append(html)
         }) 
 

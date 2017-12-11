@@ -45,7 +45,18 @@ router.get('/allMeetings', (req, res) => {
                forEach(meetings, function(item, key, a){
                 if( item.fileLinks && item.fileLinks.length > 0) {
                       let fileLinks = [];
-                        let Key = `${req.user.estateName}/${item.title}/${item.fileLinks[0]}`;
+                      var titleLink = ''
+                      var fileLinksLink = ''
+                      if(item.title){
+                      titleLink = item.title
+                      titleLink = titleLink.replace(/ /g,'');
+                  }
+                  if(item.fileLinks[0]){
+                      fileLinksLink = item.fileLinks[0]
+                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                  }
+                       
+                        let Key = `${req.user.estateName}/${titleLink}/${fileLinksLink}`;
                         fileLinks.push({
                           name: item.fileLinks[0],
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
@@ -59,7 +70,19 @@ router.get('/allMeetings', (req, res) => {
                 let polefileLinks = []; 
                 if(poll.fileLinks){ 
                     forEach(poll.fileLinks, function(name, key, a){ 
-                        let Key = `${req.user.estateName}/${poll.title}/${name}`;
+                        let fileLinks = [];
+                      var titleLink = ''
+                      var fileLinksLink = ''
+                      if(poll.title){
+                      titleLink = poll.title
+                      titleLink = titleLink.replace(/ /g,'');
+                  }
+                  if(name){
+                      fileLinksLink = name
+                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                  }
+
+                        let Key = `${req.user.estateName}/${titleLink}/${fileLinksLink}`;
                         polefileLinks.push({
                           name: name,
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
@@ -106,9 +129,19 @@ router.post('/addPollsOfMeeting', (req, res) => {
             //meeting.fileLinks.push(name);
             //Let key = `${req.user.estateName}/${req.body.title}/${name}`
             fileLinks.push(name)
+            var titleLink = ''
+                      var fileLinksLink = ''
+                      if(req.body.title){
+                      titleLink = req.body.title
+                      titleLink = titleLink.replace(/ /g,'');
+                  }
+                  if(name){
+                      fileLinksLink = name
+                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                  }
             var data = {
                 Bucket: BucketName,
-                Key: `${req.user.estateName}/${req.body.title}/${name}`,
+                Key: `${req.user.estateName}/${titleLink}/${fileLinksLink}`,
                 Body: info,
                 ContentType: 'application/pdf',
                 ContentDisposition: 'inline',
@@ -136,9 +169,19 @@ router.post('/addPollsOfMeeting', (req, res) => {
             //meeting.fileLinks.push(name);
             //Let key = `${req.user.estateName}/${req.body.title}/${name}`
             //fileLinks.push(name)
+            var titleLink = ''
+                      var fileLinksLink = ''
+                      if(req.body.title){
+                      titleLink = req.body.title
+                      titleLink = titleLink.replace(/ /g,'');
+                  }
+                  if(name){
+                      fileLinksLink = name
+                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                  }
             var data = {
                 Bucket: BucketName,
-                Key: `${req.user.estateName}/${req.body.title}/${name}`,
+                Key: `${req.user.estateName}/${titleLink}/${fileLinksLink}`,
                 Body: info,
                 ContentType: 'application/pdf',
                 ContentDisposition: 'inline',
@@ -209,9 +252,19 @@ router.post('/editMeeting', (req, res) => {
             var name = files[i].name;
             //meeting.fileLinks.push(name);
             fileLinks.push(name)
+             var titleLink = ''
+                      var fileLinksLink = ''
+                      if(req.body.title){
+                      titleLink = req.body.title
+                      titleLink = titleLink.replace(/ /g,'');
+                  }
+                  if(name){
+                      fileLinksLink = name
+                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                  }
                 var data = {
                 Bucket: BucketName,
-                Key: `${req.user.estateName}/${req.body.title}/${name}`,
+                Key: `${req.user.estateName}/${req.body.fileLinksLink}/${fileLinksLink}`,
                 Body: info,
                 ContentType: 'application/pdf',
                 ContentDisposition: 'inline',
@@ -295,10 +348,20 @@ router.post('/editPoll', (req, res) => {
             var name = req.files[key][0].name;
             //meeting.fileLinks.push(name);
             //Let key = `${req.user.estateName}/${req.body.title}/${name}`
+                      var titleLink = ''
+                      var fileLinksLink = ''
+                      if(req.body.title){
+                      titleLink = req.body.title
+                      titleLink = titleLink.replace(/ /g,'');
+                  }
+                  if(name){
+                      fileLinksLink = name
+                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                  }
             fileLinks.push(name)
             var data = {
                 Bucket: BucketName,
-                Key: `${req.user.estateName}/${req.body.title}/${name}`,
+                Key: `${req.user.estateName}/${titleLink}/${fileLinksLink}`,
                 Body: info,
                 ContentType: 'application/pdf',
                 ContentDisposition: 'inline',
@@ -472,9 +535,19 @@ function uploadFile(req, res){
             var name = files[i].name;
             //meeting.fileLinks.push(name);
             fileLinks.push(name)
+            var titleLink = ''
+                      var fileLinksLink = ''
+                      if(req.body.title){
+                      titleLink = req.body.title
+                      titleLink = titleLink.replace(/ /g,'');
+                  }
+                  if(name){
+                      fileLinksLink = name
+                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                  }
             var data = {
                 Bucket: BucketName,
-                Key:  `${req.user.estateName}/${req.body.title}/${name}`,
+                Key:  `${req.user.estateName}/${titleLink}/${fileLinksLink}`,
                 //Key: `${req.user.estateName}/Meetings/${req.body.title}/${name}`,
                 Body: info,
                 ContentType: 'application/pdf',
@@ -539,13 +612,13 @@ function savePoll(req, res, fileLinks){
                     });
                 poll.save()
                 .then(function(poll){
-                    pollIds.push(poll._id)
-                    resolve(pollIds)
+                    resolve(poll._id)
                     })
                 }))
             })
         Promise.all(promiseArr)
         .then(function(d){ 
+            console.log(d)
             //saveMeeting(req, res, fileLinks, polls)
         var meeting = new Meeting({
                 title: req.body.meeting_title,
@@ -556,7 +629,7 @@ function savePoll(req, res, fileLinks){
                 venue: req.body.venue,
                 estateName: req.user.estateName,
                 fileLinks: fileLinks,
-                polls: d[0],
+                polls: d,
                 active: true
             });
             meeting.save(function(err, meeting){

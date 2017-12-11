@@ -221,19 +221,36 @@
      <!-- Main Content -->
             <div class="custom_scroll_wrap">
                 <div class="tab-content tab-wraper tls-wrapper">   
-                    <div class="content-header">
+                  <!--  <div class="content-header">
                         <div class="row">
                             <div class="col-md-5">
                                 <h3 id="heading3"></h3>
                             </div>
                             <div class="meeting-btn add-meeting-btn show_btn_meeting">
                                <!-- <a href="/addMeeting" class="btn btn-primary" hidden="true"> 添加一个会议 | Add a Meeting</a> -->
-                            </div>
+                            <!--</div>
                             <div id="headingBottom" class="col-md-7">
                                 <p id="endhour"> </p>
                             </div>
                             <div id="headingBottom2" class="col-md-9">
                             </div>
+                        </div>
+                    </div> -->
+                    <div class="content-header">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <h3 id="heading3"></h3>
+                            </div>
+                            
+                            <div id="headingBottom" class="col-lg-7">
+                            <div class="meeting-btn add-meeting-btn show_btn_meeting">
+                               <!--<a href="/addMeeting" class="btn btn-primary"> 添加一个会议 | Add a Meeting</a>-->
+                            </div>
+                            <div id="headingBottom2" >
+                            </div>
+                                <p id="endhour"> </p>
+                            </div>
+                            
                         </div>
                     </div>      
                     {{#each meetingsData as |value meeting_key|}} {{#if @key}}
@@ -557,13 +574,13 @@
 
                         </div>
                     </div>
+                <!-- </div>
                 </div>
                 </div>
-                </div>
-                </div>
+                </div> -->
                 
                 <!--End-->
-</div> 
+ </div>
 
         <footer class="footer">
             <div class="container-fluid">
@@ -844,6 +861,10 @@
             $( "#ispan2" ).addClass( "right-arrow-add" );
             
         })
+          $(".delete_meeting").click(function(event){
+            localStorage.removeItem("tab");
+            localStorage.removeItem("divTab");
+          })
         $("#save").click(function(event){
             const startTime = $('#startTime').val()
             const endTime = $('#pollEndTime').val()
@@ -988,7 +1009,7 @@
 
 var originalData = '{{{stringify meetingsData}}}';
         originalData = JSON.parse(originalData);
-
+        console.log(originalData, 'originalData')
          function convertSerializeArrayToJson(serilizeArray) {
             var form_json = {};
             serilizeArray.forEach(function (obj) {
@@ -1038,7 +1059,7 @@ var originalData = '{{{stringify meetingsData}}}';
             $( "#endhour" ).text('')
             var html = ''
              $('#headingBottom2').html('')
-             html= '<a href="assets/pdf-sample" download="pdffile"><button class="btn btn-primary headingbtn dwn-btn" style=" width: 74% !important;max-width: 208px; margin-top: -44.5px;" type="button" id= "dwn-btn">編輯會議 | Download Poll Report</button> </a>'
+            html= '<a href="assets/pdf-sample" download="pdffile"><button class="btn btn-primary headingbtn dwn-btn download-btn"  type="button" id= "dwn-btn">編輯會議 | Download Poll Report</button> </a>'
             $('#headingBottom2').append(html)
         })
 

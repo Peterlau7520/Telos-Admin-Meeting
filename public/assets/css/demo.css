@@ -658,8 +658,9 @@ margin-left: 10px;
     margin-top: 10px;
 }
 .meeting-btn .btn{
-    width: 100%;
-    max-width: 100%;
+    /*width: 100%;
+    max-width: 100%;*/
+    min-width: 218px;
 }
 
 .custom_panel_wrapper
