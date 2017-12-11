@@ -3165,3 +3165,9 @@ body > .navbar-collapse {
   color: rgb(29,29,38);
   margin-bottom: 16px;
 }
+.add-meeting-btn{
+  bottom: 50px;
+  float: right;
+  margin-top: 10px
+  width:220px;
+}
