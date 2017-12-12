@@ -93,15 +93,21 @@ router.get('/allMeetings', (req, res) => {
                 }
                 })
             }
-                    var endTime = moment.utc(new Date(item.endTime));
-                    var startTime = moment.utc(new Date(item.startTime));
-                    item.startTime =  startTime.format("MM/DD/YYYY hh:mm");
+            console.log(item.startTime, 'start date------------------')
+                    var endTime = item.endTime;
+                    var startTime = item.startTime;
+                    console.log("endTime:---",endTime)
+                    console.log("startTime:------",startTime)
+                    // endTime = moment(endTime);
+                     // startTime = moment.(startTime);
+                    item.startTime =  moment(startTime).format("MM/DD/YYYY hh:mm");
+                    console.log('start date moment------------------',item.startTime)
                     if(item.endTime > currDate || item.endTime == currDate) { 
-                        item.endTime =  endTime.format("MM/DD/YYYY hh:mm");
+                        item.endTime =  moment(endTime).format("MM/DD/YYYY hh:mm");
                         currentMeetings.push(item)
                     }
                     else{
-                        item.endTime =  endTime.format("MM/DD/YYYY hh:mm");
+                        item.endTime =  moment(endTime).format("MM/DD/YYYY hh:mm");
                         pastMeetings.push(item)
                     }
                    // console.log(currentMeetings, pastMeetings, "current")
