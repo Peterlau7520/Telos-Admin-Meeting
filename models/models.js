@@ -1,7 +1,7 @@
- const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 // set the global Promise to Mongoose.
 mongoose.Promise = global.Promise;
-const connect = process.env.MONGODB_URI || "mongodb://admin:admin@ds117625.mlab.com:17625/telos";;
+const connect = process.env.MONGODB_URI || "mongodb://upwork:upwork@ds117625.mlab.com:17625/telos";
 mongoose.connect(connect);
 const Schema = mongoose.Schema;
 //const bcrypt = require('bcrypt');
@@ -28,7 +28,10 @@ const residentSchema = new Schema({
     unit: String,
     block: String,
     floor: String,
-    owner: Boolean
+    owner: Boolean,
+    HKIDUrl: String,
+    digitalSignature: String,
+    shares: String
 });
 
 //ESTATE
@@ -82,7 +85,7 @@ const pollSchema = new Schema({
     fileLinks: Array,
     estateName: String,
     options: Array,
-    endTime: Date,
+    endTime: String,
     active: Boolean,
     voted: [
         {
@@ -91,8 +94,9 @@ const pollSchema = new Schema({
         }
     ],
     finalResult: String,
-    results: [{choice: String, name: String}],
-    votes: Array
+    results: [{choice: String, percentage: Number}],
+    votes: Array,
+    pollReport: Array
 });
 
 //NOTICE
@@ -108,54 +112,25 @@ const noticeSchema = new Schema({
 
 //SURVEY
 const surveySchema = new Schema({
-    title: String,
-    titleChn: String,
-    effectiveTo: Date,
-    postDate: {type: Date, default: new Date()},
-    targetAudience: [{block: String, floors: Array}],
 })
-
-const questionSchema = new Schema({
-    questionEn: String,
-    questionChn: String,
-    optionIds: [{ type: Schema.ObjectId, ref: 'Options' }],
-    surveyId: { type: Schema.ObjectId, ref: 'Survey' },
-})
-
-const optionSchema = new Schema({
-    questionId: { type: Schema.ObjectId, ref: 'Question' },
-    optionNameEn: String,
-    optionNameChn: String,
-    optionsEn: [],
-    optionsChn: []
-})
-
-const userAnswersSchema = new Schema({
-    questionId: { type: Schema.ObjectId, ref: 'Question' },
-    surveyId: { type: Schema.ObjectId, ref: 'Survey' },
-    optionId: { type: Schema.ObjectId, ref: 'Option' },
-    userId: { type: Schema.ObjectId, ref: 'User' },
-})
-
 
 //MEETING SCHEMA
 const meetingSchema = new Schema({
     title: String,
     titleChn: String,
-    startTime: Date,
-    endTime: Date,
+    startTime: String,
+    endTime: String,
     venue: String,
     fileLinks: Array,
-    createdAt: {type: Date, default: new Date()},
     polls: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Poll'
         }
     ],
-    pollEndTime: Date,
     active: Boolean,
-    estateName: String,
+    estate:String,
+    youtubelink: String,
 })
 
 
@@ -164,9 +139,6 @@ const Estate =   mongoose.model('Estate', estateSchema);
 const Poll = mongoose.model('Poll', pollSchema);
 const Notice = mongoose.model('Notice', noticeSchema);
 const Survey = mongoose.model('Survey', surveySchema);
-const Question = mongoose.model('Question', questionSchema);
-const UserAnswers = mongoose.model('UserAnswers', userAnswersSchema)
-const Options = mongoose.model('Options', optionSchema);
 const Meeting = mongoose.model('Meeting', meetingSchema);
 
 module.exports = {
@@ -175,8 +147,5 @@ module.exports = {
     Poll,
     Notice,
     Survey,
-    Question,
-    UserAnswers,
-    Options,
     Meeting
 }
