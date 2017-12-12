@@ -168,6 +168,7 @@
                                         <div id='title_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{title}}</div>
                                     </div>
                                     <div class="form-group col-sm-6 text-right">
+                                        <div id="loading1"></div>
                                         <button class="btn edit_meeting1 btn-primary" id={{meeting_key}} type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"  >編輯會議 | Edit Meeting</button>
                                         <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" id="{{_id}}" data-time="{{created_at}}">Delete Meeting</button>
                                         <button style='display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
@@ -212,6 +213,7 @@
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>
+                                <div id="loading"></div>
                                  <button class="btn btn-primary add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a poll</button>
                                </div>
                             </div>
@@ -830,8 +832,11 @@ function edit_poll(event){
 
     })
 //        
-        $("#close_model2").click(function () {
+        $("#close_model2").click(function (event) {
             $("#poll2").modal("hide");
+            var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'
+            $("#loading").append(html);
+            $(".add_pole").prop('disabled', true);
              $.each($(".voting_opt :input[name*='option']"), function(data, key){  
               options1.push($(this).val())
             });
@@ -1099,7 +1104,10 @@ function edit_poll(event){
             $("#edit_model").modal('hide');
         })
         $(document).on('click','.save_meeting',function(event){
-             $("#edit_model").modal('hide');
+            $("#edit_model").modal('hide');
+            var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif "/>'
+            $("#loading1").append(html);
+            $(".edit_meeting1").prop('disabled', true);
             //var index = $(this).data('id');
             //var classvar = '.display_meetings_detail_' + index
             //var clasvarforinputfield = '.input_fields_' + index

@@ -271,10 +271,17 @@
 .loader{
     height: 49px;
     width: 47px;
-    float: right;
-    position: absolute;
     margin-top: 6px;
-    margin-left: -96px;
+    margin-left: 70px;
+
+}
+.meeting-loader{
+    height: 49px;
+    width: 47px;
+    float: left;
+    margin-left: 91px;
+    top: -5px;
+    position: relative;
 
 }
 .chnRmDetailBtn  {
@@ -442,11 +449,16 @@ a {
 a:focus, a:active,
 button::-moz-focus-inner,
 input::-moz-focus-inner,
+input[type=file] {
+    border-radius: 4px !important;
+
+}
 input[type="reset"]::-moz-focus-inner,
 input[type="button"]::-moz-focus-inner,
 input[type="submit"]::-moz-focus-inner,
 select::-moz-focus-inner,
 input[type="file"] > input[type="button"]::-moz-focus-inner {
+  color: #fff;
   outline: 0; }
 
 .ui-slider-handle:focus,
@@ -819,8 +831,9 @@ body > .navbar-collapse {
     color: white;
     border-color: #1D62F0; }
   .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary:disabled, .btn-primary:disabled:hover, .btn-primary:disabled:focus, .btn-primary:disabled.focus, .btn-primary:disabled:active, .btn-primary:disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
-    background-color: transparent;
-    border-color: #3472F7; }
+    border-color: #1e90ff;
+    color: #fff; 
+    background-color: #1e90ff; }
   .btn-primary.btn-fill {
     color: #FFFFFF;
     background-color: #3472F7;
@@ -3176,4 +3189,10 @@ body > .navbar-collapse {
   float: right;
   margin-top: 10px
   width:220px;
+}
+.add{
+  margin-bottom: 18px;
+}
+.file-btn{
+
 }

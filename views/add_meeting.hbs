@@ -178,7 +178,7 @@
                     <div class="form-group col-sm-6">
                         <label>Agenda | 议程</label>
                         <div class="documents_wrapper1">
-                        <input type="file" name="filefield" accept="application/pdf" id="fileValue"/>      
+                        <input type="file" name="filefield" accept="application/pdf" style="border-radius: 4px;" id="fileValue"/>      
                     </div>
                     </div>
                     <div class="clearfix"></div>
@@ -208,6 +208,7 @@
                         <label></label>   
                         <p class="text-right">
                             <input type="hidden" name="poll_json" id="poll_json"/>
+                            <div id="loading"></div>
                             <input type="submit" class="btn btn-primary custom_success_btn" style="margin-right: 16px;" id="save" value=" 保存 | Save"/>
                         </p>
                     </div>
@@ -268,6 +269,7 @@
                                         <div id='title_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{title}}</div>
                                     </div>
                                     <div class="form-group col-sm-6 text-right">
+                                        <div id="loading2"></div>
                                         <button class="btn edit_meeting1 btn-primary" id={{meeting_key}} type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"  >編輯會議 | Edit Meeting</button>
                                         <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" id="{{_id}}" data-time="{{created_at}}">Delete Meeting</button>
                                         <button style='display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
@@ -312,6 +314,7 @@
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>
+                                <div id="loading1"></div>
                                  <button class="btn btn-primary add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a poll</button>
                                </div>
                             </div>
@@ -844,9 +847,13 @@
 
             });
 
-            $(optionWrapper).on("click",".remove_field", function(e){ //user click on remove text
-                e.preventDefault(); $(this).parent('div').remove();
-            })
+        $(optionWrapper).on("click",".remove_field", function(e){ 
+            e.preventDefault(); $(this).parent('div').remove();
+        })
+        $(document).on("click",".custom_success_btn", function(e){
+            
+            //return false;
+        })
         var polls_array = [];
         $("#open_model").click(function () {
             $('#poll_form')[0].reset();
@@ -884,6 +891,10 @@
                 if($("#poll_json").val() == ''){
                     event.preventDefault();
                     alert("Please Add a poll")
+                }else{
+                    var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'               
+            $("#loading").append(html);
+            setTimeout(function(){ $(".custom_success_btn").prop('disabled', true); }, 500);
                 }
                })
         $("#close_model").click(function (event) {
@@ -1100,6 +1111,9 @@ var originalData = '{{{stringify meetingsData}}}';
 //        
         $("#close_model2").click(function () {
             $("#poll2").modal("hide");
+            var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'
+            $("#loading1").append(html);
+            $(".add_pole").prop('disabled', true);
              $.each($(".voting_opt :input[name*='option']"), function(data, key){  
               options1.push($(this).val())
             });
@@ -1257,8 +1271,10 @@ var originalData = '{{{stringify meetingsData}}}';
             $("#edit_model").modal('hide');
         })
         $(document).on('click','.save_meeting',function(event){
-             $("#edit_model").modal('hide');
-
+            $("#edit_model").modal('hide');
+            var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif "/>'
+            $("#loading2").append(html);
+            $(".edit_meeting1").prop('disabled', true);
             var meetingform = $("#edit_meeting_popup").serializeArray();
             var meetingData = convertSerializeArrayToJson(meetingform);
             console.log('originalData', meetingData);
