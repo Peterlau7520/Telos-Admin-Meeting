@@ -508,6 +508,7 @@
     padding: 12px 50px;
     border: 0px;
     opacity: 0.8;
+    border-radius: 4px;
 }
 
 /* upload file css ::END */
