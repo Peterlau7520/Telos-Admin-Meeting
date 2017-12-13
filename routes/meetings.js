@@ -93,22 +93,19 @@ router.get('/allMeetings', (req, res) => {
                 }
                 })
             }
-            console.log(item.startTime, 'start date------------------')
-                    var endTime = item.endTime;
-                    var startTime = item.startTime;
-                    console.log("endTime:---",endTime)
-                    console.log("startTime:------",startTime)
-                    // endTime = moment(endTime);
-                     // startTime = moment.(startTime);
-                    item.startTime =  moment(startTime).format("MM/DD/YYYY hh:mm");
-                    console.log('start date moment------------------',item.startTime)
-                    if(item.endTime > currDate || item.endTime == currDate) { 
-                        item.endTime =  moment(endTime).format("MM/DD/YYYY hh:mm");
-                        currentMeetings.push(item)
-                    }
-                    else{
-                        item.endTime =  moment(endTime).format("MM/DD/YYYY hh:mm");
-                        pastMeetings.push(item)
+                    console.log(item.endTime)
+                     var startTime = moment.utc(new Date(item.startTime));
+                    item.startTime =  startTime.format("DD/MM/YYYY hh:mm a");
+                    if(Date.parse(new Date(item.endTime)) > Date.parse(new Date)){
+                      var endTime = moment.utc(new Date(item.endTime));
+                    item.endTime =  endTime.format("DD/MM/YYYY hh:mm a");
+                    currentMeetings.push(item)
+                   //start is less than End
+                    }else{
+                      var endTime = moment.utc(new Date(item.endTime));
+                    item.endTime =  endTime.format("DD/MM/YYYY hh:mm a");
+                     pastMeetings.push(item)
+                    //end is less than start
                     }
                    // console.log(currentMeetings, pastMeetings, "current")
                     resolve({meetingsData: currentMeetings, pastMeetingsData: pastMeetings})
@@ -495,16 +492,18 @@ router.get('/addMeeting',(req,res) => {
                 }
                 })
             }
-                    var endTime = moment.utc(new Date(item.endTime));
                     var startTime = moment.utc(new Date(item.startTime));
-                    item.startTime =  startTime.format("D/MM/YYYY hh:mm");
-                    if(item.endTime > currDate || item.endTime == currDate) {
-                        item.endTime =  endTime.format("D/MM/YYYY hh:mm");
-                        currentMeetings.push(item)
-                    }
-                    else{
-                        item.endTime =  endTime.format("D/MM/YYYY hh:mm");
-                        pastMeetings.push(item)
+                    item.startTime =  startTime.format("DD/MM/YYYY hh:mm a");
+                    if(Date.parse(new Date(item.endTime)) > Date.parse(new Date)){
+                      var endTime = moment.utc(new Date(item.endTime));
+                    item.endTime =  endTime.format("DD/MM/YYYY hh:mm a");
+                    currentMeetings.push(item)
+                   //start is less than End
+                    }else{
+                      var endTime = moment.utc(new Date(item.endTime));
+                    item.endTime =  endTime.format("DD/MM/YYYY hh:mm a");
+                     pastMeetings.push(item)
+                    //end is less than start
                     }
                     resolve({meetingsData: currentMeetings, pastMeetingsData: pastMeetings})
                })
