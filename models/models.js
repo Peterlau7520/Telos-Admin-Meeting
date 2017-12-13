@@ -122,6 +122,7 @@ const meetingSchema = new Schema({
     endTime: String,
     venue: String,
     fileLinks: Array,
+    createdAt: { type: Date, default: new Date() },
     polls: [
         {
             type: Schema.Types.ObjectId,

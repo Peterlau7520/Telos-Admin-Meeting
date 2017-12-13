@@ -72,6 +72,9 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">Meetings | 會議</a>
+                    <div class="meeting-btn add-meeting-btn" style="margin-top: -3px; padding-left: 563px;">
+                        <a href="/addMeeting" class="btn btn-primary">  Add a Meeting | 添加會議</a>
+                    </div>
                 </div>
                 <div class="collapse navbar-collapse">
                 </div>
@@ -143,9 +146,9 @@
                             </div>
                             
                             <div id="headingBottom" class="col-lg-7">
-                            <div class="meeting-btn add-meeting-btn">
+                            <!-- <div class="meeting-btn add-meeting-btn">
                                <a href="/addMeeting" class="btn btn-primary">  Add a Meeting | 添加會議</a>
-                            </div>
+                            </div> -->
                             <div id="headingBottom2" >
                             </div>
                                 <p id="endhour"> </p>
@@ -774,6 +777,7 @@ function edit_poll(event){
             localStorage.setItem("tab", id);
             localStorage.setItem("divTab", ids);
              var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+             console.log(originalData[id])
             var firstDate = new Date(originalData[id].createdAt);
             var secondDate = new Date(originalData[id].createdAt);
             secondDate = new Date(secondDate.setDate(firstDate.getDate() + 3));

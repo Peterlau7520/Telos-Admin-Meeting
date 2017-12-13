@@ -50,11 +50,11 @@ router.get('/allMeetings', (req, res) => {
                       var fileLinksLink = ''
                       if(item.title){
                       titleLink = item.title
-                      titleLink = titleLink.replace(/ /g,'');
+                      titleLink = titleLink.trim();
                   }
                   if(item.fileLinks[0]){
                       fileLinksLink = item.fileLinks[0]
-                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                      fileLinksLink = fileLinksLink.trim();
                   }
                        
                         let Key = `${req.user.estateName}/${titleLink}/${fileLinksLink}`;
@@ -76,11 +76,11 @@ router.get('/allMeetings', (req, res) => {
                       var fileLinksLink = ''
                       if(poll.title){
                       titleLink = poll.title
-                      titleLink = titleLink.replace(/ /g,'');
+                      titleLink = titleLink.trim();
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                      fileLinksLink = fileLinksLink.trim();
                   }
 
                         let Key = `${req.user.estateName}/${titleLink}/${fileLinksLink}`;
@@ -88,6 +88,7 @@ router.get('/allMeetings', (req, res) => {
                           name: name,
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
                         })
+                        console.log(polefileLinks, "Poll1")
                       poll.fileLinks = polefileLinks;
                     })
                 }
@@ -146,11 +147,11 @@ router.post('/addPollsOfMeeting', (req, res) => {
                       var fileLinksLink = ''
                       if(req.body.title){
                       titleLink = req.body.title
-                      titleLink = titleLink.replace(/ /g,'');
+                      titleLink = titleLink.trim();
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                      fileLinksLink = fileLinksLink.trim();
                   }
             var data = {
                 Bucket: BucketName,
@@ -186,11 +187,11 @@ router.post('/addPollsOfMeeting', (req, res) => {
                       var fileLinksLink = ''
                       if(req.body.title){
                       titleLink = req.body.title
-                      titleLink = titleLink.replace(/ /g,'');
+                      titleLink = titleLink.trim();
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                      fileLinksLink = fileLinksLink.trim();
                   }
             var data = {
                 Bucket: BucketName,
@@ -269,11 +270,11 @@ router.post('/editMeeting', (req, res) => {
                       var fileLinksLink = ''
                       if(req.body.title){
                       titleLink = req.body.title
-                      titleLink = titleLink.replace(/ /g,'');
+                      titleLink = titleLink.trim();
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                      fileLinksLink = fileLinksLink.trim();
                   }
                 var data = {
                 Bucket: BucketName,
@@ -365,11 +366,11 @@ router.post('/editPoll', (req, res) => {
                       var fileLinksLink = ''
                       if(req.body.title){
                       titleLink = req.body.title
-                      titleLink = titleLink.replace(/ /g,'');
+                      titleLink = titleLink.trim();
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                      fileLinksLink = fileLinksLink.trim();
                   }
             fileLinks.push(name)
             var data = {
@@ -554,11 +555,11 @@ function uploadFile(req, res){
                       var fileLinksLink = ''
                       if(req.body.title){
                       titleLink = req.body.title
-                      titleLink = titleLink.replace(/ /g,'');
+                      titleLink = titleLink.trim();
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                      fileLinksLink = fileLinksLink.trim();
                   }
             var data = {
                 Bucket: BucketName,
