@@ -107,7 +107,7 @@
                                 </div>
                             </li>
                             <li class="panel panel-default panel-shadow" id="dropdown2" >
-                                <a data-toggle="collapse" href="#dropdown-lvl2" class="dropdown-list past-meeting" style="border-bottom: 1px solid #e7e7e7;box-shadow: none;"> 
+                                <a data-toggle="collapse" href="#dropdown-lvl2" class="dropdown-list down-meeting" style="border-bottom: 1px solid #e7e7e7;box-shadow: none;"> 
                                     <span>Past Meetings | 過往會議</span>
                                     <span class="sidebar-rt-arrow ">
                                         <i id="ispan2" class="fa fa-angle-right" style="font-size:27px;"></i>
@@ -800,11 +800,23 @@ function edit_poll(event){
         }) 
 
         $(".up-meeting").click(function(event){
-            $( "#ispan" ).removeClass( "right-arrow-add" );
+            var add = $( "#ispan" ).hasClass( "right-arrow-add" );
+            console.log(add, 'here')
+            if(add){
+                $( "#ispan" ).removeClass( "right-arrow-add" );
+            }else{
+                $( "#ispan" ).addClass( "right-arrow-add" );
+            }
             
         })
-         $(".past-meeting").click(function(event){
-            $( "#ispan2" ).addClass( "right-arrow-add" );
+         $(".down-meeting").click(function(event){
+            var add = $( "#ispan2" ).hasClass( "right-arrow-add" );
+            console.log(add, 'add--')
+             if(add){
+                $( "#ispan2" ).removeClass( "right-arrow-add" );
+            }else{
+                $( "#ispan2" ).addClass( "right-arrow-add" );
+            }
             
         })
 

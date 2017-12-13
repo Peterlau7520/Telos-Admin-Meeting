@@ -232,8 +232,9 @@
     min-height: auto;
     background-color: #fff;
     position: relative;
-    border-right: 1px solid #e7e7e7;
+ /*   border-right: 1px solid #e7e7e7;*/
     min-height: 100vh;
+    height: 100vh;
 }
 .side-menu .navbar {
     border: none;
@@ -549,13 +550,13 @@ textarea {
     display: block;
     width: auto;
     overflow: hidden;
+    border-left: 1px solid #e7e7e7;
    /*  padding: 15px; */
-    
-    
+    min-height: 850px;
 }
-/* .side-bar{
-    height: 500px;
- }*/
+
+
+ 
 .collapsed .right-arrow-add{
     -ms-transform: rotate(0deg); /* IE 9 */
     -webkit-transform: rotate(0deg); /* Safari 3-8 */
@@ -617,8 +618,8 @@ margin-left: 10px;
 }
 
 .tls-content-box{
-    padding: 0 15px;
-} 
+    padding: 0 15px; 
+ } 
 
 .panel-wrapper-custom .panel-group .panel{
     margin-bottom: 5px;

@@ -67,7 +67,7 @@ router.get('/allMeetings', (req, res) => {
                 if(item.polls){
                 forEach(item.polls, function(poll, key, a){ 
                     var pollEndTime = moment(new Date(poll.endTime));
-                    item.polls[key].endTime = pollEndTime.format("D-MM-YYYY");
+                    item.polls[key].endTime = pollEndTime.format("MM-DD-YYYY");
                 let polefileLinks = []; 
                 if(poll.fileLinks){ 
                     forEach(poll.fileLinks, function(name, key, a){ 
@@ -95,15 +95,15 @@ router.get('/allMeetings', (req, res) => {
             }
                     console.log(item.endTime)
                      var startTime = moment.utc(new Date(item.startTime));
-                    item.startTime =  startTime.format("DD/MM/YYYY hh:mm a");
+                    item.startTime =  startTime.format("MM/DD/YYYY hh:mm a");
                     if(Date.parse(new Date(item.endTime)) > Date.parse(new Date)){
                       var endTime = moment.utc(new Date(item.endTime));
-                    item.endTime =  endTime.format("DD/MM/YYYY hh:mm a");
+                    item.endTime =  endTime.format("MM/DD/YYYY hh:mm a");
                     currentMeetings.push(item)
                    //start is less than End
                     }else{
                       var endTime = moment.utc(new Date(item.endTime));
-                    item.endTime =  endTime.format("DD/MM/YYYY hh:mm a");
+                    item.endTime =  endTime.format("MM/DD/YYYY hh:mm a");
                      pastMeetings.push(item)
                     //end is less than start
                     }

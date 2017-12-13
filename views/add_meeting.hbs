@@ -76,7 +76,7 @@
                     <div class="side-menu-container">
                         <ul class="nav navbar-nav sidebar-nav">
                             <li class="panel panel-default" id="dropdown">
-                                <a data-toggle="collapse" href="#dropdown-lvl12" aria-expanded="true" class="arrow-img">
+                                <a data-toggle="collapse" href="#dropdown-lvl12" aria-expanded="true" class="arrow-img up-meeting">
                                     <span>Upcoming Meetings | 近期會議</span>
                                     <span class="sidebar-rt-arrow">
                                         <i id="ispan2" class="fa fa-angle-right" style="font-size:27px;"></i>
@@ -99,7 +99,7 @@
                                 </div>
                             </li> 
                             <li class="panel panel-default" id="dropdown">
-                                <a data-toggle="collapse" href="#dropdown-lvl13" aria-expanded="true" class="arrow-img2" style="border-bottom: 1px solid #e7e7e7; box-shadow: none;border-top: 1px solid #e7e7e7;">
+                                <a data-toggle="collapse" href="#dropdown-lvl13" aria-expanded="true" class="arrow-img2 down-meeting" style="border-bottom: 1px solid #e7e7e7; box-shadow: none;border-top: 1px solid #e7e7e7;">
                                     <span>Past Meetings | 以往會議</span>
                                     <span class="sidebar-rt-arrow">
                                         <i class="fa fa-angle-right" style="font-size:27px;" id="ispan"></i>
@@ -861,14 +861,14 @@
             $("#poll").modal();
         })
 
-        $(".arrow-img2").click(function(event){
-            $( "#ispan" ).addClass( "right-arrow-add" );
+        // $(".arrow-img2").click(function(event){
+        //     $( "#ispan" ).addClass( "right-arrow-add" );
             
-        })
-         $(".arrow-img").click(function(event){
-            $( "#ispan2" ).addClass( "right-arrow-add" );
+        // })
+        //  $(".arrow-img").click(function(event){
+        //     $( "#ispan2" ).addClass( "right-arrow-add" );
             
-        })
+        // })
           $(".delete_meeting").click(function(event){
             localStorage.removeItem("tab");
             localStorage.removeItem("divTab");
@@ -1082,11 +1082,22 @@ var originalData = '{{{stringify meetingsData}}}';
         })
 
          $(".up-meeting").click(function(event){
-            //$( "#ispan" ).removeClass( "right-arrow-add" );
+            
+           var add = $( "#ispan2" ).hasClass( "right-arrow-add" );
+            if(add){
+                $( "#ispan2" ).removeClass( "right-arrow-add" );
+            }else{
+                $( "#ispan2" ).addClass( "right-arrow-add" );
+            }
             
         })
-         $(".past-meeting").click(function(event){
-            $( "#ispan2" ).addClass( "right-arrow-add" );
+         $(".down-meeting").click(function(event){
+            var add = $( "#ispan" ).hasClass( "right-arrow-add" );
+            if(add){
+                $( "#ispan" ).removeClass( "right-arrow-add" );
+            }else{
+                $( "#ispan" ).addClass( "right-arrow-add" );
+            }
             
         })
 
