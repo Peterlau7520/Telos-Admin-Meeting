@@ -129,6 +129,7 @@ const meetingSchema = new Schema({
         }
     ],
     active: Boolean,
+    pollEndTime: String,
     estate:String,
     youtubelink: String,
 })
