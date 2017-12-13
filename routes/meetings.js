@@ -113,7 +113,16 @@ router.get('/allMeetings', (req, res) => {
            }))
             Promise.all(promiseArr)
             .then(function(data){
+              Estate.update({estateName: req.user.estateName,
+                $set: {
+                  currentMeetings: data[0].meetingsData,
+                  pastMeetings: data[0].pastMeetingsData,
+                }
+              })
+              .then(function(estate){
+
                  res.render('meeting', data[0]);
+               })
             })
         }
        else{
@@ -576,7 +585,7 @@ function uploadFile(req, res){
         }
 
 function savePoll(req, res, fileLinks){
-    console.log(req.body)
+    console.log(req.body, req.user)
     console.log(req.body)
     const promiseArr = []
     if(req.body.startTime) {
