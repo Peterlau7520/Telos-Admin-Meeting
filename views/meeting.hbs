@@ -71,7 +71,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">會議 | Meetings</a>
+                    <a class="navbar-brand" href="#">Meetings | 會議</a>
                 </div>
                 <div class="collapse navbar-collapse">
                 </div>
@@ -85,7 +85,7 @@
                         <ul class="nav navbar-nav sidebar-nav">
                             <li class="panel panel-default" id="dropdown" >
                                 <a data-toggle="collapse" href="#dropdown-lvl1" class="dropdown-list up-meeting" style="    border-bottom: 1px solid #e7e7e7;">
-                                    <span>Upcoming Meetings</span>
+                                    <span>Upcoming Meetings | 近期會議</span>
                                     <span class="sidebar-rt-arrow">
                                         <i id="ispan" class="fa fa-angle-right right-arrow-add" style="font-size:27px;"></i>
                                     </span>
@@ -108,7 +108,7 @@
                             </li>
                             <li class="panel panel-default panel-shadow" id="dropdown2" >
                                 <a data-toggle="collapse" href="#dropdown-lvl2" class="dropdown-list past-meeting" style="border-bottom: 1px solid #e7e7e7;box-shadow: none;"> 
-                                    <span>Past Meetings</span>
+                                    <span>Past Meetings | 過往會議</span>
                                     <span class="sidebar-rt-arrow ">
                                         <i id="ispan2" class="fa fa-angle-right" style="font-size:27px;"></i>
                                     </span>
@@ -139,12 +139,12 @@
                     <div class="content-header">
                         <div class="row">
                             <div class="col-lg-5">
-                                <h3 id="heading3">Upcoming Meeting </h3>
+                                <h3 id="heading3">Upcoming Meeting <br>  近期會議</h3>
                             </div>
                             
                             <div id="headingBottom" class="col-lg-7">
                             <div class="meeting-btn add-meeting-btn">
-                               <a href="/addMeeting" class="btn btn-primary"> 添加一个会议 | Add a Meeting</a>
+                               <a href="/addMeeting" class="btn btn-primary">  Add a Meeting | 添加會議</a>
                             </div>
                             <div id="headingBottom2" >
                             </div>
@@ -162,7 +162,7 @@
                                 <div class="tls-content-box">
                                     <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}" action="/deleteMeeting" method="post">
                                     <div class="form-group col-sm-6">
-                                        <label class='custom_label'>會議標題 | Meeting Title</label>
+                                        <label class='custom_label'>Meeting Title | 會議標題</label>
                                         <input name="meeting_id" type="hidden" value="{{_id}}">
                                         <input id ='title_{{meeting_key}}'  style='display:none' type="text" class="form-control input_fields_{{meeting_key}}" name="title" value="{{title}}">
                                         <div id='title_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{title}}</div>
@@ -175,32 +175,32 @@
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="form-group col-sm-6">
-                                        <label class='custom_label'> 會議開始時間 | Meeting Start Time</label>
+                                        <label class='custom_label'> Meeting Start Time | 會議開始時間</label>
                                         <input id ='start_time_{{meeting_key}}' style='display:none' type="datetime-local" name="start_time" class="form-control input_fields_{{meeting_key}}" value="{{startTime}}">
                                         <div id='stime_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{startTime}}</div>
 
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label class='custom_label'>會議結束時間 | Meeting End Time</label>
+                                        <label class='custom_label'>Meeting End Time | 會議結束時間</label>
                                         <input id ='end_time_{{meeting_key}}' style='display:none' type="datetime-local" name="end_time" class="form-control input_fields_{{meeting_key}}" value="{{endTime}}">
                                         <div id='etime_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{endTime}}</div>
 
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="form-group col-sm-6">
-                                        <label class='custom_label'>地點 | Venue</label>
+                                        <label class='custom_label'>Venue | 地點</label>
                                         <input t id ='venue_{{meeting_key}}' style='display:none' type="text" class="form-control input_fields_{{meeting_key}}" name="venue" value="{{venue}}">
                                         <div id='venue_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{venue}}</div>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label class='custom_label'>議程Agenda</label>
+                                        <label class='custom_label'>Agenda | 議程</label>
                                         <table class="table table-bordered table_custom_Wrapper">
                                             <tr>
                                                 <th>
-                                                    <label>ID</label>
+                                                    <label>ID | 指數</label>
                                                 </th>
                                                 <th>
-                                                    <label>Document name</label>
+                                                    <label>Document name | 文件名稱</label>
                                                 </th>
                                             </tr>
                                             {{#each fileLinks}}
@@ -261,7 +261,7 @@
                                                         <div class="clearfix"></div>
                                                         <div class="col-sm-6">
                                                             <div class="tls-voting-option-box">
-                                                                 <label class='custom_label'>投票選項 | VOTING OPTIONS</label>
+                                                                 <label class='custom_label'>VOTING OPTIONS | 投票選項</label>
                                                                 <ul>
                                                                     {{#each options as |value|}}
                                                                     <li>- {{value}}</li>
@@ -270,14 +270,14 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-sm-6">
-                                                            <label>Uploaded Documents</label>
+                                                            <label>Uploaded Documents | 已上傳的文件</label>
                                                             <table class="table table-bordered table_custom_Wrapper">
                                                                 <tr>
                                                                     <th>
-                                                                        <label>ID</label>
+                                                                        <label>ID | 指數</label>
                                                                     </th>
                                                                     <th>
-                                                                        <label>Document name</label>
+                                                                        <label>Document Name | 文件名稱</label>
                                                                     </th>
                                                                 </tr>
                                                                 {{#each fileLinks as |value file_key|}}
@@ -343,7 +343,7 @@
                             <div class="div-wrapper">
                                 <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}" action="/deleteMeeting" method="post">
                                     <div class="form-group col-sm-6">
-                                        <label class='custom_label'>會議標題 | Meeting Title</label>
+                                        <label class='custom_label'>Meeting Title | 會議標題</label>
                                         <input name="meeting_id" type="hidden" value="{{id}}">
                                         <input id ='title_{{meeting_key}}'  style='display:none'  type="text" class="form-control input_fields_{{meeting_key}}" name="title" value="{{title}}">
                                         <div id='title_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{title}}</div>
@@ -353,32 +353,32 @@
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="form-group col-sm-6">
-                                        <label class='custom_label'> 會議開始時間 | Meeting Start Time</label>
+                                        <label class='custom_label'>Meeting Start Time | 會議開始時間</label>
                                         <input id ='start_time_{{meeting_key}}' style='display:none' type="datetime-local" name="start_time" class="form-control input_fields_{{meeting_key}}" value="{{startTime}}">
                                         <div id='stime_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{startTime}}</div>
 
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label class='custom_label'>會議結束時間 | Meeting End Time</label>
+                                        <label class='custom_label'>Meeting End Time | 會議結束時間</label>
                                         <input id ='end_time_{{meeting_key}}' style='display:none' type="datetime-local" name="end_time" class="form-control input_fields_{{meeting_key}}" value="{{endTime}}">
                                         <div id='etime_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{endTime}}</div>
 
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="form-group col-sm-6">
-                                        <label class='custom_label'>地點 | Venue</label>
+                                        <label class='custom_label'>Venue | 地點</label>
                                         <input t id ='venue_{{meeting_key}}' style='display:none' type="text" class="form-control input_fields_{{meeting_key}}" name="venue" value="{{venue}}">
                                         <div id='venue_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{venue}}</div>
                                     </div>
                                     <div class="orfm-group col-sm-6">
-                                        <label class='custom_label'>議程Agenda</label>
+                                        <label class='custom_label'>Agenda | 議程</label>
                                         <table class="table table-bordered table_custom_Wrapper">
                                             <tr>
                                                 <th>
-                                                    <label>ID</label>
+                                                    <label>ID | 指數</label>
                                                 </th>
                                                 <th>
-                                                    <label>Document name</label>
+                                                    <label>Document Name | 文件名稱</label>
                                                 </th>
                                             </tr>
                                             {{#each fileLinks}}
@@ -437,7 +437,7 @@
                                                         <div class="clearfix"></div>
                                                         <div class="col-sm-6">
                                                             <div class="tls-voting-option-box">
-                                                                 <label class='custom_label'>投票選項 | VOTING OPTIONS</label>
+                                                                 <label class='custom_label'>VOTING OPTIONS | 投票選項</label>
                                                                 <ul>
                                                                     {{#each options as |value|}}
                                                                     <li>- {{value}}</li>
@@ -446,14 +446,14 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-sm-6">
-                                                            <label>Uploaded Documents</label>
+                                                            <label>Uploaded Documents | 已上傳的文件</label>
                                                             <table class="table table-bordered table_custom_Wrapper">
                                                                 <tr>
                                                                     <th>
-                                                                        <label>ID</label>
+                                                                        <label>ID | 指數</label>
                                                                     </th>
                                                                     <th>
-                                                                        <label>Document name</label>
+                                                                        <label>Document name | 文件名稱</label>
                                                                     </th>
                                                                 </tr>
                                                                 {{#each fileLinks as |value file_key|}}
@@ -563,12 +563,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add a poll</h4>
+                <h4 class="modal-title">Add a Poll | 增加投票</h4>
             </div>
             <div class="modal-body">
                 <form role="form" action="/editPoll" method="post" name="editpoll_form" id="editpoll_form" enctype="multipart/form-data" >
                     <div class="form-group col-sm-6">
-                        <label>Poll title</label>
+                        <label>Poll Title</label>
                         <input type = "hidden" name="id" id="id"/>
                         <input type="text" name="pollName" id="title" class="form-control">
                     </div>
@@ -594,9 +594,9 @@
                             </div>
                     </div> -->
                     <div class="form-group col-sm-6">
-                        <label>投票選項 | VOTING OPTION</label>
+                        <label>VOTING OPTION | 投票選項</label>
                         <br/>
-                        <button class="add_field_button1 btn btn-primary pull-left">Add Options/增加選項</button><br/><br/><br/>
+                        <button class="add_field_button1 btn btn-primary pull-left">Add Options | 增加選項</button><br/><br/><br/>
                         <div class="input_fields_wrap voting_opt1 tls-Vot-box-main">
                             <div class="tls-Vot-box">   
                                 <input  class="pull-left tls-Voting-options" type="text" name="option" id="option" placeholder="E.g. Yes/是" required/>
@@ -604,9 +604,9 @@
                         </div>
                     </div>
                     <div class="form-group col-sm-6">
-                        <label>Add Documents</label>
+                        <label>Add Documents | 增加文件</label>
                         <p>
-                        <button class="add_documents btn btn-primary">Add documents/上傳文件</button>
+                        <button class="add_documents btn btn-primary">Add documents | 上傳文件</button>
                         <div class="documents_wrapper">
                         <div class ="added_files" ></div>
                         </div>
@@ -639,7 +639,7 @@
                         <input type="text" name="title" class="form-control">
                     </div>
                     <div class="form-group col-sm-6">
-                        <label>投票标题</label>
+                        <label>投票標題</label>
                         <input type="text" name="title_chinese" class="form-control">
                     </div>
                     <div class="clearfix"></div>
@@ -654,9 +654,9 @@
                     <div class="clearfix"></div>
                     
                     <div class="form-group col-sm-6">
-                        <label>投票選項 | VOTING OPTION</label>
+                        <label>VOTING OPTION | 投票選項</label>
                         <br/> 
-                        <button class="add_field_button btn btn-primary addoptionbtn pull-left" style="margin-bottom:2%">Add Options/增加選項</button>
+                        <button class="add_field_button btn btn-primary addoptionbtn pull-left" style="margin-bottom:2%">Add Options | 增加選項</button>
                         <br/><br/><br/>
                         <div class="input_fields_wrap voting_opt tls-Vot-box-main">
                             <div class="tls-Vot-box">
@@ -670,12 +670,12 @@
                     <div class="form-group col-sm-6">
                         <label>Add Documents</label>
                         <p>
-                        <button class="add_documents addoptionbtn btn btn-primary">Add documents/上傳文件</button>
+                        <button class="add_documents addoptionbtn btn btn-primary">Add documents | 上傳文件</button>
                         <div class="documents_wrapper" id="documents_file">
                         </div>
                         </p>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-success" id="close_model2" style="float: right;"> 确认 | Confirm</button>
+                    <button type="submit" class="btn btn-primary btn-success" id="close_model2" style="float: right;"> Confirm | 确认</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -784,16 +784,16 @@ function edit_poll(event){
 
             //var hours = Math.floor(hours);
             var hours = Math.round(Math.abs(firstDate - secondDate) / 36e5);
-            hours = '剩下的時間可以取消或修改投票 | Hours remaining to edit or delete polls: ' + hours;
+            hours = 'Hours remaining to edit or delete polls | 剩下的時間可以取消或修改投票: ' + hours;
             $( "#endhour" ).text(hours)
         }) 
         $('.past-meeting').click(function (event) {
             $('.save_meeting').hide()
-            $('#heading3').text('Past Meeting')
+            $('#heading3').text('Past Meetings | 過往會議')
             $( "#endhour" ).text('')
             var html = ''
              $('#headingBottom2').html('')
-             html= '<a href="assets/pdf-sample" download="pdffile"><button class="btn btn-primary headingbtn dwn-btn download-btn"  type="button" id= "dwn-btn">編輯會議 | Download Poll Report</button> </a>'
+             html= '<a href="assets/pdf-sample" download="pdffile"><button class="btn btn-primary headingbtn dwn-btn download-btn"  type="button" style="font-size: 12px" id= "dwn-btn">Download Poll Report | 下載投票報告</button> </a>'
             $('#headingBottom2').append(html)
         }) 
 

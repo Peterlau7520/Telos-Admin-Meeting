@@ -64,7 +64,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Meeting | 添加会议</a>
+                    <a class="navbar-brand" href="#">Add a Meeting | 添加會議</a>
                 </div> 
                 <div class="collapse navbar-collapse">
                 </div>
@@ -77,7 +77,7 @@
                         <ul class="nav navbar-nav sidebar-nav">
                             <li class="panel panel-default" id="dropdown">
                                 <a data-toggle="collapse" href="#dropdown-lvl12" aria-expanded="true" class="arrow-img">
-                                    <span>將來會議 | Upcoming Meet</span>
+                                    <span>Upcoming Meetings | 近期會議</span>
                                     <span class="sidebar-rt-arrow">
                                         <i id="ispan2" class="fa fa-angle-right" style="font-size:27px;"></i>
                                     </span>
@@ -100,7 +100,7 @@
                             </li> 
                             <li class="panel panel-default" id="dropdown">
                                 <a data-toggle="collapse" href="#dropdown-lvl13" aria-expanded="true" class="arrow-img2" style="border-bottom: 1px solid #e7e7e7; box-shadow: none;border-top: 1px solid #e7e7e7;">
-                                    <span>以往會議 | Past Meetings</span>
+                                    <span>ast Meetings | 以往會議</span>
                                     <span class="sidebar-rt-arrow">
                                         <i class="fa fa-angle-right" style="font-size:27px;" id="ispan"></i>
                                     </span>
@@ -138,7 +138,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Add a Meeting | 添加会议</a>
+                    <a class="navbar-brand" href="#">Add a Meeting | 添加會議</a>
                 </div> 
                 <div class="collapse navbar-collapse">
                 </div>
@@ -154,46 +154,46 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
-                        <label>会议标题</label>
+                        <label>會議標題</label>
                         <input type="text" class="form-control" name="meeting_title_chinese" required/>
                     </div>
                     <div class="form-group col-sm-6">
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
-                        <label>Meeting Start Time | 会议开始时间</label>
+                        <label>Meeting Start Time | 會議開始時間</label>
                         <input type="datetime-local" class="form-control" name="startTime" id="startTime" required/>
                     </div>
                     <div class="form-group col-sm-6">
-                        <label>Meeting End Time | 会议结束时间</label>
+                        <label>Meeting End Time | 會議結束時間</label>
                         <input type="datetime-local" class="form-control" name="endTime" required>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
-                        <label>Venue | 地点 </label>
+                        <label>Venue | 地點 </label>
                         <input type="text" class="form-control" name="venue" required/>
                     </div>
                     
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
-                        <label>Agenda | 议程</label>
+                        <label>Agenda | 議程</label>
                         <div class="documents_wrapper1">
                         <input type="file" name="filefield" accept="application/pdf" style="border-radius: 4px;" id="fileValue"/>      
                     </div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
-                        <label>Poll end date and time</label>
+                        <label>Poll end date and time | 投票結束時間</label>
                         <input type="datetime-local" class="form-control" name="pollEndTime" id="pollEndTime">
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-12">
                         <p> 
-                            <input type="button" class="btn btn-primary poll-btn" value="添加投票 | Add a Poll" id="open_model"/>
+                            <input type="button" class="btn btn-primary poll-btn" value="Add a Poll | 添加會議" id="open_model"/>
                         </p>
                     </div>
                     <div class="form-group col-sm-12 currentpolls">
-                        <label>現行投票 | CURRENT POLLS : </label>
+                        <label>CURRENT POLLS | 現行投票 </label>
                     </div>
                     <div class="clearfix"></div>
                     <div class="custom_panel_div">
@@ -209,7 +209,7 @@
                         <p class="text-right">
                             <input type="hidden" name="poll_json" id="poll_json"/>
                             <div id="loading"></div>
-                            <input type="submit" class="btn btn-primary custom_success_btn" style="margin-right: 16px;" id="save" value=" 保存 | Save"/>
+                            <input type="submit" class="btn btn-primary custom_success_btn" style="margin-left: 16px;" id="save" value=" Save | 保存"/>
                         </p>
                     </div>
                     <div class="clearfix"></div>
@@ -315,7 +315,7 @@
                                     <div class="clearfix"></div>
                                 </form>
                                 <div id="loading1"></div>
-                                 <button class="btn btn-primary add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a poll</button>
+                                 <button class="btn btn-primary add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a Poll | 增加投票</button>
                                </div>
                             </div>
                            
@@ -331,7 +331,7 @@
                                                     {{pollNameChn}} | {{pollName}} 
                                                 </h4>
                                                 <h6 class="pull-right" style="margin-top: -23px">
-                                                Vote by: {{endTime}}
+                                                Vote by | 投票截止于: {{endTime}}
                                                 </h6>
                                             </div>
                                         </a>
@@ -362,7 +362,7 @@
                                                         <div class="clearfix"></div>
                                                         <div class="col-sm-6">
                                                             <div class="tls-voting-option-box">
-                                                                 <label class='custom_label'>投票選項 | VOTING OPTIONS</label>
+                                                                 <label class='custom_label'>VOTING OPTIONS | 投票選項</label>
                                                                 <ul>
                                                                     {{#each options as |value|}}
                                                                     <li>- {{value}}</li>
@@ -371,7 +371,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-sm-6">
-                                                            <label>Uploaded Documents</label>
+                                                            <label>Uploaded Documents | 已上傳的文件</label>
                                                             <table class="table table-bordered table_custom_Wrapper">
                                                                 <tr>
                                                                     <th>
@@ -634,7 +634,7 @@
                         <input type="text" name="title" class="form-control" required/>
                     </div>
                     <div class="form-group col-sm-6">
-                        <label>投票标题</label>
+                        <label>投票標題</label>
                         <input type="text" name="title_chinese" class="form-control" required/>
                     </div>
                     <div class="clearfix"></div>
@@ -648,9 +648,9 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
-                        <label>Voting options</label>
+                        <label>Voting Options | 投票選項</label>
                         <br/>
-                        <button class="add_field_button_add btn btn-primary addoptionbtn pull-left" style="margin-bottom:2%">Add Options/增加選項</button>
+                        <button class="add_field_button_add btn btn-primary addoptionbtn pull-left">Add Options | 增加選項</button>
                         <br/><br/><br/>
                         <div class="input_fields_wrap_add tls-Vot-box-main">
                             <div class="tls-Vot-box">
@@ -660,16 +660,16 @@
                         </div>
                     </div>
                     <div class="form-group col-sm-6">
-                        <label>Add Documents</label>
+                        <label>Add Documents | 增加文件</label>
                         <p>
-                        <button class="add_documents_add btn btn-primary addoptionbtn" style="margin-bottom:1%">Add documents/上傳文件</button>
+                        <button class="add_documents_add btn btn-primary addoptionbtn" style="margin-bottom:1%">Add documents | 上傳文件</button>
                         <div class="documents_wrapper" id="documents_file">
                         </div>
                         </p>
                     </div>
                     <div class="clearfix"></div>
                     <hr>
-                    <button type="submit" class="btn btn-primary pull-right" id="close_model" > 确认 | Confirm</button>
+                    <button type="submit" class="btn btn-primary pull-right" id="close_model" > Confirm | 确认</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -908,7 +908,7 @@
             form_data_array.forEach(function (obj) {
                 if(obj.value == '' && alerted == false){
                     event.preventDefault()
-                    alert("please Enter all Values")
+                    alert("Please fill in all the fields | 請填寫所有欄目")
                     alerted = true
                     validated = true
                 }
