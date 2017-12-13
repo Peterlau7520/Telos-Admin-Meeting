@@ -231,8 +231,9 @@
     width: 300px;
     min-height: auto;
     background-color: #fff;
-    border-right: 1px solid #e7e7e7; 
     position: relative;
+    border-right: 1px solid #e7e7e7;
+    min-height: 100vh;
 }
 .side-menu .navbar {
     border: none;
@@ -463,12 +464,12 @@
     padding: 15px 15px!important; 
     line-height: 20px!important;
 }
-.sidebar-nav{
+/*.sidebar-nav{
     width: 100%;
      max-height: 730px;
     overflow-y: auto;
     overflow-x: hidden;
-}
+}*/
 
 .sidebar-nav li .arrow-img:after {
     background-image: url('.../assets/img/forward-arrow.png');
@@ -549,9 +550,12 @@ textarea {
     width: auto;
     overflow: hidden;
    /*  padding: 15px; */
-    border-left: 1px solid #e7e7e7;
+    
+    
 }
- 
+/* .side-bar{
+    height: 500px;
+ }*/
 .collapsed .right-arrow-add{
     -ms-transform: rotate(0deg); /* IE 9 */
     -webkit-transform: rotate(0deg); /* Safari 3-8 */
@@ -654,14 +658,14 @@ margin-left: 10px;
     /* position: absolute; */
     bottom: 50px;
     right: 20px;
-    width: 220px;
-    margin: 0 auto;
+/*    width: 220px;*/
+    margin: 0 10px;
     margin-top: 10px;
 }
 .meeting-btn .btn{
     /*width: 100%;
     max-width: 100%;*/
-    min-width: 218px;
+    min-width: 255px;
 }
 
 .custom_panel_wrapper
@@ -744,7 +748,19 @@ margin-left: 10px;
     font-weight: 400;
 }
 /* Add poll Sec Css::END */
-
+@media only screen and (max-width: 1024px)  {
+    .download-btn{
+        max-width: 100%;
+        margin: 0;
+        min-width: 100%;
+    }
+    .meeting-btn{
+        width: 100%;
+    }
+    .meeting-btn .btn{
+        max-width: 100%;
+    }
+}
 @media only screen and (max-width: 767px)  {
     .tls-Vot-box-main{
         max-width: 100%;
@@ -758,10 +774,12 @@ margin-left: 10px;
     .meeting-btn{
         margin: 0 30px;
         width: 84%;
-        left: auto;
-        right: auto;
+        margin-right: 27px;
     }
     .btn{
         width: 100%;
     }
 }
+/*@media only screen and (min-width: 375px){
+  
+}*/

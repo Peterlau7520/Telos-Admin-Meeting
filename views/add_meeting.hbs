@@ -100,7 +100,7 @@
                             </li> 
                             <li class="panel panel-default" id="dropdown">
                                 <a data-toggle="collapse" href="#dropdown-lvl13" aria-expanded="true" class="arrow-img2" style="border-bottom: 1px solid #e7e7e7; box-shadow: none;border-top: 1px solid #e7e7e7;">
-                                    <span>ast Meetings | 以往會議</span>
+                                    <span>Past Meetings | 以往會議</span>
                                     <span class="sidebar-rt-arrow">
                                         <i class="fa fa-angle-right" style="font-size:27px;" id="ispan"></i>
                                     </span>
@@ -220,7 +220,7 @@
     </div>
 
      <!-- Main Content -->
-            <div class="custom_scroll_wrap">
+            <div class="custom_scroll_wrap MeetingTab" style="display: none;">
                 <div class="tab-content tab-wraper tls-wrapper">   
                   <!--  <div class="content-header">
                         <div class="row">
@@ -237,6 +237,7 @@
                             </div>
                         </div>
                     </div> -->
+                   
                     <div class="content-header">
                         <div class="row">
                             <div class="col-lg-5">
@@ -884,14 +885,18 @@
             var secondDate = new Date(endTime);
 
             var diffDays = Math.round(Math.abs((secondDate.getTime() - firstDate.getTime())/(oneDay)));
+                var valid = true;
                 if(diffDays <= 7){
+                    valid = false;
                     event.preventDefault();
                     alert("The poll deadline has to be at least 1 week (7 days) before the meeting start time")
                 }
                 if($("#poll_json").val() == ''){
+                    valid = false;
                     event.preventDefault();
                     alert("Please Add a poll")
-                }else{
+                }
+                if(valid){
                     var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'               
             $("#loading").append(html);
             setTimeout(function(){ $(".custom_success_btn").prop('disabled', true); }, 500);
@@ -1030,6 +1035,7 @@ var originalData = '{{{stringify meetingsData}}}';
         }
 
         $('.meeting_li').click(function (event) {
+            $('.MeetingTab').css('display','block');
             $('.add-meeting-wrap').remove()
             $( ".show_btn_meeting" ).empty();
             $('.show_btn_meeting').html('<a href="/addMeeting" class="btn btn-primary" hidden="true"> 添加一个会议 | Add a Meeting</a>')
@@ -1062,6 +1068,7 @@ var originalData = '{{{stringify meetingsData}}}';
         }) 
         $('.past-meeting').click(function (event) {
             $('.add-meeting-wrap').remove()
+            $('.MeetingTab').css('display','block');
             $(".show_tab_panel").addClass("active");
             $( ".show_btn_meeting" ).empty();
             $('.show_btn_meeting').html('<a href="/addMeeting" class="btn btn-primary" hidden="true"> 添加一个会议 | Add a Meeting</a>')

@@ -222,7 +222,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
     Meeting.findOne(
             { _id: req.body.meeting_id })
     .then(function(m, err){
-        console.log(m)
+        console.log(req.body, '----------poll')
         var poll = new Poll({
                             pollName: req.body.title,
                             pollNameChn: req.body.title_chinese,

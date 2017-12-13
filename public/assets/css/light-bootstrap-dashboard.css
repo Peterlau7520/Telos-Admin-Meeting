@@ -17,9 +17,7 @@
 
 
 
-.documents_wrapper1 input{
-  border-radius: 4px;
-}
+
 
 
 
@@ -256,10 +254,8 @@
     margin-top: -19px;
 }
 .download-btn{
-    width: 74% !important;
-    min-width: 218px;
+    min-width: 255px;
     margin-top: 10px;
-    margin-right: 27px;
 }
 .chnRmBtn {
     background: none;

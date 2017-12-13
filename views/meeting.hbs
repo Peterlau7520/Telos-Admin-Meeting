@@ -135,7 +135,7 @@
 
             <!-- Main Content -->
             <div class="custom_scroll_wrap">
-                <div class="tab-content tab-wraper tls-wrapper">   
+                <div class="tab-content tab-wraper side-bar tls-wrapper">   
                     <div class="content-header">
                         <div class="row">
                             <div class="col-lg-5">
@@ -695,6 +695,7 @@ function edit_poll(event){
             var childId = event.target.id;
             var originalData = '{{{stringify meetingsData}}}';
              originalData = JSON.parse(originalData);
+             console.log(originalData, 'originalData')
             var poll = originalData[parentId].polls[childId]
             var lastDate = new Date(originalData[parentId].createdAt)
             lastDate = lastDate.setDate(lastDate.getDate() - 3);
@@ -761,6 +762,7 @@ function edit_poll(event){
         }
         var originalData = '{{{stringify meetingsData}}}';
         originalData = JSON.parse(originalData);
+        console.log(originalData, 'originalData')
 
         $('.meeting_li').click(function (event) {
             $('.save_meeting').hide()
@@ -793,7 +795,7 @@ function edit_poll(event){
             $( "#endhour" ).text('')
             var html = ''
              $('#headingBottom2').html('')
-             html= '<a href="assets/pdf-sample" download="pdffile"><button class="btn btn-primary headingbtn dwn-btn download-btn"  type="button" style="font-size: 12px" id= "dwn-btn">Download Poll Report | 下載投票報告</button> </a>'
+             html= '<a href="assets/pdf-sample" download="pdffile"><button class="btn btn-primary headingbtn dwn-btn download-btn"  type="button" id= "dwn-btn">Download Poll Report | 下載投票報告</button> </a>'
             $('#headingBottom2').append(html)
         }) 
 
