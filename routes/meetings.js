@@ -576,7 +576,7 @@ function uploadFile(req, res){
         }
 
 function savePoll(req, res, fileLinks){
-    
+    console.log(req.body)
     console.log(req.body)
     const promiseArr = []
     if(req.body.startTime) {
@@ -605,7 +605,7 @@ function savePoll(req, res, fileLinks){
                      pollName: values.title,
                      pollNameChn: values.title_chinese,
                      summary: values.summary,
-                     summaryChn: values.summaryChn,
+                     summaryChn: values.summary_chinese,
                      fileLinks: values.filesName,
                      estateName: req.user.estateName,
                      options: values.option,
