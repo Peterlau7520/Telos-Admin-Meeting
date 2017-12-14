@@ -940,7 +940,7 @@
             $.each($("#documents_file :input[type='file']"), function(data, key){ 
                 console.log(this.files[0])
                 var fileData = this.files[0]
-                filesName.push(this.files[0].name)
+                filesName.push(this.files[0].name.replace(/ /g,''))
               file.push(fileData)
             });
             formData.append('files', JSON.stringify(file))

@@ -918,13 +918,16 @@ function edit_poll(event){
             console.log('here')
             $(this).parent('div').remove();
         })
-        var removedFile = []
-          $('.documents_wrapper').on("click",".remove_file", function(e){ //user click on remove text
+        var removedFilepolls = []
+          $('.documents_wrapper').on("click",".remove_file", function(e){
+            console.log("pollfile reomved")
+           //user click on remove text
             e.preventDefault(); 
             $(this).parent('div').remove();
            var name =  $(this).parent('div').attr('name');
-            removedFile.push(name)
-            $('.added_files').append(`<input type = "hidden" name="removedfile" value=${removedFile}>`)
+            removedFilepolls.push(name)
+            console.log(removedFilepolls)
+            $('.added_files').append(`<input type = "hidden" name="removedfiles" value=${removedFilepolls}>`)
         })
         /*function edit_popup(data){
             console.log(data, "hhhhhh")

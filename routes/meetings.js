@@ -83,7 +83,7 @@ router.get('/allMeetings', (req, res) => {
                       fileLinksLink = name
                       fileLinksLink = fileLinksLink.replace(/ /g,'');
                   }
-
+                        console.log(pollMeeting_title, "pollMeeting_title")
                         let Key = `${req.user.estateName}/${pollMeeting_title}/${titleLink}/${fileLinksLink}`;
                         polefileLinks.push({
                           name: name,
@@ -143,7 +143,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
                     if(req.files && !(_.isEmpty(req.files))){
                        for (var key in req.files) {
             var info = req.files[key][0].data;
-            var name = req.files[key][0].name;
+            var name = req.files[key][0].name.replace(/ /g,'');
             //meeting.fileLinks.push(name);
             //Let key = `${req.user.estateName}/${req.body.title}/${name}`
             fileLinks.push(name)
@@ -191,8 +191,9 @@ router.post('/addPollsOfMeeting', (req, res) => {
           let formData = req.body;
         for (var key in req.files) {
             var info = req.files[key][0].data;
-            var name = req.files[key][0].name;
+            var name = req.files[key][0].name.replace(/ /g,'');
             var meeting_title = req.body.pollMeeting_title
+            console.log(meeting_title)
             //meeting.fileLinks.push(name);
             //Let key = `${req.user.estateName}/${req.body.title}/${name}`
             //fileLinks.push(name)
@@ -275,7 +276,7 @@ router.post('/editMeeting', (req, res) => {
         var files = req.files.fileField
         for (var i = 0; i < files.length; i++) {
             var info = files[i].data;
-            var name = files[i].name;
+            var name = files[i].name.replace(/ /g,'');
             //meeting.fileLinks.push(name);
             fileLinks.push(name)
              var titleLink = ''
@@ -290,12 +291,13 @@ router.post('/editMeeting', (req, res) => {
                   }
                 var data = {
                 Bucket: BucketName,
-                Key: `${req.user.estateName}/${req.body.fileLinksLink}/${fileLinksLink}`,
+                Key: `${req.user.estateName}/${titleLink}/${fileLinksLink}`,
                 Body: info,
                 ContentType: 'application/pdf',
                 ContentDisposition: 'inline',
                 ACL: "public-read"
             }; // req.user.estateName
+            console.log("data", data)
             bucket.putObject(data, function (err, data) {
                 if (err) {
                     console.log('Error uploading data: ', err);
@@ -381,15 +383,18 @@ router.post('/editMeeting', (req, res) => {
 })
 
 router.post('/editPoll', (req, res) => {
+  console.log("req.", req.body, req.files)
     var data = req.body
     var id = req.body.id
     var fileLinks = []
     var pollFileLinks = []
+    var promiseArr2 = []
     if(req.files && !(_.isEmpty(req.files))){
+          promiseArr2.push(new Promise(function(resolve, reject){
          for (var key in req.files) {
+          console.log(req.files[key][0])
             var info = req.files[key][0].data;
-            var name = req.files[key][0].name;
-      console.log(req.body, 'bodyyy')
+            var name = req.files[key][0].name.replace(/ /g,'');
                       var titleLink = ''
                       var fileLinksLink = ''
                       var meeting_title =''
@@ -400,12 +405,23 @@ router.post('/editPoll', (req, res) => {
                   if(req.body.meeting_title){
                     meeting_title = req.body.meeting_title.replace(/ /g,'');
                   }
+
                   if(name){
                       fileLinksLink = name
                       fileLinksLink = fileLinksLink.replace(/ /g,'');
                   }
-                  console.log(`${req.user.estateName}/${meeting_title}/${titleLink}/${fileLinksLink}`, 'key......')
             fileLinks.push(name)
+            Poll.findOneAndUpdate({_id: id
+                        }, {
+                          $push: { 
+                             fileLinks: name,
+                          }
+                        },{ 
+                          new: true 
+                        })
+                        .then(function (data, err) {
+                            console.log(data, "data")
+                            
             var data = {
                 Bucket: BucketName,
                 Key: `${req.user.estateName}/${meeting_title}/${titleLink}/${fileLinksLink}`,
@@ -419,21 +435,16 @@ router.post('/editPoll', (req, res) => {
                     console.log('Error uploading data: ', err);
                 } else {
                     console.log('succesfully uploaded the pdf!');
-                     Poll.findOneAndUpdate({_id: id
-                        }, {
-                          $push: { 
-                             fileLinks: name,
-                          }
-                        },{ 
-                          new: true 
-                        })
-                        .then(function (data, err) {
-                            console.log(data, "data")
-                            updatePoll(req, res, fileLinks)
-                        })
+                    resolve(data)
                 }
             });
+          })
         }     
+      }))
+          Promise.all(promiseArr2)
+          .then(function(fi, err){
+            updatePoll(req, res, fileLinks)
+          })
     }
     else{
         updatePoll(req, res, fileLinks)
@@ -450,16 +461,14 @@ router.post('/editPoll', (req, res) => {
         array = req.body.option
     }
     
-     if(req.body.removedfile){
-        var file = req.body.removedfile
+     if(req.body.removedfiles){
+        var file = req.body.removedfiles
          filearray = file.split(',')
-    promiseArr.push(new Promise(function(resolve, reject){
-    forEach(filearray, function(item){
-      console.log(req.body, 'body...........')
-      console.log(item, 'file array...........')
-      var titleLink =''
-      var fileLinksLink =''
-      var meeting_title = ''
+          promiseArr.push(new Promise(function(resolve, reject){
+          forEach(filearray, function(item){
+            var titleLink =''
+            var fileLinksLink =''
+            var meeting_title = ''
                   if(req.body.meeting_title){
                     meeting_title = req.body.meeting_title.replace(/ /g,'');
                   }
@@ -468,33 +477,22 @@ router.post('/editPoll', (req, res) => {
                   }
                   if(item){
                     fileLinksLink = item.replace(/ /g,'');
-                  }
-                  let Key = `${req.user.estateName}/${meeting_title}/${titleLink}/${fileLinksLink}`
-                  bucket.deleteObject({
-                      Bucket: BucketName,
-                      Key: Key
-                    }, function(err, filed){
-                      if(err){
-                        console.log(err, 'err remove')
-                      }else{
-                        console.log(filed, 'success remove')
-                      }
-                    })
-         Poll.findOneAndUpdate({_id: req.body.id
-    }, {
-      $pull: { 
-         fileLinks: item,
-      }
-    })
-         .then(function(d, err){
-            resolve(d)
-    })
-        })
-        })) 
-     Promise.all(promiseArr)
-    .then(function(dd){
-     update(req, res)
-    })
+                   }
+                 Poll.findOneAndUpdate({_id: req.body.id
+            }, {
+              $pull: { 
+                 fileLinks: item,
+              }
+            })
+                 .then(function(d, err){
+                    resolve(d)
+            })
+                })
+                })) 
+             Promise.all(promiseArr)
+            .then(function(dd){
+             update(req, res)
+            })
     }else{
         update(req, res)
 }  
@@ -550,7 +548,7 @@ router.get('/addMeeting',(req,res) => {
                 let polefileLinks = []; 
                 if(poll.fileLinks){ 
                     forEach(poll.fileLinks, function(name, key, a){ 
-                        let Key = `${req.user.estateName}/${poll.title}/${name}`;
+                        let Key = `${req.user.estateName}/${item.title}/${poll.title}/${name}`;
                         polefileLinks.push({
                           name: name,
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
@@ -606,7 +604,7 @@ function uploadFile(req, res){
     if (files && files[0].size != 0) {
         for (var i = 0; i < files.length; i++) {
             var info = files[i].data;
-            var name = files[i].name;
+            var name = files[i].name.replace(/ /g,'');
             //meeting.fileLinks.push(name);
             fileLinks.push(name)
             var titleLink = ''
