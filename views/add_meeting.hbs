@@ -148,7 +148,10 @@
             </div>
         </nav>
             <div class="tls-content-box">
-                <form name="pollform" action="/saveMeeting" method="post" enctype="multipart/form-data" >
+                <form name="pollform" action="/saveMeeting" id="saveMeeting" method="post" enctype="multipart/form-data" >
+                <div class="form-group col-sm-12" id="errorPopup" style="display: none;">
+                    <span id="popupError" class="errorField"></span>
+                </div>
                     <div class="form-group col-sm-6">
                         <label>Meeting Title</label>
                         <input type="text" class="form-control" name="meeting_title" required/>
@@ -861,8 +864,18 @@
         })
         var polls_array = [];
         $("#open_model").click(function () {
-            $('#poll_form')[0].reset();
-            $("#poll").modal();
+            if ($("#saveMeeting").valid()) {
+                $("#errorPopup").css('display','none');
+                $("#popupError").text("");
+                $("#popupError").text("*All field are Mandatory");
+                $('#poll_form')[0].reset();
+                $("#poll").modal();
+            }else{
+                $("#errorPopup").css('display','block');
+                $("#popupError").text("*All field are Mandatory");
+            }
+
+            
         })
 
         // $(".arrow-img2").click(function(event){
