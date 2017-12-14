@@ -135,10 +135,10 @@ router.post('/addPollsOfMeeting', (req, res) => {
   console.log("re", req.body)
     if(req.body.meeting_id){
       var meeting_title = ''
-      Meeting.find({_id: req.body.meeting_id}).then(function(meetings, err){
+      Meeting.findOne({_id: req.body.meeting_id}).then(function(meetings, err){
+        console.log("meetings", meetings)
         meeting_title = meetings.title;
-      })
-        const fileLinks = []
+              const fileLinks = []
         var pollFileLinks = []
                     if(req.files && !(_.isEmpty(req.files))){
                        for (var key in req.files) {
@@ -169,7 +169,9 @@ router.post('/addPollsOfMeeting', (req, res) => {
                 ContentDisposition: 'inline',
                 ACL: "public-read"
             }; // req.user.estateName
+            console.log("data", data)
             bucket.putObject(data, function (err, data) {
+
                 if (err) {
                     console.log('Error uploading data: ', err);
                 } else {
@@ -177,11 +179,13 @@ router.post('/addPollsOfMeeting', (req, res) => {
                     console.log('succesfully uploaded the pdf!');
                 }
             });
-        }    
+        } 
+
     }
     else{
         savePoll(req,res, fileLinks)
     }
+      })   
 }
     else{
           let formData = req.body;
