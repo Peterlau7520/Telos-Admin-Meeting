@@ -345,6 +345,25 @@ router.post('/editMeeting', (req, res) => {
                   }
                 })
                  .then(function(r, err){
+                  var titleLink = ''
+                  var fileLinksLink = ''
+                  if(data.title){
+                    titleLink = data.title.replace(/ /g,'');
+                  }
+                  if(data.removedfiles){
+                    fileLinksLink = data.removedfiles.replace(/ /g,'');
+                  }
+                  let Key = `${req.user.estateName}/${titleLink}/${fileLinksLink}`
+                  bucket.deleteObject({
+                      Bucket: BucketName,
+                      Key: Key
+                    }, function(err, filed){
+                      if(err){
+                        console.log(err, 'err remove')
+                      }else{
+                        console.log(filed, 'success remove')
+                      }
+                    })
                     res.redirect('/allMeetings')
                  })
             }
@@ -366,22 +385,26 @@ router.post('/editPoll', (req, res) => {
          for (var key in req.files) {
             var info = req.files[key][0].data;
             var name = req.files[key][0].name;
-            //meeting.fileLinks.push(name);
-            //Let key = `${req.user.estateName}/${req.body.title}/${name}`
+      console.log(req.body, 'bodyyy')
                       var titleLink = ''
                       var fileLinksLink = ''
-                      if(req.body.title){
-                      titleLink = req.body.title
+                      var meeting_title =''
+                      if(req.body.pollName){
+                      titleLink = req.body.pollName
                       titleLink = titleLink.replace(/ /g,'');
+                  }
+                  if(req.body.meeting_title){
+                    meeting_title = req.body.meeting_title.replace(/ /g,'');
                   }
                   if(name){
                       fileLinksLink = name
                       fileLinksLink = fileLinksLink.replace(/ /g,'');
                   }
+                  console.log(`${req.user.estateName}/${meeting_title}/${titleLink}/${fileLinksLink}`, 'key......')
             fileLinks.push(name)
             var data = {
                 Bucket: BucketName,
-                Key: `${req.user.estateName}/${titleLink}/${fileLinksLink}`,
+                Key: `${req.user.estateName}/${meeting_title}/${titleLink}/${fileLinksLink}`,
                 Body: info,
                 ContentType: 'application/pdf',
                 ContentDisposition: 'inline',
@@ -428,6 +451,31 @@ router.post('/editPoll', (req, res) => {
          filearray = file.split(',')
     promiseArr.push(new Promise(function(resolve, reject){
     forEach(filearray, function(item){
+      console.log(req.body, 'body...........')
+      console.log(item, 'file array...........')
+      var titleLink =''
+      var fileLinksLink =''
+      var meeting_title = ''
+                  if(req.body.meeting_title){
+                    meeting_title = req.body.meeting_title.replace(/ /g,'');
+                  }
+                  if(req.body.pollName){
+                    titleLink = req.body.pollName.replace(/ /g,'');
+                  }
+                  if(item){
+                    fileLinksLink = item.replace(/ /g,'');
+                  }
+                  let Key = `${req.user.estateName}/${meeting_title}/${titleLink}/${fileLinksLink}`
+                  bucket.deleteObject({
+                      Bucket: BucketName,
+                      Key: Key
+                    }, function(err, filed){
+                      if(err){
+                        console.log(err, 'err remove')
+                      }else{
+                        console.log(filed, 'success remove')
+                      }
+                    })
          Poll.findOneAndUpdate({_id: req.body.id
     }, {
       $pull: { 

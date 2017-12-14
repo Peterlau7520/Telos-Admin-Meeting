@@ -572,6 +572,7 @@
                 <form role="form" action="/editPoll" method="post" name="editpoll_form" id="editpoll_form" enctype="multipart/form-data" >
                     <div class="form-group col-sm-6">
                         <label>Poll Title</label>
+                        <input type = "hidden" name="meeting_title" id="meeting_title"/>
                         <input type = "hidden" name="id" id="id"/>
                         <input type="text" name="pollName" id="title" class="form-control">
                     </div>
@@ -912,8 +913,9 @@ function edit_poll(event){
              
         });
        
-        $(optionWrapper).on("click",".remove_field", function(e){ //user click on remove text
+        $(document).on("click",".remove_field", function(e){ //user click on remove text
             e.preventDefault(); 
+            console.log('here')
             $(this).parent('div').remove();
         })
         var removedFile = []
@@ -1205,6 +1207,7 @@ function edit_poll(event){
              originalData = JSON.parse(originalData);
             var poll = originalData[parentId].polls[childId]
             var lastDate = new Date(originalData[parentId].createdAt)
+            var meeting_title = originalData[parentId].title
             lastDate = lastDate.setDate(lastDate.getDate() + 3);
             lastDate = new Date(lastDate)
             if(lastDate <= new Date()){
@@ -1215,6 +1218,7 @@ function edit_poll(event){
                 $('#editpoll_form')[0].reset();
                 //$('.documents_wrapper1').reset();
                 $("#poll").modal();
+                $("#meeting_title").val(meeting_title);
                 $("#title").val(poll.pollName);
                 $("#id").val(poll._id);
                 $("#title_chinese").val(poll.pollNameChn);
