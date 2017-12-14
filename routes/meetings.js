@@ -88,13 +88,11 @@ router.get('/allMeetings', (req, res) => {
                           name: name,
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
                         })
-                        console.log(polefileLinks, "Poll1")
                       poll.fileLinks = polefileLinks;
                     })
                 }
                 })
             }
-                    console.log(item.endTime)
                      var startTime = moment.utc(new Date(item.startTime));
                     item.startTime =  startTime.format("MM/DD/YYYY hh:mm a");
                     if(Date.parse(new Date(item.endTime)) > Date.parse(new Date)){
@@ -133,6 +131,7 @@ router.get('/allMeetings', (req, res) => {
 })
 
 router.post('/addPollsOfMeeting', (req, res) => {
+  console.log("re", req.body)
     if(req.body.meeting_id){
         const fileLinks = []
         var pollFileLinks = []
@@ -223,7 +222,6 @@ router.post('/addPollsOfMeeting', (req, res) => {
     Meeting.findOne(
             { _id: req.body.meeting_id })
     .then(function(m, err){
-        console.log(req.body, '----------poll')
         var poll = new Poll({
                             pollName: req.body.title,
                             pollNameChn: req.body.title_chinese,
@@ -241,7 +239,6 @@ router.post('/addPollsOfMeeting', (req, res) => {
                             });
                             poll.save()
                                 .then(function(poll){
-                                    console.log(poll)
                                     Meeting.update(
                                         { _id: req.body.meeting_id },
                                         { $push: { polls:  poll._id} } 
@@ -257,7 +254,6 @@ router.post('/addPollsOfMeeting', (req, res) => {
 
 
 router.post('/editMeeting', (req, res) => {
-    console.log(req.body, "rrrr")
     var fileLinks = []
     if(req.files && req.files.fileField) {
         var files = req.files.fileField
@@ -307,7 +303,6 @@ router.post('/editMeeting', (req, res) => {
     function save(req, res, file){
         const data = req.body
         var id = data.meeting_id
-         console.log('removedfile', req.body)
     Meeting.findOneAndUpdate({
       _id: id
     }, {
@@ -331,7 +326,6 @@ router.post('/editMeeting', (req, res) => {
         }
         else{ 
             if(data.removedfiles){
-                console.log('removedfile')
                  Meeting.findOneAndUpdate({_id: id
                 }, {
                   $pull: { 
@@ -553,14 +547,15 @@ function uploadFile(req, res){
             fileLinks.push(name)
             var titleLink = ''
                       var fileLinksLink = ''
-                      if(req.body.title){
-                      titleLink = req.body.title
+                      if(req.body.meeting_title){
+                      titleLink = req.body.meeting_title
                       titleLink = titleLink.trim();
                   }
                   if(name){
                       fileLinksLink = name
                       fileLinksLink = fileLinksLink.trim();
                   }
+                  console.log(req.user.estateName , titleLink, fileLinksLink)
             var data = {
                 Bucket: BucketName,
                 Key:  `${req.user.estateName}/${titleLink}/${fileLinksLink}`,
@@ -586,8 +581,6 @@ function uploadFile(req, res){
         }
 
 function savePoll(req, res, fileLinks){
-    console.log(req.body, req.user)
-    console.log(req.body)
     const promiseArr = []
     if(req.body.startTime) {
         var meetingStartDay = req.body.startTime.substring(0, req.body.startTime.indexOf('T'));
@@ -634,7 +627,6 @@ function savePoll(req, res, fileLinks){
             })
         Promise.all(promiseArr)
         .then(function(d){ 
-            console.log(d)
             //saveMeeting(req, res, fileLinks, polls)
         var meeting = new Meeting({
                 title: req.body.meeting_title,
@@ -658,7 +650,6 @@ function savePoll(req, res, fileLinks){
 });
 
 router.post('/deleteMeeting',(req,res) => {
-    console.log(req.body)
     Meeting.deleteOne({_id: req.body.meeting_id}, function (err, todo) {
         if (err) res.send(err);
         res.redirect('/allMeetings');
@@ -666,7 +657,6 @@ router.post('/deleteMeeting',(req,res) => {
 });
 
 router.post('/deletePoll',(req,res) => {
-    console.log(req.body)
      Poll.deleteOne({_id: req.body.pollId}, function (err, todo) {
         if (err) { res.redirect('/allMeetings')}
         Meeting.update(

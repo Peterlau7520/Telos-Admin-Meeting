@@ -635,8 +635,7 @@
                 <h4 class="modal-title">Add a poll</h4>
             </div>
             <div class="modal-body">
-                <form role="form" name="#poll_form" id="poll_form" 
-                action="/addPollsOfMeeting"  method="post" enctype="multipart/form-data">
+                <form  role="form" action="/addPollsOfMeeting" method="post" enctype="multipart/form-data"  name="#poll_form" id="poll_form" >
                     <div class="form-group col-sm-6 formlabel">
                         <label>Poll Title</label>
                         <input type="text" name="title" class="form-control">
@@ -668,12 +667,10 @@
                         </div>
                     </div>
 
-
-
                     <div class="form-group col-sm-6">
                         <label>Add Documents</label>
                         <p>
-                        <button class="add_documents addoptionbtn btn btn-primary">Add documents | 上傳文件</button>
+                        <button class="add_documents addoptionbtn btn btn-primary" type="button">Add documents | 上傳文件</button>
                         <div class="documents_wrapper" id="documents_file">
                         </div>
                         </p>
@@ -851,9 +848,8 @@ function edit_poll(event){
     })
 //        
         $("#close_model2").click(function (event) {
+            console.log("called")
             $("#poll2").modal("hide");
-            var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'
-            $("#loading").append(html);
             $(".add_pole").prop('disabled', true);
              $.each($(".voting_opt :input[name*='option']"), function(data, key){  
               options1.push($(this).val())
@@ -862,6 +858,8 @@ function edit_poll(event){
               newArray = jQuery.unique(newArray)
               $(".voting_opt").append(`<input type ="hidden" name="options" value=${newArray} />`)
                index1 = index1 + 1
+              /*  var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'
+            $("#loading").append(html);*/
         })    
 
         $("#close_model").click(function () {
