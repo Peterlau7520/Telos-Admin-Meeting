@@ -41,6 +41,7 @@ router.get('/allMeetings', (req, res) => {
         const promiseArr = []
         var currentMeetings = []
         var pastMeetings = []
+        var pollMeeting_title = '';
         if(meetings.length > 0) {
             promiseArr.push(new Promise(function(resolve, reject){
                forEach(meetings, function(item, key, a){
@@ -50,13 +51,13 @@ router.get('/allMeetings', (req, res) => {
                       var fileLinksLink = ''
                       if(item.title){
                       titleLink = item.title
-                      titleLink = titleLink.trim();
+                      titleLink = titleLink.replace(/ /g,'');
+                      pollMeeting_title = titleLink
                   }
                   if(item.fileLinks[0]){
                       fileLinksLink = item.fileLinks[0]
-                      fileLinksLink = fileLinksLink.trim();
+                      fileLinksLink = fileLinksLink.replace(/ /g,'');
                   }
-                       
                         let Key = `${req.user.estateName}/${titleLink}/${fileLinksLink}`;
                         fileLinks.push({
                           name: item.fileLinks[0],
@@ -74,16 +75,16 @@ router.get('/allMeetings', (req, res) => {
                         let fileLinks = [];
                       var titleLink = ''
                       var fileLinksLink = ''
-                      if(poll.title){
-                      titleLink = poll.title
-                      titleLink = titleLink.trim();
+                      if(poll.pollName){
+                      titleLink = poll.pollName
+                      titleLink = titleLink.replace(/ /g,'');
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.trim();
+                      fileLinksLink = fileLinksLink.replace(/ /g,'');
                   }
 
-                        let Key = `${req.user.estateName}/${titleLink}/${fileLinksLink}`;
+                        let Key = `${req.user.estateName}/${pollMeeting_title}/${titleLink}/${fileLinksLink}`;
                         polefileLinks.push({
                           name: name,
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
@@ -133,6 +134,10 @@ router.get('/allMeetings', (req, res) => {
 router.post('/addPollsOfMeeting', (req, res) => {
   console.log("re", req.body)
     if(req.body.meeting_id){
+      var meeting_title = ''
+      Meeting.find({_id: req.body.meeting_id}).then(function(meetings, err){
+        meeting_title = meetings.title;
+      })
         const fileLinks = []
         var pollFileLinks = []
                     if(req.files && !(_.isEmpty(req.files))){
@@ -146,15 +151,19 @@ router.post('/addPollsOfMeeting', (req, res) => {
                       var fileLinksLink = ''
                       if(req.body.title){
                       titleLink = req.body.title
-                      titleLink = titleLink.trim();
+                      titleLink = titleLink.replace(/ /g,'');
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.trim();
+                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                  }
+                  if(meeting_title){
+
+                      meeting_title = meeting_title.replace(/ /g,'');
                   }
             var data = {
                 Bucket: BucketName,
-                Key: `${req.user.estateName}/${titleLink}/${fileLinksLink}`,
+                Key: `${req.user.estateName}/${meeting_title}/${titleLink}/${fileLinksLink}`,
                 Body: info,
                 ContentType: 'application/pdf',
                 ContentDisposition: 'inline',
@@ -179,6 +188,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
         for (var key in req.files) {
             var info = req.files[key][0].data;
             var name = req.files[key][0].name;
+            var meeting_title = req.body.pollMeeting_title
             //meeting.fileLinks.push(name);
             //Let key = `${req.user.estateName}/${req.body.title}/${name}`
             //fileLinks.push(name)
@@ -186,15 +196,16 @@ router.post('/addPollsOfMeeting', (req, res) => {
                       var fileLinksLink = ''
                       if(req.body.title){
                       titleLink = req.body.title
-                      titleLink = titleLink.trim();
+                      titleLink = titleLink.replace(/ /g,'');
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.trim();
+                      fileLinksLink = fileLinksLink.replace(/ /g,'');
                   }
+                  meeting_title = meeting_title.replace(/ /g,'');
             var data = {
                 Bucket: BucketName,
-                Key: `${req.user.estateName}/${titleLink}/${fileLinksLink}`,
+                Key: `${req.user.estateName}/${meeting_title}/${titleLink}/${fileLinksLink}`,
                 Body: info,
                 ContentType: 'application/pdf',
                 ContentDisposition: 'inline',
@@ -205,6 +216,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
                     console.log('Error uploading data: ', err);
                 } else {
                     console.log('succesfully uploaded the pdf!');
+
                 }
             });
         }       
@@ -266,11 +278,11 @@ router.post('/editMeeting', (req, res) => {
                       var fileLinksLink = ''
                       if(req.body.title){
                       titleLink = req.body.title
-                      titleLink = titleLink.trim();
+                      titleLink = titleLink.replace(/ /g,'');
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.trim();
+                      fileLinksLink = fileLinksLink.replace(/ /g,'');
                   }
                 var data = {
                 Bucket: BucketName,
@@ -360,11 +372,11 @@ router.post('/editPoll', (req, res) => {
                       var fileLinksLink = ''
                       if(req.body.title){
                       titleLink = req.body.title
-                      titleLink = titleLink.trim();
+                      titleLink = titleLink.replace(/ /g,'');
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.trim();
+                      fileLinksLink = fileLinksLink.replace(/ /g,'');
                   }
             fileLinks.push(name)
             var data = {
@@ -549,11 +561,11 @@ function uploadFile(req, res){
                       var fileLinksLink = ''
                       if(req.body.meeting_title){
                       titleLink = req.body.meeting_title
-                      titleLink = titleLink.trim();
+                      titleLink = titleLink.replace(/ /g,'');
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.trim();
+                      fileLinksLink = fileLinksLink.replace(/ /g,'');
                   }
                   console.log(req.user.estateName , titleLink, fileLinksLink)
             var data = {

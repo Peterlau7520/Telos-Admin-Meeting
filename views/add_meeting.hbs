@@ -635,6 +635,7 @@
                 <form role="form" name="#poll_form" id="poll_form" action="/addPollsOfMeeting"  method="post" enctype="multipart/form-data">
                     <div class="form-group col-sm-6">
                         <label>Poll Title</label>
+                        <input type="hidden" name="pollMeeting_title" class="form-control" />
                         <input type="text" name="title" class="form-control" required/>
                     </div>
                     <div class="form-group col-sm-6">
@@ -906,9 +907,9 @@
                 }
                })
         $("#close_model").click(function (event) {
-            event.preventDefault()
+            var meeting_title = $('input[name=meeting_title]').val()
+            $('input[name=pollMeeting_title]').val(meeting_title)
             var form_data_array = $("#poll_form").serializeArray();
-            console.log(form_data_array);
             var form_json = {};
             var formData = new FormData();
             var alerted = false
