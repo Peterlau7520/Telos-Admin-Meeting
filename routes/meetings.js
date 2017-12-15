@@ -119,7 +119,6 @@ router.get('/allMeetings', (req, res) => {
                 }
               })
               .then(function(estate){
-
                  res.render('meeting', data[0]);
                })
             })

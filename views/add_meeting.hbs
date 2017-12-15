@@ -197,7 +197,7 @@
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-12">
                         <p> 
-                            <input type="button" class="btn btn-primary poll-btn" value="Add a Poll | 添加會議" id="open_model"/>
+                            <input type="button" class="btn btn-primary poll-btn" value="Add a Poll | 添加投票" id="open_model"/>
                         </p>
                     </div>
                     <div class="form-group col-sm-12 currentpolls">
@@ -308,7 +308,7 @@
                                     <div class="clearfix"></div>
                                 </form>
                                 <div id="loading1"></div>
-                                 <button class="btn btn-primary add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a Poll | 增加投票</button>
+                                 <button class="btn btn-primary add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a Poll | 添加投票</button>
                                </div>
                             </div>
                            
@@ -619,7 +619,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add a poll</h4>
+                <h4 class="modal-title">Add a poll | 添加投票</h4>
             </div>
             <div class="modal-body">
                 <form role="form" name="#poll_form" id="poll_form" action="/addPollsOfMeeting"  method="post" enctype="multipart/form-data">
@@ -693,7 +693,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add a poll</h4>
+                <h4 class="modal-title">Add a poll | 添加投票</h4>
             </div>
             <div class="modal-body">
                 <form role="form" action="/editPoll" method="post" name="editpoll_form" id="editpoll_form" enctype="multipart/form-data" >
@@ -760,7 +760,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add a poll</h4>
+                <h4 class="modal-title">Add a poll | 添加投票</h4>
             </div>
             <div class="modal-body">
                 <form role="form" name="#poll_form" id="poll_form" 
@@ -909,7 +909,7 @@
                 if($("#poll_json").val() == ''){
                     valid = false;
                     event.preventDefault();
-                    alert("Please Add a poll")
+                    alert("Please add a poll | 請至少加入一項投票")
                 }
                 if(valid){
                     var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'               

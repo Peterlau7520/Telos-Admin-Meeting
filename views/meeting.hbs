@@ -101,7 +101,7 @@
                                                 {{else}}
                                                 <li role="presentation" class="active">
                                                     {{/if}}
-                                                    <a class='meeting_li' href="#tab_{{_id}}" aria-controls="home" id="{{@key}}" role="tab" data-toggle="tab">{{title}}</a>
+                                                    <a class='meeting_li' href="#tab_{{_id}}" aria-controls="home" id="{{@key}}" role="tab" data-toggle="tab">{{title}} | {{titleChn}}</a>
                                                 </li>
                                             </li>
                                             {{/each}}
@@ -121,7 +121,7 @@
                                         <ul class="nav navbar-nav" role="tablist">
                                             {{#each pastMeetingsData}}
                                             <li role="presentation">
-                                                <a class='past-meeting' href="#tab_{{_id}}" aria-controls="home" role="tab" data-toggle="tab" >{{title}}</a>
+                                                <a class='past-meeting' href="#tab_{{_id}}" aria-controls="home" role="tab" data-toggle="tab" >{{title}} | {{titleChn}}</a>
                                             </li>
                                             {{/each}}
                                         </ul>
@@ -172,8 +172,8 @@
                                     </div>
                                     <div class="form-group col-sm-6 text-right">
                                         <div id="loading1"></div>
-                                        <button class="btn edit_meeting1 btn-primary" id={{meeting_key}} type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"  >編輯會議 | Edit Meeting</button>
-                                        <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" id="{{_id}}" data-time="{{created_at}}">Delete Meeting</button>
+                                        <button class="btn edit_meeting1 btn-primary" id={{meeting_key}} type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"  >Edit Meeting | 編輯會議</button>
+                                        <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" id="{{_id}}" data-time="{{created_at}}">Delete Meeting | 取消會議</button>
                                         <button style='display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
                                     </div>
                                     <div class="clearfix"></div>
@@ -217,7 +217,7 @@
                                     <div class="clearfix"></div>
                                 </form>
                                 <div id="loading"></div>
-                                 <button class="btn btn-primary add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a poll</button>
+                                 <button class="btn btn-primary add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a poll | 添加投票</button>
                                </div>
                             </div>
                            
@@ -233,7 +233,7 @@
                                                     {{pollNameChn}} | {{pollName}} 
                                                 </h4>
                                                 <h6 class="pull-right" style="margin-top: -23px">
-                                                Vote by: {{endTime}}
+                                                Vote by | 投票截止於: {{endTime}}
                                                 </h6>
                                             </div>
                                         </a>
@@ -409,7 +409,7 @@
                                                     {{pollNameChn}} | {{pollName}} 
                                                 </h4>
                                                 <h6 class="pull-right" style="margin-top: -23px">
-                                                Vote by: {{endTime}}
+                                                Vote by | 投票截止於: {{endTime}}
                                                 </h6>
                                             </div>
                                         </a>
@@ -776,7 +776,7 @@ function edit_poll(event){
 
         $('.meeting_li').click(function (event) {
             $('.save_meeting').hide()
-            $('#heading3').text('Upcoming Meeting')
+            $('#heading3').text('Upcoming Meeting | 近期會議')
             var html = ''
             $('#headingBottom2').html('')
             var id = event.target.id
@@ -1015,7 +1015,7 @@ function edit_poll(event){
 
         function edit_popup(data){
             var html = '<div class="div-wrapper" style="padding: 10px;">'+
-            '<h3 class= "heading">' + "Upcoming Meeting"+ '</h3>' + '                                        <button class=" btn btn-danger deleteMeeting deletebtn btn-danger" type="submit" id={{data._id}} data-id={{data._id}} data-time="">取消會議 | Delete Meeting</button>' + '<hr>' +
+            '<h3 class= "heading">' + "Upcoming Meeting | 近期會議"+ '</h3>' + '                                        <button class=" btn btn-danger deleteMeeting deletebtn btn-danger" type="submit" id={{data._id}} data-id={{data._id}} data-time="">Delete Meeting | 取消會議</button>' + '<hr>' +
             
 '                                <form role="form" enctype="multipart/form-data" name="edit_meeting_popup" id="edit_meeting_popup" action="/editMeeting" method="post">'+
 '                                    <div class="form-group col-sm-6">'+
