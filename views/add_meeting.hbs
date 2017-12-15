@@ -828,9 +828,14 @@
         $("#sidebarMenu").css({"min-height":hd})
     }
 
+
     $(document).ready(function () {  
         hd();
         $(".panel-heading").click(function(){
+            setTimeout(()=>{hd();},500)
+        })
+        $(".panel-headOpen").click(function(){
+            console.log('here')
             setTimeout(()=>{hd();},500)
         })
         //Add documents
@@ -868,9 +873,10 @@
                 $("#popupError").text("*All field are Mandatory");
                 $('#poll_form')[0].reset();
                 $("#poll").modal();
-            }else{
+            }else{                  
                 $("#errorPopup").css('display','block');
                 $("#popupError").text("*All field are Mandatory");
+                setTimeout(()=>{hd();},500)
             }
 
             
@@ -914,9 +920,14 @@
                 if(valid){
                     var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'               
             $("#loading").append(html);
+            setTimeout(()=>{hd();},500)
             setTimeout(function(){ $(".custom_success_btn").prop('disabled', true); }, 500);
                 }
                })
+        $(document).on("click",".panel-headOpen", function(e){
+            console.log('here')
+            setTimeout(()=>{hd();},500)
+        })
         $("#close_model").click(function (event) {
             var meeting_title = $('input[name=meeting_title]').val()
             $('input[name=pollMeeting_title]').val(meeting_title)
@@ -973,7 +984,7 @@
                         {
                                 html+=`<div class="panel-group">
                                     <div class="panel panel-default" '>
-                                        <div class="panel-heading" style="background-color: #ffffff;">
+                                        <div class="panel-heading panel-headOpen" style="background-color: #ffffff;">
                                             <a style='color:black' data-toggle="collapse" href="#collapse${i}">
                                         <h4 class="panel-title" style="text-align: center;">
                                             ${polls_array[i].title} | ${polls_array[i].title_chinese}
@@ -1035,6 +1046,7 @@
                         }
                     $('.panel-wrapper-custom').html(html);
                     $('.currentpolls').html(`<label> 現行投票 | CURRENT POLLS : ${length}</label>`)
+                    setTimeout(()=>{hd();},500)
         })
 // meeting js
 
