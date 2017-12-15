@@ -1,4 +1,4 @@
-<html>
+    <html>
 <head>
      <link href="assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
@@ -80,8 +80,8 @@
                 </div>
             </div>
         </nav>
-        <div class="row page-wrapper custom_wrapper">
-            <div class="side-menu">
+        <div id="customMainComponent" class="row page-wrapper custom_wrapper">
+            <div id="sidebarMenu" class="side-menu">
                 <nav class="navbar navbar-default" role="navigation">
                     <!-- Main Menu -->
                     <div class="side-menu-container">
@@ -690,6 +690,11 @@
 </body>
 </html>
 <script type="text/javascript">
+
+    function hd(){
+        var hd = $("#customMainComponent").height()  
+        $("#sidebarMenu").css({"min-height":hd})
+    }
 /*var optionEdit = []
 function edit_poll(event){
             var parentId = event.target.parentElement.id;
@@ -734,6 +739,10 @@ function edit_poll(event){
     
 
     $(document).ready(function () {
+         hd();
+        $(".panel-heading").click(function(){
+            setTimeout(()=>{hd();},500)
+        })
          var tabSelected = localStorage.getItem("tab");       
         if(tabSelected){
             var tabDiv = localStorage.getItem("divTab");
@@ -774,20 +783,21 @@ function edit_poll(event){
             var ids = 'tab_'+originalData[id]._id;
             localStorage.setItem("tab", id);
             localStorage.setItem("divTab", ids);
-             var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-             console.log(originalData[id])
             var firstDate = new Date(originalData[id].createdAt);
-            var secondDate = new Date(originalData[id].createdAt);
-            secondDate = new Date(secondDate.setDate(firstDate.getDate() + 3));
-            console.log(firstDate, 'firstDate')
-            console.log(secondDate, 'secondDate')
-            var diff = secondDate - firstDate;  
-            //var seconds = diff / 1000;
-            //var minutes = (diff / 1000) / 60;
-            //var hours = minutes / 60;
+            var secondDate = new Date();
+            firstDate.setDate(firstDate.getDate() + 3);
+           // secondDate.setHours(firstDate.getHours());
+           // secondDate.setMinutes(firstDate.getMinutes());
+            var diff = firstDate - secondDate;  
+            var seconds = diff / 1000;
+            var minutes = (diff / 1000) / 60;
+            var hours = minutes / 60;
 
-            //var hours = Math.floor(hours);
-            var hours = Math.round(Math.abs(firstDate - secondDate) / 36e5);
+            var hours = Math.floor(hours);
+            if(hours < 0){
+                hours =0;
+            }
+            //var hours = Math.round(Math.abs(firstDate - secondDate) / 36e5);
             hours = 'Hours remaining to edit or delete polls | 剩下的時間可以取消或修改投票: ' + hours;
             $( "#endhour" ).text(hours)
         }) 

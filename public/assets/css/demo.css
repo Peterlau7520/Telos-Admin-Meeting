@@ -225,16 +225,20 @@
     background-color: #f8f8f8;
     border-right: 1px solid #e7e7e7;
 }*/
-
+.rightsidebar-container{
+   float: left;
+    width: 70%;
+     
+}
 .side-menu {
     float: left;
-    width: 300px;
+    width: 30%;
     min-height: auto;
     background-color: #fff;
     position: relative;
- /*   border-right: 1px solid #e7e7e7;*/
-    min-height: 100vh;
-    height: 100vh;
+     min-height: 850px;
+     min-height: 100vh;
+    border-right: 1px solid #e7e7e7;  
 }
 .side-menu .navbar {
     border: none;
@@ -550,8 +554,8 @@ textarea {
     display: block;
     width: auto;
     overflow: hidden;
-    border-left: 1px solid #e7e7e7;
-   /*  padding: 15px; */
+    /*border-left: 1px solid #e7e7e7; */
+    /*padding: 15px; */
     min-height: 850px;
 }
 

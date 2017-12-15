@@ -73,8 +73,8 @@
                 </div>
             </div>
         </nav>
-        <div class="row page-wrapper custom_wrapper">
-        <div class="side-menu">
+        <div id="customMainComponent" class="row page-wrapper custom_wrapper">
+        <div id="sidebarMenu" class="side-menu">
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="side-menu-container">
                         <ul class="nav navbar-nav sidebar-nav">
@@ -129,6 +129,8 @@
                 </div> -->
             </div>
             <!--Start-->
+<div class="rightsidebar-container">
+    
 
  <div class="custom_scroll_wrap rightsidebar add-meeting-wrap">
             <div class=" tab-content tab-wraper tls-wrapper tab-swich">
@@ -574,6 +576,7 @@
                 </div> -->
                 
                 <!--End-->
+    </div>
  </div>
 
         <footer class="footer">
@@ -819,7 +822,17 @@
 
             
 <script type="text/javascript">
-    $(document).ready(function () {    
+
+    function hd(){
+        var hd = $("#customMainComponent").height()  
+        $("#sidebarMenu").css({"min-height":hd})
+    }
+
+    $(document).ready(function () {  
+        hd();
+        $(".panel-heading").click(function(){
+            setTimeout(()=>{hd();},500)
+        })
         //Add documents
         var index = 0 
         var files = []
@@ -1050,22 +1063,28 @@ var originalData = '{{{stringify meetingsData}}}';
             var id = event.target.id
             console.log(id)
              var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-            var firstDate = new Date(originalData[id].createdAt);
+            
             var ids = 'tab_'+originalData[id]._id;
             localStorage.setItem("tab", id);
             localStorage.setItem("divTab", ids);
-            var secondDate = new Date(originalData[id].createdAt);
-            secondDate = new Date(secondDate.setDate(firstDate.getDate() + 3));
+            var firstDate = new Date(originalData[id].createdAt);
+            var secondDate = new Date();
+            firstDate.setDate(firstDate.getDate() + 3);
+           // secondDate.setHours(firstDate.getHours());
+           // secondDate.setMinutes(firstDate.getMinutes());
+            var diff = firstDate - secondDate;  
+            var seconds = diff / 1000;
+            var minutes = (diff / 1000) / 60;
+            var hours = minutes / 60;
+
+            var hours = Math.floor(hours);
+            if(hours < 0){
+                hours =0;
+            }
             console.log(firstDate, 'firstDate')
             console.log(secondDate, 'secondDate')
-            var diff = secondDate - firstDate;  
-            //var seconds = diff / 1000;
-            //var minutes = (diff / 1000) / 60;
-            //var hours = minutes / 60;
-
-            //var hours = Math.floor(hours);
-            var hours = Math.round(Math.abs(firstDate - secondDate) / 36e5);
-            hours = '剩下的時間可以取消或修改投票 | Hours remaining to edit or delete polls: ' + hours;
+            //var hours = Math.round(Math.abs(firstDate - secondDate) / 36e5);
+            hours = 'Hours remaining to edit or delete polls | 剩下的時間可以取消或修改投票: ' + hours;
             $( "#endhour" ).text(hours)
         }) 
         $('.past-meeting').click(function (event) {
