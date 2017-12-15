@@ -27,8 +27,7 @@ let docFileName,pathParams,dataFile;
 const BucketName = 'telospdf';
 AWS.config.update({
   accessKeyId: 'AKIAIMLMZLII2XCKU6UA',
-  secretAccessKey: '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',
-  region: 'ap-southeast-1'
+  secretAccessKey: 'elD95wpngb2NiAfJSSCYOKhVmEAp+X2rnTSKIZ00'
 });
 const bucket = new AWS.S3({params: {Bucket: BucketName}});
 

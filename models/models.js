@@ -28,10 +28,21 @@ const residentSchema = new Schema({
     unit: String,
     block: String,
     floor: String,
-    owner: Boolean,
-    HKIDUrl: String,
-    digitalSignature: String,
-    shares: String
+    nature: String,
+    numberOfOwners: String,
+    shares: String,
+    hkid: String,
+    hkidImage: String,
+    signature: String,
+    chopImage: String,
+    proxyAppointed: [], //ALL THE MEETINGS WHERE THEY APPOINT US AS THE PROXY.
+    deviceToken: String,
+    posts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Post'
+        }
+    ]
 });
 
 //ESTATE
@@ -112,8 +123,34 @@ const noticeSchema = new Schema({
 
 //SURVEY
 const surveySchema = new Schema({
+    title: String,
+    titleChn: String,
+    effectiveTo: Date,
+    postDate: {type: Date, default: new Date()},
+    targetAudience: [{block: String, floors: Array}],
 })
 
+const questionSchema = new Schema({
+    questionEn: String,
+    questionChn: String,
+    optionIds: [{ type: Schema.ObjectId, ref: 'Options' }],
+    surveyId: { type: Schema.ObjectId, ref: 'Survey' },
+})
+
+const optionSchema = new Schema({
+    questionId: { type: Schema.ObjectId, ref: 'Question' },
+    optionNameEn: String,
+    optionNameChn: String,
+    optionsEn: [],
+    optionsChn: []
+})
+
+const userAnswersSchema = new Schema({
+    questionId: { type: Schema.ObjectId, ref: 'Question' },
+    surveyId: { type: Schema.ObjectId, ref: 'Survey' },
+    optionId: { type: Schema.ObjectId, ref: 'Option' },
+    userId: { type: Schema.ObjectId, ref: 'User' },
+})
 //MEETING SCHEMA
 const meetingSchema = new Schema({
     title: String,
@@ -141,6 +178,9 @@ const Estate =   mongoose.model('Estate', estateSchema);
 const Poll = mongoose.model('Poll', pollSchema);
 const Notice = mongoose.model('Notice', noticeSchema);
 const Survey = mongoose.model('Survey', surveySchema);
+const UserAnswers = mongoose.model('UserAnswers', userAnswersSchema)
+const Options = mongoose.model('Options', optionSchema);
+const Question = mongoose.model('Question', questionSchema);
 const Meeting = mongoose.model('Meeting', meetingSchema);
 
 module.exports = {
@@ -149,5 +189,8 @@ module.exports = {
     Poll,
     Notice,
     Survey,
+    Question,
+    UserAnswers,
+    Options,
     Meeting
 }
