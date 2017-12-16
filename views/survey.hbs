@@ -1,0 +1,1310 @@
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <link rel="stylesheet" href="assets/css/flatpickr.min.css">
+    <script src="https://unpkg.com/flatpickr"></script>
+    <!--  Survey CSS 1    -->
+    <link href="assets/css/admin-survey-css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+    <!--  Survey CSS 2     -->
+    <link href="assets/css/admin-survey-css/demo.css" rel="stylesheet" />
+  </head>
+  <style>
+    label, input { display:block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    textarea { margin: 0px 10.9688px 0px 0px;
+    height: 108px !important;
+    width: 141px; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+    h1 { font-size: 1.2em; margin: .6em 0; }
+    div#users-contain { width: 350px; margin: 20px 0; }
+    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+    .ui-dialog .ui-state-error { padding: .3em; }
+    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+    .datetimepicker {
+        background-color: #FFFFFF;border: 1px solid #E3E3E3;border-radius: 4px;color: #565656;padding: 8px 12px;"
+    }
+  </style>
+<div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
+
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="/" class="simple-text">
+                    The Beverly Hills
+                </a>
+                <a href="/" class="simple-text">
+                    比華利山莊
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li>
+                    <a href="/currentpolls.html">
+                        <i class="pe-7s-graph"></i>
+                        <p>NOTICEBOARD<br>
+                            通告
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/currentpolls.html">
+                        <i class="pe-7s-graph"></i>
+                        <p>MEETINGS<br>
+                            會議
+                        </p>
+                    </a>
+                </li>
+                <li class="active" >
+                    <a href="/pastpolls.html">
+                        <i class="pe-7s-user"></i>
+                        <p>Surveys</p>
+                        <p>問卷</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/about">
+                        <i class="pe-7s-science"></i>
+                        <p>Contractors and Consultants List
+                            <br>
+                            顧問及合約商</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/logout">
+                        <i class="pe-7s-map-marker"></i>
+                        <p>LOG OUT
+                            <br>
+                            登出</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Surveys/發出問卷</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                </div>
+            </div>
+        </nav>
+
+        <div class="content" style="padding-bottom:0; min-height:800px">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Add a Survey | 發出問卷</h4>
+                            </div>
+                            <div class="content NewContent" style="padding-right: 0; padding-left: 0;">
+                            <span id="mainError" class="errorField"></span>
+                                <form method="post" data-toggle="validator" role="form" enctype="multipart/form-data" action="/addSurvey" id = "addNotice">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="form-group">
+                                                <label>Survey Heading</label>
+                                                <input type="text" class="form-control" placeholder="Title" name="title" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="form-group">
+                                                <label>問卷標題</label>
+                                                <input type="text" class="form-control" placeholder="Title Chinese" name="titleChn" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="form-group">
+                                                <label for="example-datetime-local-input">Effective Until | 問卷有效時間</label>
+                                               <input name="endTime" class="flatpickr datetimepicker" type="text" placeholder="Select Date.." data-id="confirmDate" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <div class="form-group">
+                                                <label>Audience | 受眾</label>
+                                                <select class="form-control" name="audience"  id="audience">
+                                                    <option value="">Please select</option>
+                                                    <option value="allResidents">All Residents/所有住戶</option>
+                                                    {{#each data}}
+                                                    <option value="{{@key}}">{{@key}}/Towers/座</option>
+                                                    {{/each}}
+                                                </select>
+                                                <div id="block_list">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    {{!-- YOUR WORK HERE --}}
+                                    <div class="row">
+
+
+
+
+                                    </div>
+                                    <div id= "QuestionsAdded"></div>
+                                    <div>  
+                                    
+                                    
+                                  <!--   <button class="SurveyBtn" name= "input" id="popup_input">
+                                        INPUT SURVEY DETAILS 
+                                    </button> -->
+                                     </div> 
+                                     <div class="col-md-12">
+                                        <button type="button" id="popup_input" class="btn survey-btn  pull-left">Add Survey Question | 增加問卷問題</button>
+                                     </div>
+                                    <div id="loading" ></div>
+                                    <input type="hidden" name="floor_info" id="floor_info"/>
+                                    <button type="submit" class="btn survey-btn pull-right" id="submit">Confirm | 確定</button>
+                                    <div class="clearfix"></div>
+                                                                   
+                                </form>
+                                <div id="dialog1" title="Alert message" style="display: none">
+                                    <div class="ui-dialog-content ui-widget-content">
+                                        <p>
+                                            <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0"></span>
+                                            <label id="lblMessage1">
+                                            </label>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div id="dialog2" title="Alert message" style="display: none">
+                                    <div class="ui-dialog-content ui-widget-content">
+                                        <p>
+                                            <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0"></span>
+                                            <label id="lblMessage2">
+                                            </label>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>     
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Current Surveys | 已發出問卷</h4>
+                            </div>
+                                <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Post Date | 發出日期</th>
+                                        <th>Surveys | 問卷</th>
+                                        <th>Effective Until | 有效期至</th>
+                                    </thead>
+
+                                    <tbody>
+                                        {{#if surveys}} {{#each surveys}}
+                                        <tr>
+                                            <td>{{this.postDate}}</td>
+                                            <td>
+                                                <a href='{{this.url}}' class="view-pdf" id="{{@key}}" data-toggle="modal" data-target="#myModal">{{this.title}} | {{this.titleChn}}</a>
+                                            </td>
+                                            <td>{{this.effectiveTo}}</td>
+                                        </tr>
+                                        {{/each}}
+                                        {{else}}
+                                        <tr>
+                                            <td>N/A</td>
+                                            <td colspan="2">
+                                                No Surveys Found | 沒有已發出問卷
+                                            </td>
+                                            <td>N/A</td>
+                                        </tr>
+                                        {{/if}}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Company
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Blog
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <p class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                </p>
+            </div>
+        </footer>
+
+    </div>
+</div>
+<div id="floor_model" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        
+    </div>
+</div>
+</html>
+
+<script>
+   
+    $(document).ready(function () {
+
+        $(".flatpickr").flatpickr({
+            enableTime: true,
+            dateFormat: "m/d/YTH:i:K"
+        });
+        const html = `<p class="close-calendar">Confirm | 確認</p>`;
+        $(".flatpickr-calendar").append(html);
+        $(".close-calendar").click(function(){
+            console.log('in')
+             $(".flatpickr-calendar").removeClass("open", 1000, "easeInBack" );
+        })
+        function get_list(data) {
+            var html = "";
+            for (var key in data) {
+                var li = "<div class='checkbox checkbox-circle'><input id='floor_checkbox_"+key+"' type='checkbox' class='floor' data-id='" + key + "'/><label for='floor_checkbox_"+key+"'>" + key + "</label></div>";
+                html = html + li;
+            }
+            html = html + "</ul>"
+            return html;
+        }
+
+        function populate_modal(blockdata) {
+            var html = '<div class="modal-content">' +
+                    '<div class="modal-header">' +
+                        '<h4 class="modal-title">Select Floors/選擇樓層:' + 'Block ' + blockdata['name'] + '</h4>' +
+                    '</div>' +
+                    '<div class="modal-body">'+
+                    '<div class="row">'+
+                    '<span id="popupOptError" class="errorField"></span>'+
+                        '<div class="col-sm-12 text-center mg-bot">'+
+                            '<div class="selectall checkbox checkbox-circle">'+
+                                '<input type="checkbox" id="select_all" /><label for="select_all"> Select All/選擇全部 </label>'+
+                            '</div>'
+                        '</div>'+
+                        '<div class="col-sm-12">';
+                    var block = ""; 
+                    blockdata['data'].forEach(function(x){
+                        block = block + '<div class="col-sm-2 pd-bot floor-div">'+
+                               '<div class="checkbox-circle checkbox">'+
+                                    '<input id="block_checkbox_'+x+'" type="checkbox" data-id='+x+' class="block_checkbox" name="block_floor"/><label for="block_checkbox_'+x+'"> '+ x +'</label>'+
+                                '</div>'+
+                        '</div>';
+                    })
+                    html = html + block;
+            html = html + '</div></div></div>' +
+                    '<div class="modal-footer">' +
+                        '<button type="button" class="btn btn-success confirm-btn" id="floorConfirm">Confirm/確認</button>' +
+                        '<button type="button" class="btn btn-success confirm-btn" id="floorCancel">Cancel</button>'+
+                    '</div>' +
+                    '</div>'
+            return html;
+        }
+
+        //survey popup
+        var engList = ['']
+        var chnList = ['']
+        $(document).on('click','.addEng',function(event){
+            event.preventDefault()
+            engList.push('')
+            var id = event.target.id
+            var index = engList.length - 1
+            var html = '<div class="form-group" id="engDivKey'+index+'">'+                        
+                                '<input type="text" class="form-control" name="optionEngKey" placeholder="e.g. Cost" required/>'+
+                            '</div>'+
+                        '</div>';
+                                  var setData1 = '#engKey'+id          
+            $(setData1).append(html);
+            var html1 = '<div class="form-group" id="engDivValue'+index+'">'+
+                                '<input type="text" class="form-control" name="optionEngValue" placeholder="e.g. 20,000 HKD" required/>'+
+                            '</div>';
+                            var setData2 = '#engValue'+id
+            $(setData2).append(html1);
+            var html2 = '<div class="form-group" id="engDivBtn'+index+'">'+
+                            '<button id="'+index+'" class="engRmBtn">x</button>'+
+                            '</div>';
+            var setData = '#engBtn'+id
+                            $(setData).append(html2);
+        })
+
+        $(document).on('click','.addBtn',function(event){
+            event.preventDefault()
+            chnList.push('')
+            var id = event.target.id
+            var index = chnList.length - 1
+            var html = '<div class="form-group" id="chnDivKey'+index+'">'+                        
+                                '<input type="text" class="form-control" name="optionChnKey" placeholder="e.g. 價錢" required/>'+
+                            '</div>';
+             var setData1 = '#chnKey'+id                              
+            $(setData1).append(html);
+            var html1 = '<div class="form-group" id="chnDivValue'+index+'">'+
+                                '<input type="text" class="form-control" name="optionChnValue" placeholder="e.g. 價錢" required/>'+
+                            '</div>';
+            var setData2 = '#chnValue'+id
+            $(setData2).append(html1);
+            var html2 = '<div class="form-group" id="chnDivBtn'+index+'">'+
+                            '<button id="'+index+'" class="chnRmBtn">x</button>'+
+                            '</div>';
+             var setData3 = '#chnBtn'+id               
+            $(setData3).append(html2);
+        })
+
+        $(document).on('click','.engRmBtn',function(event){
+            event.preventDefault()
+            engList.splice(-1,1)
+            var key = '#engDivKey'+event.target.id
+            var value = '#engDivValue'+event.target.id
+            var btn = '#engDivBtn'+event.target.id
+            $( key ).remove();
+            $( value ).remove();
+            $( btn ).remove();
+        })
+        
+        $(document).on('click','.chnRmDetailBtn',function(event){
+            event.preventDefault()
+            var key = '#chnDivDetailKey'+event.target.id
+            var value = '#chnDivDetailValue'+event.target.id
+            var btn = '#chnDivDetailBtn'+event.target.id
+            $( key ).remove();
+            $( value ).remove();
+            $( btn ).remove();
+        })
+        $(document).on('click','.engRmDetailBtn',function(event){
+            event.preventDefault()
+            var key = '#engDivDetailKey'+event.target.id
+            var value = '#engDivDetailValue'+event.target.id
+            var btn = '#engDivDetailBtn'+event.target.id
+            $( key ).remove();
+            $( value ).remove();
+            $( btn ).remove();
+        })
+        $(document).on('click','.chnRmBtn',function(event){
+            event.preventDefault()
+            chnList.splice(-1,1)
+            var key = '#chnDivKey'+event.target.id
+            var value = '#chnDivValue'+event.target.id
+            var btn = '#chnDivBtn'+event.target.id
+            $( key ).remove();
+            $( value ).remove();
+            $( btn ).remove();
+        })
+        var optionId = 0;
+        var questions = []
+
+        $(document).on('click','#optionConfirm',function(event){
+            event.preventDefault()
+            var total = optionId;
+            var detail = [];
+            jQuery.extend(jQuery.validator.messages, {
+                required: ""
+            })
+            for(var k = 0; k <= total; k++){ 
+                var valIn = "#row"+k+" :input"
+                ch = $(valIn).valid({
+                    messages: {
+                    required: ""
+                    }
+
+                })
+                if(ch === false){ 
+                //ShowCustomDialog3("*All field are Mandatory.");  
+                $("#popupError").text("*All fields are mandatory | 所有欄目為必填"); 
+                    return false; 
+                }
+            }
+            if(optionId === -1){
+               $("#popupError").text("*Please add at least one Option | 請加入至少一個選項");
+            }
+            else{
+            // if($("#optionForm").valid() === true){
+            $("#mainError").text("");
+            for(var k = 0; k <= total; k++){ 
+            var optionChn = []
+            var id1 = "#row"+k+" :input[name*='optionChnKey']" 
+            $.each($(id1), function(data, key){  
+              optionChn.push({"key": $(this).val()})
+            });
+            var i = 0;
+            var id2 = "#row"+k+" :input[name*='optionChnValue']"
+            $.each($(id2), function(data, key){  
+              optionChn[i].value = $(this).val()
+              i++;
+            });
+            var optionEng = []
+            var id3 = "#row"+k+" :input[name*='optionEngKey']"
+            $.each($(id3), function(data, key){  
+              optionEng.push({"key": $(this).val()})
+            });
+
+            var j = 0;
+            var id4 = "#row"+k+" :input[name*='optionEngValue']"
+            $.each($(id4), function(data, key){  
+              optionEng[j].value = $(this).val()
+              j++;
+            });
+            if(optionEng.length !== optionChn.length){
+                $("#popupError").text("*English and Chinese option do not match. 中英選項不符");
+                return false;
+            }
+            var id5 = "#row"+k+" :input[name*='optChn']"
+            var optionNameChn = $(id5).val();
+            var id6 = "#row"+k+" :input[name*='opt']"
+            var optionNameEng = $(id6).val();
+            var id7 = "#row"+k+" :input[name*='optionEngDetailKey']"
+            var id8 = "#row"+k+" :input[name*='optionEngDetailValue']"
+            
+            var textEng = 0
+            if($(id7).val() && $(id8).val()){
+              optionEng.push({"key": $(id7).val(), "value":$(id8).val()});
+              textEng = 1
+            }
+              var id9 = "#row"+k+" :input[name*='optionChnDetailKey']"
+            var id10 = "#row"+k+" :input[name*='optionChnDetailValue']"
+            var textChn = 0
+            if($(id9).val() && $(id10).val()){
+              optionChn.push({"key": $(id9).val(), "value":$(id10).val()});
+              textChn = 1
+            }
+            if((textEng === 1 && textChn === 0) || (textEng === 0 && textChn === 1)){
+                $("#popupError").text("English and Chinese option do not match. 中英選項不符");
+                return false;
+            }
+            $("#popupError").text("");
+
+            var equalopt = false;
+            $.each(optionEng, function(data, key){
+            
+                console.log(optionChn[data].value, 'chn');
+                console.log(optionEng[data].value, 'eng');
+                if(!isNaN(optionChn[data].value) || !isNaN(optionEng[data].value)){
+                    if(optionChn[data].value !== optionEng[data].value){
+                        console.log('false')
+                        $("#popupError").text("Options value must be same");  
+                        equalopt = true     
+                    }
+                }
+             })  
+             if(equalopt){
+               return false;
+             }
+            //
+            $("#popupError").text("");
+            var optionNameEng = $(id6).val();
+            detail.push({"optionNameChn": optionNameChn, "optionChn":optionChn, "optionNameEng": optionNameEng, "optionEng":optionEng})
+           }
+           var questionChn = $("#row0 :input[name*='questionChn']").val();
+           var questionEng = $("#row0 :input[name*='question']").val();
+           if(questionChn && questionEng){
+            questions.push({"questionEng": questionEng,"questionChn":questionChn, "options": detail})
+            $("#floor_model").modal('hide');
+           
+            //console.log(questions, 'questions')
+            engList = ['']
+            chnList = ['']
+            optionId = 0
+            var id = questions.length - 1
+            var html = '<div class="">'+                        
+                                ' <button class="quesBtn editPopup" name= "input" id="'+id+'">' +
+                                                                        questionChn + ' | ' + questionEng +
+                                                                    '</button>'
+                            '</div>'
+
+             $('#QuestionsAdded').append(html);  
+             }else{
+                var questionChn = $("input[name*='questionChn']").val();
+                var questionEng = $("input[name*='question']").val();
+                var key = $("input[name*='questionKey']").val();
+                var editData = []
+                editData.push({"questionEng": questionEng,"questionChn":questionChn, "options": detail})
+           
+                questions[key] = editData[0]
+                engList = ['']
+            chnList = ['']
+            optionId = 0
+            $( "#QuestionsAdded" ).empty();
+
+             var html = ''
+            questions.forEach(function(ques, index){
+            html = html +   '<div class="">'+                        
+                    ' <button class="quesBtn editPopup" name= "input" id="'+index+'">' +
+                        ques['questionChn'] + ' | ' + ques['questionEng'] +
+                    '</button>'
+                '</div>'
+
+            })
+             $('#QuestionsAdded').append(html);
+
+              $("#floor_model").modal('hide');
+                
+    
+           } 
+       }
+       // }
+       // else{
+         //   console.log("invalid")
+       // }
+        })
+        $(document).on('click','#optionAdd',function(event){
+            engList.push('')
+            chnList.push('')
+            var id = event.target.id
+            var indexChn = chnList.length - 1
+            var indexEng = engList.length - 1
+            optionId = optionId+ 1;
+            var index = optionId
+            var html = '<div id="row'+index+'">'+
+                                    '<div class="row">'+
+                                        '<div class="col-md-6">'+
+                                            '<div class="form-group vr-line">'+
+                                                '<label>Enter Details of Option:</label>'+
+                                                '<input type="text" class="form-control" name="opt" placeholder="e.g. Option 1" required/>'+
+                                            '</div>'+
+                                        '</div>'+
+                                         '<div class="col-md-6">'+
+                                            '<div class="form-group vr-line">'+
+                                                '<label>請輸入選擇資料：</label>'+
+                                                '<input type="text" class="form-control" name="optChn" placeholder="e.g. 選擇一" required/>'+
+                                            '</div>'+
+                                            
+                                        '</div>'+
+                                    '</div>'+
+            '<div class="row">'+ 
+                            '<div class="col-md-2 RemPadRt margLf hr-line">'+
+                                '<div class="form-group" id="engDivKey'+indexEng+'">'+                  '<input type="text" class="form-control" name="optionEngKey" placeholder="e.g. Cost" required/>'+
+                                '</div>'+
+                                '<div id="engKey'+index+'"></div>'+
+
+                                '<div class="form-group" id="engDivDetailKey'+index+'">'+                        
+                                '<input type="text" class="form-control" name="optionEngDetailKey" placeholder="e.g. Details" required/>'+
+                            '</div>'+
+
+                                '<button id="'+index+'" class="addbtn addEng">Add</button>'+
+                            '</div>'+
+                             '<div class="col-md-3 RemPad">'+
+                                '<div class="form-group" id="engDivValue'+indexEng+'">'+
+                                    '<input type="text" class="form-control" name="optionEngValue" placeholder="e.g. 20,000 HKD" required/>'+
+                                '</div>'+
+                                '<div id="engValue'+index+'"></div>'+
+
+                                '<div class="form-group" id="engDivDetailValue'+index+'">'+
+                                '<textarea class="form-control" name="optionEngDetailValue" placeholder="e.g. Renovate the ca" required/>'+
+                            '</div>'+
+
+                            '</div>'+
+                            '<div class="col-md-1 RemPad" style="width: 10px;">'+
+                                '<div class="form-group" id="engDivBtn'+indexEng+'">'+
+                                    '<button class="engRmBtn" id="'+indexEng+'">x</button>'+
+                                '</div>'+
+                                '<div id="engBtn'+index+'"></div>'+
+
+                                '<div class="form-group" id="engDivDetailBtn'+index+'">'+
+                            '<button id="'+index+'" class="engRmDetailBtn">x</button>'+
+                            '</div>'+
+
+                            '</div>'+
+                            '<div>'+
+                                '<div class="col-md-2 RemPadRt margLf hr-line" id="chnCost">'+
+                                    '<div class="form-group" id="chnDivKey'+indexChn+'">'+              '<input type="text" class="form-control" name="optionChnKey" placeholder="e.g. Cost" required/>'+
+                                '</div>'+
+                                '<div id="chnKey'+index+'"></div>'+
+
+                                '<div class="form-group" id="chnDivDetailKey'+index+'">'+                        
+                                '<input type="text" class="form-control" name="optionChnDetailKey" placeholder="e.g. 描述" required/>'+
+                            '</div>'+
+
+                                '<button id="'+index+'" class="addbtn addBtn engBtn'+index+'">Add</button>'+ '</br>' +
+                                '<button type="submit" class=" ConfirmBtn RmBtnOptions" style="margin-top: 10px;margin-left: -6px;width: 100px;padding-left: 10px;border-width: 1px;background-color: transparent;/* font-weight: 400; *//* opacity: 0.8; */filter: alpha(opacity=80);/* padding: 8px 16px; */border-color: #bdbaba;color: #1f1b1b;float: right;margin-right: 6px;background: none;border: 1px solid #ccc;font-size: 11px;width: 103px;height: 26px;line-height: 17px;border-radius: 2px;" id="'+index+'">Remove Option</button>'+
+                            '</div>'+
+                             '<div class="col-md-3 RemPad">'+
+                                '<div class="form-group" id="chnDivValue'+indexChn+'">'+
+                                    '<input type="text" class="form-control" name="optionChnValue" placeholder="e.g. 20,000 HKD" required/>'+
+                            '</div>'+
+                            '<div id="chnValue'+index+'"></div>'+
+
+                            '<div class="form-group" id="chnDivDetailValue'+index+'">'+
+                                '<textarea class="form-control" name="optionChnDetailValue" placeholder="e.g. 修復停車場" required/>'+
+                            '</div>'+
+
+                            '</div>'+
+
+                        '</div>'+
+                        '<div class="col-md-1 RemPad" style="width: 10px;">'+
+                            '<div class="form-group" id="chnDivBtn'+indexChn+'">'+
+                                '<button class="chnRmBtn" id="'+indexChn+'">x</button>'+
+                            '</div>'+
+                            '<div id="chnBtn'+index+'"></div>'+
+
+                            '<div class="form-group" id="chnDivDetailBtn'+index+'">'+
+                            '<button id="'+index+'" class="chnRmDetailBtn">x</button>'+
+                            '</div>'    
+
+                        '</div>'+
+                        '</div>';
+                        $('#addQuestion').append(html);
+
+        })
+        $(document).on('click','.RmBtnOptions',function(event){
+            optionId = optionId - 1
+            event.preventDefault()
+            var id = event.target.id
+            var key = '#row'+event.target.id
+            $( key ).remove();
+        })
+        $(document).on('click','.RmBtnOptionEdit1',function(event){
+            optionId = optionId - 1
+            event.preventDefault()
+            var id = event.target.id
+            var key = '#row'+event.target.id
+            $( key ).remove();
+        })
+
+        function survey_modal(blockdata) {
+            var html = '<div class="modal-content ModelStyle" style="width: 115%;">' +
+                    '<div class="modal-header">' +
+                        '<h4 class="modal-title">輸入問卷資料 | INPUT SURVEY DETAILS' + '</h4>' +
+                    '</div>' +
+                    '<div class="modal-body">'+
+                    '<div class="row">'+
+                    '<span id="popupError" class="errorField"></span>'+
+                        '<div class="col-sm-12 mg-bot RemPad">'+
+                            '<form method="post" id="optionForm">'+
+                                    '<div id="row0">'+
+                                    '<div class="row MargTop" id="row0">'+
+                                        '<div class="col-md-6">'+
+                                            '<div class="form-group">'+
+                                                '<label>Survey Question</label>'+
+                                                '<input type="text" class="form-control" name="question" required/>'+
+                                            '</div>'+
+                                        '</div>'+
+                                         '<div class="col-md-6">'+
+                                            '<div class="form-group">'+
+                                                '<label>問卷問題</label>'+
+                                                '<input type="text" class="form-control" name="questionChn" required/>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'+
+                                    '<div class="row">'+
+                                        '<div class="col-md-6">'+
+                                            '<div class="form-group vr-line">'+
+                                                '<label>Enter Details of Option:</label>'+
+                                                '<input type="text" class="form-control" name="opt" placeholder="e.g. Option 1" required/>'+
+                                            '</div>'+
+                                        '</div>'+
+                                         '<div class="col-md-6">'+
+                                            '<div class="form-group vr-line">'+
+                                                '<label>請輸入選擇資料：</label>'+
+                                                '<input type="text" class="form-control" name="optChn" placeholder="e.g. 選擇一" required/>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'+
+                                    '<div class="row" >'+ 
+                                    '<div class="col-md-2 RemPadRt margLf hr-line">';
+                                    var block = ""; 
+                    blockdata['engCostList'].forEach(function(x, index){
+                        block = block + '<div class="form-group" id="engDivKey'+index+'">'+                        
+                                                '<input type="text" class="form-control" name="optionEngKey" placeholder="e.g. Cost" required/>'+
+                                            '</div>'+'<div id="engKey0"></div>'+
+                                            
+                                            '<div class="form-group" id="engDivDetailKey0">'+                        
+                                '<input type="text" class="form-control" name="optionEngDetailKey" placeholder="e.g. Details" required/>'+
+                            '</div>'+
+
+
+                                            '<button id="0" class="addbtn addEng">Add</button>'+
+
+                                        '</div>'+
+                                         '<div class="col-md-3 RemPad">'+
+                                            '<div class="form-group" id="engDivValue'+index+'">'+
+                                                '<input type="text" class="form-control" name="optionEngValue" placeholder="e.g. 20,000 HKD" required/>'+
+                                            '</div>'+'<div id="engValue0"></div>'+
+
+                                            '<div class="form-group" id="engDivDetailValue0">'+
+                                '<textarea class="form-control" name="optionEngDetailValue" placeholder="e.g. Renovate the carpark canopy" required/>'+
+                            '</div>'+
+
+                                            '</div>'+
+                                            '<div class="col-md-1 RemPad" style="width: 10px;">'+
+                                            '<div class="form-group" id="engDivBtn'+index+'">'+
+                                                '<button class="engRmBtn" id="'+index+'">x</button>'+
+                                            '</div>'+'<div id="engBtn0"></div>'+
+                                            '<div class="form-group" id="engDivDetailBtn0">'+
+                            '<button id="0" class="engRmDetailBtn">x</button>'+
+                            '</div>'
+                                            ;
+                    })
+                    block = block + 
+                                    '</div><div>'+
+                                        '<div class="col-md-2 RemPadRt margLf hr-line" id="chnCost">';
+                    html = html + block;
+                    var block_chn = ""; 
+                    blockdata['chnCostList'].forEach(function(x, index){
+                        block_chn = block_chn + '<div class="form-group" id="chnDivKey'+index+'">'+                        
+                                                '<input type="text" class="form-control" name="optionChnKey" placeholder="e.g. 價錢" required/>'+
+                                            '</div>'+'<div id="chnKey0"></div>'+
+
+                                            '<div class="form-group" id="chnDivDetailKey0">'+                        
+                                '<input type="text" class="form-control" name="optionChnDetailKey" placeholder="e.g. 描述" required/>'+
+                            '</div>'+
+
+                                            '<button id="0" class="addbtn addBtn">Add</button></div>'+
+                                        '</div>'+
+                                         '<div class="col-md-3 RemPad">'+
+                                            '<div class="form-group" id="chnDivValue'+index+'">'+
+                                                '<input type="text" class="form-control" name="optionChnValue" placeholder="e.g. 20,000 HKD" required/>'+
+                                            '</div>'+
+                                            '<div id="chnValue0"></div>'+
+                                            '<div class="form-group" id="chnDivDetailValue0">'+
+                                '<textarea class="form-control" name="optionChnDetailValue" placeholder="e.g. 修復停車場" required/>'+
+                            '</div>'+
+                                            '</div>'+
+                                            '<div class="col-md-1 RemPad" style="width: 10px;">'+
+                                            '<div class="form-group" id="chnDivBtn'+index+'">'+
+                                                '<button class="chnRmBtn" id="'+index+'">x</button>'+
+                                            '</div>'+
+                                            '<div id="chnBtn0"></div>'+
+                                            '<div class="form-group" id="chnDivDetailBtn0">'+
+                            '<button id="0" class="chnRmDetailBtn">x</button>'+
+                            '</div>';
+                    })
+                    block_chn = block_chn;
+                    html = html + block_chn;
+
+            html = html + '</div></div></div><div id="addQuestion"></div></div>' +
+                    '<div class="modal-footer">' +
+'<button type="button" class="btn ConfirmBtn survey-btn" style="float:left;" id="optionAdd">存檔 | Add Option</button>' +
+'<button type="button" class="btn ConfirmBtn survey-btn" id="cancel">取消 | Cancel</button>' +
+                        '<button type="submit" class="btn ConfirmBtn survey-btn" id="optionConfirm">存檔 | Save</button>' +
+                    '</div>' + '</form>' + 
+                    '<div id="dialog3" title="Alert message" style="display: none">' +
+                                    '<div class="ui-dialog-content ui-widget-content">' +
+                                        '<p>'+
+                                            '<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0"></span>' +
+                                            '<label id="lblMessage3">' +
+                                            '</label>' +
+                                        '</p>' +
+                                    '</div>'+
+                                '</div>'+
+                    '</div>'
+            return html;
+        }
+
+        $(document).on('click','.questionDelete',function(event){
+
+            var id = event.target.id;
+            var array = questions;
+            var data = $.grep(array, function(e, key){ 
+                return key != id; 
+            });
+            questions = data
+            $( "#QuestionsAdded" ).empty();
+            engList = ['']
+            chnList = ['']
+            optionId = 0
+             var html = ''
+            questions.forEach(function(ques, index){
+            html = html +   '<div class="">'+                        
+                    ' <button class="quesBtn editPopup" name= "input" id="'+index+'">' +
+                        ques['questionChn'] + ' | ' + ques['questionEng'] +
+                    '</button>'
+                '</div>'
+
+            })
+             $('#QuestionsAdded').append(html);
+             $("#floor_model").modal('hide');
+        })
+
+        function survey_edit_modal(blockdata){
+            var html = '<div class="modal-content ModelStyle">' +
+                    '<div class="modal-header">' +
+                        '<h4 class="modal-title">輸入問卷資料 | INPUT SURVEY DETAILS' + '</h4>' +'<button type="button" class="btn ConfirmBtn  questionDelete delete-btn" id="'+blockdata['key']+'">刪除 | Delete</button>'+
+                    '</div>' +
+                    '<div class="modal-body">'+
+                    '<div class="row">'+
+                    '<span id="popupError" class="errorField"></span>'+
+                        '<div class="col-sm-12 mg-bot RemPad">'+
+                            '<form method="post" id="optionForm">'+
+                                    '<div>'+
+                                    '<div class="row MargTop">'+
+                                        '<div class="col-md-6">'+
+                                            '<div class="form-group">'+
+                                                '<label>Survey Question</label>'+
+                                                '<input type="text" class="form-control" name="question" value="'+blockdata['questions']["questionEng"]+'" required/>'+
+                                                '<input type="hidden" name="questionKey" value="'+blockdata['key']+'"/>'+
+                                            '</div>'+
+                                        '</div>'+
+                                         '<div class="col-md-6">'+
+                                            '<div class="form-group">'+
+                                                '<label>問卷問題</label>'+
+                                                '<input type="text" class="form-control" name="questionChn" value="'+blockdata['questions']["questionChn"]+'" required/>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>';
+                                    var blockOption = ""; 
+                                  //  var blockOptKey = ""; 
+                                   optionId =  blockdata['questions']['options'].length - 1
+                    blockdata['questions']['options'].forEach(function(opt, indexOpt){
+                    blockOption = blockOption    +'<div id="row'+indexOpt+'"><div class="row" >'+
+                                        '<div class="col-md-6">'+
+                                            '<div class="form-group vr-line">'+
+                                                '<label>Enter Details of Option:</label>'+
+                                                '<input type="text" class="form-control" name="opt" value="'+opt["optionNameEng"]+'" placeholder="e.g. Option 1" required/>'+
+                                            '</div>'+
+                                        '</div>'+
+                                         '<div class="col-md-6">'+
+                                            '<div class="form-group vr-line">'+
+                                                '<label>請輸入選擇資料：</label>'+
+                                                '<input type="text" class="form-control" name="optChn" value="'+opt["optionNameChn"]+'" placeholder="e.g. 選擇一" required/>'+
+                                                 
+                                            '</div>'+
+                                            
+                                        '</div>'+
+                                    '</div>'+
+                                    '<div class="row" >'+ 
+                                    '<div class="col-md-2 RemPadRt margLf hr-line">';
+                                    
+                    opt['optionEng'].forEach(function(optionKey, indexOptKey){
+                        engList.push('')
+                        blockOption = blockOption + '<div class="form-group" id="engDivKey'+indexOptKey+indexOpt+'">'+                        
+                                                '<input type="text" class="form-control" name="optionEngKey" value="'+optionKey["key"]+'" placeholder="e.g. Cost" required/>'+
+                                            '</div>';
+                                            })
+                    
+                        blockOption =  blockOption +
+                        '<div id="engKey'+indexOpt+'"></div>'  
+                        +'<button id="'+indexOpt+'" class="addbtn addEng">Add</button>'+
+                                                     '</div>'+'<div class="col-md-3 RemPad">';
+                    opt['optionEng'].forEach(function(optionKey, indexOptKey){
+                        blockOption = blockOption + 
+                                         
+                                            '<div class="form-group" id="engDivValue'+indexOptKey+indexOpt+'">'+
+                                                '<input type="text" class="form-control" name="optionEngValue" value="'+optionKey["value"]+'" placeholder="e.g. 20,000 HKD" required/>'+
+                                            '</div>';
+                                            })
+
+                                       blockOption =  blockOption +   '<div id="engValue'+indexOpt+'"></div>'+'</div>'+'<div class="col-md-1 RemPad" style="width: 10px;">';
+                   opt['optionEng'].forEach(function(optionKey, indexOptKey){
+                        blockOption = blockOption +
+                                            '<div class="form-group" id="engDivBtn'+indexOptKey+indexOpt+'">'+
+                                                '<button class="engRmBtn" id="'+indexOptKey+indexOpt+'">x</button>'+
+                                            '</div>';
+                                            })
+                   
+                        blockOption = blockOption +  '<div id="engBtn'+indexOpt+'"></div>'+
+                                             '</div>'+'<div class="col-md-2 RemPadRt margLf hr-line" id="chnCost">';
+                   // 
+                    opt['optionChn'].forEach(function(optionChnKey, indexOptChnKey){
+                        chnList.push('')
+                        blockOption = blockOption + '<div class="form-group" id="chnDivKey'+indexOptChnKey+indexOpt+'">'+                        
+                                                '<input type="text" class="form-control" name="optionChnKey" value="'+optionChnKey["key"]+'" placeholder="e.g. 價錢" required/>'+
+                                            '</div>';
+                                            })
+                    
+                        blockOption =  blockOption +
+                        '<div id="chnKey'+indexOpt+'"></div>'+  
+                        '<button id="'+indexOpt+'" class="addbtn addBtn">Add</button>'+
+                                                     '</div>'+'<div class="col-md-3 RemPad">';
+                    opt['optionChn'].forEach(function(optionChnKey, indexOptChnKey){
+                        blockOption = blockOption + 
+                                         
+                                            '<div class="form-group" id="chnDivValue'+indexOptChnKey+indexOpt+'">'+
+                                                '<input type="text" class="form-control" name="optionChnValue" value="'+optionChnKey["value"]+'" placeholder="e.g. 20,000 HKD" required/>'+
+                                            '</div>';
+                                            })
+
+                                       blockOption =  blockOption  + '<div id="chnValue'+indexOpt+'"></div>'+  '<div class="form-group" id="chnDivDetailValue'+indexOpt+'">'+
+                                '<button type="submit" class="ConfirmBtn RmBtnOptionEdit1" style="margin-top: 10px;margin-left: -6px;width: 100px;padding-left: 10px;border-width: 1px;background-color: transparent;/* font-weight: 400; *//* opacity: 0.8; */filter: alpha(opacity=80);/* padding: 8px 16px; */border-color: #bdbaba;color: #1f1b1b;float: right;margin-right: 6px;background: none;border: 1px solid #ccc;font-size: 11px;width: 103px;height: 26px;line-height: 17px;border-radius: 2px;" id="'+indexOpt+'">Remove Option</button>'+
+                                        '</div>'+
+                                       '</div><div class="col-md-1 RemPad" style="width: 10px;">';
+                   opt['optionChn'].forEach(function(optionChnKey, indexOptChnKey){
+
+                        blockOption = blockOption +
+                                            '<div class="form-group" id="chnDivBtn'+indexOptChnKey+indexOpt+'">'+
+                                                '<button class="chnRmBtn" id="'+indexOptChnKey+indexOpt+'">x</button>'+
+                                            '</div>';
+                                            })
+                   blockOption = blockOption +  '<div id="chnBtn'+indexOpt+'"></div>'+
+                                             '</div></div></div>';
+                    })    
+                   html = html + blockOption;
+
+                   html = html + '<div id="addQuestion"></div></div>' +
+                    '<div class="modal-footer">' +
+'<button type="button" class="btn ConfirmBtn" style="float:left;" id="optionAdd">存檔 | Add Option</button>' +
+'<button type="button" class="btn ConfirmBtn" id="cancel">存檔 | Cancel</button>' +
+                        '<button type="submit" class="btn ConfirmBtn" id="optionConfirm">存檔 | Save</button>' +
+                    '</div>' + '</form>' + 
+                    '<div id="dialog3" title="Alert message" style="display: none">' +
+                                    '<div class="ui-dialog-content ui-widget-content">' +
+                                        '<p>'+
+                                            '<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0"></span>' +
+                                            '<label id="lblMessage3">' +
+                                            '</label>' +
+                                        '</p>' +
+                                    '</div>'+
+                                '</div>'+
+                    '</div>'
+                                    return html;
+                                    // })
+        }
+        var cardData = '{{{stringify surveys}}}';
+        if(cardData){
+        cardData = JSON.parse(cardData);
+        }
+        function card_modal(blockdata){
+            console.log(blockdata)
+            var html = '<div class="modal-content ModelStyle" style="background-color: #f7f7f7;">' +
+                            '<div class="modal-header">' +
+                                '<h4 class="modal-title text-center">'+blockdata.titleChn+' | '+ blockdata.title +'</h4>'+
+                            '</div>' +            
+                                '<div class="modal-body">';
+                                var blockQuestion = ""; 
+                    if(blockdata.question){
+                    blockdata.question.forEach(function(opt, indexQues){
+                    blockQuestion = blockQuestion    +
+                                '<div class="model-shadow" >'+
+                                '<div class="befor-row">'+
+                                    '<div class="row" style="background-color: white;padding-left: 10px">'+ 
+                                    '<p style="margin-top: 10px;">'+opt.questionEn+' | '+ opt.questionChn+'</p>'+
+                                    '<p style="font-size:12px">'+' Number of owners who have filled out this question | 問卷問題填數: 150／300'+'</p>'+
+                                        '<div class="col-sm-12 text-center mg-bot">'+
+                                            '<canvas id="myChart'+indexQues+'"></canvas>'+
+                                        '</div>'+
+                                    '<div>'+  '</div>' + 
+                                '</div>'+'</div>'+'</div>';
+                    })
+                }
+                    html = html + blockQuestion +     
+                      '</div>';
+                        html = html  +
+
+                            '<div class="modal-footer">' +
+                                '<button type="button" class="btn ConfirmBtn btn-width survey-btn" id="cancel">Close</button>' +
+                            '</div>';
+                        return html;
+        }   
+function buildCanvas(settings){
+    console.log(settings)
+    if(settings.question){
+    settings.question.forEach(function(opt, indexQues){
+        var dataChart = []
+        var dataLable = []
+        opt.optionIds.forEach(function(optChild, indexQues){
+            
+            dataChart.push(30)
+            dataLable.push(optChild.optionNameEn + ' | ' + optChild.optionNameChn )
+        })
+        var graph = 'myChart' + indexQues
+        var ctx = document.getElementById(graph).getContext('2d');
+        console.log(dataLable, "dataLable")
+var myPieChart = new Chart(ctx,{
+    type: 'pie',
+    data : {
+    datasets: [{
+        data: dataChart,
+        backgroundColor: [' #FF6384 ', '#FF9F40', ' #FFCD56', '#4BC0C0', '#36A2EB', ' #FF6384 ', '#FF9F40', ' #FFCD56', '#4BC0C0', '#36A2EB', ' #FF6384 ', '#FF9F40', ' #FFCD56', '#4BC0C0', '#36A2EB'],
+        hoverBackgroundColor: [' #FF6384 ', '#FF9F40', ' #FFCD56', '#4BC0C0', '#36A2EB', ' #FF6384 ', '#FF9F40', ' #FFCD56', '#4BC0C0', '#36A2EB', ' #FF6384 ', '#FF9F40', ' #FFCD56', '#4BC0C0', '#36A2EB'],
+    }],
+
+    // These labels appear in the legend and in the tooltips when hovering different arcs
+    labels: dataLable
+},
+    options: {}
+});
+})
+}
+}
+
+        var data = '{{{stringify data}}}';
+        data = JSON.parse(data);
+        
+        var selectedAudiance = null;
+        var selectedBlook = null;
+        var selectedData = {};
+        $(document).on('click','#cancel',function(event){
+            engList = ['']
+            chnList = ['']
+             $("#floor_model").modal('hide');
+        })
+        $("#audience").change(function () {
+            selectedAudiance = $(this).val();
+            var blockList = data[selectedAudiance];
+            var list = get_list(blockList)
+            selectedData = {};
+            selectedData[selectedAudiance] = {};
+            
+            $("#block_list").html(list);
+        });
+          $(document).on("click", ".editPopup", function (event) {
+            event.preventDefault();
+            var index = event.target.id
+
+            var modeldata = {questions: questions[index], key: index};
+                var modelhtml = survey_edit_modal(modeldata);
+                $("#floor_model .modal-dialog").html(modelhtml);
+                $("#floor_model").modal();
+        })
+        function getSelectedFloor(){
+           var floors = [];
+           $.each($(".block_checkbox:checked"), function(){            
+               floors.push($(this).data('id'));
+           });
+           return floors;
+        }
+
+        $(document).on("change", "#select_all", function () {
+            if ($(this).is(":checked")) {
+                $(".floor-div .block_checkbox").prop('checked', true);
+            }else{
+                $(".floor-div .block_checkbox").prop('checked', false);
+            }
+        })
+        $(document).on("change", ".floor", function () {
+            if ($(this).is(":checked")) {
+                var key = $(this).data('id');
+                selectedBlook = key;
+                var modeldata = {"name": key, data: data[selectedAudiance][key]};
+                var modelhtml = populate_modal(modeldata);
+                $("#floor_model .modal-dialog").html(modelhtml);
+                selectedData[selectedAudiance][key] = [];
+                $("#floor_model").modal();
+            }else{
+                delete selectedData[selectedAudiance][key]
+            }
+        });
+        
+        $(document).on('click','#floorConfirm',function(){
+            
+            selectedData[selectedAudiance][selectedBlook] = getSelectedFloor(); 
+            if(!selectedData[selectedAudiance][selectedBlook].length){
+                $("#popupOptError").text("*Please select at least one floor | 請選擇至少1個樓層"); 
+                return false;
+            }         
+            $("#floor_info").val(JSON.stringify(selectedData));
+            $("#floor_model").modal('hide');
+        })
+
+        $(document).on('click','#floorCancel',function(){
+            var id = "#floor_checkbox_"+selectedBlook;
+                 $(id).attr('checked', false);
+            $("#floor_model").modal('hide');
+        })
+         
+         $(document).on('click','#popup_input',function(event){
+             event.preventDefault()
+             var data = $('#addNotice :input');
+          var values = {}
+            data.each(function() {
+            if(this.name !== ""){
+              values[this.name] = $(this).val();
+            }
+         });
+
+            if(values.audience === '' || values.endTime === '' || values.title === '' || values.titleChn === '' ){
+                ShowCustomDialog1("All fields are mandatory | 所有欄目為必填")
+                //$("#mainError").text("Please add question");
+            }else{
+                //$("#mainError").text("Please add question");
+              var modeldata = {"name": "test", engCostList: engList, chnCostList: chnList};
+                var modelhtml = survey_modal(modeldata);
+                $("#floor_model .modal-dialog").html(modelhtml);
+                $("#floor_model").modal();
+            }
+         })
+          $(document).on('click','.view-pdf',function(event){
+            var id = event.target.id
+            var modeldata = cardData[id];
+            var modelhtml = card_modal(modeldata);
+                $("#floor_model .modal-dialog").html(modelhtml);
+                $("#floor_model").modal();
+                buildCanvas(modeldata)
+                console.log("hereeeee")
+          })
+          
+         $(document).on('click','#submit',function(event){
+          event.preventDefault()
+          if(questions.length === 0){
+             ShowCustomDialog2("Please add questions | 請加入問卷問題");
+            return false;
+          }
+          var data = $('#addNotice :input');
+          var values = {}
+            data.each(function() {
+            if(this.name !== ""){
+              values[this.name] = $(this).val();
+            }
+         });
+            values["questions"] = questions
+            const HostName = "http://localhost:3000"
+            $.ajax(HostName+'/addSurvey', {
+                  type: 'POST',
+                  data: JSON.stringify(values),
+                  contentType: 'application/json',
+                  beforeSend: function() { 
+                    var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'
+                      $("#loading").append(html);
+                      $("#submit").prop('disabled', true); // disable button
+                    },
+                    success:function(data){ 
+                       var html = ''
+                      $("#loading").append(html);
+                      $("#submit").prop('disabled', false); 
+                      location.reload(); // enable button
+                    },
+                  error  : function() { console.log('error');}
+            });
+         })
+
+           function ShowCustomDialog1(data)
+            {
+            ShowDialogBox1('Warning',data,'Ok', 'GoToAssetList',null);
+            }
+            function ShowDialogBox1(title, content, btn1text, functionText, parameterList) {
+                var btn1css;
+                var btn2css;
+                if (btn1text == '') {
+                    btn1css = "hidecss";
+                } else {
+                    btn1css = "showcss";
+                }
+                $("#lblMessage1").html(content);
+                $("#dialog1").dialog({
+                    resizable: false,
+                    title: title,
+                    modal: true,
+                    width: '400px',
+                    height: 'auto',
+                    bgiframe: false,
+                    stack: true,
+                    buttons: [
+                                    {
+                                        text: btn1text,
+                                        "class": btn1css,
+                                        click: function () {
+                                                                                    
+                                            $("#dialog1").dialog('close');
+
+                                        }
+                                    },
+                                ]
+                });
+}
+  function ShowCustomDialog2(data)
+            {
+            ShowDialogBox2('Warning',data,'Ok', 'GoToAssetList',null);
+            }
+            function ShowDialogBox2(title, content, btn1text, functionText, parameterList) {
+                var btn1css;
+                var btn2css;
+                if (btn1text == '') {
+                    btn1css = "hidecss";
+                } else {
+                    btn1css = "showcss";
+                }
+                $("#lblMessage2").html(content);
+                $("#dialog2").dialog({
+                    resizable: false,
+                    title: title,
+                    modal: true,
+                    width: '400px',
+                    height: 'auto',
+                    bgiframe: false,
+                    stack: true,
+                    buttons: [
+                                    {
+                                        text: btn1text,
+                                        "class": btn1css,
+                                        click: function () {
+                                                                                    
+                                            $("#dialog2").dialog('close');
+
+                                        }
+                                    },
+                                ]
+                });
+}
+
+
+
+
+function ShowCustomDialog3(data)
+            {
+            ShowDialogBox3('Warning',data,'Ok', 'GoToAssetList',null);
+            }
+            function ShowDialogBox3(title, content, btn1text, functionText, parameterList) {
+                var btn1css;
+                var btn2css;
+                if (btn1text == '') {
+                    btn1css = "hidecss";
+                } else {
+                    btn1css = "showcss";
+                }
+                $("#lblMessage3").html(content);
+                $("#dialog3").dialog({
+                    resizable: false,
+                    title: title,
+                    modal: true,
+                    width: '400px',
+                    height: 'auto',
+                    bgiframe: false,
+                    stack: true,
+                    buttons: [
+                                    {
+                                        text: btn1text,
+                                        "class": btn1css,
+                                        click: function () {
+                                                                                    
+                                            $("#dialog3").dialog('close');
+
+                                        }
+                                    },
+                                ]
+                });
+}
+    });
+
+</script>

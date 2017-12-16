@@ -16,6 +16,8 @@ const models = require('./models/models');
 
 //----------------ROUTES----------------
 const meetingRoutes = require('./routes/meetings');
+const surveyRoutes = require('./routes/surveys');
+const noticeRoutes = require('./routes/notices');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
 const Estate = models.Estate;
@@ -78,6 +80,8 @@ app.use(passport.session());
 app.use('/', auth(passport));
 app.use('/', index);
 app.use('/', meetingRoutes);
+app.use('/', noticeRoutes);
+app.use('/', surveyRoutes);
 
 //----------------ERRORS----------------
 app.use(function(err, req, res, next) {
