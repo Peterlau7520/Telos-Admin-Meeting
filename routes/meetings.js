@@ -36,7 +36,8 @@ let currDate = new Date();
 let currentDate = currDate.getFullYear()+"-"+(currDate.getMonth()+1)+"-"+currDate.getDate()+" "+currDate.getHours()+":"+currDate.getMinutes()+":"+currDate.getSeconds();
 router.get('/allMeetings', (req, res) => {
     //res.render('meeting')
-    Meeting.find().populate('polls').lean().then(function(meetings, err){
+    Meeting.find({estate: req.user.estateName}).populate('polls').lean().then(function(meetings, err){
+      console.log(meetings)
         const promiseArr = []
         var currentMeetings = []
         var pastMeetings = []
@@ -524,7 +525,7 @@ router.post('/editPoll', (req, res) => {
 })
 
 router.get('/addMeeting',(req,res) => {
-      Meeting.find().populate('polls').lean().then(function(meetings, err){
+      Meeting.find({estate: req.user.estateName}).populate('polls').lean().then(function(meetings, err){
         const promiseArr = []
         var currentMeetings = []
         var pastMeetings = []
