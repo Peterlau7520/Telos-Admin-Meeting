@@ -3185,7 +3185,7 @@ body > .navbar-collapse {
 .add-meeting-btn{
   bottom: 50px;
   float: right;
-  margin-top: 10px
+  margin-top: 10px;
   width:220px;
 }
 .add{
@@ -3193,4 +3193,8 @@ body > .navbar-collapse {
 }
 .file-btn{
 
+}
+
+.datetimepicker {
+  
 }
