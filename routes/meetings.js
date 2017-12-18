@@ -37,7 +37,6 @@ let currentDate = currDate.getFullYear()+"-"+(currDate.getMonth()+1)+"-"+currDat
 router.get('/allMeetings', (req, res) => {
     //res.render('meeting')
     Meeting.find({estate: req.user.estateName}).populate('polls').lean().then(function(meetings, err){
-      console.log(meetings)
         const promiseArr = []
         var currentMeetings = []
         var pastMeetings = []
@@ -83,7 +82,6 @@ router.get('/allMeetings', (req, res) => {
                       fileLinksLink = name
                       fileLinksLink = fileLinksLink.replace(/ /g,'');
                   }
-                        console.log(pollMeeting_title, "pollMeeting_title")
                         let Key = `${req.user.estateName}/${pollMeeting_title}/${titleLink}/${fileLinksLink}`;
                         polefileLinks.push({
                           name: name,
@@ -131,11 +129,9 @@ router.get('/allMeetings', (req, res) => {
 })
 
 router.post('/addPollsOfMeeting', (req, res) => {
-  console.log("re", req.body)
     if(req.body.meeting_id){
       var meeting_title = ''
       Meeting.findOne({_id: req.body.meeting_id}).then(function(meetings, err){
-        console.log("meetings", meetings)
         meeting_title = meetings.title;
               const fileLinks = []
         var pollFileLinks = []
@@ -168,7 +164,6 @@ router.post('/addPollsOfMeeting', (req, res) => {
                 ContentDisposition: 'inline',
                 ACL: "public-read"
             }; // req.user.estateName
-            console.log("data", data)
             bucket.putObject(data, function (err, data) {
 
                 if (err) {
@@ -192,7 +187,6 @@ router.post('/addPollsOfMeeting', (req, res) => {
             var info = req.files[key][0].data;
             var name = req.files[key][0].name.replace(/ /g,'');
             var meeting_title = req.body.pollMeeting_title
-            console.log(meeting_title)
             //meeting.fileLinks.push(name);
             //Let key = `${req.user.estateName}/${req.body.title}/${name}`
             //fileLinks.push(name)
@@ -270,6 +264,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
 
 
 router.post('/editMeeting', (req, res) => {
+  console.log(req.body, "gggg")
     var fileLinks = []
     if(req.files && req.files.fileField) {
         var files = req.files.fileField
@@ -296,7 +291,6 @@ router.post('/editMeeting', (req, res) => {
                 ContentDisposition: 'inline',
                 ACL: "public-read"
             }; // req.user.estateName
-            console.log("data", data)
             bucket.putObject(data, function (err, data) {
                 if (err) {
                     console.log('Error uploading data: ', err);
@@ -326,6 +320,8 @@ router.post('/editMeeting', (req, res) => {
       $set: { 
         title: data.title,
         titleChn: data.titleChn,
+        meetingSummary: data.meetingSummary,
+        meetingSummaryChn: data.meetingSummaryChn,
         startTime: data.start_time, 
         endTime: data.end_time, 
         venue:data.venue,
@@ -382,7 +378,6 @@ router.post('/editMeeting', (req, res) => {
 })
 
 router.post('/editPoll', (req, res) => {
-  console.log("req.", req.body, req.files)
     var data = req.body
     var id = req.body.id
     var fileLinks = []
@@ -391,7 +386,6 @@ router.post('/editPoll', (req, res) => {
     if(req.files && !(_.isEmpty(req.files))){
           promiseArr2.push(new Promise(function(resolve, reject){
          for (var key in req.files) {
-          console.log(req.files[key][0])
             var info = req.files[key][0].data;
             var name = req.files[key][0].name.replace(/ /g,'');
                       var titleLink = ''
@@ -418,8 +412,8 @@ router.post('/editPoll', (req, res) => {
                         },{ 
                           new: true 
                         })
-                        .then(function (data, err) {
-                            console.log(data, "data")
+                        .then(function (data1, err) {
+                            console.log(data1, "data")
                             
             var data = {
                 Bucket: BucketName,
@@ -616,7 +610,6 @@ function uploadFile(req, res){
                       fileLinksLink = name
                       fileLinksLink = fileLinksLink.replace(/ /g,'');
                   }
-                  console.log(req.user.estateName , titleLink, fileLinksLink)
             var data = {
                 Bucket: BucketName,
                 Key:  `${req.user.estateName}/${titleLink}/${fileLinksLink}`,
@@ -692,8 +685,10 @@ function savePoll(req, res, fileLinks){
         var meeting = new Meeting({
                 title: req.body.meeting_title,
                 titleChn: req.body.meeting_title_chinese,
-                startTime: req.body.startTime ,//meetingStartFinal,
-                endTime: req.body.endTime, //meetingEndFinal,
+                meetingSummary: req.body.meetingSummary,
+                meetingSummaryChn: req.body.meetingSummaryChn,
+                startTime: meetingStartFinal ,//meetingStartFinal,
+                endTime: meetingEndFinal, //meetingEndFinal,
                 pollEndTime: pollEndFinal,
                 venue: req.body.venue,
                 estate: req.user.estateName,

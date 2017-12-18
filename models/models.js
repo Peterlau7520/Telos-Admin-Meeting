@@ -155,6 +155,8 @@ const userAnswersSchema = new Schema({
 const meetingSchema = new Schema({
     title: String,
     titleChn: String,
+    meetingSummary: String,
+    meetingSummaryChn: String,
     startTime: String,
     endTime: String,
     venue: String,

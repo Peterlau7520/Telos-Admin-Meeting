@@ -217,6 +217,18 @@
                                             {{/each}}
                                         </table>
                                     </div>
+                                      <div class="form-group col-sm-6">
+                                        <label class='custom_label'> Meeting Summary | 會議摘要</label>
+                                        <input id ='meeting_summary_{{meeting_key}}' style='display:none' type="datetime-local" name="meeting_summary" class="form-control input_fields_{{meeting_key}}" value="{{startTime}}">
+                                        <div id='stime_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{meetingSummary}}</div>
+
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class='custom_label'>Meeting Summary Chinese | 會議概要中文</label>
+                                        <input id ='meeting_summary_chinese_{{meeting_key}}' style='display:none' type="datetime-local" name="meeting_summary_chinese" class="form-control input_fields_{{meeting_key}}" value="{{endTime}}">
+                                        <div id='etime_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{meetingSummaryChn}}</div>
+
+                                    </div><br/><br/>
                                     <div class="clearfix"></div>
                                 </form>
                                 <div id="loading"></div>
@@ -1043,6 +1055,18 @@ function edit_poll(event){
 '                                    <div class="form-group col-sm-6 text-right">'+
 '                                    </div>'+
 '                                    <div class="clearfix"></div>'+
+'                                    <div class="form-group col-sm-6">'+
+'                                        <label class=""> 取消會議 | Meeting Summary</label>'+
+'                                        <textarea id ="" type="text" name="meetingSummary" class="form-control input_fields_" >'+ data.meetingSummary + '</textarea>' +
+'                                        <div id="" class=""></div>'+
+''+
+'                                    </div>'+
+'                                    <div class="form-group col-sm-6">'+
+'                                        <label class=""> 取消會議 | Meeting Summary Chinese</label>'+
+'                                         <textarea id ="" type="text" name="meetingSummaryChn" class="form-control input_fields_" >'+ data.meetingSummaryChn + '</textarea>' +
+'                                        <div id="" class=""></div>'+
+''+
+'                                    </div>'+
 '                                    <div class="form-group col-sm-6">'+
 '                                        <label class=""> 取消會議 | Meeting Start Time</label>'+
 '                                        <input id ="" type="datetime-local" name="start_time" class="form-control input_fields_" value="'+data.start_time+'">'+
