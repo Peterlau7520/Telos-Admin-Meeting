@@ -182,12 +182,12 @@ router.get('/getSurveys', (req, res) => {
         Estate.findOneAndUpdate({estateName: req.user.estateName,$set: {surveys: result }})
         .then(function(est) {
             console.log(list, "list")
-            res.render('survey', {"data": blocksFloors, 'surveys': list});
+            res.render('survey', {"data": blocksFloors, 'surveys': list, "estateName": req.user.estateName});
         })
     })
     }
     else{
-        res.render('survey', {"data": blocksFloors, 'surveys': list});
+        res.render('survey', {"data": blocksFloors, 'surveys': list, "estateName": req.user.estateName});
     }
     })
     })

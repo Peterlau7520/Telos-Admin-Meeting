@@ -35,7 +35,6 @@ const bucket = new AWS.S3({params: {Bucket: BucketName}});
 let currDate = new Date(); 
 let currentDate = currDate.getFullYear()+"-"+(currDate.getMonth()+1)+"-"+currDate.getDate()+" "+currDate.getHours()+":"+currDate.getMinutes()+":"+currDate.getSeconds();
 router.get('/allMeetings', (req, res) => {
-    //res.render('meeting')
     Meeting.find({estate: req.user.estateName}).populate('polls').lean().then(function(meetings, err){
         const promiseArr = []
         var currentMeetings = []
@@ -92,7 +91,7 @@ router.get('/allMeetings', (req, res) => {
                 }
                 })
             }
-                     var startTime = moment.utc(new Date(item.startTime));
+                    var startTime = moment.utc(new Date(item.startTime));
                     item.startTime =  startTime.format("MM/DD/YYYY hh:mm a");
                     if(Date.parse(new Date(item.endTime)) > Date.parse(new Date)){
                       var endTime = moment.utc(new Date(item.endTime));
@@ -118,12 +117,13 @@ router.get('/allMeetings', (req, res) => {
                 }
               })
               .then(function(estate){
+                 data[0]["estateName"] = req.user.estateName;
                  res.render('meeting', data[0]);
                })
             })
         }
        else{
-            res.render('meeting')
+            res.render('meeting', {"estateName": req.user.estateName})
         }
     })
 })
@@ -569,11 +569,12 @@ router.get('/addMeeting',(req,res) => {
            }))
             Promise.all(promiseArr)
             .then(function(data){
+                data[0]["estateName"] = req.user.estateName;
                 res.render('add_meeting', data[0]);
             })
         }
         else{
-            res.render('add_meeting');
+            res.render('add_meeting', {"estateName": req.user.estateName });
         }
     
 })

@@ -234,11 +234,11 @@ router.get('/noticeBoard', (req, res) => {
               $push: {pastNotices: result } 
             })
             .then(function(est) {
-            res.render('notice', {"data": blocksFloors, "notices": uniqueList2});
+            res.render('notice', {"data": blocksFloors, "notices": uniqueList2, "estateName": req.user.estateName});
             })
 
     }else{
-            res.render('notice', {"data": blocksFloors, "notices": uniqueList2});
+            res.render('notice', {"data": blocksFloors, "notices": uniqueList2, "estateName": req.user.estateName});
     }
   })
 })
