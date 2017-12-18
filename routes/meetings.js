@@ -711,7 +711,7 @@ function savePoll(req, res, fileLinks){
 });
 
 router.post('/deleteMeeting',(req,res) => {
-    Meeting.deleteOne({_id: req.body.meeting_id}, function (err, todo) {
+    Meeting.deleteOne({_id: req.body.meetingId}, function (err, todo) {
         if (err) res.send(err);
         res.redirect('/allMeetings');
     });

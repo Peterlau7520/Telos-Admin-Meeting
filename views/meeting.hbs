@@ -176,6 +176,7 @@
                                     <div class="form-group col-sm-6 text-right">
                                         <div id="loading1"></div>
                                         <button class="btn edit_meeting1 btn-primary" id={{meeting_key}} type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"  >Edit Meeting | 編輯會議</button>
+                                        <div id ="loader"></div>
                                         <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" id="{{_id}}" data-time="{{created_at}}">Delete Meeting | 取消會議</button>
                                         <button style='display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
                                     </div>
@@ -231,7 +232,9 @@
                                     </div><br/><br/>
                                     <div class="clearfix"></div>
                                 </form>
-                                <div id="loading"></div>
+                                <div class="clearfix"></div>
+                                <div id="loader2"></div>
+                                <div class="clearfix"></div>
                                  <button class="btn btn-primary add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a poll | 添加投票</button>
                                </div>
                             </div>
@@ -513,7 +516,15 @@
                                                             </p>
                                                         </div>
                                                     </div>
-
+                                                    <div id="dialog2" title="Alert message" style="display: none; ">
+                                                        <div class="ui-dialog-content ui-widget-content">
+                                                            <p>
+                                                                <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0"></span>
+                                                                <label id="lblMessage2">
+                                                                </label>
+                                                            </p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -773,6 +784,10 @@ function edit_poll(event){
         }
 
         $(".delete_meeting").click(function(event){
+            event.preventDefault();
+            console.log("helll")
+            const id = event.target.id
+            ShowCustomDialog2("are you sure you wnna delete?", id)
             localStorage.removeItem("tab");
             localStorage.removeItem("divTab");
           })
@@ -883,6 +898,8 @@ function edit_poll(event){
               newArray = jQuery.unique(newArray)
               $(".voting_opt").append(`<input type ="hidden" name="options" value=${newArray} />`)
                index1 = index1 + 1
+               var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif " />'
+                $("#loader2").append(html);
               /*  var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'
             $("#loading").append(html);*/
         })    
@@ -896,6 +913,8 @@ function edit_poll(event){
               var newArray = optionEdit.filter(function(v){return v!==''});
               newArray = jQuery.unique(newArray)
               console.log(newArray)
+              var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif " style="    margin-left: 194px;"/>'
+                $("#loader3").append(html);
                //$('#options_field').val(JSON.stringify(newArray));
               $(".voting_opt1").append(`<input type ="hidden" name="options" value=${newArray}>`)
             //    index1 = index1 + 1
@@ -1162,7 +1181,7 @@ function edit_poll(event){
         })
         $(document).on('click','.save_meeting',function(event){
             $("#edit_model").modal('hide');
-            var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif "/>'
+            var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif " style="    margin-left: 194px;"/>'
             $("#loading1").append(html);
             $(".edit_meeting1").prop('disabled', true);
             //var index = $(this).data('id');
@@ -1307,6 +1326,63 @@ function edit_poll(event){
                                                                                     
                                             //$("#dialog1").dialog('close');
                                             $(this).dialog("close"); 
+                                        }
+                                    },
+                                ]
+                });
+}
+
+            function ShowCustomDialog2(data, id)
+            {
+            ShowDialogBox2('Warning',data,'Ok', 'GoToAssetList',null, id);
+            }
+            function ShowDialogBox2(title, content, btn1text, functionText, parameterList, id) {
+                console.log("id", id)
+                const meeting_id = id
+                var btn1css;
+                var btn2css;
+                if (btn1text == '') {
+                    btn1css = "hidecss";
+                } else {
+                    btn1css = "showcss";
+                }
+                $("#lblMessage2").html(content);
+                $("#dialog2").dialog({
+                    resizable: false,
+                    title: title,
+                    modal: true,
+                    width: '400px',
+                    height: 'auto',
+                    bgiframe: false,
+                    stack: true,
+                    buttons: [
+                                    {
+                                        text: btn1text,
+                                        "class": btn1css,
+                                        click: function (event) {
+                                           const HostName = "http://localhost:3000"
+                                           console.log("called")
+                                            $.ajax({
+                                                url: HostName + "/deleteMeeting",
+                                                data: {meetingId: meeting_id},
+                                                type: 'POST',
+                                                
+                                            })
+                                             $(this).dialog("close"); 
+                                            var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif " style="    margin-left: 194px;"/>'
+                                             $("#loader").append(html);                                  
+                                              location.reload()
+                                            //$("#dialog1").dialog('close');
+                                           
+                                        }
+                                    },
+                                    {
+                                        text: "Cancel",
+                                        "class": btn1css,
+                                        click: function (event) {                                           
+                                             $(this).dialog("close");                                          
+                                            //$("#dialog1").dialog('close');
+                                           
                                         }
                                     },
                                 ]
