@@ -91,15 +91,15 @@ router.get('/allMeetings', (req, res) => {
                 }
                 })
             }
-                    var startTime = moment.utc(new Date(item.startTime));
+                    var startTime = moment(new Date(item.startTime));
                     item.startTime =  startTime.format("MM/DD/YYYY hh:mm a");
                     if(Date.parse(new Date(item.endTime)) > Date.parse(new Date)){
-                      var endTime = moment.utc(new Date(item.endTime));
+                      var endTime = moment(new Date(item.endTime));
                     item.endTime =  endTime.format("MM/DD/YYYY hh:mm a");
                     currentMeetings.push(item)
                    //start is less than End
                     }else{
-                      var endTime = moment.utc(new Date(item.endTime));
+                      var endTime = moment(new Date(item.endTime));
                     item.endTime =  endTime.format("MM/DD/YYYY hh:mm a");
                      pastMeetings.push(item)
                     //end is less than start
@@ -636,7 +636,10 @@ function uploadFile(req, res){
         }
 
 function savePoll(req, res, fileLinks){
+  console.log(req.body)
     const promiseArr = []
+    const startDate = new Date(req.body.startTime)
+    console.log(startDate)
     if(req.body.startTime) {
         var meetingStartDay = req.body.startTime.substring(0, req.body.startTime.indexOf('T'));
         var meetingStartHour = req.body.startTime.substring(req.body.startTime.indexOf('T') + 1, req.body.startTime.indexOf('T') + 9);
@@ -654,6 +657,7 @@ function savePoll(req, res, fileLinks){
         var pollEndHour = req.body.pollEndTime.substring(req.body.pollEndTime.indexOf('T') + 1, req.body.pollEndTime.indexOf('T') + 9);
         var pollEndFinal = dateFormat(pollEndDay + " " + pollEndHour, 'shortDate');
     }
+    console.log(meetingStartFinal, meetingEndFinal, pollEndFinal)
      const Polls = JSON.parse(req.body.poll_json)
       if(Polls.length  > 0){
             forEach(Polls, function(values){
@@ -667,7 +671,7 @@ function savePoll(req, res, fileLinks){
                      fileLinks: values.filesName,
                      estateName: req.user.estateName,
                      options: values.option,
-                     endTime: pollEndFinal,
+                     endTime: req.body.pollEndTime,
                      active: true,
                      voted: [],
                      finalResult: "",
@@ -688,9 +692,9 @@ function savePoll(req, res, fileLinks){
                 titleChn: req.body.meeting_title_chinese,
                 meetingSummary: req.body.meetingSummary,
                 meetingSummaryChn: req.body.meetingSummaryChn,
-                startTime: meetingStartFinal ,//meetingStartFinal,
-                endTime: meetingEndFinal, //meetingEndFinal,
-                pollEndTime: pollEndFinal,
+                startTime: req.body.startTime ,//meetingStartFinal,
+                endTime: req.body.endTime, //meetingEndFinal,
+                pollEndTime: req.body.pollEndTime,
                 venue: req.body.venue,
                 estate: req.user.estateName,
                 fileLinks: fileLinks,

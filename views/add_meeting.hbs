@@ -133,11 +133,8 @@
 
                     </div>
                  </nav>
-               <!--  <div class="meeting-btn">
-                    <a href="/addMeeting" class="btn btn-primary">舉行會議 | Add a Meeting</a>
-                </div> -->
+             
             </div>
-            <!--Start-->
 <div class="rightsidebar-container">
     
 
@@ -847,8 +844,7 @@
         
         $("body").delegate(".flatpickr", "focusin", function(){
             $(this).flatpickr({
-            enableTime: true,
-            dateFormat: "m/d/YTH:i:K",
+            enableTime: true
          });
         const html = `<p class="close-calendar">Confirm | 確認</p>`;
         $(".flatpickr-calendar").append(html);

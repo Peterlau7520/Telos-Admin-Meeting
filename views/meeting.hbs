@@ -746,8 +746,7 @@ function edit_poll(event){
          hd();
         $("body").delegate(".flatpickr", "focusin", function(){
             $(this).flatpickr({
-            enableTime: true,
-            dateFormat: "m/d/YTH:i:K",
+            enableTime: true
          });
         const html = `<p class="close-calendar">Confirm | 確認</p>`;
         $(".flatpickr-calendar").append(html);
