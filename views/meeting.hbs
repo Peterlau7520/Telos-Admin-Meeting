@@ -172,7 +172,7 @@
                             {{/if}}
                             <div class="div-wrapper">
                                 <div class="tls-content-box">
-                                    <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}" action="/deleteMeeting" method="post">
+                                    <form role="form" name="edit_meeting_{{meeting_key}}" id="edit_meeting_{{meeting_key}}" action="" method="post">
                                     <div class="form-group col-sm-6">
                                         <label class='custom_label'>Meeting Title | 會議標題</label>
                                         <input name="meeting_id" type="hidden" value="{{_id}}">
@@ -1053,6 +1053,7 @@ function edit_poll(event){
         }*/
 
         function edit_popup(data){
+            console.log(data.startTime)
             var html = '<div class="div-wrapper" style="padding: 10px;">'+
             '<h3 class= "heading">' + "Upcoming Meeting | 近期會議"+ '</h3>' + '                                        <button class=" btn btn-danger deleteMeeting deletebtn btn-danger" type="submit" id={{data._id}} data-id={{data._id}} data-time="">Delete Meeting | 取消會議</button>' + '<hr>' +
             
@@ -1082,13 +1083,13 @@ function edit_poll(event){
 '                                    </div>'+
 '                                    <div class="form-group col-sm-6">'+
 '                                        <label class=""> Meeting Start Time | 會議開始時間</label>'+
-'                                        <input id ="" type="text" name="start_time" class="flatpickr datetimepicker form-control input_fields_" value="'+data.start_time+'">'+
+'                                        <input id ="" type="text" name="start_time" class="flatpickr datetimepicker form-control input_fields_" value="'+data.startTime+'">'+
 '                                        <div id="" class=""></div>'+
 ''+
 '                                    </div>'+
 '                                    <div class="form-group col-sm-6">'+
 '                                        <label class="">Meeting End Time | 會議結束時間</label>'+
-'                                        <input id =""  type="text" name="end_time" class="flatpickr datetimepicker form-control input_fields" value="'+data.end_time+'">'+
+'                                        <input id =""  type="text" name="end_time" class="flatpickr datetimepicker form-control input_fields" value="'+data.endTime+'">'+
 '                                        <div id="" class=""></div>'+
 ''+
 '                                    </div>'+
@@ -1366,7 +1367,7 @@ function edit_poll(event){
                                         text: btn1text,
                                         "class": btn1css,
                                         click: function (event) {
-                                           const HostName = "http://localhost:3000"
+                                           const HostName = "http://localhost:4000"
                                            console.log("called")
                                             $.ajax({
                                                 url: HostName + "/deleteMeeting",

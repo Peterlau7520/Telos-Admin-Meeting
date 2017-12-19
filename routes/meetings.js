@@ -218,7 +218,6 @@ router.post('/addPollsOfMeeting', (req, res) => {
                 }
             });
         }       
-    //res.json({ meetingsPollData: JSON.parse(req.body) })
     }
 
     function savePoll(req, res, files){
@@ -702,7 +701,6 @@ function savePoll(req, res, fileLinks){
                 active: true
             });
             meeting.save(function(err, meeting){
-                console.log(meeting)
                 res.redirect('/allMeetings')
     })
 })
@@ -711,7 +709,9 @@ function savePoll(req, res, fileLinks){
 });
 
 router.post('/deleteMeeting',(req,res) => {
+  console.log(req.body, "reqq")
     Meeting.deleteOne({_id: req.body.meetingId}, function (err, todo) {
+      console.log(todo, "do")
         if (err) res.send(err);
         res.redirect('/allMeetings');
     });

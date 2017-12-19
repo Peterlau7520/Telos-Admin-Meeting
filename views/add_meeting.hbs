@@ -773,7 +773,7 @@
             </div>
             <div class="modal-body">
                 <form role="form" name="#poll_form" id="poll_form" 
-                action="/addPollsOfMeeting"  method="post" enctype="multipart/form-data">
+                action="/addPollsOfMeeting"  method="post" enctype="multipart/form-data" target="uploader_iframe" onsubmit="return false">
                     <div class="form-group col-sm-6 formlabel">
                         <label>Poll Title</label>
                         <input type="text" name="title" class="form-control">
@@ -817,6 +817,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary btn-success" id="close_model2" style="float: right;"> 确认 | Confirm</button>
                 </form>
+                <iframe id="uploader_iframe" name="uploader_iframe" style="display: none;"></iframe>
             </div>
             <div class="modal-footer">
                 
