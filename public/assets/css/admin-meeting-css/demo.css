@@ -659,13 +659,13 @@ margin-left: 10px;
 }
 
 .meeting-btn{
-    text-align: right;
+    /*text-align: right;
     /* position: absolute; */
-    bottom: 50px;
-    right: 20px;
+   /* bottom: 50px;
+    right: 20px;*/
 /*    width: 220px;*/
-    margin: 0 10px;
-    margin-top: 10px;
+   /* margin: 0 10px;
+    margin-top: 10px;*/*/
 }
 .meeting-btn .btn{
     /*width: 100%;
