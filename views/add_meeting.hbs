@@ -1257,10 +1257,10 @@ var originalData = '{{{stringify meetingsData}}}';
             
 '                                <form role="form" enctype="multipart/form-data" name="edit_meeting_popup" id="edit_meeting_popup" action="/editMeeting" method="post">'+
 '                                    <div class="form-group col-sm-6">'+
-'                                        <label class="">取消會議 | Meeting Title</label>'+
+'                                        <label class="">Meeting Title</label>'+
 '                                        <input name="meeting_id" type="hidden" value="'+data._id+'">'+
 '                                        <input id ="title" type="text" class="form-control input_fields" name="title" value="'+data.title+'">'+
-'                                        <label class="">取消會議 | Meeting Chinese Title</label>'+
+'                                        <label class="">會議標題</label>'+
 '                                        <input id ="titleChn" type="text" class="form-control input_fields" name="titleChn" value="'+data.titleChn+'">'+
 '                                        <div id="" class=""></div>'+
 '                                    </div>'+
@@ -1268,26 +1268,26 @@ var originalData = '{{{stringify meetingsData}}}';
 '                                    </div>'+
 '                                    <div class="clearfix"></div>'+
 '                                    <div class="form-group col-sm-6">'+
-'                                        <label class=""> 取消會議 | Meeting Start Time</label>'+
+'                                        <label class=""> Meeting Start Time | 會議開始時間</label>'+
 '                                        <input id ="" type="text" name="start_time" class="mydate flatpickr form-control input_fields_" value="12/23/2017T9:00:PM">'+
 '                                        <div id="" class=""></div>'+
 ''+
 '                                    </div>'+
 '                                    <div class="form-group col-sm-6">'+
-'                                        <label class="">取消會議 | Meeting End Time</label>'+
+'                                        <label class="">Meeting End Time | 會議結束時間</label>'+
 '                                        <input id =""  type="text" name="end_time" class="flatpickr flatpickr-input datetimepicker form-control input_fields" value="'+data.end_time+'">'+
 '                                        <div id="" class=""></div>'+
 ''+
 '                                    </div>'+
 '                                    <div class="clearfix"></div>'+
 '                                    <div class="form-group col-sm-6">'+
-'                                        <label class="">取消會議 | Venue</label>'+
+'                                        <label class="">Venue | 地點</label>'+
 '                                        <input t id ="" type="text" class="form-control input_fields" name="venue" value="'+data.venue+'">'+
 '                                        <div id="" class=""></div>'+
 '                                    </div>'+
 '                                   <div id="removedfiles">'+ '</div>' +
 '                                    <div class="form-group col-sm-6">'+
-'                                        <label class="">取消會議 | Agenda</label>';
+'                                        <label class=""> Agenda | 議程</label>';
                                       if(data.fileLinks[0]){
                           html = html + '<table class="table table-bordered table_custom_Wrapper">'+
 '                                            <tr>'+
@@ -1311,8 +1311,8 @@ var originalData = '{{{stringify meetingsData}}}';
             html = html +    '<div class = "add" id= "addAgenda">'+ '<input name="fileField" id ="addFile" type="file" class="form-control input_fields />' + '</div>'+
 '                                    </div>'+
 '                                    <div class="clearfix"></div>'+
-'                                        <button  class=" btn save_meeting savebtn" type="submit" data-id=""> 儲存 | Save</button>'+
-'                                        <button  class="btn cancel_meeting savebtn" type="button" data-id="">取消 | Cancel</button>'+
+'                                        <button  class=" btn save_meeting savebtn" type="submit" data-id=""> Save | 儲存</button>'+
+'                                        <button  class="btn cancel_meeting savebtn" type="button" data-id="">Cancel | 取消</button>'+
 '                                </form>'+
 '                            </div>';
     
