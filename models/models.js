@@ -116,6 +116,7 @@ const noticeSchema = new Schema({
     titleChn: String,
     endTime: String,
     postDate: String,
+    estate: String,
     fileLinks: Array,
     active: Boolean,
     targetAudience: [{block: String, floors: Array}],
@@ -128,6 +129,7 @@ const surveySchema = new Schema({
     effectiveTo: Date,
     postDate: {type: Date, default: new Date()},
     targetAudience: [{block: String, floors: Array}],
+    estate: String
 })
 
 const questionSchema = new Schema({

@@ -174,6 +174,7 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
     var endDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
     var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
     var endFinal = dateFormat( endDay + " " + endHour , 'shortDate');
+    console.log(endFinal);
     var notice = new Notice({
             title: req.body.title,
             titleChn: req.body.titleChn,
@@ -199,6 +200,7 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
 }
 
 router.get('/noticeBoard', (req, res) => {
+  console.log(req.user.estateName)
   var blocksFloors = {
                 'Blocks': {
                     'A': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'],
