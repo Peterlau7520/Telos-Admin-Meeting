@@ -426,7 +426,7 @@
         })
         var optionId = 0;
         var questions = []
-
+        var i=0
         $(document).on('click','#optionConfirm',function(event){
             event.preventDefault()
             var total = optionId;
@@ -531,7 +531,10 @@
            var questionChn = $("#row0 :input[name*='questionChn']").val();
            var questionEng = $("#row0 :input[name*='question']").val();
            if(questionChn && questionEng){
+            console.log(questions.length)
             questions.push({"questionEng": questionEng,"questionChn":questionChn, "options": detail})
+            i++;
+            console.log(questions)
             $("#floor_model").modal('hide');
            
             //console.log(questions, 'questions')

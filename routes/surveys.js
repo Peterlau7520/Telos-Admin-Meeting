@@ -43,7 +43,6 @@ router.post('/addSurvey', (req, res) => {
 function saveSurvey(req, res, targetAudience){
     console.log(req.body.questions)
     const options = []
-    console.log('REQQQQQ',req.body.endTime);
     var endDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
     var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
     var endFinal = dateFormat( endDay + " " + endHour , 'shortDate');
@@ -56,20 +55,23 @@ function saveSurvey(req, res, targetAudience){
         });
     survey.save()
     .then(function(survey){
-        console.log(survey)
     if(survey){
         const questions = req.body.questions
+        var order = 0
         if(questions.length >0){
              let j = -1
                 var fetchquestion = function() {
                 j++
                 if(j < questions.length) {
             forEach(questions, function(question){
+                console.log(question, "question", j)
             var que = new Question({
                 questionEn: question.questionEng,
                 questionChn: question.questionChn,
                 surveyId: survey._id,
+                order: order
             });
+            order++;
             que.save()
             .then(function(q){
                 console.log(q)
@@ -89,13 +91,11 @@ function saveSurvey(req, res, targetAudience){
                             option.save()
                                 .then(function(option){
                                     if(option){
-                                    console.log(option._id, q._id,'pppp')
                                    Question.update(
                                     { _id:  q._id},
                                     { $push: { optionIds:  option._id } }
                                     )
                                     .then(function(ques, err) {
-                                        console.log(ques)
                                         if(err){
                                         res.send(err);
                                         }
@@ -140,11 +140,10 @@ router.get('/getSurveys', (req, res) => {
   Survey.find({estate: req.user.estateName}).lean()
   .then(function(survey, err) {
     if(survey.length){
-        console.log(survey, "survey")
         var todayDate = new Date()
         promiseArr.push(new Promise(function(resolve, reject){
         _.forEach(survey, function(surv, index) {
-        Question.find({surveyId: surv._id}).populate('optionIds').lean()
+        Question.find({surveyId: surv._id}).populate('optionIds').lean().sort( { order: 1 } )
             .then(function(que, err){
             surv.question = que
             resolve(survey)
@@ -156,10 +155,8 @@ router.get('/getSurveys', (req, res) => {
         Promise.all(promiseArr)
         .then(function(data, err){
             list = data[0]
-            console.log(data, "data")
         
             _.forEach(data[0], function(sur, index) {
-                console.log(sur, "sur")
             var currentDate = moment(new Date());
             currentDate = currentDate.format("D/MM/YYYY");
             var now1 = moment(new Date(sur.effectiveTo));
@@ -182,7 +179,6 @@ router.get('/getSurveys', (req, res) => {
         var result = _.map(uniqueList, '_id');
         Estate.findOneAndUpdate({estateName: req.user.estateName,$set: {surveys: result }})
         .then(function(est) {
-            console.log(list, "list")
             res.render('survey', {"data": blocksFloors, 'surveys': list, "estateName": req.user.estateName});
         })
     })
