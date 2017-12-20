@@ -43,6 +43,7 @@ router.post('/addSurvey', (req, res) => {
 function saveSurvey(req, res, targetAudience){
     console.log(req.body.questions)
     const options = []
+    console.log('REQQQQQ',req.body.endTime);
     var endDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
     var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
     var endFinal = dateFormat( endDay + " " + endHour , 'shortDate');
