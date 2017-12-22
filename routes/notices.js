@@ -33,7 +33,6 @@ router.use(busboyBodyParser({multi: true}));
 
 
 router.post('/addNotice', (req, res) => {
-    console.log(req.body)
     if(req.body.floor_info){
         floorInfo = JSON.parse(req.body.floor_info)
     }
@@ -128,7 +127,6 @@ router.post('/addNotice', (req, res) => {
 });
 
 exports.uploadPdf = function(req, res, targetAudience){
-    console.log(req.files)
     var files = req.files && req.files.filefield ? req.files.filefield : false;
     var fileLinks = []
     if (files && files[0].size != 0) {
@@ -167,7 +165,6 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
     var endDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
     var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
     var endFinal = dateFormat( endDay + " " + endHour , 'shortDate');
-    console.log(endFinal);
     var notice = new Notice({
             title: req.body.title,
             titleChn: req.body.titleChn,
@@ -178,15 +175,20 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
             fileLinks:fileLinks
         });
         notice.save(function(err, notice){
-        Estate.findOne({
-            estateName: req.user.estateName
-        }, function(err, estate){
-            if(err){
-                res.render('error')
-            }
-            estate.currentNotices.push(notice)
+            console.log("helllllll", req.user)
+            Estate.findOneAndUpdate({username: req.user.username
+            }, {
+                 $push: { 
+                    currentNotices: notice._id,
+                }
+                },{ 
+                new: true 
+             })
+            .then(function(err, estate){
+           /* if(err){
+                res.send(err)
+            }*/
             //Redirecting routes.
-            console.log(notice)
             res.redirect('/noticeBoard');
         })
     })
