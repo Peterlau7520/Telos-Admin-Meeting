@@ -179,7 +179,7 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
         });
         notice.save(function(err, notice){
         Estate.findOne({
-            estateName: req.user.estateName
+            _id: req.user._id
         }, function(err, estate){
             if(err){
                 res.render('error')
@@ -225,7 +225,7 @@ router.get('/noticeBoard', (req, res) => {
             }
     return (!(todayDate != new Date(item.endTime) && todayDate > new Date(item.endTime))) ? item._id : ''
        });
-      Estate.findOneAndUpdate({username: req.user.username,
+      Estate.findOneAndUpdate({_id: req.user._id,
               $push: {pastNotices: result } 
             })
             .then(function(est) {
