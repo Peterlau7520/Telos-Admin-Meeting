@@ -20,7 +20,7 @@ const router = express.Router();
 router.use(busboyBodyParser({multi: true}));
 const dateFormat = require('dateformat');
 
-// AWS.config.loadFromPath('./key.json');
+
 var AWS = require('aws-sdk');
 const async = require('async');
 let docFileName,pathParams,dataFile;
@@ -139,8 +139,6 @@ router.post('/addPollsOfMeeting', (req, res) => {
                        for (var key in req.files) {
             var info = req.files[key][0].data;
             var name = req.files[key][0].name.replace(/ /g,'');
-            //meeting.fileLinks.push(name);
-            //Let key = `${req.user.estateName}/${req.body.title}/${name}`
             fileLinks.push(name)
             var titleLink = ''
                       var fileLinksLink = ''
@@ -186,10 +184,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
         for (var key in req.files) {
             var info = req.files[key][0].data;
             var name = req.files[key][0].name.replace(/ /g,'');
-            var meeting_title = req.body.pollMeeting_title
-            //meeting.fileLinks.push(name);
-            //Let key = `${req.user.estateName}/${req.body.title}/${name}`
-            //fileLinks.push(name)
+            var meeting_title = req.body.pollMeeting_title;
             var titleLink = ''
                       var fileLinksLink = ''
                       if(req.body.title){
@@ -613,7 +608,6 @@ function uploadFile(req, res){
             var data = {
                 Bucket: BucketName,
                 Key:  `${req.user.estateName}/${titleLink}/${fileLinksLink}`,
-                //Key: `${req.user.estateName}/Meetings/${req.body.title}/${name}`,
                 Body: info,
                 ContentType: 'application/pdf',
                 ContentDisposition: 'inline',

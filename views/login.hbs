@@ -87,47 +87,39 @@
               <form data-toggle="validator" role="form" class="register-form" method="post" action="/register" >
                 <div class="form-group">
                   <div class="help-block with-errors" style="color:violet"></div>
-                <label style="padding-left: 0px !important">Name/姓名</label>
+                <label style="padding-left: 0px !important">Name | 姓名</label>
                 <input type="text" class="form-control" id="inputName" placeholder="name" name="chairmanName" required/>
                 </div>
                 <div class="form-group">
                   <div class="help-block with-errors" style="color:violet"></div>
-                <label style="padding-left: 0px !important">Estate/屋苑</label>
+                <label style="padding-left: 0px !important">Estate (English)</label>
                 <input type="text" placeholder="estate" name="estateName" required/>
+                </div>
+                  <div class="form-group">
+                  <div class="help-block with-errors" style="color:violet"></div>
+                <label style="padding-left: 0px !important">屋苑名稱 (中文)</label>
+                <input type="text" placeholder="estate" name="estateNameChn" required/>
                 </div>
                 <div class="form-group">
                   <div class="help-block with-errors" style="color:violet"></div>
-                <label style="padding-left: 0px !important">Username/用戶名</label>
+                <label style="padding-left: 0px !important">Username | 用戶名</label>
                 <input type="text" placeholder="username" name="username" required/>
                 </div>
                 <div class="form-group">
-                <label style="padding-left: 0px !important" for="inputPassword" class="control-label">Password/密碼</label>
+                <label style="padding-left: 0px !important" for="inputPassword" class="control-label">Password | 密碼</label>
                 <input type="password" class="form-control" id="inputPassword" placeholder="password" name="password" required>
                 </div>
                 <div class="form-group">
                 <div class="help-block with-errors" style="color:violet"></div>
-                <label style="padding-left: 0px !important">Confirm password/確認密碼</label>
+                <label style="padding-left: 0px !important">Confirm password | 確認密碼</label>
                 <input type="password" placeholder="re-enter password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" required/>
                 </div>
                 <div class="form-group">
                   <div class="help-block with-errors" style="color:violet"></div>
-                <label style="padding-left: 0px !important" for="inputEmail" class="control-label">Email/電郵</label>
+                <label style="padding-left: 0px !important" for="inputEmail" class="control-label">Email | 電郵</label>
                 <input type="text" class="form-control" id="inputEmail" data-error="Sorry that email address is invalid" placeholder="email address" name="emailAddress" required>
                 </div>
-                <div class="form-group">
-                  <div class="help-block with-errors" style="color:violet"></div>
-                <label style="padding-left: 0px !important">Invite Code/邀請碼</label>
-                <input type="text" placeholder="invite code" name="inviteCode" required/>
-
-                </div>
-                <div class="form-group">
-                  <div class="help-block with-errors" style="color:violet"></div>
-                <label style="padding-left: 0px !important">Total Number of Units/最多戶</label>
-                <input type="text" placeholder="Max number of units" name="numberOfUnits" required/>
-
-                </div>
-
-                <button type="submit">create</button>
+                <button type="submit">Create</button>
                 <p class="message" style="font-family: Roboto ,sans-serif">Already registered?/已經註冊? <a href="#">Sign In/登入</a></p>
               </form>
               <form class="login-form" action="/login" method="post" >
@@ -155,16 +147,4 @@
     </body>
 
 
-                  {{!-- <div class="form-group">
-                    <label for="inputPassword" class="control-label">Password</label>
-                    <div class="form-inline row">
-                      <div class="form-group col-sm-6">
-                        <input type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
-                        <div class="help-block">Minimum of 6 characters</div>
-                      </div>
-                      <div class="form-group col-sm-6">
-                        <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Confirm" required>
-                        <div class="help-block with-errors"></div>
-                      </div>
-                  </div>
-                  </div> --}}
+      

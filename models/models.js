@@ -48,11 +48,12 @@ const residentSchema = new Schema({
 //ESTATE
 const estateSchema = new Schema({
     estateName: String,
+    estateNameDisplay: String,
+    estateNameChn: String,
     username: String,
     password: String,
     emailAddress: String,
     chairmanName: String,
-    inviteCode: String,
     surveys: [
         {
             type: Schema.Types.ObjectId,

@@ -17,15 +17,9 @@ const apiKey = 'ZTE5MDk1OWYtNGQzOS00OWE5LWFkNjctNDgwZDU2YjBkMDZi';
 const oneSignal = require('onesignal')(apiKey, appId, true);
 
 const BucketName = 'telospdf';
-// AWS.config.update({
-//   accessKeyId: process.env.S3_KEY,
-//   secretAccessKey: process.env.secretAccessKey
-// });
-// 
 AWS.config.update({
   accessKeyId: 'AKIAIMLMZLII2XCKU6UA',
   secretAccessKey: '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',
-  //region: 'ap-southeast-1'
 });
 
 const bucket = new AWS.S3({params: {Bucket: BucketName}});
@@ -142,17 +136,16 @@ exports.uploadPdf = function(req, res, targetAudience){
             var info = files[i].data;
             var name = files[i].name.replace(/ /g,'');
             var title = req.body.title.replace(/ /g,'');
-            console.log(title)
-            //meeting.fileLinks.push(name);
             fileLinks.push(name)
+            const estatePath = req.user.estateName.split(" ").join("");
             var data = {
                 Bucket: BucketName,
-                Key: `${req.user.estateName}/Notices/${title}/${name}`,
+                Key: `${estatePath}/Notices/${title}/${name}`,
                 Body: info,
                 ContentType: 'application/pdf',
                 ContentDisposition: 'inline',
                 ACL: "public-read"
-            }; // req.user.estateName
+            }; 
             bucket.putObject(data, function (err, data) {
                 if (err) {
                     console.log('Error uploading data: ', err);
@@ -200,7 +193,6 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
 }
 
 router.get('/noticeBoard', (req, res) => {
-  console.log(req.user.estateName)
   var blocksFloors = {
                 'Blocks': {
                     'A': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'],
@@ -223,6 +215,7 @@ router.get('/noticeBoard', (req, res) => {
     var uniqueList2 = _.filter(notices, function(item, key, a){   
         if(item.fileLinks.length > 0) {
               let fileLinks = [];
+              const estatePath = req.user.estateName.split(" ").join("");
                 let Key = `${req.user.estateName}/Notices/${item.title.replace(/ /g,'')}/${item.fileLinks[0]}`;
                 fileLinks.push({
                   name: item.fileLinks[0],

@@ -6,18 +6,22 @@ var Estate = models.Estate;
 module.exports = function(passport) {
   // main login routes
   router.post('/register', (req, res) => {
-    Estate.findOne({"estateName" : req.body.estateName.trim()}, function(err, estate){
+    const checkEstate = req.body.estateName.split(" ").join("").trim();
+    Estate.findOne({"estateName" : checkEstate}, function(err, estate){
       if(estate){
         res.render('login', {
-          flash : "account for this estate already exists",
+          flash : "Account for this estate already exists",
           layout: 'loginLayout.hbs'
         });
       }
       else{
+        const estateName = req.body.estateName.split(" ").join("");
         let estate = new Estate({
           username : req.body.username.trim(),
           password : req.body.password.trim(),
-          estateName: req.body.estateName,
+          estateName: estateName.trim(),
+          estateNameDisplay: req.body.estateName,
+          estateNameChn: req.body.estateNameChn,
           emailAddress: req.body.emailAddress.trim(),
           chairmanName: req.body.chairmanName.trim(),
         });
