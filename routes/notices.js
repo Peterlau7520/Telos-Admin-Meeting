@@ -229,6 +229,8 @@ router.get('/noticeBoard', (req, res) => {
               $push: {pastNotices: result } 
             })
             .then(function(est) {
+                console.log("esttt", est);
+                console.log("user", req.user)
             res.render('notice', {"data": blocksFloors, "notices": uniqueList2, "estateName": req.user.estateName});
             })
 
