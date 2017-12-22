@@ -225,9 +225,9 @@ router.get('/noticeBoard', (req, res) => {
             }
     return (!(todayDate != new Date(item.endTime) && todayDate > new Date(item.endTime))) ? item._id : ''
        });
-      Estate.findOneAndUpdate({_id: req.user._id,
-              $push: {pastNotices: result } 
-            })
+      Estate.findOneAndUpdate({_id: req.user._id},
+             { $push: {pastNotices: result } }
+            )
             .then(function(est) {
             res.render('notice', {"data": blocksFloors, "notices": uniqueList2, "estateName": req.user.estateName});
             })
