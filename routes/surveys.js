@@ -177,7 +177,7 @@ router.get('/getSurveys', (req, res) => {
             return (todayDate != item.effectiveTo && todayDate > item.effectiveTo) ? item._id : ''
         });
         var result = _.map(uniqueList, '_id');
-        Estate.findOneAndUpdate({_id: req.user._id,$set: {surveys: result }})
+        Estate.findOneAndUpdate({_id: req.user._id}, {$set: {surveys: result }})
         .then(function(est) {
             res.render('survey', {"data": blocksFloors, 'surveys': list, "estateName": req.user.estateName});
         })
