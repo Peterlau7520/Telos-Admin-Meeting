@@ -225,7 +225,7 @@ router.get('/noticeBoard', (req, res) => {
             }
     return (!(todayDate != new Date(item.endTime) && todayDate > new Date(item.endTime))) ? item._id : ''
        });
-      Estate.findOneAndUpdate({estateName: req.user.estateName,
+      Estate.findOneAndUpdate({username: req.user.username,
               $push: {pastNotices: result } 
             })
             .then(function(est) {
