@@ -110,7 +110,7 @@ router.get('/allMeetings', (req, res) => {
            }))
             Promise.all(promiseArr)
             .then(function(data){
-              Estate.findOneAndUpdate({estateName: req.user.estateName,
+              Estate.findOneAndUpdate({_id: req.user._id,
                 $set: {
                   currentMeetings: data[0].meetingsData,
                   pastMeetings: data[0].pastMeetingsData,
