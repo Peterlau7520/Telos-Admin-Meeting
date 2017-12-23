@@ -465,16 +465,16 @@ input:focus {
   -ms-transition: all 100ms ease-in;
   transition: all 100ms ease-in; }
 .delete-btn{
-      float: right;
+    float: right;
     margin-top: -24px;
-    background: none !important;
+    background: #e61717 !important;
     border: 1px solid #e61717 !important; 
     font-size: 12px !important;
     width: 120px !important;
     height: 30px !important;
     line-height: 15px !important;
     border-radius: 2px !important;
-    color: #cc3030  !important;
+    color: white!important;
 }
 .fa {
   width: 18px;

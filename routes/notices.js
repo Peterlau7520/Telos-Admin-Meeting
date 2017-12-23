@@ -93,7 +93,7 @@ router.post('/addNotice', (req, res) => {
             else{
                 const blocks = Object.keys(audience)
                 forEach(residents, function(item, index){
-                    //make an array of the blocks
+                    //MAKE AN ARRAY OF BLOCKS
                     var  segmentedAudience= [];
                     if (blocks.includes(item.block)){
                         if(audience[item.block].includes(item.floor)){
@@ -128,7 +128,6 @@ router.post('/addNotice', (req, res) => {
 });
 
 exports.uploadPdf = function(req, res, targetAudience){
-    console.log(req.files)
     var files = req.files && req.files.filefield ? req.files.filefield : false;
     var fileLinks = []
     if (files && files[0].size != 0) {
@@ -232,11 +231,11 @@ router.get('/noticeBoard', (req, res) => {
             .then(function(est) {
                 console.log("esttt", est);
                 console.log("user", req.user)
-            res.render('notice', {"data": blocksFloors, "notices": uniqueList2, "estateName": req.user.estateName});
+            res.render('notice', {"data": blocksFloors, "notices": uniqueList2, "estateNameDisplay": req.user.estateNameDisplay, "estateNameChn": req.user.estateNameChn});
             })
 
     }else{
-            res.render('notice', {"data": blocksFloors, "notices": uniqueList2, "estateName": req.user.estateName});
+            res.render('notice', {"data": blocksFloors, "notices": uniqueList2, "estateNameDisplay": req.user.estateNameDisplay,"estateNameChn": req.user.estateNameChn});
     }
   })
 })
