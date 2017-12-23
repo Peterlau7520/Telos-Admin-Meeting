@@ -167,7 +167,6 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
     var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
     var endFinal = dateFormat( endDay + " " + endHour , 'yyyy-mm-dd HH:MM');
     console.log(endFinal);
-    console.log(endTest);
     var notice = new Notice({
             title: req.body.title,
             titleChn: req.body.titleChn,

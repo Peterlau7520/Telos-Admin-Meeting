@@ -31,18 +31,22 @@ const residentSchema = new Schema({
     nature: String,
     numberOfOwners: String,
     shares: String,
-    hkid: String,
-    hkidImage: String,
-    signature: String,
+    hkid: Array,
+    hkidImage: Array,
+    signature: Array,
     chopImage: String,
-    proxyAppointed: [], //ALL THE MEETINGS WHERE THEY APPOINT US AS THE PROXY.
+    proxyAppointed: [
+    { type: Schema.Types.ObjectId,
+            ref: 'Meeting'}
+            ], //ALL THE MEETINGS WHERE THEY APPOINT US AS THE PROXY.
     deviceToken: String,
     posts: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Post'
         }
-    ]
+    ],
+    registered: {type: Boolean , default: false},
 });
 
 //ESTATE
@@ -107,6 +111,10 @@ const pollSchema = new Schema({
     ],
     finalResult: String,
     results: [{choice: String, percentage: Number}],
+    votingResults: [{choice: String, resident: {
+        type: Schema.Types.ObjectId,
+        ref: 'Resident'
+    }}],
     votes: Array,
     pollReport: Array
 });
@@ -176,6 +184,7 @@ const meetingSchema = new Schema({
     pollEndTime: String,
     estate:String,
     youtubelink: String,
+    views: { type: String, default: 0 },
 })
 
 
