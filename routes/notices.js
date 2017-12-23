@@ -162,11 +162,12 @@ exports.uploadPdf = function(req, res, targetAudience){
 
 
 exports.saveNotice = function(req, res, fileLinks, targetAudience){
-    var postDate = dateFormat(new Date(), 'shortDate');
+    var postDate = dateFormat(new Date(), 'yyyy-mm-dd HH:MM');
     var endDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
     var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
-    var endFinal = dateFormat( endDay + " " + endHour , 'shortDate');
+    var endFinal = dateFormat( endDay + " " + endHour , 'yyyy-mm-dd HH:MM');
     console.log(endFinal);
+    console.log(endTest);
     var notice = new Notice({
             title: req.body.title,
             titleChn: req.body.titleChn,
