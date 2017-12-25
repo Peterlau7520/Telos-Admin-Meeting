@@ -25,12 +25,20 @@ AWS.config.update({
 const bucket = new AWS.S3({params: {Bucket: BucketName}});
  
 //Data models
-
 const Estate = models.Estate;
 const Notice = models.Notice;
 const Resident = models.Resident;
 router.use(busboyBodyParser({multi: true}));
 
+
+//Sort function
+function compareDate(noticeA,noticeB){
+    if (noticeA.postDate > noticeB.postDate)
+        return -1;
+    if (noticeA.postDate < noticeB.postDate)
+        return 1;
+    return 0;
+  }
 
 router.post('/addNotice', (req, res) => {
     console.log(req.body)
@@ -208,6 +216,7 @@ router.get('/noticeBoard', (req, res) => {
     if(notices.length){
     var todayDate = new Date()
     var uniqueList = _.filter(notices, function(item, key, a){   
+    //CHECKING PAST NOTICES. RETURN PAST NOTICES' ID
     return (todayDate != new Date(item.endTime) && todayDate > new Date(item.endTime)) ? item._id : ''
        });
     var result = _.map(uniqueList, '_id');
@@ -224,18 +233,24 @@ router.get('/noticeBoard', (req, res) => {
             }
     return (!(todayDate != new Date(item.endTime) && todayDate > new Date(item.endTime))) ? item._id : ''
        });
-
+      uniqueList2.sort(compareDate);
+      uniqueList2.sort(compareDate);
+      console.log(uniqueList2);
       Estate.findOneAndUpdate({_id: req.user._id},
              { $push: {pastNotices: result } }
             )
             .then(function(est) {
-                console.log("esttt", est);
-                console.log("user", req.user)
-            res.render('notice', {"data": blocksFloors, "notices": uniqueList2, "estateNameDisplay": req.user.estateNameDisplay, "estateNameChn": req.user.estateNameChn});
+            res.render('notice', {
+            "data": blocksFloors, 
+            "notices": uniqueList2, 
+            "estateNameDisplay": req.user.estateNameDisplay, "estateNameChn": req.user.estateNameChn});
             })
 
     }else{
-            res.render('notice', {"data": blocksFloors, "notices": uniqueList2, "estateNameDisplay": req.user.estateNameDisplay,"estateNameChn": req.user.estateNameChn});
+            res.render('notice', {
+            "data": blocksFloors, 
+            "notices": uniqueList2, 
+            "estateNameDisplay": req.user.estateNameDisplay,"estateNameChn": req.user.estateNameChn});
     }
   })
 })
