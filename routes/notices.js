@@ -277,7 +277,7 @@ router.get('/noticeBoard', (req, res) => {
     var todayDate = new Date()
     var uniqueList = _.filter(notices, function(item, key, a){   
     //CHECKING PAST NOTICES. RETURN PAST NOTICES' ID
-    return (todayDate != new Date(item.endTime) && todayDate > new Date(item.endTime)) ? item._id : ''
+    return (new Date(todayDate) != new Date(item.endTime) && new Date(todayDate) > new Date(item.endTime)) ? item._id : ''
        });
     var result = _.map(uniqueList, '_id');
     var uniqueList2 = _.filter(notices, function(item, key, a){   
