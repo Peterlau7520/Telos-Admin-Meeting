@@ -110,20 +110,21 @@ router.get('/allMeetings', (req, res) => {
            }))
             Promise.all(promiseArr)
             .then(function(data){
-              Estate.findOneAndUpdate({estateName: req.user.estateName,
+              Estate.findOneAndUpdate({_id: req.user._id},{
                 $set: {
                   currentMeetings: data[0].meetingsData,
                   pastMeetings: data[0].pastMeetingsData,
                 }
               })
               .then(function(estate){
-                 data[0]["estateName"] = req.user.estateName;
+                 data[0]["estateNameDisplay"] = req.user.estateNameDisplay;
+                 data[0]["estateNameChn"] = req.user.estateNameChn;
                  res.render('meeting', data[0]);
                })
             })
         }
        else{
-            res.render('meeting', {"estateName": req.user.estateName})
+            res.render('meeting', {"estateNameDisplay": req.user.estateNameDisplay, "estateNameChn": req.user.estateNameChn})
         }
     })
 })
@@ -563,12 +564,13 @@ router.get('/addMeeting',(req,res) => {
            }))
             Promise.all(promiseArr)
             .then(function(data){
-                data[0]["estateName"] = req.user.estateName;
+                data[0]["estateNameDisplay"] = req.user.estateNameDisplay;
+                data[0]["estateNameChn"] = req.user.estateNameChn;
                 res.render('add_meeting', data[0]);
             })
         }
         else{
-            res.render('add_meeting', {"estateName": req.user.estateName });
+            res.render('add_meeting', {"estateNameDisplay": req.user.estateNameDisplay, "estateNameChn": req.user.estateNameChn});
         }
     
 })

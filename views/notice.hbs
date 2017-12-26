@@ -16,10 +16,10 @@
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="/" class="simple-text">
-                    {{estateName}}
+                    {{estateNameDisplay}}
                 </a>
                 <a href="/" class="simple-text">
-                    {{estateName}} 
+                    {{estateNameChn}} 
                 </a>
             </div>
             <ul class="nav">
@@ -176,7 +176,7 @@
                                             <td>{{value.postDate}}</td>
                                             {{#each this.fileLinks}}
                                             <td>
-                                             <a target="_blank" href={{this.url}} class="view-pdf" >{{value.title}} | {{value.titleChn}}</a>
+                                             <a target="_blank" href={{this.url}} class="view-pdf" >{{value.title}} <br> {{value.titleChn}}</a>
                                             </td>
                                             {{/each}}
                                             <td>{{this.endTime}}</td>

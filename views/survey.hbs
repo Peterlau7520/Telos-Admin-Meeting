@@ -40,10 +40,10 @@
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="/" class="simple-text">
-                    {{estateName}}
+                    {{estateNameDisplay}}
                 </a>
                 <a href="/" class="simple-text">
-                    {{estateName}} 
+                    {{estateNameChn}} 
                 </a>
             </div>
             <ul class="nav">
@@ -652,7 +652,7 @@
                             '</div>'+
 
                                 '<button id="'+index+'" class="addbtn addBtn engBtn'+index+'">Add</button>'+ '</br>' +
-                                '<button type="submit" class=" ConfirmBtn RmBtnOptions" style="margin-top: 10px;margin-left: -6px;width: 100px;padding-left: 10px;border-width: 1px;background-color: transparent;/* font-weight: 400; *//* opacity: 0.8; */filter: alpha(opacity=80);/* padding: 8px 16px; */border-color: #bdbaba;color: #1f1b1b;float: right;margin-right: 6px;background: none;border: 1px solid #ccc;font-size: 11px;width: 103px;height: 26px;line-height: 17px;border-radius: 2px;" id="'+index+'">Remove Option</button>'+
+                                '<button type="submit" class="RmBtnOptions" style="margin-top: 10px;margin-left: -6px;width: 100px;padding-left: 10px;border-width: 1px;background-color: transparent;/* font-weight: 400; *//* opacity: 0.8; */filter: alpha(opacity=80);/* padding: 8px 16px; */border-color: #bdbaba;color: #1f1b1b;float: right;margin-right: 6px;background: none;border: 1px solid #ccc;font-size: 11px;width: 103px;height: 26px;line-height: 17px;border-radius: 2px;" id="'+index+'">Remove Option</button>'+
                             '</div>'+
                              '<div class="col-md-3 RemPad">'+
                                 '<div class="form-group" id="chnDivValue'+indexChn+'">'+
@@ -810,9 +810,9 @@
 
             html = html + '</div></div></div><div id="addQuestion"></div></div>' +
                     '<div class="modal-footer">' +
-'<button type="button" class="btn ConfirmBtn survey-btn" style="float:left;" id="optionAdd">增加選項 | Add Option</button>' +
-'<button type="button" class="btn ConfirmBtn survey-btn" id="cancel">取消 | Cancel</button>' +
-                        '<button type="submit" class="btn ConfirmBtn survey-btn" id="optionConfirm">存檔 | Save</button>' +
+'<button type="button" class="btn survey-btn" style="float:left;" id="optionAdd">增加選項 | Add Option</button>' +
+'<button type="button" class="btn survey-btn" id="cancel">取消 | Cancel</button>' +
+                        '<button type="submit" class="btn survey-btn" id="optionConfirm">存檔 | Save</button>' +
                     '</div>' + '</form>' + 
                     '<div id="dialog3" title="Alert message" style="display: none">' +
                                     '<div class="ui-dialog-content ui-widget-content">' +
@@ -855,7 +855,7 @@
         function survey_edit_modal(blockdata){
             var html = '<div class="modal-content ModelStyle">' +
                     '<div class="modal-header">' +
-                        '<h4 class="modal-title">輸入問卷資料 | INPUT SURVEY DETAILS' + '</h4>' +'<button type="button" class="btn ConfirmBtn  questionDelete delete-btn" id="'+blockdata['key']+'">刪除 | Delete</button>'+
+                        '<h4 class="modal-title">輸入問卷資料 | INPUT SURVEY DETAILS' + '</h4>' +'<button type="button" class="btn questionDelete delete-btn" id="'+blockdata['key']+'">刪除 | Delete</button>'+
                     '</div>' +
                     '<div class="modal-body">'+
                     '<div class="row">'+
@@ -951,7 +951,7 @@
                                             })
 
                                        blockOption =  blockOption  + '<div id="chnValue'+indexOpt+'"></div>'+  '<div class="form-group" id="chnDivDetailValue'+indexOpt+'">'+
-                                '<button type="submit" class="ConfirmBtn RmBtnOptionEdit1" style="margin-top: 10px;margin-left: -6px;width: 100px;padding-left: 10px;border-width: 1px;background-color: transparent;/* font-weight: 400; *//* opacity: 0.8; */filter: alpha(opacity=80);/* padding: 8px 16px; */border-color: #bdbaba;color: #1f1b1b;float: right;margin-right: 6px;background: none;border: 1px solid #ccc;font-size: 11px;width: 103px;height: 26px;line-height: 17px;border-radius: 2px;" id="'+indexOpt+'">Remove Option</button>'+
+                                '<button type="submit" class="RmBtnOptionEdit1" style="margin-top: 10px;margin-left: -6px;width: 100px;padding-left: 10px;border-width: 1px;background-color: transparent;/* font-weight: 400; *//* opacity: 0.8; */filter: alpha(opacity=80);/* padding: 8px 16px; */border-color: #bdbaba;color: #1f1b1b;float: right;margin-right: 6px;background: none;border: 1px solid #ccc;font-size: 11px;width: 103px;height: 26px;line-height: 17px;border-radius: 2px;" id="'+indexOpt+'">Remove Option</button>'+
                                         '</div>'+
                                        '</div><div class="col-md-1 RemPad" style="width: 10px;">';
                    opt['optionChn'].forEach(function(optionChnKey, indexOptChnKey){
@@ -968,9 +968,9 @@
 
                    html = html + '<div id="addQuestion"></div></div>' +
                     '<div class="modal-footer">' +
-'<button type="button" class="btn ConfirmBtn" style="float:left;" id="optionAdd">存檔 | Add Option</button>' +
-'<button type="button" class="btn ConfirmBtn" id="cancel">存檔 | Cancel</button>' +
-                        '<button type="submit" class="btn ConfirmBtn" id="optionConfirm">存檔 | Save</button>' +
+'<button type="button" class="btn survey-btn" style="float:left;" id="optionAdd">增加選項 | Add Option</button>' +
+'<button type="button" class="btn survey-btn" id="cancel">取消 | Cancel</button>' +
+                        '<button type="submit" class="btn survey-btn" id="optionConfirm">存檔 | Save</button>' +
                     '</div>' + '</form>' + 
                     '<div id="dialog3" title="Alert message" style="display: none">' +
                                     '<div class="ui-dialog-content ui-widget-content">' +
@@ -1017,7 +1017,7 @@
                         html = html  +
 
                             '<div class="modal-footer">' +
-                                '<button type="button" class="btn ConfirmBtn btn-width survey-btn" id="cancel">Close</button>' +
+                                '<button type="button" class="btn btn-width survey-btn" id="cancel">Close</button>' +
                             '</div>';
                         return html;
         }   
