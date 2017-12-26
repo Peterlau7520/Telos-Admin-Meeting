@@ -44,7 +44,6 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
   Estate.findById(id, function(err, user) {
-    console.log(user);
     done(err, user);
   });
 });

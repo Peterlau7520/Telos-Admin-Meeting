@@ -12,8 +12,8 @@ const busboyBodyParser = require('busboy-body-parser');
 const fs = require('fs');
 var AWS = require('aws-sdk');
 
-const appId = 'ed588636-4302-4f1c-b250-ea7d9713d706';
-const apiKey = 'ZTE5MDk1OWYtNGQzOS00OWE5LWFkNjctNDgwZDU2YjBkMDZi';
+const appId = '72ae436c-554c-4364-bd3e-03af71505447';
+const apiKey = 'YTU4NmE5OGItODM3NC00YTYwLWExNjUtMTEzOTE2YjUwOWJk';
 const oneSignal = require('onesignal')(apiKey, appId, true);
 
 const BucketName = 'telospdf';
@@ -48,9 +48,10 @@ router.post('/addNotice', (req, res) => {
     if(req.body.audience == 'allResidents'){
         exports.uploadPdf(req, res, targetAudience);
         //CASE OF ALL RESIDENTS USING ONESIGNAL AS AN EXAMPLE
-        Resident.find(function(err, residents){
+        Resident.find({estateName: req.user.estateName}, function(err, residents){
             var oneSignalIds = [];
             forEach(residents, function(item, index){
+                console.log("deviceToken",item.deviceToken)
                 if(item.deviceToken != undefined && item.deviceToken != '') {
                 let type = item.deviceToken.length > 40 ? 'android':'ios';
                 oneSignal.addDevice(item.deviceToken, type) 
@@ -63,18 +64,21 @@ router.post('/addNotice', (req, res) => {
             var message =  "hellllo"
             var data = {}
             var sendData = ''
+            console.log("Onesignal ids", oneSignalIds); //the array is empty. It's an issue related to promise. 
             if(oneSignalIds.length){
             oneSignal.createNotification(message,data , oneSignalIds)
             .then(function(data){
              if(data){
+                console.log('sent out successfully')
                 res.json({
                     message: 'Data saved succesfully'
                 })
              }
              else{
+                console.log('sent out unsuccessful')
                 res.render('error', {layout: 'errorLayout.hbs'})
                 res.json({
-                        message: 'Unsuccessfull'
+                        message: 'Unsuccessful'
                     })
              }
             })
@@ -93,7 +97,8 @@ router.post('/addNotice', (req, res) => {
         exports.uploadPdf(req, res, targetAudience);
 
         //CASE OF SEGMENTED USERS USING ONESIGNAL AS AN EXAMPLE
-        Residents.find({estateName: req.user.estate}, function(err, residents){
+        Residents.find({estateName: req.user.estateName}, function(err, residents){
+            console.log(residents)
             if(!residents){
                 //wrong estatename
             }
@@ -174,7 +179,6 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
     var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
 
     var endFinal = dateFormat( endDay + " " + endHour , 'yyyy-mm-dd HH:MM');
-    console.log(endFinal);
     var notice = new Notice({
             title: req.body.title,
             titleChn: req.body.titleChn,
@@ -234,7 +238,6 @@ router.get('/noticeBoard', (req, res) => {
        });
       uniqueList.sort(compareDate);
       uniqueList2.sort(compareDate);
-      console.log(uniqueList2);
       Estate.findOneAndUpdate({_id: req.user._id},
              { $push: {pastNotices: result } }
             )
