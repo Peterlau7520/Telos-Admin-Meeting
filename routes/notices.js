@@ -233,7 +233,7 @@ router.get('/noticeBoard', (req, res) => {
             }
     return (!(todayDate != new Date(item.endTime) && todayDate > new Date(item.endTime))) ? item._id : ''
        });
-      uniqueList2.sort(compareDate);
+      uniqueList.sort(compareDate);
       uniqueList2.sort(compareDate);
       console.log(uniqueList2);
       Estate.findOneAndUpdate({_id: req.user._id},
