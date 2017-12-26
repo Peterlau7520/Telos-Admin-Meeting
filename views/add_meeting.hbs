@@ -843,7 +843,9 @@
         //datetimepicker
         
         $("body").delegate(".flatpickr", "focusin", function(){
+            var aWeekLater = new Date().setDate(new Date().getDate() + 14);
             $(this).flatpickr({
+            minDate: aWeekLater,
             enableTime: true
          });
         const html = `<p class="close-calendar">Confirm | 確認</p>`;
@@ -926,13 +928,14 @@
             var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
             var firstDate = new Date(startTime);
             var secondDate = new Date(endTime);
-
             var diffDays = Math.round(Math.abs((secondDate.getTime() - firstDate.getTime())/(oneDay)));
+
+
                 var valid = true;
                 if(diffDays <= 7){
                     valid = false;
                     event.preventDefault();
-                    alert("The poll deadline has to be at least 1 week (7 days) before the meeting start time")
+                    alert("The poll deadline has to be at least 1 week (7 days) before the meeting start time. | 投票截止時間需至少在會議開始時間一星期前")
                 }
                 if($("#poll_json").val() == ''){
                     valid = false;
