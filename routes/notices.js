@@ -11,6 +11,7 @@ const _ = require('lodash');
 const busboyBodyParser = require('busboy-body-parser');
 const fs = require('fs');
 var AWS = require('aws-sdk');
+var Promise = require('bluebird');
 
 const appId = '72ae436c-554c-4364-bd3e-03af71505447';
 const apiKey = 'YTU4NmE5OGItODM3NC00YTYwLWExNjUtMTEzOTE2YjUwOWJk';
@@ -48,19 +49,32 @@ router.post('/addNotice', (req, res) => {
     if(req.body.audience == 'allResidents'){
         exports.uploadPdf(req, res, targetAudience);
         //CASE OF ALL RESIDENTS USING ONESIGNAL AS AN EXAMPLE
+        console.log(req.user.estateName, 'estateName')
         Resident.find({estateName: req.user.estateName}, function(err, residents){
             var oneSignalIds = [];
+            var promiseArr = [];
             forEach(residents, function(item, index){
-                console.log("deviceToken",item.deviceToken)
+                console.log(item)
                 if(item.deviceToken != undefined && item.deviceToken != '') {
-                let type = item.deviceToken.length > 40 ? 'android':'ios';
-                oneSignal.addDevice(item.deviceToken, type) 
-                .then(function(id){
-                oneSignalIds.push(id);
+                    promiseArr.push(new Promise(function(resolve, reject){
+                    let type = item.deviceToken.length > 16 ? 'android':'ios';
+                    console.log(item.deviceToken)
+                    console.log(type+'========'+item.deviceToken.length)
+                    oneSignal.addDevice(item.deviceToken, type) 
+                    .then(function(id){
+                        resolve(id)
+                    })
+                }))
+                Promise.all(promiseArr)
+                .then(function(data, err){
+                    console.log(data, "datttttttttt")
+                    oneSignalIds = data
+                    sendNotification(oneSignalIds)
                 })
-            }
+                }
             })
-            var msg = "Hello ! new notice"
+
+            /*var msg = "Hello ! new notice"
             var message =  "hellllo"
             var data = {}
             var sendData = ''
@@ -82,10 +96,11 @@ router.post('/addNotice', (req, res) => {
                     })
              }
             })
-        }
+        }*/
     })
 
     } else {
+        console.log('elseeeeeeeeeeeeeeeeeeeeeeeeeeee')
         //CASE OF SELECTED RESIDENTS
         const audience = floorInfo.Blocks;
         for(var key in  audience){
@@ -97,27 +112,38 @@ router.post('/addNotice', (req, res) => {
         exports.uploadPdf(req, res, targetAudience);
 
         //CASE OF SEGMENTED USERS USING ONESIGNAL AS AN EXAMPLE
-        Residents.find({estateName: req.user.estateName}, function(err, residents){
+        Resident.find({estateName: req.user.estateName}, function(err, residents){
             console.log(residents)
             if(!residents){
                 //wrong estatename
             }
             else{
                 const blocks = Object.keys(audience)
+                var promiseArr = [];
+                 var  segmentedAudience= [];
                 forEach(residents, function(item, index){
                     //MAKE AN ARRAY OF BLOCKS
-                    var  segmentedAudience= [];
-                    if (blocks.includes(item.block)){
-                        if(audience[item.block].includes(item.floor)){
+                    console.log(item, "item")
+                   // if (blocks.includes(item.block)){
+                        //if(audience[item.block].includes(item.floor)){
                              if(item.deviceToken != undefined && item.deviceToken != '') {
+                                console.log("residents", item)
+                                 promiseArr.push(new Promise(function(resolve, reject){
                                 let type = item.deviceToken.length > 40 ? 'android':'ios';
-                                oneSignal.addDevice(item.deviceToken, type) 
-                                .then(function(id){
-                                segmentedAudience.push(id);
+                                    oneSignal.addDevice(item.deviceToken, type) 
+                                    .then(function(id){
+                                        console.log("id", id)
+                                        resolve(id)
+                                    })
+                                 }))
+                                 Promise.all(promiseArr)
+                                .then(function(data, err){
+                                    console.log(data, "datttttttttt111111")
+                                    segmentedAudience = data
                                 })
                             }
-                        }
-                    }
+                        //}
+                    //}
                 })
                     var message = "New Notice! ";
                     var data = {}
@@ -138,6 +164,36 @@ router.post('/addNotice', (req, res) => {
     }
 
 });
+
+function sendNotification(oneSignalIds){
+    var msg = "Hello ! new notice"
+            var message =  "hellllo"
+            var data = {}
+            var sendData = ''
+            console.log("Onesignal ids", oneSignalIds); //the array is empty. It's an issue related to promise. 
+            if(oneSignalIds.length){
+            oneSignal.createNotification(message,data , oneSignalIds)
+            .then(function(data){
+             if(data){
+                console.log(data)
+                console.log('sent out successfully')
+                /*res.json({
+                    message: 'Data saved succesfully'
+                })*/
+
+                return true
+             }
+             else{
+                console.log('sent out unsuccessful')
+                // res.render('error', {layout: 'errorLayout.hbs'})
+                /*res.json({
+                        message: 'Unsuccessful'
+                    })*/
+                    return false
+             }
+            })
+        }
+}
 
 exports.uploadPdf = function(req, res, targetAudience){
     var files = req.files && req.files.filefield ? req.files.filefield : false;
@@ -161,7 +217,7 @@ exports.uploadPdf = function(req, res, targetAudience){
                 if (err) {
                     console.log('Error uploading data: ', err);
                 } else {
-                    console.log('succesfully uploaded the pdf!');
+                    console.log('succesfully uploaded the pdf!!!!!!!!!!!!!!');
                     exports.saveNotice(req, res, fileLinks, targetAudience);
 
                 }
@@ -197,6 +253,7 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
             }
             estate.currentNotices.push(notice)
             //Redirecting routes.
+            console.log('redirect--------------')
             res.redirect('/noticeBoard');
         })
     })
