@@ -1195,7 +1195,7 @@ var originalData = '{{{stringify meetingsData}}}';
             });
               var newArray = options1.filter(function(v){return v!==''});
               newArray = jQuery.unique(newArray)
-              $(".voting_opt").append(`<input type ="hidden" name="options" value=${newArray} />`)
+              $(".voting_opt").append('<input type ="hidden" name="options" value="'+newArray+'" />')
                index1 = index1 + 1
         })    
 
@@ -1209,7 +1209,7 @@ var originalData = '{{{stringify meetingsData}}}';
               newArray = jQuery.unique(newArray)
               console.log(newArray, 'array')
                //$('#options_field').val(JSON.stringify(newArray));
-              $(".voting_opt1").append(`<input type ="hidden" name="options" value=${newArray}>`)
+              $(".voting_opt1").append('<input type ="hidden" name="options" value="'+newArray+'">')
 
            
         })    
