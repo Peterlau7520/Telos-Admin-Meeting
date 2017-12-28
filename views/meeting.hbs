@@ -912,7 +912,7 @@ function edit_poll(event){
             });
               var newArray = options1.filter(function(v){return v!==''});
               newArray = jQuery.unique(newArray)
-              $(".voting_opt").append(`<input type ="hidden" name="options" value=${newArray} />`)
+              $(".voting_opt").append('<input type ="hidden" name="options" value="'+newArray+'"/>')
                index1 = index1 + 1
                var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif " />'
                 $("#loader2").append(html);
@@ -933,7 +933,7 @@ function edit_poll(event){
               var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif " style="    margin-left: 194px;"/>'
                 $("#loader3").append(html);
                //$('#options_field').val(JSON.stringify(newArray));
-              $(".voting_opt1").append(`<input type ="hidden" name="options" value=${newArray}>`)
+              $(".voting_opt1").append('<input type ="text" name="options" value="'+newArray+'" hidden>')
             //    index1 = index1 + 1
 
         $("#poll").modal("hide");
