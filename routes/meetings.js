@@ -374,6 +374,7 @@ router.post('/editMeeting', (req, res) => {
 
 router.post('/editPoll', (req, res) => {
     var data = req.body
+    console.log(data);
     var id = req.body.id
     var fileLinks = []
     var pollFileLinks = []

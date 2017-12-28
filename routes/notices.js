@@ -49,12 +49,10 @@ router.post('/addNotice', (req, res) => {
     if(req.body.audience == 'allResidents'){
         exports.uploadPdf(req, res, targetAudience);
         //CASE OF ALL RESIDENTS USING ONESIGNAL AS AN EXAMPLE
-        console.log(req.user.estateName, 'estateName')
         Resident.find({estateName: req.user.estateName}, function(err, residents){
             var oneSignalIds = [];
             var promiseArr = [];
             forEach(residents, function(item, index){
-                console.log(item)
                 if(item.deviceToken != undefined && item.deviceToken != '') {
                     promiseArr.push(new Promise(function(resolve, reject){
                     let type = item.deviceToken.length > 16 ? 'android':'ios';
@@ -67,42 +65,19 @@ router.post('/addNotice', (req, res) => {
                 }))
                 Promise.all(promiseArr)
                 .then(function(data, err){
-                    console.log(data, "datttttttttt")
+                    console.log(data, "data")
                     oneSignalIds = data
-                    sendNotification(oneSignalIds)
+                    const noticeBody = 'New notice! ' + req.body.title + ' | ' + req.body.titleChn
+                    sendNotification(oneSignalIds, noticeBody)
                 })
                 }
             })
-
-            /*var msg = "Hello ! new notice"
-            var message =  "hellllo"
-            var data = {}
-            var sendData = ''
-            console.log("Onesignal ids", oneSignalIds); //the array is empty. It's an issue related to promise. 
-            if(oneSignalIds.length){
-            oneSignal.createNotification(message,data , oneSignalIds)
-            .then(function(data){
-             if(data){
-                console.log('sent out successfully')
-                res.json({
-                    message: 'Data saved succesfully'
-                })
-             }
-             else{
-                console.log('sent out unsuccessful')
-                res.render('error', {layout: 'errorLayout.hbs'})
-                res.json({
-                        message: 'Unsuccessful'
-                    })
-             }
-            })
-        }*/
     })
 
     } else {
-        console.log('elseeeeeeeeeeeeeeeeeeeeeeeeeeee')
         //CASE OF SELECTED RESIDENTS
         const audience = floorInfo.Blocks;
+        console.log("audience",audience)
         for(var key in  audience){
             if(audience.hasOwnProperty(key)){
                 const subAudience = { 'block': key, 'floors': audience[key]};
@@ -113,7 +88,6 @@ router.post('/addNotice', (req, res) => {
 
         //CASE OF SEGMENTED USERS USING ONESIGNAL AS AN EXAMPLE
         Resident.find({estateName: req.user.estateName}, function(err, residents){
-            console.log(residents)
             if(!residents){
                 //wrong estatename
             }
@@ -123,41 +97,27 @@ router.post('/addNotice', (req, res) => {
                  var  segmentedAudience= [];
                 forEach(residents, function(item, index){
                     //MAKE AN ARRAY OF BLOCKS
-                    console.log(item, "item")
-                   // if (blocks.includes(item.block)){
-                        //if(audience[item.block].includes(item.floor)){
+                   if (blocks.includes(item.block)){
+                        const selectedFloors = audience[item.block].toString().split(',');
+                        if(selectedFloors.includes(item.floor)){
                              if(item.deviceToken != undefined && item.deviceToken != '') {
-                                console.log("residents", item)
                                  promiseArr.push(new Promise(function(resolve, reject){
                                 let type = item.deviceToken.length > 40 ? 'android':'ios';
                                     oneSignal.addDevice(item.deviceToken, type) 
                                     .then(function(id){
-                                        console.log("id", id)
                                         resolve(id)
                                     })
                                  }))
-                                 Promise.all(promiseArr)
+                                Promise.all(promiseArr)
                                 .then(function(data, err){
-                                    console.log(data, "datttttttttt111111")
-                                    segmentedAudience = data
+                                    segmentedAudience = data;
+                                    const noticeBody = 'New notice! ' + req.body.title + ' | ' + req.body.titleChn
+                                    sendNotification(segmentedAudience, noticeBody)
                                 })
                             }
-                        //}
-                    //}
+                        }
+                    }
                 })
-                    var message = "New Notice! ";
-                    var data = {}
-                if(segmentedAudience.length){
-                    oneSignal.createNotification(message, data,segmentedAudience)
-                    .then(function(data){
-                    })
-                }
-                else{
-                    res.json({
-                    message: 'Unsuccessfull'
-                })
-                }
-
             }
 
         })
@@ -165,30 +125,18 @@ router.post('/addNotice', (req, res) => {
 
 });
 
-function sendNotification(oneSignalIds){
-    var msg = "Hello ! new notice"
-            var message =  "hellllo"
+function sendNotification(oneSignalIds, noticeBody){
+            var message =  noticeBody;
             var data = {}
-            var sendData = ''
-            console.log("Onesignal ids", oneSignalIds); //the array is empty. It's an issue related to promise. 
             if(oneSignalIds.length){
-            oneSignal.createNotification(message,data , oneSignalIds)
+            oneSignal.createNotification(message , data, oneSignalIds)
             .then(function(data){
              if(data){
-                console.log(data)
                 console.log('sent out successfully')
-                /*res.json({
-                    message: 'Data saved succesfully'
-                })*/
-
                 return true
              }
              else{
                 console.log('sent out unsuccessful')
-                // res.render('error', {layout: 'errorLayout.hbs'})
-                /*res.json({
-                        message: 'Unsuccessful'
-                    })*/
                     return false
              }
             })
@@ -260,15 +208,16 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
 }
 
 router.get('/noticeBoard', (req, res) => {
-  var blocksFloors = {
-                'Blocks': {
-                    'A': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'],
-                    'B': ['K', 'L', 'M'],
-                    'C': ['1', '2', '3', '4'],
-                    'D': ['1', '2', '3', '4', '5'],
-                    'E': ['1', '2', '3', '4', '5']
-                },
-            }
+//   var blocksFloors = {
+//                 'Blocks': {
+//                     'A': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'],
+//                     'B': ['K', 'L', 'M'],
+//                     'C': ['1', '2', '3', '4'],
+//                     'D': ['1', '2', '3', '4', '5'],
+//                     'E': ['1', '2', '3', '4', '5']
+//                 },
+//             }
+    var blocksFloors = req.user.blockArray[0]
   Notice
   .find({estate: req.user.estateName})
   .lean()
