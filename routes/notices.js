@@ -55,7 +55,7 @@ router.post('/addNotice', (req, res) => {
             forEach(residents, function(item, index){
                 if(item.deviceToken != undefined && item.deviceToken != '') {
                     promiseArr.push(new Promise(function(resolve, reject){
-                    let type = item.deviceToken.length > 16 ? 'android':'ios';
+                    let type = item.deviceToken.length > 40 ? 'android':'ios';
                     console.log(item.deviceToken)
                     console.log(type+'========'+item.deviceToken.length)
                     oneSignal.addDevice(item.deviceToken, type) 
@@ -208,16 +208,8 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
 }
 
 router.get('/noticeBoard', (req, res) => {
-//   var blocksFloors = {
-//                 'Blocks': {
-//                     'A': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'],
-//                     'B': ['K', 'L', 'M'],
-//                     'C': ['1', '2', '3', '4'],
-//                     'D': ['1', '2', '3', '4', '5'],
-//                     'E': ['1', '2', '3', '4', '5']
-//                 },
-//             }
-    var blocksFloors = req.user.blockArray[0]
+
+  var blocksFloors = req.user.blockArray[0]
   Notice
   .find({estate: req.user.estateName})
   .lean()

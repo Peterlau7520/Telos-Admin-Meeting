@@ -15,7 +15,6 @@ var moment = require("moment");
 const busboyBodyParser = require('busboy-body-parser');
 
 const fs = require('fs');
-//router.use(busboyBodyParser({multi: true}));
 const router = express.Router();
 router.use(busboyBodyParser({multi: true}));
 const dateFormat = require('dateformat');

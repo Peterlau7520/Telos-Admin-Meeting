@@ -12,6 +12,13 @@ const fs = require('fs');
 const _ = require('lodash');
 var moment = require("moment");
 var Promise = require('bluebird');
+
+
+const appId = '72ae436c-554c-4364-bd3e-03af71505447';
+const apiKey = 'YTU4NmE5OGItODM3NC00YTYwLWExNjUtMTEzOTE2YjUwOWJk';
+const oneSignal = require('onesignal')(apiKey, appId, true);
+
+
 //Data models
 const Estate = models.Estate;
 const Survey = models.Survey;
@@ -27,10 +34,37 @@ router.post('/addSurvey', (req, res) => {
     }
     var targetAudience = []
     if(req.body.audience == 'allResidents'){
-        saveSurvey(req, res, targetAudience)
+        saveSurvey(req, res, targetAudience);
+        Resident.find({estateName: req.user.estateName}, function(err, residents){
+            var oneSignalIds = [];
+            var promiseArr = [];
+            forEach(residents, function(item, index){
+                if(item.deviceToken != undefined && item.deviceToken != '') {
+                    promiseArr.push(new Promise(function(resolve, reject){
+                    let type = item.deviceToken.length > 40 ? 'android':'ios';
+                    console.log(item.deviceToken)
+                    console.log(type+'========'+item.deviceToken.length)
+                    oneSignal.addDevice(item.deviceToken, type) 
+                    .then(function(id){
+                        resolve(id)
+                    })
+                }))
+                Promise.all(promiseArr)
+                .then(function(data, err){
+                    console.log(data, "data")
+                    oneSignalIds = data
+                    const messageBody = 'New survey! ' + req.body.title + ' | ' + req.body.titleChn
+                    sendNotification(oneSignalIds, messageBody)
+                })
+                }
+            })
+    })
+
     }
     else{
+        //CASE OF SELECTED RESIDENTS
         const audience = floorInfo.Blocks;
+        
         for(var key in  audience){
             if(audience.hasOwnProperty(key)){
                 const subAudience = { 'block': key, 'floors': audience[key]};
@@ -38,6 +72,41 @@ router.post('/addSurvey', (req, res) => {
             }
         }
         saveSurvey(req, res, targetAudience)
+         //CASE OF SEGMENTED USERS USING ONESIGNAL AS AN EXAMPLE
+         Resident.find({estateName: req.user.estateName}, function(err, residents){
+            if(!residents){
+                //wrong estatename
+            }
+            else{
+                const blocks = Object.keys(audience)
+                var promiseArr = [];
+                 var  segmentedAudience= [];
+                forEach(residents, function(item, index){
+                    //MAKE AN ARRAY OF BLOCKS
+                   if (blocks.includes(item.block)){
+                        const selectedFloors = audience[item.block].toString().split(',');
+                        if(selectedFloors.includes(item.floor)){
+                             if(item.deviceToken != undefined && item.deviceToken != '') {
+                                 promiseArr.push(new Promise(function(resolve, reject){
+                                let type = item.deviceToken.length > 40 ? 'android':'ios';
+                                    oneSignal.addDevice(item.deviceToken, type) 
+                                    .then(function(id){
+                                        resolve(id)
+                                    })
+                                 }))
+                                Promise.all(promiseArr)
+                                .then(function(data, err){
+                                    segmentedAudience = data;
+                                    const messageBody = 'New survey! ' + req.body.title + ' | ' + req.body.titleChn
+                                    sendNotification(segmentedAudience, messageBody)
+                                })
+                            }
+                        }
+                    }
+                })
+            }
+
+        })
     }
 
 function saveSurvey(req, res, targetAudience){
@@ -125,18 +194,27 @@ function saveSurvey(req, res, targetAudience){
     }
 });
 
+function sendNotification(oneSignalIds, messageBody){
+    var message =  messageBody;
+    var data = {}
+    if(oneSignalIds.length){
+    oneSignal.createNotification(message , data, oneSignalIds)
+    .then(function(data){
+     if(data){
+        console.log('sent out successfully')
+        return true
+     }
+     else{
+        console.log('sent out unsuccessful')
+            return false
+     }
+    })
+}
+}
 
 router.get('/getSurveys', (req, res) => {
     const promiseArr =[]
-     var blocksFloors = {
-                'Blocks': {
-                    'A': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'],
-                    'B': ['K', 'L', 'M'],
-                    'C': ['1', '2', '3', '4'],
-                    'D': ['1', '2', '3', '4', '5'],
-                    'E': ['1', '2', '3', '4', '5']
-                },
-            }
+  var blocksFloors = req.user.blockArray[0]
   Survey.find({estate: req.user.estateName}).lean()
   .then(function(survey, err) {
     if(survey.length){
