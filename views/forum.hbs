@@ -1,0 +1,534 @@
+<html>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <!--  Forum CSS 1    -->
+    <link href="assets/css/admin-forum-css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+    <!--  Forum CSS 2     -->
+    <link href="assets/css/admin-forum-css/demo.css" rel="stylesheet" />
+<div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
+
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="/" class="simple-text">
+                    {{estateNameDisplay}}
+                </a>
+                <a href="/" class="simple-text">
+                    {{estateNameChn}} 
+                </a>
+            </div>
+            <ul class="nav">
+                <li>
+                    <a href="/Noticeboard">
+                        <i class="pe-7s-graph"></i>
+                        <p>NOTICEBOARD
+                            <br> 通告
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/allMeetings">
+                        <i class="pe-7s-graph"></i>
+                        <p>MEETINGS
+                            <br> 會議
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/getSurveys">
+                        <i class="pe-7s-user"></i>
+                        <p>Surveys</p>
+                        <p>問卷</p>
+                    </a>
+                </li>
+                 <li class="active">
+                    <a href="/getForum">
+                        <i class="pe-7s-science"></i>
+                        <p>Forum
+                            <br> 論壇
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/logout">
+                        <i class="pe-7s-map-marker"></i>
+                        <p>LOG OUT
+                            <br> 登出
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                <div class="sk-circle parent-circle">
+  <div class="sk-circle1 sk-child"></div>
+  <div class="sk-circle2 sk-child"></div>
+  <div class="sk-circle3 sk-child"></div>
+  <div class="sk-circle4 sk-child"></div>
+  <div class="sk-circle5 sk-child"></div>
+  <div class="sk-circle6 sk-child"></div>
+  <div class="sk-circle7 sk-child"></div>
+  <div class="sk-circle8 sk-child"></div>
+  <div class="sk-circle9 sk-child"></div>
+  <div class="sk-circle10 sk-child"></div>
+  <div class="sk-circle11 sk-child"></div>
+  <div class="sk-circle12 sk-child"></div>
+</div>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Forum/論壇</a>
+
+                    <div class = "add-meeting-btn" style="margin-top: -3px; padding-left: 563px;">
+                   <a href="" class="btn btn-info forum-heading-btn btn-primary new_post">  New Post | 添加會議</a>
+                    </div>
+                </div>
+                <div class="collapse navbar-collapse">
+                </div>
+            </div>
+        </nav>
+
+        <div class="content" style="padding-bottom:0; min-height:800px">
+            <div class="container-fluid">
+                <div class="row">
+                   
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Forum/論壇</h4>
+                            </div>
+                                <div class="content table-responsive table-full-width">
+                                <table class="table ">
+                                    <thead>
+                                        <th>總數 | Posts: {{numberOfPosts}}</th>
+                                        <th class="text-center">留言 | Comments</th>
+                                        <th class="text-center">贊 | likes</th>
+                                        <th class="text-center">最後留言 | Last Comment</th>
+                                    </thead>
+
+                                    <tbody>
+                                       {{#each forum as |value forum_key|}} 
+                                        <tr>
+                                            <td>
+                                                <span class="forum-table-number" id="new_{{forum_key}}"></span>
+                                                <span class="forum-table-text comment_box forum-table-no" id="{{forum_key}}"><script>document.write({{{forum_key}}} + 1)</script>    
+                                               </span>
+                                               <span class="forum-table-text comment_box forum-text" id="{{forum_key}}" display: inline-block>
+                                               {{content}}
+                                                    <p class="comment_box" id="{{forum_key}}">從 | Posted by: {{account}}</p>
+                                                    </span>
+                                            </td>
+                                            <td>
+                                                <p class="text-center forum-para">{{numberOfComments}}</p>
+                                            </td>
+                                            <td><p class="text-center forum-para">{{numberOfLikes}}</p></td>
+                                             
+                                            <td> 
+                                                <p class="text-center forum-para-hrs" >{{timeLeftChinese}} <br> {{timeLeft}}</p>
+                                            </td>
+                                        </tr>
+                                      
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+         <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
+                        <li>
+                            <a href="/">
+                                Home | 主頁
+                            </a>
+                        </li>
+
+                        {{!-- <li>
+                            <a href="/">
+                                Portfolio/過往客戶
+                            </a>
+                        </li> --}}
+                    </ul>
+                </nav>
+                <p class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="/telos">Telos</a> | Transforming the way you manage your estate
+                </p>
+            </div>
+        </footer>
+
+    </div>
+</div>
+<!-- Modal -->
+{{!-- Please use this code for the modal pop up --}}
+{{!-- https://bootsnipp.com/snippets/8Mren --}}
+
+<div id="commentModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content ">
+      <div class="modal-header forum-model-header">
+        <button type="button" class="close closeComment" data-dismiss="modal">&times;</button>
+        <div class="modal-title" >
+            <div class="post-number">1</div>
+           <div class="post-text ">
+            <div class="row">
+            <div class=" col-lg-12" name="title" id="title">
+              
+            </div>
+
+
+           </div>
+           </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="comments" id="comments"></div>
+      </div>
+      <div class="modal-footer new-modal-footer">
+        <span id="popupError1" class="errorField"></span>
+         <form role="form" action="/newComment" method="post" enctype="multipart/form-data"  name="#poll_form" id="comment_form" >
+       <div class="output" id="postid"></div>
+        <textarea id="comment " class="comment-textbox" placeholder="Type here..." name="comment" ></textarea>
+        <button type="submit" class="btn btn-primary forum-btn-primary send_comment">Send</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="newPost" class="modal  fade" role="dialog">
+  <div class="modal-dialog  modal-lg newpost-model-dialog">
+
+    <!-- Modal content-->
+    
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title new-model-title">  | NEW POST</h4>
+      </div>
+      <div class="modal-body new-model-body">
+        <div class="output"></div>
+        <div class="check-icon text-center">
+          
+        </div>
+      </div>
+
+      <div class="modal-footer new-modal-footer">
+      <span id="popupError" class="errorField" style="margin-left: 66px;"></span>
+        <form role="form form-inline" action="/newPost" method="post" enctype="multipart/form-data"  name="#newpost" id="newpost" >
+        <textarea id="text" name="content" class="new-post-text-box" placeholder="Type your post here..."></textarea>
+
+        <button type="submit" class="btn btn-primary forum-btn-primary send_post add_new_post">Send</button>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="reportComment" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    
+    <div class="modal-content">
+      <div class="modal-header forum-model-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title forum-model-title">  Please Tell Us wwhy are you reporting this comment?</h4>
+       
+      </div>
+      <div class="modal-body">
+        <form class="form form-inline" role="form" action="/reportComment" method="post" enctype="multipart/form-data"  name="#poll_form" id="poll_form" >
+        <div class="outputReport" id="outputReport"></div>
+        
+        <textarea id="text" name="commentReport" class="comment-textbox" placeholder="Type here..."></textarea>
+   
+        <button type="submit" class="btn btn-primary forum-btn-primary send_post">Report</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div id="reportPost" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    
+    <div class="modal-content">
+      <div class="modal-header forum-model-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title forum-model-title">  Please Tell Us wwhy are you reporting this Post?</h4>
+       
+      </div>
+      <div class="modal-body">
+        <form role="form form-inline" action="/reportPost" method="post" enctype="multipart/form-data"  name="#poll_form" id="poll_form" >
+        <div class="outputPost" id="outputPost"></div>
+        <textarea id="text" class="comment-textbox" placeholder="Type here..." name="postReport"></textarea>
+        <button type="submit" class="btn btn-primary forum-btn-primary send_post">Send</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+</html>
+
+<script type="text/javascript">
+
+
+$('#commentModal').on('hidden.bs.modal', function (e) {
+  window.location.reload(1);
+})
+
+
+    $(document).ready(function () {
+        console.log('parent-circle')
+       $(".parent-circle").hide();
+        var refresh = true;
+/*if(refresh){
+setTimeout(function(){
+   refreshPage(refresh)
+}, 5000);
+}*/
+     var forum = '{{{stringify forum}}}'
+     forum = JSON.parse(forum);
+     console.log(forum, 'forum')
+     var socket =  io.connect('http://localhost:4000')
+         
+        socket.on('post', function(data) {
+           if(data){
+            if(forum.length < data.data){
+                var refresh = true
+                refreshPage(refresh)
+            }
+        }
+        });
+        socket.on('comment', function(data) {
+          location.reload()
+        })
+       /* socket.on('Getpost', function(data) {
+            console.log('Got announcement:', data);
+        });*/
+
+        function refreshPage(refresh){
+            if(refresh){
+                window.location.reload(1);
+            }
+        }
+
+         var originalData = '{{{stringify forum}}}';
+            originalData = JSON.parse(originalData);
+
+            var user = '{{{user}}}';
+
+        $.each(originalData, function(key,com){ 
+            //key++;
+            $('new_' + key).html("hello")
+        })
+        $(".new_post").click(function(event){
+            refresh = false;
+            event.preventDefault();
+            $("#newPost").modal();
+        })
+
+        $("#text").keyup(function(){
+        // Getting the current value of textarea
+        var currentText = $(this).val();
+        
+        // Setting the Div content
+        $(".output").text(currentText);
+    });
+
+        function convertSerializeArrayToJson(serilizeArray) {
+            var form_json = {};
+            serilizeArray.forEach(function (obj) {
+                form_json[obj.name] = obj.value;
+            });
+            return form_json;
+        }
+         $(document).on("click",".send_comment", function(e){
+            event.preventDefault();
+            var comment = $("textarea[name='comment']").val();
+            if(comment){
+            const commentData = $('#comment_form').serializeArray();
+            const comm = convertSerializeArrayToJson(commentData)
+           $("#comments").append('<div class="col-lg-12 comment-width"><span class="pull-left estate">'+'admin'+'</span> <span class="comment-para">'+'hfghfg | 0 hours ago'+'</span><span class="report-link pull-right "><a href="#" class="report_comment"  id="">Report Comment</a></span> </div><span class=" fa-marign pt-comment"><a href="#" class=""  id=""><div class="heart like-fa like_comment" aria-hidden="true" id=""><div class="fa-count inc-count" id="">'+0+'</div></div></a></span><span class="commentContent">'+comm.comment+'</span> <br>')
+            const HostName = "http://localhost:4000"
+             $.ajax({
+                        url: HostName + "/newComment",
+                        data: comm,
+                        type: 'POST',
+                         success: function (data) {
+                          var socket =  io.connect('http://localhost:4000')
+                          socket.emit('comment', {data:'data'});
+                          //  location.reload()
+                        },
+                        err: function(err){
+                            console.log(err)
+                        }                       
+                        })
+            
+            }else{
+                $("#popupError1").text("*All fields are mandatory | 請填寫所有欄目");
+            }
+        })
+
+         $(document).on("click",".like_comment", function(e){
+             $(this).toggleClass('animating');
+             $(this).removeClass("like_comment");
+            const value = $('.like_comment').attr('id')
+            var v1 = $(this).children().attr('id')
+            $(this).css("color", "blue")
+            console.log(v1++)
+            $(this).children().html(v1++)
+            const commentId= e.target.id
+            event.preventDefault();
+            const HostName = "http://localhost:4000"
+             $.ajax({
+                        url: HostName + "/likeComment",
+                        data: {commentId: commentId},
+                        type: 'POST',
+                         success: function (data) {
+                        //location.reload()
+                        },
+                        err: function(err){
+                            console.log(err)
+                        }                       
+                        })
+            
+            
+        })
+        $(document).on("click",".closeComment", function(e){
+            refresh = true
+            refreshPage(refresh)
+            return true;
+         })
+         var userLike = false 
+           $(document).on("click",".like_post", function(e){
+            console.log('testing')
+            if(!userLike){
+             $(this).removeClass('like_post')
+            $(this).toggleClass('animating');
+            const value = $('.like_post').attr('id')
+            var v1 = $(this).children().attr('id')
+            console.log(v1++)
+            $(this).children().html(v1++)
+            const postId= e.target.id
+            event.preventDefault();
+            const HostName = "http://localhost:4000"
+             $.ajax({
+                        url: HostName + "/likePost",
+                        data: {postId: postId},
+                        type: 'POST',
+                         success: function (data) {
+                        //location.reload()
+                        },
+                        err: function(err){
+                            console.log(err)
+                        }                       
+                        })
+            
+            }
+        })
+        $(".add_new_post").click(function(event){
+            event.preventDefault();
+            var comment = $("textarea[name='content']").val();
+            if(comment){
+             socket.emit('post', {data:'data'});
+            refresh = true
+            const postData = $('#newpost').serializeArray();
+            const post = convertSerializeArrayToJson(postData)
+              $('.check-icon').html('<img src="../assets/img/check.png" alt="img">')
+              const HostName = "http://localhost:4000"
+               $.ajax({
+                        url: HostName + "/newPost",
+                        data: post,
+                        type: 'POST',
+                         success: function (data) {
+                        location.reload()
+                        },
+                        err: function(err){
+                            console.log(err)
+                        }                       
+                        })
+            //$("#newPost").modal('hide');
+        }else{
+            $("#popupError").text("*All fields are mandatory | 請填寫所有欄目"); 
+        }
+        })
+        $(document).on("click",".report_comment", function(e){
+            console.log("called")
+            $("#outputReport").html('<input type="hidden" name="commentId" value="'+event.target.id+'" /> ')
+            $("#reportComment").modal();
+        })
+        $(document).on("click",".report_post", function(e){
+            console.log("called")
+            $("#outputPost").html('<input type="hidden" name="postId" value="'+event.target.id+'" /> ')
+            $("#reportPost").modal();
+                    })
+        $(".comment_box").click(function(event){
+            $("#commentModal").modal();
+            refresh = false
+            userLike = false
+            const data= originalData[event.target.id]   
+            var liked = originalData[event.target.id].likedBy
+            if(liked.indexOf(user) > -1){
+              console.log('testing like')
+                userLike = true
+            }
+            
+            var id = event.target.id
+            const sno = id++
+            $('.post-number').html((id++) + '.')
+            $('#postid').html('<input type="hidden" name="postId" value="'+data._id+'" />')
+            $("#title").html('<span class="post-text">'+data.content+'<span class="posted-date"><h6>Posted: '+data.postTime+'</h6></span><span class="report-link"><a href="#"  class="report_post"  id="'+data._id+'">Report Post</a> </span></span><span class="post-thumb-icon"> <a href="#"><div class="heart like-fa like_post" aria-hidden="true" id="'+data._id+'"><div class="fa-count" id="'+data.numberOfLikes+'">'+data.numberOfLikes+'</div></div></a></span>')
+            $("#comments").html('')
+            $.each(data.comments, function(key,com){ 
+                var userConLike = false
+                
+            if(com.likedBy.indexOf(user) > -1){
+                userConLike = true
+            }
+            const length =  com.likedBy.length 
+            var html = '<div class="col-lg-12 comment-width"><span class="pull-left estate">'+com.account+'</span> <span class="comment-para">'+com.timeLeftChinese+' | '+com.timeLeft+'</span><span class="report-link pull-right "><a href="#" class="report_comment"  id="'+com._id+'">Report Comment</a></span> </div><span class=" fa-marign pt-comment"><a href="#" class=""  id="'+com._id+'">';
+            if(!userConLike){
+             html = html + '<div class="heart like-fa + like_comment" aria-hidden="true" id="'+com._id+'">'
+            }else{
+                 html = html + '<div class="heart like-fa " aria-hidden="true" id="'+com._id+'">'
+            }
+           html = html + '<div class="fa-count inc-count" id="'+length+'">'+length+'</div></div></a></span><span class="commentContent">'+com.content+'</span> <br>';
+              $("#comments").append(html)
+            });
+            console.log(data, "data")
+        })
+$(".like_post").on('click touchstart', function(){
+  $(this).toggleClass('animating');
+});
+
+
+$(".like_post").on('animationend', function(){
+  $(this).toggleClass('animating');
+});
+})
+</script>

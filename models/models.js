@@ -188,6 +188,87 @@ const meetingSchema = new Schema({
     views: { type: String, default: 0 },
 })
 
+//FORUM
+//POST
+const postSchema = new Schema({
+    account: String,
+    estateName: String,
+    content: String,
+    postTime: { type: Date, default: new Date() },
+    lastCommentedTime: String,
+    comments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Comment'            
+        }
+    ],
+    postedBy: 
+    {
+        type: Schema.Types.ObjectId,
+        ref: 'Resident'
+    }
+    ,
+    likedBy: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Resident'
+        }
+    ],
+
+    commentedBy: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Resident'
+        }
+
+    ]
+})
+
+//COMMENT
+const commentSchema = new Schema({
+    account: String,
+    content: String,
+    estateName: String,
+    commentedTime: String,
+    commentedBy: 
+    {
+        type: Schema.Types.ObjectId,
+        ref: 'Resident'
+    }
+    ,
+    likedBy: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Resident'
+        }
+    ]
+})
+
+//POST REPORT 
+const postReport = new Schema({
+    postReport: String,
+    reportedPost : {
+        type: Schema.Types.ObjectId,
+        ref: 'Post'
+    },
+    reportedBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'Resident'
+    }
+})
+
+//COMMENT REPORT
+const commentReport = new Schema({
+    commentReport: String,
+    reportedComment: {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment'
+    },
+    reportedBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'Resident'
+    }
+})
 
 const Resident = mongoose.model('Resident', residentSchema);
 const Estate =   mongoose.model('Estate', estateSchema);
@@ -198,6 +279,11 @@ const UserAnswers = mongoose.model('UserAnswers', userAnswersSchema)
 const Options = mongoose.model('Options', optionSchema);
 const Question = mongoose.model('Question', questionSchema);
 const Meeting = mongoose.model('Meeting', meetingSchema);
+const Comment = mongoose.model('Comment', commentSchema);
+const Post = mongoose.model('Post', postSchema);
+const PostReport = mongoose.model('PostReport', postReport);
+const CommentReport = mongoose.model('CommentReport',commentReport);
+
 
 module.exports = {
     Resident,
@@ -208,5 +294,9 @@ module.exports = {
     Question,
     UserAnswers,
     Options,
-    Meeting
+    Meeting,
+    Comment,
+    Post,
+    PostReport,
+    CommentReport
 }

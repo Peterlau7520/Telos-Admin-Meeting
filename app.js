@@ -8,13 +8,16 @@ const cookieParser = require('cookie-parser');
 const exphbs = require('express-handlebars');
 var hbs = require('hbs');
 const flash = require('connect-flash');
-
+const http = require('http');
+var server = require('http').createServer(app);
+var socket = require('socket.io');
 //----------------MODELS----------------
 const models = require('./models/models');
 
 
 
 //----------------ROUTES----------------
+const forumRoutes = require('./routes/forum');
 const meetingRoutes = require('./routes/meetings');
 const surveyRoutes = require('./routes/surveys');
 const noticeRoutes = require('./routes/notices');
@@ -82,6 +85,7 @@ app.use('/', index);
 app.use('/', meetingRoutes);
 app.use('/', noticeRoutes);
 app.use('/', surveyRoutes);
+app.use('/', forumRoutes);
 
 //----------------ERRORS----------------
 app.use(function(err, req, res, next) {
@@ -100,8 +104,11 @@ app.use(function(err, req, res, next) {
   
 
 //----------------START----------------
-app.listen(process.env.PORT || 4000, function () {
-    console.log('server successfully started on Port 4000');
+var server = app.listen(process.env.PORT || 4000, function () {
+  console.log('server successfully started on Port 4000');
 })
+var io = socket(server);
+app.io = io;
+
 
   
