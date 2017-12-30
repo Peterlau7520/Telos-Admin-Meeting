@@ -254,4 +254,11 @@ router.get('/noticeBoard', (req, res) => {
     }
   })
 })
+
+router.get('/deleteNotice', (req,res)=> {
+    Notice.deleteOne({_id: req.query.id}, function (err, todo) {
+          if (err) res.send(err);
+          res.redirect('/noticeBoard');
+      });
+})
 module.exports = router;

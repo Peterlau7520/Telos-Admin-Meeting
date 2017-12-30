@@ -166,6 +166,7 @@
                                         <th>Post Date | 發出日期</th>
                                         <th>Notice | 通告</th>
                                         <th>Effective Until | 有效期至</th>
+                                        <th> </th>
                                     </thead>
                                     <tbody>
 
@@ -180,6 +181,7 @@
                                             </td>
                                             {{/each}}
                                             <td>{{this.endTime}}</td>
+                                            <td> <a href="/deleteNotice?id={{value._id}}"> x </a> </td>
                                         </tr>
                                         {{/each}}
                                         {{else}}
