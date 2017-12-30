@@ -164,16 +164,11 @@
                                     <div class="row">
 
 
-
-
                                     </div>
                                     <div id= "QuestionsAdded"></div>
                                     <div>  
                                     
                                     
-                                  <!--   <button class="SurveyBtn" name= "input" id="popup_input">
-                                        INPUT SURVEY DETAILS 
-                                    </button> -->
                                      </div> 
                                      <div class="col-md-12">
                                         <button type="button" id="popup_input" class="btn survey-btn  pull-left">Add Survey Question | 增加問卷問題</button>
@@ -991,6 +986,29 @@
         }
         function card_modal(blockdata){
             console.log(blockdata)
+            const optionsDetailsChnAndEng = []
+            blockdata.question.forEach(function(item, index){
+                item.optionIds.forEach(function(item,index){
+                    console.log(item);
+                    const optionName = item.optionNameEn;
+                    const optionNameChn = item.optionNameChn;
+                    const optionDetails = [];
+                    item.optionsChn.forEach(function(object,index){
+                        const detail = {};
+                        detail[object.key] = object.value,
+                        detail[item.optionsEn[index].key] = item.optionsEn[index].value
+                        optionDetails.push(detail);
+                    })
+                    optionsDetailsChnAndEng.push({
+                        "optionName": optionName,
+                        "optionNameChn": optionNameChn,
+                        "optionDetails": optionDetails
+                    })
+                })
+            })
+            console.log(optionsDetailsChnAndEng);
+            //Display option details above options. 
+            
             var html = '<div class="modal-content ModelStyle" style="background-color: #f7f7f7;">' +
                             '<div class="modal-header">' +
                                 '<h4 class="modal-title text-center">'+blockdata.titleChn+' | '+ blockdata.title +'</h4>'+

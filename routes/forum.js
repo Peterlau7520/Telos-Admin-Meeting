@@ -46,10 +46,17 @@ router.get('/getForum', (req, res) => {
                //console.log(post.timeLeft)
             }
             post.postTime = moment(new Date(post.postTime)).format("DD/MM/YY hh:mm ")
-            const numberOfLikes = post.likedBy.length
-                post.numberOfLikes = numberOfLikes
-                post.numberOfComments = post.comments.length
-                forEach(post.comments, function(comment, key){
+            const numberOfLikes = post.likedBy.length;
+            post.numberOfLikes = numberOfLikes;
+            post.numberOfComments = post.comments.length;
+
+            if(post.comments){
+                post.comments.sort(compareDate)
+
+
+
+            }
+            forEach(post.comments, function(comment, key){
                     var today = new Date();
                     var comTime = new Date(comment.commentedTime);
                     var hoursComment = Math.abs(comTime - today) / 36e5;
@@ -67,6 +74,7 @@ router.get('/getForum', (req, res) => {
                     }
                 })
             })
+    
         req.app.io.on('connection', function(socket){
             var data = posts.length
            socket.broadcast.emit('post', {data: data})
@@ -87,6 +95,15 @@ router.get('/getForum', (req, res) => {
     }) 
          
 })
+//Sort function
+function compareDate(commentA,commentB){
+    if (commentA.commentedTime > commentB.commentedTime)
+        return -1;
+    if (commentA.commentedTime < commentB.commentedTime)
+        return 1;
+    return 0;
+  }
+
 
 router.get('/postsComments', function(req,res){
     const postId = req.query.postId;
@@ -109,6 +126,7 @@ router.get('/postsComments', function(req,res){
                 };
                 sorted_posts.push(post);
             })
+            sorted_comments.sort(compareDate);
 
             res.send({comments: sorted_comments});     
     })
