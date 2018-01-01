@@ -273,7 +273,14 @@
     <div class="modal-dialog">
         
     </div>
+    {{!-- <div>
+    <p style="font-size:12px"> Option A: </p> <div>
+        <p>Cost: HKD 20,000</p>
+        <p>Details: This is about carpark renovation.</p>
+    </div>
+    </div> --}}
 </div>
+
 </html>
 
 <script>
@@ -986,44 +993,48 @@
         }
         function card_modal(blockdata){
             console.log(blockdata)
-            const optionsDetailsChnAndEng = []
-            blockdata.question.forEach(function(item, index){
-                item.optionIds.forEach(function(item,index){
-                    console.log(item);
-                    const optionName = item.optionNameEn;
-                    const optionNameChn = item.optionNameChn;
-                    const optionDetails = [];
-                    item.optionsChn.forEach(function(object,index){
-                        const detail = {};
-                        detail[object.key] = object.value,
-                        detail[item.optionsEn[index].key] = item.optionsEn[index].value
-                        optionDetails.push(detail);
-                    })
-                    optionsDetailsChnAndEng.push({
-                        "optionName": optionName,
-                        "optionNameChn": optionNameChn,
-                        "optionDetails": optionDetails
-                    })
-                })
-            })
-            console.log(optionsDetailsChnAndEng);
-            //Display option details above options. 
+            const optionsDetailsChnAndEng = [];
             
             var html = '<div class="modal-content ModelStyle" style="background-color: #f7f7f7;">' +
                             '<div class="modal-header">' +
                                 '<h4 class="modal-title text-center">'+blockdata.titleChn+' | '+ blockdata.title +'</h4>'+
                             '</div>' +            
                                 '<div class="modal-body">';
-                                var blockQuestion = ""; 
-                    if(blockdata.question){
-                    blockdata.question.forEach(function(opt, indexQues){
+            var blockQuestion = ""; 
+
+
+            if(blockdata.question){
+                blockdata.question.forEach(function(opt, indexQues){
+                console.log(opt);
+                var allOptionsDetails = '';
+                var eachOptionDetail = '';
+                for(var j = 0; j < opt.optionIds.length; j++){
+                    eachOptionDetail = '<div><span style="font-size:12px">' + opt.optionIds[j].optionNameChn +' | ' + opt.optionIds[j].optionNameEn + ' </span></div>';
+                    var optionDetail = '<div>';
+                    for(var i=0; i < opt.optionIds[j].optionsChn.length; i++){
+                        var detail =  '<p style="font-size:12px" >' + opt.optionIds[j].optionsChn[i].key + ': '+ opt.optionIds[j].optionsChn[i].value + ' <br> ' +
+                            opt.optionIds[j].optionsEn[i].key + ': '+ opt.optionIds[j].optionsEn[i].value + '</p>';
+                            optionDetail = optionDetail + detail;
+                    }
+                    optionDetail = eachOptionDetail + optionDetail + '</div>';
+                    allOptionsDetails = allOptionsDetails + optionDetail;
+                }
+
                     blockQuestion = blockQuestion    +
                                 '<div class="model-shadow" >'+
                                 '<div class="befor-row">'+
+
                                     '<div class="row" style="background-color: white;padding-left: 10px">'+ 
+
                                     '<p style="margin-top: 10px;">'+opt.questionEn+' | '+ opt.questionChn+'</p>'+
+                                    
+                                    
                                     '<p style="font-size:12px">'+' Number of owners who have filled out this question | 問卷問題填數: 150／300'+'</p>'+
+                                          '<div class="row">' +
+                                            allOptionsDetails +
+                                          '</div>' +
                                         '<div class="col-sm-12 text-center mg-bot">'+
+                                         
                                             '<canvas id="myChart'+indexQues+'"></canvas>'+
                                         '</div>'+
                                     '<div>'+  '</div>' + 
@@ -1320,3 +1331,4 @@ function ShowCustomDialog3(data)
     });
 
 </script>
+
