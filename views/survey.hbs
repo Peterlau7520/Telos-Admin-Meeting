@@ -436,54 +436,54 @@
             jQuery.extend(jQuery.validator.messages, {
                 required: ""
             })
-            for(var k = 0; k <= total; k++){ 
-                var valIn = "#row"+k+" :input"
-                ch = $(valIn).valid({
-                    messages: {
-                    required: ""
-                    }
+                for(var k = 0; k <= total; k++){ 
+                    var valIn = "#row"+k+" :input"
+                    ch = $(valIn).valid({
+                        messages: {
+                        required: ""
+                        }
 
-                })
-                if(ch === false){ 
-                //ShowCustomDialog3("*All field are Mandatory.");  
-                $("#popupError").text("*All fields are mandatory | 所有欄目為必填"); 
-                    return false; 
+                    })
+                    if(ch === false){ 
+                    //ShowCustomDialog3("*All field are Mandatory.");  
+                    $("#popupError").text("*All fields are mandatory | 所有欄目為必填"); 
+                        return false; 
+                    }
                 }
-            }
-            if(optionId === -1){
-               $("#popupError").text("*Please add at least one Option | 請加入至少一個選項");
-            }
+                if(optionId === -1){
+                   $("#popupError").text("*Please add at least one Option | 請加入至少一個選項");
+                }
             else{
             // if($("#optionForm").valid() === true){
             $("#mainError").text("");
             for(var k = 0; k <= total; k++){ 
             var optionChn = []
             var id1 = "#row"+k+" :input[name*='optionChnKey']" 
-            $.each($(id1), function(data, key){  
-              optionChn.push({"key": $(this).val()})
-            });
+                $.each($(id1), function(data, key){  
+                  optionChn.push({"key": $(this).val()})
+                });
             var i = 0;
             var id2 = "#row"+k+" :input[name*='optionChnValue']"
-            $.each($(id2), function(data, key){  
-              optionChn[i].value = $(this).val()
-              i++;
-            });
+                $.each($(id2), function(data, key){  
+                  optionChn[i].value = $(this).val()
+                  i++;
+                });
             var optionEng = []
             var id3 = "#row"+k+" :input[name*='optionEngKey']"
-            $.each($(id3), function(data, key){  
-              optionEng.push({"key": $(this).val()})
-            });
+                $.each($(id3), function(data, key){  
+                  optionEng.push({"key": $(this).val()})
+                });
 
             var j = 0;
             var id4 = "#row"+k+" :input[name*='optionEngValue']"
-            $.each($(id4), function(data, key){  
-              optionEng[j].value = $(this).val()
-              j++;
-            });
-            if(optionEng.length !== optionChn.length){
-                $("#popupError").text("*English and Chinese option do not match. 中英選項不符");
-                return false;
-            }
+                $.each($(id4), function(data, key){  
+                  optionEng[j].value = $(this).val()
+                  j++;
+                });
+                if(optionEng.length !== optionChn.length){
+                    $("#popupError").text("*English and Chinese option do not match. 中英選項不符");
+                    return false;
+                }
             var id5 = "#row"+k+" :input[name*='optChn']"
             var optionNameChn = $(id5).val();
             var id6 = "#row"+k+" :input[name*='opt']"
@@ -492,39 +492,38 @@
             var id8 = "#row"+k+" :input[name*='optionEngDetailValue']"
             
             var textEng = 0
-            if($(id7).val() && $(id8).val()){
-              optionEng.push({"key": $(id7).val(), "value":$(id8).val()});
-              textEng = 1
-            }
+                if($(id7).val() && $(id8).val()){
+                  optionEng.push({"key": $(id7).val(), "value":$(id8).val()});
+                  textEng = 1
+                }
               var id9 = "#row"+k+" :input[name*='optionChnDetailKey']"
             var id10 = "#row"+k+" :input[name*='optionChnDetailValue']"
             var textChn = 0
-            if($(id9).val() && $(id10).val()){
-              optionChn.push({"key": $(id9).val(), "value":$(id10).val()});
-              textChn = 1
-            }
-            if((textEng === 1 && textChn === 0) || (textEng === 0 && textChn === 1)){
-                $("#popupError").text("English and Chinese option do not match. 中英選項不符");
-                return false;
-            }
-            $("#popupError").text("");
-
-            var equalopt = false;
-            $.each(optionEng, function(data, key){
-            
-                console.log(optionChn[data].value, 'chn');
-                console.log(optionEng[data].value, 'eng');
-                if(!isNaN(optionChn[data].value) || !isNaN(optionEng[data].value)){
-                    if(optionChn[data].value !== optionEng[data].value){
-                        console.log('false')
-                        $("#popupError").text("Options value must be same");  
-                        equalopt = true     
-                    }
+                if($(id9).val() && $(id10).val()){
+                  optionChn.push({"key": $(id9).val(), "value":$(id10).val()});
+                  textChn = 1
                 }
-             })  
-             if(equalopt){
-               return false;
-             }
+                if((textEng === 1 && textChn === 0) || (textEng === 0 && textChn === 1)){
+                    $("#popupError").text("English and Chinese option do not match. 中英選項不符");
+                    return false;
+                }
+            $("#popupError").text("");
+            var equalopt = false;
+                $.each(optionEng, function(data, key){
+                
+                    console.log(optionChn[data].value, 'chn');
+                    console.log(optionEng[data].value, 'eng');
+                    if(!isNaN(optionChn[data].value) || !isNaN(optionEng[data].value)){
+                        if(optionChn[data].value !== optionEng[data].value){
+                            console.log('false')
+                            $("#popupError").text("Options value must be same");  
+                            equalopt = true     
+                        }
+                    }
+                 })  
+                 if(equalopt){
+                   return false;
+                 }
             //
             $("#popupError").text("");
             var optionNameEng = $(id6).val();
@@ -579,9 +578,8 @@
                 
     
            } 
-       }
-       // }
-       // else{
+            }
+              // else{
          //   console.log("invalid")
        // }
         })
@@ -991,6 +989,7 @@
         if(cardData){
         cardData = JSON.parse(cardData);
         }
+        console.log(cardData, "cccccccccccc")
         function card_modal(blockdata){
             console.log(blockdata)
             const optionsDetailsChnAndEng = [];
@@ -1057,8 +1056,8 @@ function buildCanvas(settings){
         var dataChart = []
         var dataLable = []
         opt.optionIds.forEach(function(optChild, indexQues){
-            
-            dataChart.push(30)
+            console.log(optChild, "optChild")
+            dataChart.push(optChild.totalUsersAnswered)
             dataLable.push(optChild.optionNameEn + ' | ' + optChild.optionNameChn )
         })
         var graph = 'myChart' + indexQues
@@ -1181,10 +1180,15 @@ var myPieChart = new Chart(ctx,{
           $(document).on('click','.view-pdf',function(event){
             var id = event.target.id
             var modeldata = cardData[id];
+            console.log(modeldata, "modeldatamodeldatamodeldatamodeldata")
             var modelhtml = card_modal(modeldata);
                 $("#floor_model .modal-dialog").html(modelhtml);
                 $("#floor_model").modal();
+                if(modeldata.effectiveTo != "expired"){
+                    console.log("neww ")
+                }else{
                 buildCanvas(modeldata)
+            }
                 console.log("hereeeee")
           })
           
@@ -1290,9 +1294,6 @@ var myPieChart = new Chart(ctx,{
                                 ]
                 });
 }
-
-
-
 
 function ShowCustomDialog3(data)
             {
