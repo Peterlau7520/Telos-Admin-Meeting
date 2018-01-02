@@ -166,7 +166,7 @@ exports.uploadPdf = function(req, res, targetAudience){
                 if (err) {
                     console.log('Error uploading data: ', err);
                 } else {
-                    console.log('succesfully uploaded the pdf!!!!!!!!!!!!!!');
+                    console.log('succesfully uploaded the pdf!');
                     exports.saveNotice(req, res, fileLinks, targetAudience);
 
                 }

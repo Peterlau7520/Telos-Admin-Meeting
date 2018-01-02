@@ -30,7 +30,7 @@
             <ul class="nav">
                 <li>
                     <a href="/Noticeboard">
-                        <i class="pe-7s-graph"></i>
+                        <i class="pe-7s-note2"></i>
                         <p>NOTICEBOARD
                             <br> 通告
                         </p>
@@ -38,7 +38,7 @@
                 </li>
                 <li class="active">
                     <a href="/allMeetings">
-                        <i class="pe-7s-graph"></i>
+                        <i class="pe-7s-folder"></i>
                         <p>MEETINGS
                             <br> 會議
                         </p>
@@ -46,7 +46,7 @@
                 </li>
                 <li>
                     <a href="/getSurveys">
-                        <i class="pe-7s-user"></i>
+                        <i class="pe-7s-graph"></i>
                         <p>Surveys</p>
                         <p>問卷</p>
                     </a>
@@ -61,7 +61,7 @@
                 </li>
                 <li>
                     <a href="/logout">
-                        <i class="pe-7s-map-marker"></i>
+                        <i class="pe-7s-back"></i>
                         <p>LOG OUT
                             <br> 登出
                         </p>
@@ -1212,55 +1212,9 @@ function edit_poll(event){
             var meetingform = $("#edit_meeting_popup").serializeArray();
             var meetingData = convertSerializeArrayToJson(meetingform);
             console.log('originalData', meetingData);
-            /*if(originalData[index].polls){
-            originalData[index].polls.forEach(function (value, key) {
-                var poll_form = $("#poll_form_" + index + '_' + key).serializeArray();
-                meetingData.polls.push(convertSerializeArrayToJson(poll_form));
-            });
-            }*/
-          /*  $.ajax({
-                url: "/editMeeting",
-                data: { "meeting": JSON.stringify(meetingData) },
-                type: 'POST',
-                enctype: 'multipart/form-data',
-                dataType: "json",
-                success: function (data) {
-                    $("#title_"+index).val(data.title)
-                    $('#title_div_'+index).text(data.title)
-                    $("#start_time"+index).val(data.start_time)
-                    $('#stime_div_'+index).text(data.start_time)
-                    $("#end_time"+index).val(data.end_time)
-                    $('#etime_div_'+index).text(data.end_time)
-                    $("#venue"+index).val(data.venue)
-                    $('#venue_div_'+index).text(data.venue)
-                    console.log(data.title)
-                    location.reload()
-                }
 
-            });*/
         });
-        //for delete meeting
-       /* $('.delete_meeting').click(function(e) {
-            e.preventDefault();
-            console.log(event.target.id)
-            const meeting_id = event.target.id
-            console.log(meeting_id)
-            const HostName = "http://localhost:3000"
-            $.ajax({
-                url: HostName + "/deleteMeeting",
-                data: meeting_id,
-                type: 'POST',
-                success: function (data) {
-                    location.reload()
-                }
-                err: function(err){
-                    console.log(err)
-                }
-
-            });
-
-        });*/
-        //for add pole
+    
         $('.add_pole').click(function(event) {
             console.log(event.target.id)
             const id = event.target.id
