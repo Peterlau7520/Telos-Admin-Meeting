@@ -153,9 +153,10 @@ exports.uploadPdf = function(req, res, targetAudience){
             var title = req.body.title.replace(/ /g,'');
             fileLinks.push(name)
             const estatePath = req.user.estateName.split(" ").join("");
+            const noticeDateTimePath = dateFormat(new Date(), 'yyyy-mm-dd HH:MM').split(" ").join("");
             var data = {
                 Bucket: BucketName,
-                Key: `${estatePath}/Notices/${title}/${name}`,
+                Key: `${estatePath}/Notices/${title}/${noticeDateTimePath}/${name}`,
                 Body: info,
                 ContentType: 'application/pdf',
                 ContentDisposition: 'inline',
@@ -181,7 +182,6 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
     var postDate = dateFormat(new Date(), 'yyyy-mm-dd HH:MM');
     var endDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
     var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
-
     var endFinal = dateFormat( endDay + " " + endHour , 'yyyy-mm-dd HH:MM');
     var notice = new Notice({
             title: req.body.title,
@@ -225,7 +225,7 @@ router.get('/noticeBoard', (req, res) => {
         if(item.fileLinks.length > 0) {
               let fileLinks = [];
               const estatePath = req.user.estateName.split(" ").join("");
-                let Key = `${req.user.estateName}/Notices/${item.title.replace(/ /g,'')}/${item.fileLinks[0]}`;
+                let Key = `${req.user.estateName}/Notices/${item.title.replace(/ /g,'')}/${item.postDate.split(" ").join("")}/${item.fileLinks[0]}`;
                 fileLinks.push({
                   name: item.fileLinks[0],
                   url: "https://"+BucketName+".s3.amazonaws.com/"+Key
