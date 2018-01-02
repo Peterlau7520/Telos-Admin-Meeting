@@ -148,6 +148,7 @@ const questionSchema = new Schema({
     optionIds: [{ type: Schema.ObjectId, ref: 'Options' }],
     surveyId: { type: Schema.ObjectId, ref: 'Survey' },
     order: String,
+    userAnswered: String
 })
 
 const optionSchema = new Schema({

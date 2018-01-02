@@ -1018,7 +1018,6 @@
                     optionDetail = eachOptionDetail + optionDetail + '</div>';
                     allOptionsDetails = allOptionsDetails + optionDetail;
                 }
-
                     blockQuestion = blockQuestion    +
                                 '<div class="model-shadow" >'+
                                 '<div class="befor-row">'+
@@ -1028,7 +1027,7 @@
                                     '<p style="margin-top: 10px;">'+opt.questionEn+' | '+ opt.questionChn+'</p>'+
                                     
                                     
-                                    '<p style="font-size:12px">'+' Number of owners who have filled out this question | 問卷問題填數: 150／300'+'</p>'+
+                                    '<p style="font-size:12px">'+' Number of owners who have filled out this question | 問卷問題填數: '  +opt.userAnswered+ '</p>'+
                                           '<div class="row">' +
                                             allOptionsDetails +
                                           '</div>' +
@@ -1068,10 +1067,18 @@ var myPieChart = new Chart(ctx,{
     data : {
     datasets: [{
         data: dataChart,
-        backgroundColor: [' #FF6384 ', '#FF9F40', ' #FFCD56', '#4BC0C0', '#36A2EB', ' #FF6384 ', '#FF9F40', ' #FFCD56', '#4BC0C0', '#36A2EB', ' #FF6384 ', '#FF9F40', ' #FFCD56', '#4BC0C0', '#36A2EB'],
-        hoverBackgroundColor: [' #FF6384 ', '#FF9F40', ' #FFCD56', '#4BC0C0', '#36A2EB', ' #FF6384 ', '#FF9F40', ' #FFCD56', '#4BC0C0', '#36A2EB', ' #FF6384 ', '#FF9F40', ' #FFCD56', '#4BC0C0', '#36A2EB'],
+        backgroundColor: ['rgba(255, 99, 132, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 205, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 205, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(54, 162, 235, 1)','rgba(255, 99, 132, 1)']
     }],
-
     // These labels appear in the legend and in the tooltips when hovering different arcs
     labels: dataLable
 },
@@ -1184,6 +1191,7 @@ var myPieChart = new Chart(ctx,{
             var modelhtml = card_modal(modeldata);
                 $("#floor_model .modal-dialog").html(modelhtml);
                 $("#floor_model").modal();
+                //buildCanvas(modeldata)
                 if(modeldata.effectiveTo != "expired"){
                     console.log("neww ")
                 }else{

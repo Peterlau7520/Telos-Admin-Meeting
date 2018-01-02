@@ -223,41 +223,59 @@ router.get('/getSurveys', (req, res) => {
         var todayDate = new Date()
         promiseArr.push(new Promise(function(resolve, reject){
         _.forEach(survey, function(surv, index) {
+            var finalQuestions = []
         Question.find({surveyId: surv._id}).populate('optionIds').lean().sort( { order: 1 } )
             .then(function(que, err){
             surv.question = que
             _.forEach(que, function(q, index1) {
-                console.log(q, "hhhhhhh")
+                UserAnswers.find({surveyId : surv._id, questionId: q._id })
+                .then(function(user, err){
+                    console.log("queque", q)
+                    Question.update(
+                        { _id:  q._id},
+                        { $set: { userAnswered:  user.length} }
+                        )
+                        .then(function(ques, err) {
+                         if(err){
+                         res.send(err);
+                        }
+                        if(q.optionIds.length  > 0){
+                            let i = -1
+                    var fetch = function() {
+                     i++
+                      if(i < q.optionIds.length) {
                  _.forEach(q.optionIds, function(option, index2) {
-                    console.log(que[index].optionIds[index2], "option")
                 UserAnswers.find({surveyId : surv._id, optionId: option._id ,questionId: option.questionId })
                 .then(function(data, err) {
                     Options.update(
                         { _id:  option._id},
                         { $set: { totalUsersAnswered:  data.length} }
                         )
-                        .then(function(ques, err) {
+                        .then(function(option, err) {
                          if(err){
                          res.send(err);
                         }
-                
-                     console.log(data, "data")
-                     que[index1].usersCount = data.length
-                     console.log(surv, "que")
-                    //surv.question[index].totalUsers = data.length
-                    //option.totalUsers = data.length
+                        if(option){
+                             console.log("option", option)
                     resolve(survey)
+                }
                 })
                 })
                 })
+             }
+            }
+            }
+            fetch()   
             })     
         });
+        })
+        })
         })
         }))
         var list = ''
         Promise.all(promiseArr)
         .then(function(data, err){
-            console.log(data, "datadata")
+            console.log("*************************************")
             list = data[0]
         
             _.forEach(data[0], function(sur, index) {
