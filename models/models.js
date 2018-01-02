@@ -155,7 +155,8 @@ const optionSchema = new Schema({
     optionNameEn: String,
     optionNameChn: String,
     optionsEn: [],
-    optionsChn: []
+    optionsChn: [],
+    totalUsersAnswered: String
 })
 
 const userAnswersSchema = new Schema({

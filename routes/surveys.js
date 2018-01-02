@@ -23,6 +23,7 @@ const oneSignal = require('onesignal')(apiKey, appId, true);
 const Estate = models.Estate;
 const Survey = models.Survey;
 const Question = models.Question;
+const UserAnswers = models.UserAnswers;
 const Options = models.Options;
 const Resident = models.Resident;
 router.use(busboyBodyParser({multi: true}));
@@ -214,6 +215,7 @@ function sendNotification(oneSignalIds, messageBody){
 
 router.get('/getSurveys', (req, res) => {
     const promiseArr =[]
+    const promiseArr2 = []
   var blocksFloors = req.user.blockArray[0]
   Survey.find({estate: req.user.estateName}).lean()
   .then(function(survey, err) {
@@ -224,14 +226,38 @@ router.get('/getSurveys', (req, res) => {
         Question.find({surveyId: surv._id}).populate('optionIds').lean().sort( { order: 1 } )
             .then(function(que, err){
             surv.question = que
-            resolve(survey)
-        })     
+            _.forEach(que, function(q, index1) {
+                console.log(q, "hhhhhhh")
+                 _.forEach(q.optionIds, function(option, index2) {
+                    console.log(que[index].optionIds[index2], "option")
+                UserAnswers.find({surveyId : surv._id, optionId: option._id ,questionId: option.questionId })
+                .then(function(data, err) {
+                    Options.update(
+                        { _id:  option._id},
+                        { $set: { totalUsersAnswered:  data.length} }
+                        )
+                        .then(function(ques, err) {
+                         if(err){
+                         res.send(err);
+                        }
+                
+                     console.log(data, "data")
+                     que[index1].usersCount = data.length
+                     console.log(surv, "que")
+                    //surv.question[index].totalUsers = data.length
+                    //option.totalUsers = data.length
+                    resolve(survey)
+                })
+                })
+                })
+            })     
         });
-
+        })
         }))
         var list = ''
         Promise.all(promiseArr)
         .then(function(data, err){
+            console.log(data, "datadata")
             list = data[0]
         
             _.forEach(data[0], function(sur, index) {
