@@ -828,6 +828,7 @@ function edit_poll(event){
             var ids = 'tab_'+originalData[id]._id;
             localStorage.setItem("tab", id);
             localStorage.setItem("divTab", ids);
+            console.log(originalData[id], )
             var firstDate = new Date(originalData[id].createdAt);
             var secondDate = new Date();
             firstDate.setDate(firstDate.getDate() + 3);
@@ -1236,11 +1237,19 @@ function edit_poll(event){
             var originalData = '{{{stringify meetingsData}}}';
              originalData = JSON.parse(originalData);
             var poll = originalData[parentId].polls[childId]
-            var lastDate = new Date(originalData[parentId].createdAt)
+            console.log(originalData[parentId], "orggggggg")
+            var lastDate = new Date(originalData[parentId].startTime)
             var meeting_title = originalData[parentId].title
-            lastDate = lastDate.setDate(lastDate.getDate() + 3);
-            lastDate = new Date(lastDate)
-            if(lastDate <= new Date()){
+            //lastDate = lastDate.setDate(lastDate.getDate() + 3);
+            //lastDate = new Date(lastDate)
+            console.log(lastDate, "lastDate")
+            var diff = lastDate - new Date()
+            var seconds = diff / 1000;
+            var minutes = (diff / 1000) / 60;
+            var hours = minutes / 60;
+              var one_day=1000*60*60*24;
+
+            if((diff/one_day).toFixed() < 14){
                 ShowCustomDialog1('you are not allowed to edit the poll.')
                 event.preventDefault()
             }else{
