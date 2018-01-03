@@ -828,24 +828,22 @@ function edit_poll(event){
             var ids = 'tab_'+originalData[id]._id;
             localStorage.setItem("tab", id);
             localStorage.setItem("divTab", ids);
-            console.log(originalData[id], )
-            var firstDate = new Date(originalData[id].createdAt);
+            console.log('meeting details', originalData[id], )
+            var firstDate = new Date(originalData[id].startTime);
             var secondDate = new Date();
-            firstDate.setDate(firstDate.getDate() + 3);
            // secondDate.setHours(firstDate.getHours());
            // secondDate.setMinutes(firstDate.getMinutes());
             var diff = firstDate - secondDate;  
             var seconds = diff / 1000;
             var minutes = (diff / 1000) / 60;
             var hours = minutes / 60;
-
-            var hours = Math.floor(hours);
-            if(hours < 0){
-                hours =0;
+             var one_day=1000*60*60*24;
+            var days = (diff/one_day).toFixed();
+            if( days < 0){
+                days =0;
             }
-            //var hours = Math.round(Math.abs(firstDate - secondDate) / 36e5);
-            hours = 'Hours remaining to edit or delete polls | 剩下的時間可以取消或修改投票: ' + hours;
-            $( "#endhour" ).text(hours)
+            days = 'Days remaining to edit or delete polls | 剩下的時間可以取消或修改投票: ' + days + ' 天';
+            $( "#endhour" ).text(days)
         }) 
         $('.past-meeting').click(function (event) {
             $('.save_meeting').hide()
@@ -1247,7 +1245,7 @@ function edit_poll(event){
             var seconds = diff / 1000;
             var minutes = (diff / 1000) / 60;
             var hours = minutes / 60;
-              var one_day=1000*60*60*24;
+            var one_day=1000*60*60*24;
 
             if((diff/one_day).toFixed() < 14){
                 ShowCustomDialog1('you are not allowed to edit the poll.')

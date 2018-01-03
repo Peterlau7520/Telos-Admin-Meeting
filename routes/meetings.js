@@ -6,6 +6,7 @@ const models = require('../models/models');
 const Estate = models.Estate;
 const Notice = models.Notice;
 const Meeting = models.Meeting;
+const Resident = models.Resident;
 const Poll = models.Poll;
 const forEach = require('async-foreach').forEach;
 var Promise = require('bluebird');
@@ -289,12 +290,6 @@ router.post('/editMeeting', (req, res) => {
                 } else {
                     console.log('succesfully uploaded the pdf!');
                     save(req, res, fileLinks)
-                      /*bucket.deleteObject({
-                      Bucket: BucketName,
-                      Key: req.body.fileLinks[0].url
-                    }, function(err, filed){
-                        console.log(filed)
-                    })*/
                 }
             });
         }
@@ -357,10 +352,14 @@ router.post('/editMeeting', (req, res) => {
                         console.log(filed, 'success remove')
                       }
                     })
+                    const message = data.title + ' has been edited'+ ' | ' + data.titleChn + ' 内容有所更改'
+                    sendNotification(message)
                     res.redirect('/allMeetings')
                  })
             }
             else{
+                const message = data.title + ' has been edited'+ ' | ' + data.titleChn + ' 内容有所更改'
+                sendNotification(message)
                 res.redirect('/allMeetings')
             }
     
@@ -502,6 +501,8 @@ router.post('/editPoll', (req, res) => {
             res.json({message: 'Could Not Update'})
         }
         else{
+            const message = data.pollName + ' has been edited'+ ' | ' + data.pollNameChn + ' 投票内容有所更改'
+            sendNotification(message)
             res.redirect('/allMeetings')
             //res.json({message: 'Updated Successfully'})
         }
@@ -695,13 +696,14 @@ function savePoll(req, res, fileLinks){
                 active: true
             });
             meeting.save(function(err, meeting){
+                const message = '新會議已添加 | A New Meeting has just been added!'
+                sendNotification(message)
                 res.redirect('/allMeetings')
     })
 })
 }
 }
 });
-
 router.post('/deleteMeeting',(req,res) => {
   console.log(req.body, "reqq")
     Meeting.deleteOne({_id: req.body.meetingId}, function (err, todo) {
@@ -726,5 +728,41 @@ router.post('/deletePoll',(req,res) => {
 });
 
 
+function sendNotification(message){
+    Resident.find({estateName: req.user.estateName}, function(err, residents){
+        var oneSignalIds = [];
+        var promiseArr = [];
+        forEach(residents, function(item, index){
+            if(item.deviceToken != undefined && item.deviceToken != '') {
+                promiseArr.push(new Promise(function(resolve, reject){
+                let type = item.deviceToken.length > 40 ? 'android':'ios';
+                oneSignal.addDevice(item.deviceToken, type) 
+                .then(function(id){
+                    resolve(id)
+                })
+            }))
+            Promise.all(promiseArr)
+            .then(function(data, err){
+                console.log(data, "data")
+                oneSignalIds = data
+                var options = {small_icon: "ic_telos_grey_background"}
+                if(oneSignalIds.length){
+                oneSignal.createNotification(message , options, oneSignalIds)
+                .then(function(data){
+                 if(data){
+                    console.log('sent out successfully')
+                    return true
+                 }
+                 else{
+                    console.log('sent out unsuccessful')
+                        return false
+                 }
+                })
+            }
+            })
+            }
+        })
+})
+}
 module.exports = router;
 
