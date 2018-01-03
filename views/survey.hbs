@@ -996,7 +996,7 @@
             
             var html = `<div class="modal-content ModelStyle" style="background-color: #f7f7f7;">` +
                             `<div class="modal-header">` +
-                                `<h4 class="modal-title text-center">`+blockdata.titleChn+` | `+ blockdata.title +`</h4>`+
+                                `<h4 class="modal-title text-center"> ${blockdata.titleChn} |  ${blockdata.title} </h4>`+
                             `</div>` +            
                                 `<div class="modal-body">`;
             var blockQuestion = ""; 
@@ -1008,11 +1008,11 @@
                 var allOptionsDetails = '';
                 var eachOptionDetail = '';
                 for(var j = 0; j < opt.optionIds.length; j++){
-                    eachOptionDetail = `<div><span style="font-size:12px">` + opt.optionIds[j].optionNameChn +` | ` + opt.optionIds[j].optionNameEn + ` </span></div>`;
+                    eachOptionDetail = `<div><span style="font-size:12px"> ${opt.optionIds[j].optionNameChn}  | ${opt.optionIds[j].optionNameEn}  </span></div>`;
                     var optionDetail = `<div>`;
                     for(var i=0; i < opt.optionIds[j].optionsChn.length; i++){
-                        var detail =  `<p style="font-size:12px" >` + opt.optionIds[j].optionsChn[i].key + ': '+ opt.optionIds[j].optionsChn[i].value + ` <br> ` +
-                            opt.optionIds[j].optionsEn[i].key + ': '+ opt.optionIds[j].optionsEn[i].value + `</p>`;
+                        var detail =  `<p style="font-size:12px" > ${opt.optionIds[j].optionsChn[i].key} :  ${opt.optionIds[j].optionsChn[i].value}  <br>  
+                            ${opt.optionIds[j].optionsEn[i].key} : ${opt.optionIds[j].optionsEn[i].value} </p>`;
                             optionDetail = optionDetail + detail;
                     }
                     optionDetail = eachOptionDetail + optionDetail + `</div>`;
@@ -1024,13 +1024,11 @@
 
                                     `<div class="row" style="background-color: white;padding-left: 10px">`+ 
 
-                                    `<p style="margin-top: 10px;">'+opt.questionEn+' | '+ opt.questionChn+'</p>`+
+                                    `<p style="margin-top: 10px;">${opt.questionEn} | ${opt.questionChn}</p>`+
                                     
                                     
-                                    `<p style="font-size:12px">'+' Number of owners who have filled out this question | 問卷問題填數: '  +opt.userAnswered+ '</p>'+
-                                                                              '<div class="row">` +
-                                            allOptionsDetails +
-                                          `</div>` +
+                                    `<p style="font-size:12px"> Number of owners who have filled out this question | 問卷問題填數:   ${opt.userAnswered} </p> `+
+                                                        `<div class="row"> ${allOptionsDetails} </div> `+
                                         `<div class="col-sm-12 text-center mg-bot">`+
                                          
                                             `<canvas id="myChart`+indexQues+`"></canvas>`+
