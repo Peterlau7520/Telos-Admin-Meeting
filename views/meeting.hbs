@@ -803,7 +803,7 @@ function edit_poll(event){
             event.preventDefault();
             console.log("helll")
             const id = event.target.id
-            ShowCustomDialog2("are you sure you wnna delete?", id)
+            ShowCustomDialog2("Are you sure you want to delete this meeting? | 確定刪除會議 ？", id)
             localStorage.removeItem("tab");
             localStorage.removeItem("divTab");
           })
