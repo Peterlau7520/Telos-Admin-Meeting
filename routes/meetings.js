@@ -30,6 +30,13 @@ AWS.config.update({
   secretAccessKey: 'elD95wpngb2NiAfJSSCYOKhVmEAp+X2rnTSKIZ00'
 });
 const bucket = new AWS.S3({params: {Bucket: BucketName}});
+
+
+const appId = '72ae436c-554c-4364-bd3e-03af71505447';
+const apiKey = 'YTU4NmE5OGItODM3NC00YTYwLWExNjUtMTEzOTE2YjUwOWJk';
+const oneSignal = require('onesignal')(apiKey, appId, true);
+
+
 let currDate = new Date(); 
 let currentDate = currDate.getFullYear()+"-"+(currDate.getMonth()+1)+"-"+currDate.getDate()+" "+currDate.getHours()+":"+currDate.getMinutes()+":"+currDate.getSeconds();
 router.get('/allMeetings', (req, res) => {
@@ -353,13 +360,13 @@ router.post('/editMeeting', (req, res) => {
                       }
                     })
                     const message = data.title + ' has been edited'+ ' | ' + data.titleChn + ' 内容有所更改'
-                    sendNotification(message)
+                    sendNotification(message, req.user.estateName)
                     res.redirect('/allMeetings')
                  })
             }
             else{
                 const message = data.title + ' has been edited'+ ' | ' + data.titleChn + ' 内容有所更改'
-                sendNotification(message)
+                sendNotification(message, req.user.estateName)
                 res.redirect('/allMeetings')
             }
     
@@ -502,7 +509,7 @@ router.post('/editPoll', (req, res) => {
         }
         else{
             const message = data.pollName + ' has been edited'+ ' | ' + data.pollNameChn + ' 投票内容有所更改'
-            sendNotification(message)
+            sendNotification(message,  req.user.estateName)
             res.redirect('/allMeetings')
             //res.json({message: 'Updated Successfully'})
         }
@@ -697,7 +704,7 @@ function savePoll(req, res, fileLinks){
             });
             meeting.save(function(err, meeting){
                 const message = '新會議已添加 | A New Meeting has just been added!'
-                sendNotification(message)
+                sendNotification(message,  req.user.estateName)
                 res.redirect('/allMeetings')
     })
 })
@@ -728,8 +735,8 @@ router.post('/deletePoll',(req,res) => {
 });
 
 
-function sendNotification(message){
-    Resident.find({estateName: req.user.estateName}, function(err, residents){
+function sendNotification(message, estateName){
+    Resident.find({estateName: estateName}, function(err, residents){
         var oneSignalIds = [];
         var promiseArr = [];
         forEach(residents, function(item, index){
