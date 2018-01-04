@@ -130,7 +130,7 @@
                                         <ul class="nav navbar-nav" role="tablist">
                                             {{#each pastMeetingsData}}
                                             <li role="presentation">
-                                                <a class='past-meeting' href="#tab_{{_id}}" aria-controls="home" role="tab" data-toggle="tab" >{{title}} | {{titleChn}}</a>
+                                                <a class='past-meeting' href="#tab_{{_id}}" aria-controls="home" role="tab" data-toggle="tab" id="{{@key}}">{{title}} | {{titleChn}}</a>
                                             </li>
                                             {{/each}}
                                         </ul>
@@ -846,12 +846,14 @@ function edit_poll(event){
             $( "#endhour" ).text(days)
         }) 
         $('.past-meeting').click(function (event) {
+            var data = '{{{stringify pastMeetingsData}}}'
+            data = JSON.parse(data)
             $('.save_meeting').hide()
             $('#heading3').text('Past Meetings | 過往會議')
             $( "#endhour" ).text('')
             var html = ''
              $('#headingBottom2').html('')
-             html= '<a href="assets/pdf-sample" download="pdffile"><button class="btn btn-primary headingbtn dwn-btn download-btn"  type="button" id= "dwn-btn">Download Poll Report | 下載投票報告</button> </a>'
+             html= `<a href=${data[event.target.id].pollReport} download="pollReport"><button class="btn btn-primary headingbtn dwn-btn download-btn"  type="button" id= "dwn-btn">Download Poll Report | 下載投票報告</button> </a>`
             $('#headingBottom2').append(html)
         }) 
 
