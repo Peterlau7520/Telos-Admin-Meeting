@@ -62,9 +62,9 @@ router.post('/addNotice', (req, res) => {
                     })
                 }))
                 Promise.all(promiseArr)
-                .then(function(data, err){
-                    console.log(data, "data")
-                    oneSignalIds = data
+                .then(function(aud, err){
+                    console.log(aud, "aud")
+                    oneSignalIds = aud
                     const noticeBody = '新通告 | New notice ! ' + req.body.title + ' | ' + req.body.titleChn
                     sendNotification(oneSignalIds, noticeBody)
                 })
@@ -107,8 +107,8 @@ router.post('/addNotice', (req, res) => {
                                     })
                                  }))
                                 Promise.all(promiseArr)
-                                .then(function(data, err){
-                                    segmentedAudience = data;
+                                .then(function(audience, err){
+                                    segmentedAudience = audience;
                                     const noticeBody = 'New notice! ' + req.body.title + ' | ' + req.body.titleChn
                                     sendNotification(segmentedAudience, noticeBody)
                                 })
@@ -125,11 +125,12 @@ router.post('/addNotice', (req, res) => {
 
 function sendNotification(oneSignalIds, noticeBody){
             var message =  noticeBody;
-            var data = {small_icon: "ic_telos_grey_background"}
+            var options = {} //{small_icon: "ic_telos_grey_background"}
             if(oneSignalIds.length){
-            oneSignal.createNotification(message , data, oneSignalIds)
-            .then(function(data){
-             if(data){
+                console.log(options, "dataaaaaaaaaa")
+            oneSignal.createNotification(message, oneSignalIds)
+            .then(function(notify){
+             if(notify){
                 console.log('sent out successfully')
                 return true
              }

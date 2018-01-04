@@ -749,14 +749,14 @@ function sendNotification(message, estateName){
                 })
             }))
             Promise.all(promiseArr)
-            .then(function(data, err){
+            .then(function(Ids, err){
                 console.log(data, "data")
-                oneSignalIds = data
-                var options = {small_icon: "ic_telos_grey_background"}
+                oneSignalIds = Ids
+                var data = {small_icon: "ic_telos_grey_background"}
                 if(oneSignalIds.length){
-                oneSignal.createNotification(message , options, oneSignalIds)
-                .then(function(data){
-                 if(data){
+                oneSignal.createNotification(message , oneSignalIds)
+                .then(function(notifiy){
+                 if(notifiy){
                     console.log('sent out successfully')
                     return true
                  }
