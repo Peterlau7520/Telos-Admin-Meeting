@@ -11,25 +11,42 @@
     display: block;
   }
 }
+@media (max-height: 1099px){
+  .intro-app-showcase {
+      padding: 0px 0;
+      display: inline-block;
+      margin: 50px 0;
+  }
+}
 
 @media only screen and (max-width: 812px)  {
-  .gadget-ios{
-    width:auto !important;
+  
+  .aws-img-mobile{
+    content:url("assets/img/landing-page/security-flow-english-phone_2.svg") !important;
+    background-size: 134%;
   }
+ 
 }
 
 @media only screen and (max-width: 767px)  {
   .gadget-ios{
     width:auto !important;
   }
-  .aws-img{
-    background-size: 134%;
-  }
+  
   .intro-app-showcase{
     padding-top: 0px;
   }
 }
-
+.gadget-ios,.gadget-windows,.gadget-android{
+    width:100% !important;
+  }
+.intro-app-showcase{
+  height: 100%;
+}
+.aws-img{
+    content:url("assets/img/landing-page/security-flow-english.svg");
+    background-size: 134%;
+  }
 .intro-app-showcase .platform-swith>a {
     height: 30px;
     padding: 0 5px;
@@ -404,7 +421,7 @@
       </section>
 
       <!-- security flow -->
-      <section class="fw-section with-parallax padding-top-10x padding-bottom-12x aws-img" data-aos="fade-up" style="background-image: url(assets/img/landing-page/security-flow-english-phone_2.svg); background-size: 100% 100%;">
+      <section class="fw-section with-parallax  aws-img aws-img-mobile" data-aos="fade-up" id="aws-img" style=" background-size: 100% 100%;">
       </section>
 
 
@@ -415,7 +432,7 @@
         <div class="intro-app-background" data-platform="#windows" data-jarallax="" style="background: url('assets/img/landing-page/background-admin(1).png') 50% 50% no-repeat;"></div> -->
         <div class="container">
           <div class="row">
-            <div class="col-sm-12 col-xs-12  padding-bottom-2x">
+            <div class="col-md-6 col-sm-12 col-xs-12  padding-bottom-2x">
               <div class="intro-app-header active" data-platform="#ios">
                 <h2 style="text-align: center; margin-left: 20px"><span class="text-black">Admin panel: </span><span class="text-primary">post notices</span></h2>
               </div>
@@ -499,7 +516,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="gadget-ios active" data-platform="#ios"><img src="assets/img/landing-page/noticeboard-admin.svg" alt="Ios">
               </div>
               <div class="gadget-android" data-platform="#android"><img src="assets/img/landing-page/add-poll-admin.svg" alt="Android">
