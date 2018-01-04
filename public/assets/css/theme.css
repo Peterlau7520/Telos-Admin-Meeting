@@ -3,8 +3,8 @@
  * Silicon Multi-Purpose Technology Theme
  * Copyright 2017 8Guild.com
  * Theme Styles
-  
-   
+
+
    ╔══╗╔═══╗╔╗╔╗╔══╗╔╗──╔══╗
    ║╔╗║║╔══╝║║║║╚╗╔╝║║──║╔╗╚╗
    ║╚╝║║║╔═╗║║║║─║║─║║──║║╚╗║
@@ -5917,11 +5917,11 @@ ul.wpb_thumbnails-fluid > li {
 }
 
 .intro-section.intro-app-showcase .platform-swith > a:hover.platform-android, .intro-section.intro-app-showcase .platform-swith > a.active.platform-android {
-  background-color: #a4c639;
+  background-color: #222222;
 }
 
 .intro-section.intro-app-showcase .platform-swith > a:hover.platform-windows, .intro-section.intro-app-showcase .platform-swith > a.active.platform-windows {
-  background-color: #00bcf2;
+  background-color: #222222;
 }
 
 .intro-section.intro-app-showcase .intro-app-features .feature p {
@@ -5960,11 +5960,11 @@ ul.wpb_thumbnails-fluid > li {
 }
 
 .intro-section.intro-light.intro-app-showcase .platform-swith > a:hover.platform-android, .intro-section.intro-light.intro-app-showcase .platform-swith > a.active.platform-android {
-  color: #a4c639;
+  color: #222222;
 }
 
 .intro-section.intro-light.intro-app-showcase .platform-swith > a:hover.platform-windows, .intro-section.intro-light.intro-app-showcase .platform-swith > a.active.platform-windows {
-  color: #00bcf2;
+  color: #222222;
 }
 
 .intro-section.intro-light.intro-app-showcase .intro-app-features .feature h4, .intro-section.intro-light.intro-app-showcase .intro-app-features .feature p {

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="324px" height="540px" viewBox="0 0 324 540" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>upcomingmeeting(w)-2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="50%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#FAFBFC" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="46.71" y="36.18" width="230.58" height="467.64" rx="31.32"></rect>
+        <filter x="-8.5%" y="-2.7%" width="119.5%" height="109.6%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0.0823529412   0 0 0 0 0.250980392  0 0 0 0.14 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter2"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter2" result="shadowBlurOuter2"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0.0823529412   0 0 0 0 0.250980392  0 0 0 0.05 0" type="matrix" in="shadowBlurOuter2" result="shadowMatrixOuter2"></feColorMatrix>
+            <feOffset dx="3" dy="8" in="SourceAlpha" result="shadowOffsetOuter3"></feOffset>
+            <feGaussianBlur stdDeviation="4.5" in="shadowOffsetOuter3" result="shadowBlurOuter3"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.678431373   0 0 0 0 0.729411765   0 0 0 0 0.8  0 0 0 0.25 0" type="matrix" in="shadowBlurOuter3" result="shadowMatrixOuter3"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="shadowMatrixOuter2"></feMergeNode>
+                <feMergeNode in="shadowMatrixOuter3"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-7.6%" y="-2.2%" width="117.8%" height="108.8%" filterUnits="objectBoundingBox" id="filter-5">
+            <feGaussianBlur stdDeviation="0.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 1 0" type="matrix" in="shadowInnerInner1" result="shadowMatrixInner1"></feColorMatrix>
+            <feGaussianBlur stdDeviation="4.5" in="SourceAlpha" result="shadowBlurInner2"></feGaussianBlur>
+            <feOffset dx="0" dy="-4" in="shadowBlurInner2" result="shadowOffsetInner2"></feOffset>
+            <feComposite in="shadowOffsetInner2" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner2"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.08 0" type="matrix" in="shadowInnerInner2" result="shadowMatrixInner2"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner2"></feMergeNode>
+            </feMerge>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-6">
+            <stop stop-color="#F3F4F6" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-7">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#FEFEFE" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-8" x="60.75" y="89.91" width="202.5" height="360.18" rx="5.4"></rect>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-10">
+            <stop stop-color="#75D4FD" offset="0%"></stop>
+            <stop stop-color="#87E5ED" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-11" x="0.75" y="0.46" width="202.5" height="40.77"></rect>
+        <rect id="path-12" x="0.75" y="0.63" width="202.5" height="122.85"></rect>
+        <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="linearGradient-13">
+            <stop stop-color="#8A55EA" offset="0%"></stop>
+            <stop stop-color="#4359F8" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="upcomingmeeting(w)-2">
+            <mask id="mask-3" fill="white">
+                <use xlink:href="#path-2"></use>
+            </mask>
+            <g id="iPhone-Body">
+                <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-2"></use>
+                <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-2"></use>
+            </g>
+            <path d="M162,493.02 C153.052987,493.02 145.8,485.767013 145.8,476.82 C145.8,467.872987 153.052987,460.62 162,460.62 C170.947013,460.62 178.2,467.872987 178.2,476.82 C178.2,485.767013 170.947013,493.02 162,493.02 Z M162,491.13 C169.903195,491.13 176.31,484.723195 176.31,476.82 C176.31,468.916805 169.903195,462.51 162,462.51 C154.096805,462.51 147.69,468.916805 147.69,476.82 C147.69,484.723195 154.096805,491.13 162,491.13 Z" id="Home" fill="url(#linearGradient-6)" style="mix-blend-mode: multiply;"></path>
+            <mask id="mask-9" fill="white">
+                <use xlink:href="#path-8"></use>
+            </mask>
+            <g id="Mask-for-Screen">
+                <use fill="url(#linearGradient-7)" fill-rule="evenodd" xlink:href="#path-8"></use>
+                <rect stroke-opacity="0.04" stroke="#000000" stroke-width="0.756" x="60.372" y="89.532" width="203.256" height="360.936" rx="5.4"></rect>
+            </g>
+            <rect id="Rectangle-2" fill="#FAFBFD" mask="url(#mask-9)" x="46.71" y="105.57" width="230.58" height="355.32"></rect>
+            <g id="Group-3" mask="url(#mask-9)">
+                <g transform="translate(52.000000, 89.000000)">
+                    <rect id="Rectangle" fill="#1D1D26" fill-rule="evenodd" x="0.482142857" y="0.91" width="218" height="33.09"></rect>
+                    <text id="近期會議-|-Upcoming-Meet" fill="none" font-family="PingFangTC-Regular, PingFang TC" font-size="10" font-weight="normal" letter-spacing="0.337500006">
+                        <tspan x="39.3545898" y="21" fill="#F2F2F2">近期會議</tspan>
+                        <tspan x="80.7045898" y="21" font-family="ArialMT, Arial" fill="#F2F2F2"> | Upcoming Meeting</tspan>
+                    </text>
+                    <g id="Group" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(17.000000, 11.000000)">
+                        <ellipse id="Oval-2" fill="#F2F2F2" cx="1.81714286" cy="1.44" rx="1.39821429" ry="1.35"></ellipse>
+                        <ellipse id="Oval-2-Copy" fill="#F2F2F2" cx="1.81714286" cy="6.3" rx="1.39821429" ry="1.35"></ellipse>
+                        <ellipse id="Oval-2-Copy-2" fill="#F2F2F2" cx="1.81714286" cy="11.16" rx="1.39821429" ry="1.35"></ellipse>
+                    </g>
+                </g>
+            </g>
+            <rect id="Rectangle-12" fill="url(#linearGradient-10)" mask="url(#mask-9)" x="60.21" y="120.69" width="204.5" height="121.77"></rect>
+            <rect id="Rectangle-15" fill="#FFFFFF" opacity="0.949999988" mask="url(#mask-9)" x="115" y="178" width="94.5" height="6.75"></rect>
+            <g id="Group-10" mask="url(#mask-9)">
+                <g transform="translate(60.000000, 242.000000)">
+                    <g id="Rectangle-13" stroke="none">
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-11"></use>
+                        <rect stroke="#F5F6F8" stroke-width="1.35" x="1.425" y="1.135" width="201.15" height="39.42"></rect>
+                    </g>
+                    <path d="M71.625,20.575 L132.389998,20.575" id="Line-2" stroke="#F5F6F8" stroke-width="4.05" stroke-linecap="square"></path>
+                </g>
+            </g>
+            <g id="Group-15" mask="url(#mask-9)">
+                <g transform="translate(60.000000, 297.000000)">
+                    <g id="Rectangle-14" stroke="none">
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-12"></use>
+                        <rect stroke="#F5F6F8" stroke-width="1.35" x="1.425" y="1.305" width="201.15" height="121.5"></rect>
+                    </g>
+                    <path d="M53.2785,45.45 L150.845825,45.45" id="Line-2" stroke="#F5F6F8" stroke-width="5.4" stroke-linecap="square"></path>
+                    <path d="M53.2785,65.97 L150.845825,65.97" id="Line-2-Copy" stroke="#F5F6F8" stroke-width="5.4" opacity="0.699999988" stroke-linecap="square"></path>
+                    <path d="M53.2785,77.58 L150.845825,77.58" id="Line-2-Copy-2" stroke="#F5F6F8" stroke-width="5.4" opacity="0.699999988" stroke-linecap="square"></path>
+                </g>
+            </g>
+            <text id="議程-|-Agenda" mask="url(#mask-9)" font-family="PingFangTC-Regular, PingFang TC" font-size="8.5" font-weight="normal" letter-spacing="0.242857128" fill="#BCBCBC">
+                <tspan x="66.2802526" y="294">議程</tspan>
+                <tspan x="83.7659668" y="294" font-family="ArialMT, Arial"> | Agenda</tspan>
+            </text>
+            <g id="Group-2" mask="url(#mask-9)">
+                <g transform="translate(53.000000, 415.000000)">
+                    <g id="Group-4" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Group-12" fill="#1D1D26">
+                            <g id="Group-14" transform="translate(0.100000, 0.700000)">
+                                <rect id="Rectangle-4" x="0" y="0" width="216.27" height="40"></rect>
+                            </g>
+                        </g>
+                        <g id="icon_ios_page_filled" transform="translate(25.000000, 3.000000)">
+                            <rect id="@bounds" x="0" y="0" width="30" height="30"></rect>
+                            <path d="M21.0416667,12.0833333 L15.8333333,6.875 L15.8333333,12.0833333 L21.0416667,12.0833333 Z M7.91666667,5.41666667 L15.4166667,5.41666667 L22.0833333,12.0833333 L22.0833333,24.1666667 L7.91666667,24.1666667 L7.91666667,5.41666667 Z" id="Rectangle-166" fill="#EDEEEF" opacity="0.25"></path>
+                        </g>
+                        <g id="icon_ios_chat_filled" transform="translate(162.000000, 3.000000)">
+                            <rect id="@bounds" x="0" y="0" width="30" height="30"></rect>
+                            <path d="M8.41304433,19.2461216 C9.03525824,19.821672 11.0597646,21.1217848 8.13906689,23.0848265 C9.36064248,23.5277815 11.1848573,23.1314341 12.6488376,21.930666 C13.171191,21.5022275 14.344945,21.6666667 15,21.6666667 C19.8324916,21.6666667 23.75,18.4953503 23.75,14.5833333 C23.75,10.6713164 19.8324916,7.5 15,7.5 C10.1675084,7.5 6.25,10.6713164 6.25,14.5833333 C6.25,16.3689669 7.06619359,18.0002792 8.41304433,19.2461216 Z" id="Oval-19" fill="#EDEEEF" opacity="0.25"></path>
+                        </g>
+                        <g id="icon_ios_topcharts_filled" transform="translate(118.000000, 4.000000)">
+                            <rect id="@bounds" x="0" y="0" width="28" height="28"></rect>
+                            <path d="M5.05555556,5.05555556 L22.9444444,5.05555556 L22.9444444,22.9444444 L5.05555556,22.9444444 L5.05555556,5.05555556 Z M10.2701904,10.8888889 L9.93057673,9.70497662 L10.8888889,8.93911492 L9.70841667,8.93911492 L9.34849393,7.77777778 L8.9585356,8.93911492 L7.77777778,8.93911492 L8.7172434,9.68793771 L8.34741797,10.8618874 L9.31799714,10.1578984 L10.2701904,10.8888889 Z M10.2701904,15.5555556 L9.93057673,14.3716433 L10.8888889,13.6057816 L9.70841667,13.6057816 L9.34849393,12.4444444 L8.9585356,13.6057816 L7.77777778,13.6057816 L8.7172434,14.3546044 L8.34741797,15.528554 L9.31799714,14.8245651 L10.2701904,15.5555556 Z M10.2701904,20.2222222 L9.93057673,19.03831 L10.8888889,18.2724483 L9.70841667,18.2724483 L9.34849393,17.1111111 L8.9585356,18.2724483 L7.77777778,18.2724483 L8.7172434,19.021271 L8.34741797,20.1952207 L9.31799714,19.4912318 L10.2701904,20.2222222 Z M12.0555556,8.94444444 L12.0555556,9.72222222 L20.6111111,9.72222222 L20.6111111,8.94444444 L12.0555556,8.94444444 Z M12.0555556,13.6111111 L12.0555556,14.3888889 L20.6111111,14.3888889 L20.6111111,13.6111111 L12.0555556,13.6111111 Z M12.0555556,18.2777778 L12.0555556,19.0555556 L20.6111111,19.0555556 L20.6111111,18.2777778 L12.0555556,18.2777778 Z" id="Rectangle-205" fill="#EDEEEF" opacity="0.25"></path>
+                        </g>
+                    </g>
+                    <path d="M94.9984345,14.5297337 L77,14.5297337 L77,26.2954952 L94.9984345,26.2954952 L94.9984345,14.5297337 Z M94.9676737,13.0028759 C94.9642286,12.2791232 94.5098807,12.1834936 93.6002059,12.1392294 L86.3114236,12.1392294 C85.7186432,12.1392294 84.8899057,11.7995197 84.4701889,11.3845092 L83.8329125,10.754934 C83.4129818,10.3397096 82.7973162,10 81.9916778,10 L78.5092263,10 C77.7566266,10 77,10.5633038 77,11.1625792 L77,13.8506129 L95,13.8506129 L94.9676737,13.0028759 Z" id="Notes" fill="url(#linearGradient-13)" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

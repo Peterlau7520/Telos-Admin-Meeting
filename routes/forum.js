@@ -52,9 +52,6 @@ router.get('/getForum', (req, res) => {
 
             if(post.comments){
                 post.comments.sort(compareDate)
-
-
-
             }
             forEach(post.comments, function(comment, key){
                     var today = new Date();
