@@ -121,10 +121,9 @@
                                         <tr>
                                             <td>
                                                 <span class="forum-table-number" id="new_{{forum_key}}"></span>
-                                                <span class="forum-table-text comment_box forum-table-no" id="{{forum_key}}"><script>document.write({{{forum_key}}} + 1)</script>    
+                                                <span class="forum-table-text comment_box forum-table-no" id="{{forum_key}}"><script>document.write({{{forum_key}}} + 1)</script>      
                                                </span>
-                                               <span class="forum-table-text comment_box forum-text" id="{{forum_key}}" display: inline-block>
-                                               {{content}}
+                                               <span class="forum-table-text comment_box forum-text" id="{{forum_key}}" display: inline-block>  {{content}}
                                                     <p class="comment_box" id="{{forum_key}}">從 | Posted by: {{account}}</p>
                                                     </span>
                                             </td>
@@ -303,7 +302,6 @@ $('#commentModal').on('hidden.bs.modal', function (e) {
 
 
     $(document).ready(function () {
-        console.log('parent-circle')
        $(".parent-circle").hide();
         var refresh = true;
 /*if(refresh){
@@ -313,7 +311,6 @@ setTimeout(function(){
 }*/
      var forum = '{{{stringify forum}}}'
      forum = JSON.parse(forum);
-     console.log(forum, 'forum')
      var socket =  io.connect('http://localhost:4000')
          
         socket.on('post', function(data) {
@@ -400,7 +397,6 @@ setTimeout(function(){
             const value = $('.like_comment').attr('id')
             var v1 = $(this).children().attr('id')
             $(this).css("color", "blue")
-            console.log(v1++)
             $(this).children().html(v1++)
             const commentId= e.target.id
             event.preventDefault();
@@ -426,13 +422,11 @@ setTimeout(function(){
          })
          var userLike = false 
            $(document).on("click",".like_post", function(e){
-            console.log('testing')
             if(!userLike){
              $(this).removeClass('like_post')
             $(this).toggleClass('animating');
             const value = $('.like_post').attr('id')
             var v1 = $(this).children().attr('id')
-            console.log(v1++)
             $(this).children().html(v1++)
             const postId= e.target.id
             event.preventDefault();
@@ -450,6 +444,7 @@ setTimeout(function(){
                         })
             
             }
+            
         })
         $(".add_new_post").click(function(event){
             event.preventDefault();
@@ -478,12 +473,10 @@ setTimeout(function(){
         }
         })
         $(document).on("click",".report_comment", function(e){
-            console.log("called")
             $("#outputReport").html('<input type="hidden" name="commentId" value="'+event.target.id+'" /> ')
             $("#reportComment").modal();
         })
         $(document).on("click",".report_post", function(e){
-            console.log("called")
             $("#outputPost").html('<input type="hidden" name="postId" value="'+event.target.id+'" /> ')
             $("#reportPost").modal();
                     })
@@ -494,7 +487,6 @@ setTimeout(function(){
             const data= originalData[event.target.id]   
             var liked = originalData[event.target.id].likedBy
             if(liked.indexOf(user) > -1){
-              console.log('testing like')
                 userLike = true
             }
             
@@ -520,7 +512,6 @@ setTimeout(function(){
            html = html + '<div class="fa-count inc-count" id="'+length+'">'+length+'</div></div></a></span><span class="commentContent">'+com.content+'</span> <br>';
               $("#comments").append(html)
             });
-            console.log(data, "data")
         })
 $(".like_post").on('click touchstart', function(){
   $(this).toggleClass('animating');

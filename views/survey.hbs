@@ -294,7 +294,6 @@
         const html = `<p class="close-calendar">Confirm | 確認</p>`;
         $(".flatpickr-calendar").append(html);
         $(".close-calendar").click(function(){
-            console.log('in')
              $(".flatpickr-calendar").removeClass("open", 1000, "easeInBack" );
         })
         function get_list(data) {
@@ -510,12 +509,8 @@
             $("#popupError").text("");
             var equalopt = false;
                 $.each(optionEng, function(data, key){
-                
-                    console.log(optionChn[data].value, 'chn');
-                    console.log(optionEng[data].value, 'eng');
                     if(!isNaN(optionChn[data].value) || !isNaN(optionEng[data].value)){
                         if(optionChn[data].value !== optionEng[data].value){
-                            console.log('false')
                             $("#popupError").text("Options value must be same");  
                             equalopt = true     
                         }
@@ -532,13 +527,10 @@
            var questionChn = $("#row0 :input[name*='questionChn']").val();
            var questionEng = $("#row0 :input[name*='question']").val();
            if(questionChn && questionEng){
-            console.log(questions.length)
             questions.push({"questionEng": questionEng,"questionChn":questionChn, "options": detail})
             i++;
-            console.log(questions)
             $("#floor_model").modal('hide');
            
-            //console.log(questions, 'questions')
             engList = ['']
             chnList = ['']
             optionId = 0
@@ -580,7 +572,6 @@
            } 
             }
               // else{
-         //   console.log("invalid")
        // }
         })
         $(document).on('click','#optionAdd',function(event){
@@ -989,9 +980,7 @@
         if(cardData){
         cardData = JSON.parse(cardData);
         }
-        console.log(cardData, "cccccccccccc")
         function card_modal(blockdata){
-            console.log(blockdata)
             const optionsDetailsChnAndEng = [];
             
             var html = `<div class="modal-content ModelStyle" style="background-color: #f7f7f7;">` +
@@ -1004,7 +993,6 @@
 
             if(blockdata.question){
                 blockdata.question.forEach(function(opt, indexQues){
-                console.log(opt);
                 var allOptionsDetails = '';
                 var eachOptionDetail = '';
                 for(var j = 0; j < opt.optionIds.length; j++){
@@ -1047,19 +1035,16 @@
                         return html;
         }   
 function buildCanvas(settings){
-    console.log(settings)
     if(settings.question){
     settings.question.forEach(function(opt, indexQues){
         var dataChart = []
         var dataLable = []
         opt.optionIds.forEach(function(optChild, indexQues){
-            console.log(optChild, "optChild")
             dataChart.push(optChild.totalUsersAnswered)
             dataLable.push(optChild.optionNameEn + ' | ' + optChild.optionNameChn )
         })
         var graph = 'myChart' + indexQues
         var ctx = document.getElementById(graph).getContext('2d');
-        console.log(dataLable, "dataLable")
 var myPieChart = new Chart(ctx,{
     type: 'pie',
     data : {
@@ -1185,17 +1170,15 @@ var myPieChart = new Chart(ctx,{
           $(document).on('click','.view-pdf',function(event){
             var id = event.target.id
             var modeldata = cardData[id];
-            console.log(modeldata, "modeldatamodeldatamodeldatamodeldata")
             var modelhtml = card_modal(modeldata);
                 $("#floor_model .modal-dialog").html(modelhtml);
                 $("#floor_model").modal();
                 //buildCanvas(modeldata)
                 if(modeldata.effectiveTo != "expired"){
-                    console.log("neww ")
+                    console.log("no canvas")
                 }else{
                 buildCanvas(modeldata)
             }
-                console.log("hereeeee")
           })
           
          $(document).on('click','#submit',function(event){

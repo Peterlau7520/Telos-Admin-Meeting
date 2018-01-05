@@ -317,23 +317,6 @@
                                                             </table>
                                                         </div>
                                                         <div class="clearfix"></div>
-                                                        <!--<div class="form-group col-sm-6">
-                                                            <label class='custom_label'>POll Results</label>
-                                                            <table class="table table-bordered table_custom_Wrapper">
-                                                                <tr>
-                                                                    <th>
-                                                                        <label>ID</label>
-                                                                    </th>
-                                                                    <th>
-                                                                        <label>Document name</label>
-                                                                    </th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>Agends.pdf</td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>-->
                                                         <div class="form-group col-sm-6">
                                                         </div>
                                                     </form>
@@ -493,23 +476,6 @@
                                                             </table>
                                                         </div>
                                                         <div class="clearfix"></div>
-                                                        <!--<div class="form-group col-sm-6">
-                                                            <label class='custom_label'>POll Results</label>
-                                                            <table class="table table-bordered table_custom_Wrapper">
-                                                                <tr>
-                                                                    <th>
-                                                                        <label>ID</label>
-                                                                    </th>
-                                                                    <th>
-                                                                        <label>Document name</label>
-                                                                    </th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>Agends.pdf</td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>-->
                                                         <div class="form-group col-sm-6">
                                                         </div>
                                                     </form>
@@ -612,13 +578,6 @@
                         <textarea type="datetime-local" name="summaryChn" id="summary_chinese" class="form-control"></textarea>
                     </div>
                     <div class="clearfix"></div>
-                    <!-- <div class="form-group col-sm-6">
-                        <label>投票選項 | VOTING OPTION</label>
-                            <div class="input_fields_wrap voting_opt1">
-                                <button class="add_field_button1 btn btn-info btn-fill">Add Options/增加選項</button>
-                                    <div><input style="display:flex; border-radius: 0px;" type="text" name="option" id="option" placeholder="E.g. Yes/是" required></div>
-                            </div>
-                    </div> -->
                     <div class="form-group col-sm-6">
                         <label>VOTING OPTION | 投票選項</label>
                         <br/>
@@ -726,44 +685,6 @@
         var hd = $("#customMainComponent").height()  
         $("#sidebarMenu").css({"min-height":hd})
     }
-/*var optionEdit = []
-function edit_poll(event){
-            var parentId = event.target.parentElement.id;
-            var childId = event.target.id;
-            var originalData = '{{{stringify meetingsData}}}';
-             originalData = JSON.parse(originalData);
-             console.log(originalData, 'originalData')
-            var poll = originalData[parentId].polls[childId]
-            var lastDate = new Date(originalData[parentId].createdAt)
-            lastDate = lastDate.setDate(lastDate.getDate() - 3);
-            lastDate = new Date(lastDate)
-            if(lastDate <= new Date){
-                ShowCustomDialog1('test alert data')
-            }else{
-                
-                $('#editpoll_form')[0].reset();
-                //$('.documents_wrapper1').reset();
-                $("#poll").modal();
-                $("#title").val(poll.pollName);
-                $("#id").val(poll._id);
-                $("#title_chinese").val(poll.pollNameChn);
-                $("#project_name").val(poll.projectName);
-                $("#project_name_chinese").val(poll.projectNameChn);
-                $("#summary").val(poll.summary);
-                $("#summary_chinese").val(poll.summaryChn);
-                $( ".voting_opt1 :input[name*='option']" ).remove();
-                $(".voting_opt1 .remove_field").remove();
-                var optionWrapper = $(".voting_opt1");
-                $.each(poll.options, function( index, value ) {
-                $(optionWrapper).append('<div class="input_div"><input type="text" value="'+value+'" name="option1"/><a href="#" class="remove_field">Remove</a></div>');
-            });
-            $.each(poll.fileLinks, function( index, value ) {
-                $('.added_files').append('<div name="'+value.name+'"><input type="text" value="'+value.name+'" name="fileLinks"/><a href="#" class="remove_file removebtn">Remove</a></div>');
-            });
-           /* $.each($(".voting_opt1 :input[name*='option']"), function(data, key){  
-              optionEdit.push($(this).val())
-              console.log($(this).val(), "value")
-            });*/
     $(document).ready(function () {
          hd();
         $("body").delegate(".flatpickr", "focusin", function(){
@@ -796,7 +717,6 @@ function edit_poll(event){
 
         $(".delete_meeting").click(function(event){
             event.preventDefault();
-            console.log("helll")
             const id = event.target.id
             ShowCustomDialog2("Are you sure you want to delete this meeting? | 確定刪除會議 ？", id)
             localStorage.removeItem("tab");
@@ -812,8 +732,6 @@ function edit_poll(event){
         }
         var originalData = '{{{stringify meetingsData}}}';
         originalData = JSON.parse(originalData);
-        console.log(originalData, 'originalData')
-
         $('.meeting_li').click(function (event) {
             $('.save_meeting').hide()
             $('#heading3').text('Upcoming Meeting | 近期會議')
@@ -823,7 +741,6 @@ function edit_poll(event){
             var ids = 'tab_'+originalData[id]._id;
             localStorage.setItem("tab", id);
             localStorage.setItem("divTab", ids);
-            console.log('meeting details', originalData[id], )
             var firstDate = new Date(originalData[id].startTime);
             var secondDate = new Date();
            // secondDate.setHours(firstDate.getHours());
@@ -854,7 +771,6 @@ function edit_poll(event){
 
         $(".up-meeting").click(function(event){
             var add = $( "#ispan" ).hasClass( "right-arrow-add" );
-            console.log(add, 'here')
             if(add){
                 $( "#ispan" ).removeClass( "right-arrow-add" );
             }else{
@@ -864,7 +780,6 @@ function edit_poll(event){
         })
          $(".down-meeting").click(function(event){
             var add = $( "#ispan2" ).hasClass( "right-arrow-add" );
-            console.log(add, 'add--')
              if(add){
                 $( "#ispan2" ).removeClass( "right-arrow-add" );
             }else{
@@ -898,7 +813,6 @@ function edit_poll(event){
     })
 //        
         $("#close_model2").click(function (event) {
-            console.log("called")
             $("#poll2").modal("hide");
             $(".add_pole").prop('disabled', true);
              $.each($(".voting_opt :input[name*='option']"), function(data, key){  
@@ -918,12 +832,10 @@ function edit_poll(event){
             //optionEdit=[]
             var optionEdit = []
             $.each($(".voting_opt1 :input[name*='option1']"), function(data, key){ 
-            console.log($(this).val(), 'edit value') 
               optionEdit.push($(this).val())
             });
               var newArray = optionEdit.filter(function(v){return v!==''});
               newArray = jQuery.unique(newArray)
-              console.log(newArray, 'newArray')
               var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif " style="    margin-left: 194px;"/>'
                 $("#loader3").append(html);
                //$('#options_field').val(JSON.stringify(newArray));
@@ -938,14 +850,6 @@ function edit_poll(event){
         $(add_option_button1).click(function(e){ //on add input button click
             e.preventDefault();
             $(optionWrapper1).append('<div class="input_div tls-Vot-box"><input class="pull-left tls-Voting-options" placeholder="E.g. Yes/是" type="text" name="option1"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
-            /* $.each($(".voting_opt1 :input[name*='option1']"), function(data, key){  
-                optionEdit.push($(this).val())
-            });
-              var newArray = optionEdit.filter(function(v){return v!==''});
-              newArray = jQuery.unique(newArray)
-              console.log(newArray, "newArray")
-            $(".voting_opt1").append(`<input type ="hidden" name="options" value=${newArray}>`)
-               index1 = index1 + 1*/
         }); 
         var docWrapper = $(".documents_wrapper")
         var add_document_button = $(".add_documents");
@@ -969,96 +873,18 @@ function edit_poll(event){
        
         $(document).on("click",".remove_field", function(e){ //user click on remove text
             e.preventDefault(); 
-            console.log('here')
             $(this).parent('div').remove();
         })
         var removedFilepolls = []
           $('.documents_wrapper').on("click",".remove_file", function(e){
-            console.log("pollfile reomved")
            //user click on remove text
             e.preventDefault(); 
             $(this).parent('div').remove();
            var name =  $(this).parent('div').attr('name');
             removedFilepolls.push(name)
-            console.log(removedFilepolls)
             $('.added_files').append(`<input type = "hidden" name="removedfiles" value=${removedFilepolls}>`)
         })
-        /*function edit_popup(data){
-            console.log(data, "hhhhhh")
-            var file = ''
-            if(data.fileLinks[0]){
-                console.log("yess")
-                file = data.fileLinks[0]
-            }
-            else{
-                console.log("nooo")
-                //$('.hide1').hide()
-                file = ''
-            }
-            var html = '<div class="div-wrapper" style="padding: 10px;">'+
-            '<h3 class= "heading">' + "Upcoming Meeting"+ '</h3>' + '                                        <button class=" btn btn-danger deleteMeeting deletebtn btn-danger" type="submit" id={{data._id}} data-id={{data._id}} data-time="">取消會議 | Delete Meeting</button>' + '<hr>' +
-            
-'                                <form role="form" enctype="multipart/form-data" name="edit_meeting_popup" id="edit_meeting_popup" action="/editMeeting" method="post">'+
-'                                    <div class="form-group col-sm-6">'+
-'                                        <label class="">取消會議 | Meeting Title</label>'+
-'                                        <input name="meeting_id" type="hidden" value="'+data._id+'">'+
-'                                        <input id ="title" type="text" class="form-control input_fields" name="title" value="'+data.title+'">'+
-'                                        <label class="">取消會議 | Meeting Chinese Title</label>'+
-'                                        <input id ="titleChn" type="text" class="form-control input_fields" name="titleChn" value="'+data.titleChn+'">'+
-'                                        <div id="" class=""></div>'+
-'                                    </div>'+
-'                                    <div class="form-group col-sm-6 text-right">'+
-'                                    </div>'+
-'                                    <div class="clearfix"></div>'+
-'                                    <div class="form-group col-sm-6">'+
-'                                        <label class=""> 取消會議 | Meeting Start Time</label>'+
-'                                        <input id ="" type="datetime-local" name="start_time" class="form-control input_fields_" value="'+data.start_time+'">'+
-'                                        <div id="" class=""></div>'+
-''+
-'                                    </div>'+
-'                                    <div class="form-group col-sm-6">'+
-'                                        <label class="">取消會議 | Meeting End Time</label>'+
-'                                        <input id =""  type="datetime-local" name="end_time" class="form-control input_fields" value="'+data.end_time+'">'+
-'                                        <div id="" class=""></div>'+
-''+
-'                                    </div>'+
-'                                    <div class="clearfix"></div>'+
-'                                    <div class="form-group col-sm-6">'+
-'                                        <label class="">取消會議 | Venue</label>'+
-'                                        <input t id ="" type="text" class="form-control input_fields" name="venue" value="'+data.venue+'">'+
-'                                        <div id="" class=""></div>'+
-'                                    </div>'+
-'                                    <div class="form-group col-sm-6">'+
-'                                        <label class="">取消會議 | Agenda</label>'+
-'                                        <table class="table table-bordered table_custom_Wrapper">'+
-'                                            <tr>'+
-'                                                <th>'+
-'                                                    <label>ID</label>'+
-'                                                </th>'+
-'                                                <th>'+
-'                                                    <label>Document name</label>'+
-'                                                </th>'+
-'                                            </tr>'+
-'                                            <tr>'+
-'                                                <td id="hide1" class="hide1">1</td>'+
-                                                    '<input name="fileLinks" type="hidden" value="'+file.name+'" class="hide1">'+
-'                                                <td id="hide">'+ file.name + '                                        <button  class="remove_file removebtn hide1" type="button" id="'+ file.name + '"> X </button>'+
-'</td>'+
-'                                            </tr>'+
-'                                        </table>'+
-'                                         <div id="removedfiles">'+ '</div>' +
-'                                        <div class = "add" id= "addAgenda">'+ '<input name="fileField" id ="addFile" type="file" class="form-control input_fields  accept="application/pdf"/>' + '</div>'+
-'                                    </div>'+
-'                                    <div class="clearfix"></div>'+
-'                                        <button  class=" btn save_meeting savebtn" type="submit" data-id=""> 儲存 | Save</button>'+
-'                                        <button  class="btn cancel_meeting savebtn" type="button" data-id="">取消 | Cancel</button>'+
-'                                </form>'+
-'                            </div>';
-                return html; 
-        }*/
-
         function edit_popup(data){
-            console.log(data.startTime)
             var html = '<div class="div-wrapper" style="padding: 10px;">'+
             '<h3 class= "heading">' + "Upcoming Meeting | 近期會議"+ '</h3>' + '                                        <button class=" btn btn-danger deleteMeeting deletebtn btn-danger" type="submit" id={{data._id}} data-id={{data._id}} data-time="">Delete Meeting | 取消會議</button>' + '<hr>' +
             
@@ -1150,44 +976,13 @@ function edit_poll(event){
         $(document).on('click','.remove_file',function(event){
             event.preventDefault();
             var removedfile = event.target.id
-            console.log(removedfile)
             var html = '<input type="hidden" name="removedfiles" value="'+removedfile+'"/> '
             $('#removedfiles').append(html)
            $('#hide').hide()
            $('#hide1').hide()
            $('#addFile').show()
         })
-       /* $(".edit_meeting").click(function () {
-            console.log('here')
-             var modelhtml = edit_popup();
-             console.log(modelhtml)
-                $("#edit_model .modal-dialog").html(modelhtml);
-                $("#edit_model").modal();
-            var index = $(this).data('id');
-            // current date
-            var newDate = new Date();
-            //newDate = newDate.getFullYear()+"-"+(newDate.getMonth()+1)+"-"+newDate.getDate();
-            //date with +3days
-            var time = $(this).data('time');
-            var someDate = time ;
-
-            //someDate.setDate(someDate.getDate() + 3); 
-            //var dateFormated = someDate.toISOString().substr(0,10);
-            if(newDate > someDate) {
-                var classvar = '.display_meetings_detail_' + index
-                var clasvarforinputfield = '.input_fields_' + index
-                $(clasvarforinputfield).show()
-               
-                /*$("#addAgenda").append(html)
-                $(classvar).hide()
-                $('.save_meeting').show()
-                $(this).hide()    
-            } else {
-                alert('You can not edit this');
-            }*/
-            
-       // }
-   // })*/
+       
         $(document).on('click','.cancel_meeting',function(event){
             $("#edit_model").modal('hide');
         })
@@ -1196,21 +991,12 @@ function edit_poll(event){
             var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif " style="    margin-left: 194px;"/>'
             $("#loading1").append(html);
             $(".edit_meeting1").prop('disabled', true);
-            //var index = $(this).data('id');
-            //var classvar = '.display_meetings_detail_' + index
-            //var clasvarforinputfield = '.input_fields_' + index
-            //$(classvar).show()
-            //$(clasvarforinputfield).hide()
-            //$('.save_meeting').hide()
-            //$('.edit_meeting').show()
             var meetingform = $("#edit_meeting_popup").serializeArray();
             var meetingData = convertSerializeArrayToJson(meetingform);
-            console.log('originalData', meetingData);
 
         });
     
         $('.add_pole').click(function(event) {
-            console.log(event.target.id)
             const id = event.target.id
             $("#poll2").modal();
             var html = '<input type="hidden" name="meeting_id" value="'+id+'"/> '
@@ -1230,12 +1016,10 @@ function edit_poll(event){
             var originalData = '{{{stringify meetingsData}}}';
              originalData = JSON.parse(originalData);
             var poll = originalData[parentId].polls[childId]
-            console.log(originalData[parentId], "orggggggg")
             var lastDate = new Date(originalData[parentId].startTime)
             var meeting_title = originalData[parentId].title
             //lastDate = lastDate.setDate(lastDate.getDate() + 3);
             //lastDate = new Date(lastDate)
-            console.log(lastDate, "lastDate")
             var diff = lastDate - new Date()
             var seconds = diff / 1000;
             var minutes = (diff / 1000) / 60;
@@ -1311,11 +1095,9 @@ function edit_poll(event){
             ShowDialogBox2('Warning',data,'Ok', 'GoToAssetList',null, id);
             }
             function ShowDialogBox2(title, content, btn1text, functionText, parameterList, id) {
-                console.log("id", id)
                 const meeting_id = id
                 var btn1css;
                 var btn2css;
-                console.log(btn1text, 'btn1text')
                 if (btn1text == '') {
                     btn1css = "hidecss";
                 } else {
@@ -1337,7 +1119,6 @@ function edit_poll(event){
                                         "class": btn1css,
                                         click: function (event) {
                                            const HostName = "http://localhost:4000"
-                                           console.log("called")
                                             $.ajax({
                                                 url: HostName + "/deleteMeeting",
                                                 data: {meetingId: meeting_id},
