@@ -1,6 +1,71 @@
 <!-- Body-->
 
 <body>
+<style>
+@media screen and (max-width: 480px){
+  #hide{
+    display: none;
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 400px){
+  #show{
+    display: block;
+  }
+}
+@media (max-height: 1099px){
+  .intro-app-showcase {
+      padding: 0px 0;
+      display: inline-block;
+      margin: 50px 0;
+  }
+}
+
+@media only screen and (max-width: 812px)  {
+  
+  .aws-img-mobile{
+    content:url("assets/img/landing-page/security-flow-chinese-phone.png") !important;
+    background-size: 134%;
+  }
+ 
+}
+
+@media only screen and (max-width: 767px)  {
+  .gadget-ios{
+    width:auto !important;
+  }
+  .gadget-android{
+    width:auto !important;
+  }
+  .gadget-windows{
+    width:auto !important;
+  }
+  .intro-app-showcase{
+    padding-top: 0px;
+  }
+}
+ 
+.intro-app-showcase{
+  height: 100%;
+}
+.aws-img{
+    content:url("assets/img/landing-page/security-flow-chinese.png");
+    background-size: 134%;
+  }
+.intro-app-showcase .platform-swith>a {
+    height: 30px;
+    padding: 0 5px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: .1em;
+    line-height: 30px;
+    text-decoration: none;
+    width: 105px;
+    margin: 0 0px;
+    display: inline-block;
+    box-sizing: content-box;
+  }
+  </style>
   <div class="loading-screen">
     <div class="inner">
       <div class="preloader-logo" style="width: 90px;"><img class="attachment-full size-full" src="assets/img/telos.png"></div>
@@ -173,7 +238,7 @@
       <section class="fw-section layout-full-equal section-no-gap padding-top-0.5x overflow-hidden">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-right" style="background: url('assets/img/landing-page/noticeboard(w)-2.svg') 50% 50% no-repeat;"></div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-right" style="background: url('assets/img/landing-page/noticeboard(w)-2.png') 50% 50% no-repeat;    height: 500px;"></div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-left">
               <div class="hidden-sm hidden-xs" style="height: 96px;"></div>
               <div class="visible-sm" style="height: 60px;"></div>
@@ -220,7 +285,7 @@
       <section class="fw-section layout-full-equal section-no-gap overflow-hidden">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-push-6 col-md-push-6" data-aos="fade-left" style="background: url('assets/img/landing-page/upcomingmeeting(w)-2.svg') 50% 50% no-repeat;"></div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-push-6 col-md-push-6" data-aos="fade-left" style="background: url('assets/img/landing-page/upcomingmeeting(w)-2.png') 50% 50% no-repeat;    height: 500px;"></div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-pull-6 col-md-pull-6" data-aos="fade-right">
               <div class="hidden-sm hidden-xs" style="height: 96px;"></div>
               <div class="visible-sm" style="height: 60px;"></div>
@@ -256,7 +321,7 @@
       <section class="fw-section layout-full-equal section-no-gap padding-top-0.5x overflow-hidden">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-right" style="background: url('assets/img/landing-page/vote(w)-2.svg') 50% 50% no-repeat;"></div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-right" style="background: url('assets/img/landing-page/vote(w)-2.png') 50% 50% no-repeat;    height: 500px;"></div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-left">
               <div class="hidden-sm hidden-xs" style="height: 96px;"></div>
               <div class="visible-sm" style="height: 60px;"></div>
@@ -302,7 +367,7 @@
       <section class="fw-section layout-full-equal section-no-gap overflow-hidden">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-push-6 col-md-push-6" data-aos="fade-left" style="background: url('assets/img/landing-page/forum(w)-2.svg') 50% 50% no-repeat;"></div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-push-6 col-md-push-6" data-aos="fade-left" style="background: url('assets/img/landing-page/forum(w)-2.png') 50% 50% no-repeat;    height: 500px;"></div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-pull-6 col-md-pull-6" data-aos="fade-right">
               <div class="hidden-sm hidden-xs" style="height: 96px;"></div>
               <div class="visible-sm" style="height: 60px;"></div>
@@ -358,7 +423,7 @@
       </section>
 
       <!-- security flow -->
-      <section class="fw-section with-parallax padding-top-10x padding-bottom-12x" data-aos="fade-up" style="background-image: url(assets/img/landing-page/security-flow-chinese-phone.svg);">
+      <section class="fw-section with-parallax aws-img aws-img-mobile" data-aos="fade-up" style="background-size: 100% 100%;">
       </section>
 
       <!-- admin section -->
@@ -453,11 +518,11 @@
               </div>
             </div>
             <div class="col-md-4">
-              <div class="gadget-ios active" data-platform="#ios"><img src="assets/img/landing-page/noticeboard-admin.svg" alt="Ios">
+              <div class="gadget-ios active" data-platform="#ios"><img src="assets/img/landing-page/noticeboard-admin.png" alt="Ios">
               </div>
-              <div class="gadget-android" data-platform="#android"><img src="assets/img/landing-page/add-poll-admin.svg" alt="Android">
+              <div class="gadget-android" data-platform="#android"><img src="assets/img/landing-page/add-poll-admin.png" alt="Android">
               </div>
-              <div class="gadget-windows" data-platform="#windows"><img src="assets/img/landing-page/survey-admin.svg" alt="Windows">
+              <div class="gadget-windows" data-platform="#windows"><img src="assets/img/landing-page/survey-admin.png" alt="Windows">
               </div>
             </div>
           </div>

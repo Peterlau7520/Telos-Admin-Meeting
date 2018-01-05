@@ -148,6 +148,7 @@ router.post('/likeComment', (req,res) => {
 })
 
 router.post('/likePost', (req,res) => {
+    console.log("post liked")
     const postId = req.body.postId;
     Post.update({_id: postId
              }, {

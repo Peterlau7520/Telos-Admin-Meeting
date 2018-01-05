@@ -183,10 +183,12 @@ input:focus {
   top: 0;
   height: 100vh; }
 .loader{
-   margin-top: -41px;
-    position: absolute;
-    margin-left: 77%;
-
+    height: 49px;
+    width: 47px;
+    float: right;
+    position: relative !important;
+    margin-top: 6px;
+    margin-left: -96px;
 }
 .sidebar,
 body > .navbar-collapse {

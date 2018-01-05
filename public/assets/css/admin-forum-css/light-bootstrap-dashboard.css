@@ -14,14 +14,6 @@
  
  */
 /*      light colors         */
-
-
-
-
-
-
-
-
 /*css open*/
 .add-meeting-btn{
   bottom: 50px;
@@ -64,27 +56,6 @@
     box-shadow: none;
     width: 94%;
 }
-
-/*.ModelStyle .RemPadRt::before {
-    height: 100%;
-    width: 21px;
-    content: "";
-    position: absolute;
-    left: -6px;
-    top: -15px;
-    background: url(../../assets/img/listline.png);
-    background-repeat-x: no-repeat;
-}*/
-/*.ModelStyle .RemPadRt::before {
-    height: 100%;
-    width: 21px;
-    content: "";
-    position: absolute;
-    left: -6px;
-    top: -15px;
-    background: url(../../assets/img/listline.png);
-    background-repeat-x: no-repeat;
-}*/
 .ModelStyle .ConfirmBtn {
     background: none;
     border: 1px solid #ccc;
@@ -123,15 +94,6 @@
   position: relative;
   z-index: 10;
 }
-/*.vr-line::after {
-    height: 180px;
-    width: 1px;
-    content: "";
-    position: absolute;
-    left: 32px;
-    top: 53px;
-    background-color: #e3e3e3;
-}*/
 .NewContent input, .NewContent select {
   border-radius: 0;
   height: 34px;
@@ -198,18 +160,6 @@
     font-weight: normal !important;
     padding: 3px 0 !important;
 }
-
-/*.ModelStyle .RemPadRt::before {
-    height: 100%;
-    width: 100px;
-    content: "";
-    position: absolute;
-    left: -17px;
-    top: -21px;
-    background: url(../../assets/img/listline.png);
-    background-size: 40px;
-    background-repeat-x: no-repeat;
-}*/
 .RemPad {
   padding-left: 0;
   padding-right: 0;
@@ -287,8 +237,7 @@
     line-height: 32px;
     font-size: 12px;
     position: relative;
-}
-    
+}   
 .addbtn {
     float: right;
     margin-right: 6px;
@@ -305,15 +254,7 @@
     font-size: large;
     margin-left: 10px;
 }
-
 /*css close*/
-
-
-
-
-
-
-
 @keyframes spin {
   from {
     transform: rotate(0deg); }
@@ -738,7 +679,6 @@ body > .navbar-collapse {
     background: -ms-linear-gradient(top, #9368E9 0%, #943bea 100%);
     background: linear-gradient(to bottom, #9368E9 0%, #943bea 100%);
     background-size: 150% 150%; }
-
 .main-panel {
   background: rgba(203, 203, 210, 0.15);
   position: relative;
@@ -897,7 +837,6 @@ body > .navbar-collapse {
       border-top-color: #FFFFFF; }
   .btn-warning .caret {
     border-top-color: #FF9500; }
-
 .btn-danger {
   border-color: #FF4A55;
   color: #FF4A55; }
@@ -3256,7 +3195,6 @@ body > .navbar-collapse {
  .modal-footer{
   text-align: unset;
  }
- 
  textarea{
   resize:none;
  }
@@ -3281,7 +3219,6 @@ body > .navbar-collapse {
   vertical-align: top;
   font-size: 29px;
   font-weight: 700;
-
 }
 .thumb-span{
   display: inline-block;
@@ -3358,10 +3295,7 @@ body > .navbar-collapse {
     width:58%;
    }
 }
-
-
 /*ggggggggggg*/
-
 .like-container{filter: url('#filter');}
 .like-cnt{  
   position: absolute; 
@@ -3383,7 +3317,6 @@ body > .navbar-collapse {
 .gp-footer{position: fixed; color: #fff; bottom: 10px; left: 50%; font-family: georgia; font-style: italic; transform: translateX(-50%);}
 .gp-footer .soc_icons{display: inline-block; color: #ddca7e; margin: 0px 0px;}
 
-
 ::-moz-selection { background: transparent;}
 ::selection {background: transparent;}
 
@@ -3398,7 +3331,6 @@ body > .navbar-collapse {
     url(https://example.com/MaterialIcons-Regular.woff) format('woff'),
     url(https://example.com/MaterialIcons-Regular.ttf) format('truetype');
 }
-
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -3423,8 +3355,6 @@ body > .navbar-collapse {
   /* Support for IE. */
   font-feature-settings: 'liga';
 }
-
-
 /**/
 .heart {
   cursor: pointer;
@@ -3439,7 +3369,6 @@ body > .navbar-collapse {
  .heart:hover {
   background-position:right;
  }
-
  .animating {
   animation: heart-burst .8s steps(28) 1;
  }
@@ -3448,8 +3377,6 @@ body > .navbar-collapse {
  from {background-position:left;}
  to { background-position:righ;}
  }
-
-
 /*dfddddd*/
 
 .post-thumb-icon{

@@ -859,7 +859,6 @@
             setTimeout(()=>{hd();},500)
         })
         $(".panel-headOpen").click(function(){
-            console.log('here')
             setTimeout(()=>{hd();},500)
         })
         //Add documents
@@ -876,7 +875,6 @@
             var optionWrapper         = $(".input_fields_wrap_add"); //Fields wrapper
             var add_option_button      = $(".add_field_button_add"); //Add button ID
             $(add_option_button).click(function(e){ //on add input button click
-                console.log('here')
                 e.preventDefault();
                     $(".input_fields_wrap_add").append('<div class="tls-Vot-box"><input class="tls-Voting-options" type="text" name="option" placeholder="E.g. Yes/是" /><a href="#" class="remove_field">Remove</a></div>'); //add input box
 
@@ -921,7 +919,6 @@
         $("#save").click(function(event){
             const startTime = $('#startTime').val()
             const endTime = $('#pollEndTime').val()
-            console.log(startTime, endTime)
             /*var timeDiff = Math.abs(startTime.getTime() - endTime.getTime());
             var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
             alert(diffDays);*/
@@ -950,7 +947,6 @@
                 }
                })
         $(document).on("click",".panel-headOpen", function(e){
-            console.log('here')
             setTimeout(()=>{hd();},500)
         })
         $("#close_model").click(function (event) {
@@ -976,9 +972,7 @@
             if(validated === true){
                 return false
             }
-            for (var pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-            }
+            
             var option = []
             $.each($(".input_fields_wrap_add :input[name*='option']"), function(data, key){  
               option.push($(this).val())
@@ -987,21 +981,17 @@
             var file = []
             var filesName = []
             $.each($("#documents_file :input[type='file']"), function(data, key){ 
-                console.log(this.files[0])
                 var fileData = this.files[0]
                 filesName.push(this.files[0].name.replace(/ /g,''))
               file.push(fileData)
             });
             formData.append('files', JSON.stringify(file))
             formData.append('filesName', filesName)
-            console.log(file,filesName, "files")
             form_json["option"] = option
             form_json["files"] = file
             form_json["filesName"] = filesName
-            console.log(form_json, "foe")
             polls_array.push(form_json);
             var length = polls_array.length
-            console.log(JSON.stringify(polls_array), "poll")
             $("#poll_json").val(JSON.stringify(polls_array));
             $("#poll").modal("hide");
             var html ='';
@@ -1077,7 +1067,6 @@
 
 var originalData = '{{{stringify meetingsData}}}';
         originalData = JSON.parse(originalData);
-        console.log(originalData, 'originalData')
          function convertSerializeArrayToJson(serilizeArray) {
             var form_json = {};
             serilizeArray.forEach(function (obj) {
@@ -1098,7 +1087,6 @@ var originalData = '{{{stringify meetingsData}}}';
             $('#headingBottom2').html('')
             
             var id = event.target.id
-            console.log(id)
              var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
             
             var ids = 'tab_'+originalData[id]._id;
@@ -1118,8 +1106,6 @@ var originalData = '{{{stringify meetingsData}}}';
             if(hours < 0){
                 hours =0;
             }
-            console.log(firstDate, 'firstDate')
-            console.log(secondDate, 'secondDate')
             //var hours = Math.round(Math.abs(firstDate - secondDate) / 36e5);
             hours = 'Hours remaining to edit or delete polls | 剩下的時間可以取消或修改投票: ' + hours;
             $( "#endhour" ).text(hours)
@@ -1181,8 +1167,6 @@ var originalData = '{{{stringify meetingsData}}}';
                 }
 
             });
-            
-
     })
 //        
         $("#close_model2").click(function () {
@@ -1207,7 +1191,6 @@ var originalData = '{{{stringify meetingsData}}}';
             });
               var newArray = optionEdit.filter(function(v){return v!==''});
               newArray = jQuery.unique(newArray)
-              console.log(newArray, 'array')
                //$('#options_field').val(JSON.stringify(newArray));
               $(".voting_opt1").append('<input type ="hidden" name="options" value="'+newArray+'">')
 
@@ -1327,7 +1310,6 @@ var originalData = '{{{stringify meetingsData}}}';
 
             var data = originalData[event.target.id]
              var modelhtml = edit_popup(originalData[event.target.id]);
-             console.log('edit', modelhtml)
               $("#edit_model .modal-dialog").html(modelhtml);
                 $("#edit_model").modal();
                  $('#addFile').hide()
@@ -1335,7 +1317,6 @@ var originalData = '{{{stringify meetingsData}}}';
         $(document).on('click','.remove_file',function(event){
             event.preventDefault();
             var removedfile = event.target.id
-            console.log(removedfile)
             var html = '<input type="hidden" name="removedfiles" value="'+removedfile+'"/> '
             $('#removedfiles').append(html)
            $('#hide').hide()
@@ -1353,13 +1334,10 @@ var originalData = '{{{stringify meetingsData}}}';
             $(".edit_meeting1").prop('disabled', true);
             var meetingform = $("#edit_meeting_popup").serializeArray();
             var meetingData = convertSerializeArrayToJson(meetingform);
-            console.log('originalData', meetingData);
-
         });
 
         //for add pole
         $('.add_pole').click(function(event) {
-            console.log(event.target.id)
             const id = event.target.id
             $("#poll2").modal();
             var html = '<input type="hidden" name="meeting_id" value="'+id+'"/> '
@@ -1386,7 +1364,6 @@ var originalData = '{{{stringify meetingsData}}}';
             if(lastDate <= new Date()){
                 ShowCustomDialog1('you are not allowed to edit the poll.')
             }else{
-                console.log(poll.pollName, 'edit name')
                 $('#editpoll_form')[0].reset();
                 //$('.documents_wrapper1').reset();
                 $("#poll_edit").modal();
