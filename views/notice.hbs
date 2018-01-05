@@ -1,10 +1,19 @@
 <!--[if lt IE 9]>
+<head>
+
 <script src="es5-shim.min.js"></script>
 <![endif]-->
 <!--  Survey CSS 1    -->
 <link href="assets/css/admin-survey-css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 <!--  Survey CSS 2     -->
-<link href="assets/css/admin-survey-css/demo.css" rel="stylesheet" />
+
+<link href="assets/css/admin-survey-css/demo.css" rel="stylesheet" />  
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="assets/css/flatpickr.min.css"/>
+    <script src="assets/js/flatpickr.js"></script>
+   </head>
 <style>
     .datetimepicker {
         background-color: #FFFFFF;border: 1px solid #E3E3E3;border-radius: 4px;color: #565656;padding: 8px 12px;"
@@ -147,7 +156,7 @@
                                         </div>
                                     </div>
                                     <input type="hidden" name="floor_info" id="floor_info"/>
-                                    <div id="loading"></div>
+                                    <div id="loading"></div><br/><br/><br/>
                                     <input type = "hidden" onclick="hiddenClass()" class = "submitHidden  btn-info btn-fill pull-right" />
                                     <button type="submit" class="btn submitNotice submit-space btn-info btn-fill pull-right">Confirm and Add Notice | 確認并添加</button>
                                     <div class="clearfix"></div>
@@ -182,7 +191,7 @@
                                             {{/each}}
                                             <td>{{this.endTime}}</td>
 
-                                            <td> <a href="/deleteNotice?id={{value._id}}"> x </a> </td>
+                                            <td class="deleteNotice" id="{{value._id}}"> x </td>
                                         </tr>
                                         {{/each}}
                                         {{else}}
@@ -211,7 +220,7 @@
                     <ul>
                         <li>
                             <a href="/">
-                                Home | 主頁
+                                                            Home | 主頁
                             </a>
                         </li>
 
@@ -235,11 +244,17 @@
         
     </div>
 </div>
+<div id="dialog2" title="Alert message" style="display: none; ">
+                                                        <div class="ui-dialog-content ui-widget-content">
+                                                            <p>
+                                                                <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0"></span>
+                                                                <label id="lblMessage2" style="display: inherit;">
+                                                                </label>
+                                                            </p>
+                                                        </div>
+                                                    </div>   
 <script>
     $(document).ready(function () {
-
-  
-
         $(".flatpickr").flatpickr({
             enableTime: true,
             dateFormat: "m/d/YTh:i:K"
@@ -247,7 +262,6 @@
         const html = `<p class="close-calendar">Confirm | 確認</p>`;
         $(".flatpickr-calendar").append(html);
         $(".close-calendar").click(function(){
-            console.log('in')
              $(".flatpickr-calendar").removeClass("open", 1000, "easeInBack" );
         })
         function populate_modal_pdf() {
@@ -386,5 +400,64 @@
                  $(id).attr('checked', false);
             $("#floor_model").modal('hide');
         })
+           $(document).on('click','.deleteNotice',function(event){
+            ShowCustomDialog2("Are you sure you want to delete this meeting? | 確定刪除會議 ？", event.target.id)
+            })
+         function ShowCustomDialog2(data, id)
+            {
+            ShowDialogBox2('Warning',data,'Ok', 'GoToAssetList',null, id);
+            }
+            function ShowDialogBox2(title, content, btn1text, functionText, parameterList, id) {
+                const notice_id = id
+                var btn1css;
+                var btn2css;
+                if (btn1text == '') {
+                    btn1css = "hidecss";
+                } else {
+                    btn1css = "showcss";
+                }
+                $("#lblMessage2").html(content);
+                $("#dialog2").dialog({
+                    resizable: false,
+                    title: title,
+                    modal: true,
+                    width: '400px',
+                    height: 'auto',
+                    bgiframe: false,
+                    stack: true,
+                    buttons: [
+                                    {
+
+                                        text: btn1text,
+                                        "class": btn1css,
+                                        click: function (event) {
+                                           const HostName = "http://localhost:4000"
+                                            $.ajax({
+                                                url: HostName + `/deleteNotice?id=${notice_id}`,
+                                                type: 'GET',
+                                                
+                                            })
+                                             $(this).dialog("close"); 
+                                            var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif " style="    margin-left: 194px;"/>'
+                                             $("#loader").append(html);                                  
+                                              location.reload()
+                                            //$("#dialog1").dialog('close');
+                                           
+                                        }
+                                    },
+                                    {
+                                        text: "Cancel",
+                                        "class": btn1css,
+                                        click: function (event) {                                           
+                                             $(this).dialog("close");                                          
+                                            //$("#dialog1").dialog('close');
+                                           
+                                        }
+                                    },
+                                ]
+                });
+}
+
     });
+
 </script>
