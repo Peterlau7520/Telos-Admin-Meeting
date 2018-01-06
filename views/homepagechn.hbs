@@ -2,6 +2,9 @@
 
 <body>
 <style>
+body{
+      font-family: -webkit-body !important;
+}
 @media screen and (max-width: 480px){
   #hide{
     display: none;
@@ -23,8 +26,18 @@
 @media only screen and (max-width: 812px)  {
   
   .aws-img-mobile{
-    content:url("assets/img/landing-page/security-flow-chinese-phone.png") !important;
+    content:url("assets/img/landing-page/security-flow-chinese-phone.svg") !important;
     background-size: 134%;
+    padding-top: 25px;
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+  }
+  .mobile-show{
+    display: block;
+  }
+  .mobile-hide{
+    display: none;
   }
  
 }
@@ -47,10 +60,12 @@
 .intro-app-showcase{
   height: 100%;
 }
-.aws-img{
-    content:url("assets/img/landing-page/security-flow-chinese.png");
-    background-size: 134%;
-  }
+.mobile-show{
+  display: none;
+}
+.mobile-hide{
+  display: block;
+}
 .intro-app-showcase .platform-swith>a {
     height: 30px;
     padding: 0 5px;
@@ -238,7 +253,7 @@
       <section class="fw-section layout-full-equal section-no-gap padding-top-0.5x overflow-hidden">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-right" style="background: url('assets/img/landing-page/noticeboard(w)-2.png') 50% 50% no-repeat;    height: 500px;"></div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-right" style="background: url('assets/img/landing-page/noticeboard(w)-2.svg') 50% 50% no-repeat;    height: 500px;"></div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-left">
               <div class="hidden-sm hidden-xs" style="height: 96px;"></div>
               <div class="visible-sm" style="height: 60px;"></div>
@@ -285,7 +300,7 @@
       <section class="fw-section layout-full-equal section-no-gap overflow-hidden">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-push-6 col-md-push-6" data-aos="fade-left" style="background: url('assets/img/landing-page/upcomingmeeting(w)-2.png') 50% 50% no-repeat;    height: 500px;"></div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-push-6 col-md-push-6" data-aos="fade-left" style="background: url('assets/img/landing-page/upcomingmeeting(w)-2.svg') 50% 50% no-repeat;    height: 500px;"></div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-pull-6 col-md-pull-6" data-aos="fade-right">
               <div class="hidden-sm hidden-xs" style="height: 96px;"></div>
               <div class="visible-sm" style="height: 60px;"></div>
@@ -321,7 +336,7 @@
       <section class="fw-section layout-full-equal section-no-gap padding-top-0.5x overflow-hidden">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-right" style="background: url('assets/img/landing-page/vote(w)-2.png') 50% 50% no-repeat;    height: 500px;"></div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-right" style="background: url('assets/img/landing-page/vote(w)-2.svg') 50% 50% no-repeat;    height: 500px;"></div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-left">
               <div class="hidden-sm hidden-xs" style="height: 96px;"></div>
               <div class="visible-sm" style="height: 60px;"></div>
@@ -367,7 +382,7 @@
       <section class="fw-section layout-full-equal section-no-gap overflow-hidden">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-push-6 col-md-push-6" data-aos="fade-left" style="background: url('assets/img/landing-page/forum(w)-2.png') 50% 50% no-repeat;    height: 500px;"></div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-push-6 col-md-push-6" data-aos="fade-left" style="background: url('assets/img/landing-page/forum(w)-2.svg') 50% 50% no-repeat;    height: 500px;"></div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-pull-6 col-md-pull-6" data-aos="fade-right">
               <div class="hidden-sm hidden-xs" style="height: 96px;"></div>
               <div class="visible-sm" style="height: 60px;"></div>
@@ -424,6 +439,8 @@
 
       <!-- security flow -->
       <section class="fw-section with-parallax aws-img aws-img-mobile" data-aos="fade-up" style="background-size: 100% 100%;">
+        <img class="mobile-show" src="assets/img/landing-page/security-flow-chinese-phone.svg"/>
+        <img class="mobile-hide" src="assets/img/landing-page/security-flow-chinese.svg"/>
       </section>
 
       <!-- admin section -->
@@ -518,11 +535,11 @@
               </div>
             </div>
             <div class="col-md-4">
-              <div class="gadget-ios active" data-platform="#ios"><img src="assets/img/landing-page/noticeboard-admin.png" alt="Ios">
+              <div class="gadget-ios active" data-platform="#ios"><img src="assets/img/landing-page/noticeboard-admin.svg" alt="Ios">
               </div>
-              <div class="gadget-android" data-platform="#android"><img src="assets/img/landing-page/add-poll-admin.png" alt="Android">
+              <div class="gadget-android" data-platform="#android"><img src="assets/img/landing-page/add-poll-admin.svg" alt="Android">
               </div>
-              <div class="gadget-windows" data-platform="#windows"><img src="assets/img/landing-page/survey-admin.png" alt="Windows">
+              <div class="gadget-windows" data-platform="#windows"><img src="assets/img/landing-page/survey-admin.svg" alt="Windows">
               </div>
             </div>
           </div>
