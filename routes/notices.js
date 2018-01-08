@@ -65,12 +65,12 @@ router.post('/addNotice', (req, res) => {
                 .then(function(aud, err){
                     console.log(aud, "aud")
                     oneSignalIds = aud
-                    const noticeBody = '新通告 | New notice ! ' + req.body.title + ' | ' + req.body.titleChn
+                    const noticeBody = ` ${req.user.estateNameChn} 新通告 | ${req.user.estateName} New notice ! ` + req.body.title + ' | ' + req.body.titleChn
                     sendNotification(oneSignalIds, noticeBody)
                 })
                 }
             })
-    })
+        })
 
     } else {
         //CASE OF SELECTED RESIDENTS
@@ -123,12 +123,13 @@ router.post('/addNotice', (req, res) => {
 
 });
 
+
+
 function sendNotification(oneSignalIds, noticeBody){
             var message =  noticeBody;
             var options = {} //{small_icon: "ic_telos_grey_background"}
             if(oneSignalIds.length){
-                console.log(options, "dataaaaaaaaaa")
-            oneSignal.createNotification(message, oneSignalIds)
+            oneSignal.createNotification(message, options, oneSignalIds)
             .then(function(notify){
              if(notify){
                 console.log('sent out successfully')
@@ -139,6 +140,7 @@ function sendNotification(oneSignalIds, noticeBody){
                     return false
              }
             })
+
         }
 }
 
