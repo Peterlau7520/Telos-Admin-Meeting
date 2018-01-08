@@ -2,10 +2,8 @@
   "name": "working",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node ./node_modules/.bin/pm2 start app.js --name Telos",
-    "poststart": "node ./node_modules/.bin/pm2 logs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
