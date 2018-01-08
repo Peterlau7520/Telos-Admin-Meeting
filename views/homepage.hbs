@@ -733,7 +733,10 @@ h2{
 if(isChrome === true || isFirefox === true || isOpera === true){
 document.getElementById("fontId").style.fontFamily = "'SF-Display-Regular', sans-serif";
 }
-else{
+if(isSafari === true){
+document.getElementById("fontId").style.fontFamily = "Open Sans";
+}
+if(isIE === true){
   document.getElementById("fontId").style.fontFamily = "arial";
 }
   </script>
