@@ -396,8 +396,9 @@ setTimeout(function(){
              $(this).removeClass("like_comment");
             const value = $('.like_comment').attr('id')
             var v1 = $(this).children().attr('id')
+            console.log(v1++, "v1")
+            $(this).children().text(v1++)
             $(this).css("color", "blue")
-            $(this).children().html(v1++)
             const commentId= e.target.id
             event.preventDefault();
             const HostName = "http://localhost:4000"
@@ -427,7 +428,8 @@ setTimeout(function(){
             $(this).toggleClass('animating');
             const value = $('.like_post').attr('id')
             var v1 = $(this).children().attr('id')
-            $(this).children().html(v1++)
+            console.log(v1++, "v1")
+            $(this).children().text(v1++)
             const postId= e.target.id
             event.preventDefault();
             const HostName = "http://localhost:4000"
