@@ -3096,7 +3096,11 @@ body > .navbar-collapse {
   display: inline;
   vertical-align: top;
   font-size: 17px;
-  width: 95%;
+  margin-right: -5%;
+  /*width: 95%;*/
+ }
+ .tdWidth{
+  width: 42%;
  }
 .forum-table-text  p{
   margin:0;
