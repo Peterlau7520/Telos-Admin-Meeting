@@ -856,7 +856,7 @@
         var index = 0 
         $(add_document_button).click(function (e) { //on add input button click
             e.preventDefault();
-            $(docWrapper).append(`<input type="file" name=${index} class=" fileValue" id="fileValues" value=""  accept="application/pdf"/><br />`); //add choose file box
+            $(docWrapper).append(`<div><input type="file" name=${index} class=" fileValue" style ="width: 50%; display: inline;" id="fileValues" value=""  accept="application/pdf"/><a href="#" class="remove_field">Remove</a></div><br />`); //add choose file box
             index = index + 1
         });
 
@@ -1025,8 +1025,8 @@
             var minutes = (diff / 1000) / 60;
             var hours = minutes / 60;
             var one_day=1000*60*60*24;
-
-            if((diff/one_day).toFixed() < 14){
+            console.log((diff/one_day).toFixed())
+            if((diff/one_day).toFixed() > 14){
                 ShowCustomDialog1('you are not allowed to edit the poll.')
                 event.preventDefault()
             }else{
