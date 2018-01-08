@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node ./node_modules/.bin/pm2 start app.js --name Telos",
+    "poststart": "node ./node_modules/.bin/pm2 logs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -33,6 +35,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
+    "pm2": "^2.9.1",
     "socket.io": "^2.0.4"
   }
 }
