@@ -109,10 +109,10 @@ h2{
 
 
         </li>
-        <li class="menu-item menu-item-has-children"><a href="/">Portfolio</a>
+        {{!-- <li class="menu-item menu-item-has-children"><a href="/">Portfolio</a>
 
 
-        </li>
+        </li> --}}
 
         <li class="menu-item menu-item-has-children"><a href="/about"><span>About</span></a>
 
@@ -181,8 +181,8 @@ h2{
               <li class="active menu-item menu-item-has-children has-mega-menu"><a href="/"><span>Home</span></a>
 
               </li>
-              <li class="menu-item menu-item-has-children"><a href="/">Portfolio</a>
-              </li>
+              {{!-- <li class="menu-item menu-item-has-children"><a href="/">Portfolio</a>
+              </li> --}}
               <li class="menu-item menu-item-has-children"><a href="/about"><span>About</span></a>
 
               </li>
@@ -205,9 +205,9 @@ h2{
               <li class="active menu-item menu-item-has-children has-mega-menu"><a href="/"><span>Home</span></a>
 
               </li>
-              <li class="menu-item menu-item-has-children"><a href="/">Portfolio</a>
+              {{!-- <li class="menu-item menu-item-has-children"><a href="/">Portfolio</a>
 
-              </li>
+              </li> --}}
               <li class="menu-item menu-item-has-children">
                 <a href="/about">About</a>
               </li>
@@ -647,30 +647,34 @@ h2{
         <div class="container">
           <div class="footer-row">
             <div class="row">
+              <!-- contact us -->
+              <div class="col-md-4 col-sm-6">
+                <section class="widget widget_silicon_contacts" id="silicon_contacts-2">
+                  <h3 class="widget-title">Contact Us</h3>
+                  <ul>
+                    <li><i class="si si-location background-white"></i><span class="contact-label">Find Us</span><span class="contact-info font-family-body">iDendron, 1/F, Knowles Building, The University of Hong Kong, Hong Kong</span></li>
+                    <li><i class="si si-phone background-white"></i><span class="contact-label font-family-nav">Call Us</span><a class="contact-info font-family-body" href="tel:+85298825917">(+852) 9882-5917</a></li>
+                    <li><i class="si si-email-black background-white"></i><span class="contact-label font-family-nav">Write Us</span><a class="contact-info font-family-body" href="mailto:support@telos-technology.com">support@telos-technology.com</a></li>
+                  </ul>
+                </section>
+              </div>
+              <!-- terms and conditions -->
+              {{!-- <div class="col-md-3 col-sm-6">
+                <section class="widget widget_categories" id="categories-3">
+                  <h3 class="widget-title">Telos Technology ltd</h3>
+                  <ul>
+                    <li class="cat-item cat-item-39"><a href="/terms">Terms and Conditions</a> (8)</li>
+                    <li class="cat-item cat-item-42"><a href="/privacy">Privacy Policy</a> (6)</li>
+                  </ul>
+                </section>
+              </div> --}}
+              <!-- download buttons -->
+              <div class="container text-center padding-bottom-2x">
+                <div class="text-block">
+                </div><a class="market-btn btn-appstore waves-effect" href="#" style="background-image: url(assets/img/appstore.png);"><span>Download on the</span>App Store</a><a class="market-btn btn-playstore waves-effect" href="#" style="background-image: url(assets/img/playstore.png);"><span>Download on the</span>Google Play</a>
+              </div>
             </div>
           </div>
-          <!-- download buttons -->
-          <section class="fw-section">
-            <div class="container text-center padding-bottom-2x">
-              <div class="text-block">
-              </div><a class="market-btn btn-appstore waves-effect" href="#" style="background-image: url(assets/img/appstore.png);"><span>Download on the</span>App Store</a><a class="market-btn btn-playstore waves-effect" href="#" style="background-image: url(assets/img/playstore.png);"><span>Download on the</span>Google Play</a>
-            </div>
-          </section>
-          <!-- <div class="col-md-3 col-sm-6">
-            <section class="widget widget_categories" id="categories-3">
-              <h3 class="widget-title">Categories</h3>
-              <ul>
-                <li class="cat-item cat-item-39"><a href="#">Crowdfunding</a> (4)</li>
-                <li class="cat-item cat-item-42"><a href="#">Digital</a> (6)</li>
-                <li class="cat-item cat-item-41"><a href="#">Marketing</a> (10)</li>
-                <li class="cat-item cat-item-82"><a href="#">Posts</a> (10)</li>
-                <li class="cat-item cat-item-43"><a href="#">Science</a> (7)</li>
-                <li class="cat-item cat-item-40"><a href="#">Software</a> (10)</li>
-                <li class="cat-item cat-item-38"><a href="#">Technology</a> (8)</li>
-                <li class="cat-item cat-item-1"><a href="#">Uncategorized</a> (1)</li>
-              </ul>
-            </section>
-          </div> -->
           <!-- grey line -->
           <div class="footer-row border-default-top">
             <section class="widget widget_text" id="text-2">
@@ -704,8 +708,8 @@ h2{
   </main>
 
   
-{/*  <script id="zupScript" src="https://cp.zupportdesk.com/App/widget/ChatWidget.js?widgetId=962ebb6e-fb13-4afa-bd8c-7389a521a59b"></script> 
-*/}
+<script id="zupScript" src="https://cp.zupportdesk.com/App/widget/ChatWidget.js?widgetId=962ebb6e-fb13-4afa-bd8c-7389a521a59b"></script> 
+
 </body>
 
 </html>

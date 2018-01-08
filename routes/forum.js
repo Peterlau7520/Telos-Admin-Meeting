@@ -70,6 +70,7 @@ router.get('/getForum', (req, res) => {
                        if(comment.timeLeftChinese == 'NaN 几小时前'){post.timeLeftChinese = '0 几小时前'}
                     }
                 })
+             posts.sort(sortPost)
             })
     
         req.app.io.on('connection', function(socket){
@@ -94,14 +95,20 @@ router.get('/getForum', (req, res) => {
 })
 //Sort function
 function compareDate(commentA,commentB){
-    if (commentA.commentedTime > commentB.commentedTime)
+    if (new Date(commentA.commentedTime) > new Date(commentB.commentedTime))
         return -1;
-    if (commentA.commentedTime < commentB.commentedTime)
+    if (new Date(commentA.commentedTime) < new Date(commentB.commentedTime))
         return 1;
     return 0;
   }
 
-
+function sortPost(postA, postB){
+    if (new Date(postA.lastCommentedTime) > new Date(postB.lastCommentedTime))
+        return -1;
+    if (new Date(postA.lastCommentedTime) < new Date(postB.lastCommentedTime))
+        return 1;
+    return 0;
+  }
 router.get('/postsComments', function(req,res){
     const postId = req.query.postId;
     Post.find({
