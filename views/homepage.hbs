@@ -1,8 +1,18 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+
 <!-- Body-->
 <style>
-body{
-      font-family: -webkit-body !important;
+h2{
+     /* font-family: ""*/
 }
+{/*body{
+      font-family: -webkit-body !important;
+}*/}
 @media screen and (max-width: 480px){
   #hide{
     display: none;
@@ -81,7 +91,7 @@ body{
     box-sizing: content-box;
   }
 </style>
-<body>
+<body id="fontId">
   <div class="loading-screen">
     <div class="inner">
       <div class="preloader-logo" style="width: 90px;"><img class="attachment-full size-full" src="assets/img/telos.png"></div>
@@ -692,6 +702,38 @@ body{
       <script src="assets/js/theme.min.js"></script>
   </main>
 
-  {{!-- chat plugin  --}}
-  {{!-- <script id="zupScript" src="https://cp.zupportdesk.com/App/widget/ChatWidget.js?widgetId=962ebb6e-fb13-4afa-bd8c-7389a521a59b"></script> --}}
+  
+{/*  <script id="zupScript" src="https://cp.zupportdesk.com/App/widget/ChatWidget.js?widgetId=962ebb6e-fb13-4afa-bd8c-7389a521a59b"></script> 
+*/}
 </body>
+
+</html>
+ <script>
+    // Opera 8.0+
+    var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+    // Firefox 1.0+
+    var isFirefox = typeof InstallTrigger !== 'undefined';
+
+    // Safari 3.0+ "[object HTMLElementConstructor]" 
+    var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
+
+    // Internet Explorer 6-11
+    var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+    // Edge 20+
+    var isEdge = !isIE && !!window.StyleMedia;
+
+    // Chrome 1+
+    var isChrome = !!window.chrome && !!window.chrome.webstore;
+
+    // Blink engine detection
+    var isBlink = (isChrome || isOpera) && !!window.CSS;
+
+if(isChrome === true || isFirefox === true || isOpera === true){
+document.getElementById("fontId").style.fontFamily = "'SF-Display-Regular', sans-serif";
+}
+else{
+  document.getElementById("fontId").style.fontFamily = "arial";
+}
+  </script>
