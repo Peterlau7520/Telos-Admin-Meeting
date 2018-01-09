@@ -368,7 +368,7 @@ setTimeout(function(){
             if(comment){
             const commentData = $('#comment_form').serializeArray();
             const comm = convertSerializeArrayToJson(commentData)
-           $("#comments").append('<div class="col-lg-12 comment-width"><span class="pull-left estate">'+'admin'+'</span> <span class="comment-para">'+'hfghfg | 0 hours ago'+'</span><span class="report-link pull-right "><a href="#" class="report_comment"  id="">Report Comment</a></span> </div><span class=" fa-marign pt-comment"><a href="#" class=""  id=""><div class="heart like-fa like_comment" aria-hidden="true" id=""><div class="fa-count inc-count" id="">'+0+'</div></div></a></span><span class="commentContent">'+comm.comment+'</span> <br>')
+           $("#comments").prepend('<div class="col-lg-12 comment-width"><span class="pull-left estate">'+'admin'+'</span> <span class="comment-para">'+'hfghfg | 0 hours ago'+'</span><span class="report-link pull-right "><a href="#" class="report_comment"  id="">Report Comment</a></span> </div><span class=" fa-marign pt-comment"><a href="#" class=""  id=""><div class="heart like-fa like_comment" aria-hidden="true" id=""><div class="fa-count inc-count" id="">'+0+'</div></div></a></span><span class="commentContent">'+comm.comment+'</span> <br>')
              $.ajax({
                         url: HostName + "/newComment",
                         data: comm,
