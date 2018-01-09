@@ -313,7 +313,7 @@ setTimeout(function(){
 }*/
      var forum = '{{{stringify forum}}}'
      forum = JSON.parse(forum);
-     var socket =  io.connect('http://localhost:4000')
+     var socket =  io.connect(window.location.origin)
          
         socket.on('post', function(data) {
            if(data){
@@ -374,7 +374,7 @@ setTimeout(function(){
                         data: comm,
                         type: 'POST',
                          success: function (data) {
-                          var socket =  io.connect('http://localhost:4000')
+                          var socket =  io.connect(window.location.origin)
                           socket.emit('comment', {data:'data'});
                           //  location.reload()
                         },
@@ -482,6 +482,7 @@ setTimeout(function(){
             if(liked.indexOf(user) > -1){
                 userLike = true
             }
+            console.log(data.numberOfLikes, "data.numberOfLikes")
             var id = event.target.id
             const sno = id++
             $('.post-number').html((id++) + '.')

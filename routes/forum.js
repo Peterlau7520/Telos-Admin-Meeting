@@ -24,9 +24,7 @@ const CommentReport = models.CommentReport;
 router.use(busboyBodyParser({multi: true}));
 
 router.get('/getForum', (req, res) => {
-    Post.find({
-        estateName: req.user.estateName
-    }).populate('comments').lean().sort({lastCommentedTime: -1})
+    Post.find().populate('comments').lean().sort({lastCommentedTime: -1})
     .then(function(posts,err){
          forEach(posts, function(post, key){
             var today = new Date();
@@ -48,7 +46,6 @@ router.get('/getForum', (req, res) => {
             const numberOfLikes = post.likedBy.length;
             post.numberOfLikes = numberOfLikes;
             post.numberOfComments = post.comments.length;
-
             if(post.comments){
                 post.comments.sort(compareDate)
             }
