@@ -1,7 +1,19 @@
+  <html>
+      <head>
     <!--  Meeting CSS 1    -->
     <link href="assets/css/admin-meeting-css/light-bootstrap-dashboard.css" rel="stylesheet"/>
     <!--  Meeting CSS 2     -->
     <link href="assets/css/admin-meeting-css/demo.css" rel="stylesheet" />
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="assets/css/flatpickr.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    <script src="assets/js/flatpickr.js"></script>
+   </head>
+      <body>
+
 <style>
     .datetimepicker {
         background-color: #FFFFFF;border: 1px solid #E3E3E3;border-radius: 4px;color: #565656;padding: 8px 12px;"
@@ -570,7 +582,7 @@
                                                             </p>
                                                         </div>
                                                     </div>
-
+                                                         
                                                 </div>
                                             </div>
                                         </div>
@@ -615,7 +627,7 @@
                 </p>
             </div>
         </footer>
-    </div>
+    </div> 
 </div>
 
 
@@ -826,8 +838,17 @@
     </div>
       
 </div>        
-
-
+<div id="dialog2" title="Alert message" style="display: none; ">
+                                                        <div class="ui-dialog-content ui-widget-content">
+                                                            <p>
+                                                                <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0"></span>
+                                                                <label id="lblMessage2">
+                                                                </label>
+                                                            </p>
+                                                        </div>
+                                                    </div>  
+</body>
+</html>
 
             
 <script type="text/javascript">
@@ -897,6 +918,9 @@
             }
         })
           $(".delete_meeting").click(function(event){
+            event.preventDefault();
+            const id = event.target.id
+            ShowCustomDialog2("Are you sure you want to delete this meeting? | 確定刪除會議 ？", id)
             localStorage.removeItem("tab");
             localStorage.removeItem("divTab");
           })
@@ -1064,24 +1088,24 @@ var originalData = '{{{stringify meetingsData}}}';
             $('#headingBottom2').html('')
             
             var id = event.target.id
-             var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-            
             var ids = 'tab_'+originalData[id]._id;
             localStorage.setItem("tab", id);
             localStorage.setItem("divTab", ids);
-            var firstDate = new Date(originalData[id].createdAt);
+            var m = moment(originalData[id].startTime, "DD.MM.YYYY HH:mm:ss");
+            var dt = m.toDate();
             var secondDate = new Date();
-            firstDate.setDate(firstDate.getDate() + 3);
-            var diff = firstDate - secondDate;  
+            var diff = dt - secondDate;  
             var seconds = diff / 1000;
             var minutes = (diff / 1000) / 60;
             var hours = minutes / 60;
-            var hours = Math.floor(hours);
-            if(hours < 0){
-                hours =0;
+             var one_day=1000*60*60*24;
+            var days = (diff/one_day).toFixed();
+            if( days < 0){
+                days =0;
             }
-            hours = 'Hours remaining to edit or delete polls | 剩下的時間可以取消或修改投票: ' + hours;
-            $( "#endhour" ).text(hours)
+            days = 'Days remaining to edit or delete polls | 剩下的時間可以取消或修改投票: ' + days + ' 天';
+            $( "#endhour" ).text(days)
+
         }) 
         $('.past-meeting').click(function (event) {
             $('.add-meeting-wrap').remove()
@@ -1385,5 +1409,58 @@ var originalData = '{{{stringify meetingsData}}}';
                                 ]
                 });
 }
+function ShowCustomDialog2(data, id)
+            {
+            ShowDialogBox2('Warning',data,'Ok', 'GoToAssetList',null, id);
+            }
+            function ShowDialogBox2(title, content, btn1text, functionText, parameterList, id) {
+                const meeting_id = id
+                var btn1css;
+                var btn2css;
+                if (btn1text == '') {
+                    btn1css = "hidecss";
+                } else {
+                    btn1css = "showcss";
+                }
+                $("#lblMessage2").html(content);
+                $("#dialog2").dialog({
+                    resizable: false,
+                    title: title,
+                    modal: true,
+                    width: '400px',
+                    height: 'auto',
+                    bgiframe: false,
+                    stack: true,
+                    buttons: [
+                                    {
+
+                                        text: btn1text,
+                                        "class": btn1css,
+                                        click: function (event) {
+                                            $.ajax({
+                                                url: HostName + "/deleteMeeting",
+                                                data: {meetingId: meeting_id},
+                                                type: 'POST',
+                                                
+                                            })
+                                             $(this).dialog("close"); 
+                                            var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif " style="    margin-left: 194px;"/>'
+                                             $("#loader").append(html);                                  
+                                              location.reload()
+                                           
+                                        }
+                                    },
+                                    {
+                                        text: "Cancel",
+                                        "class": btn1css,
+                                        click: function (event) {                                           
+                                             $(this).dialog("close");                                          
+                                           
+                                        }
+                                    },
+                                ]
+                });
+}
+
     })
 </script>
