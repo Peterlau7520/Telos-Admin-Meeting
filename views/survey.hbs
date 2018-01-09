@@ -1158,9 +1158,7 @@ var myPieChart = new Chart(ctx,{
 
             if(values.audience === '' || values.endTime === '' || values.title === '' || values.titleChn === '' ){
                 ShowCustomDialog1("All fields are mandatory | 所有欄目為必填")
-                //$("#mainError").text("Please add question");
             }else{
-                //$("#mainError").text("Please add question");
               var modeldata = {"name": "test", engCostList: engList, chnCostList: chnList};
                 var modelhtml = survey_modal(modeldata);
                 $("#floor_model .modal-dialog").html(modelhtml);

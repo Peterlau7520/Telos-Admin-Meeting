@@ -896,15 +896,6 @@
                 setTimeout(()=>{hd();},500)
             }
         })
-
-        // $(".arrow-img2").click(function(event){
-        //     $( "#ispan" ).addClass( "right-arrow-add" );
-            
-        // })
-        //  $(".arrow-img").click(function(event){
-        //     $( "#ispan2" ).addClass( "right-arrow-add" );
-            
-        // })
           $(".delete_meeting").click(function(event){
             localStorage.removeItem("tab");
             localStorage.removeItem("divTab");
@@ -912,9 +903,6 @@
         $("#save").click(function(event){
             const startTime = $('#startTime').val()
             const endTime = $('#pollEndTime').val()
-            /*var timeDiff = Math.abs(startTime.getTime() - endTime.getTime());
-            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-            alert(diffDays);*/
             var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
             var firstDate = new Date(startTime);
             var secondDate = new Date(endTime);
@@ -1084,8 +1072,6 @@ var originalData = '{{{stringify meetingsData}}}';
             var firstDate = new Date(originalData[id].createdAt);
             var secondDate = new Date();
             firstDate.setDate(firstDate.getDate() + 3);
-           // secondDate.setHours(firstDate.getHours());
-           // secondDate.setMinutes(firstDate.getMinutes());
             var diff = firstDate - secondDate;  
             var seconds = diff / 1000;
             var minutes = (diff / 1000) / 60;
@@ -1094,7 +1080,6 @@ var originalData = '{{{stringify meetingsData}}}';
             if(hours < 0){
                 hours =0;
             }
-            //var hours = Math.round(Math.abs(firstDate - secondDate) / 36e5);
             hours = 'Hours remaining to edit or delete polls | 剩下的時間可以取消或修改投票: ' + hours;
             $( "#endhour" ).text(hours)
         }) 
@@ -1176,7 +1161,6 @@ var originalData = '{{{stringify meetingsData}}}';
             });
               var newArray = optionEdit.filter(function(v){return v!==''});
               newArray = jQuery.unique(newArray)
-               //$('#options_field').val(JSON.stringify(newArray));
               $(".voting_opt1").append('<input type ="hidden" name="options" value="'+newArray+'">')
 
            

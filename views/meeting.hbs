@@ -745,8 +745,6 @@
             localStorage.setItem("divTab", ids);
             var firstDate = new Date(originalData[id].startTime);
             var secondDate = new Date();
-           // secondDate.setHours(firstDate.getHours());
-           // secondDate.setMinutes(firstDate.getMinutes());
             var diff = firstDate - secondDate;  
             var seconds = diff / 1000;
             var minutes = (diff / 1000) / 60;
@@ -825,8 +823,6 @@
                index1 = index1 + 1
                var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif " />'
                 $("#loader2").append(html);
-              /*  var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'
-            $("#loading").append(html);*/
         })    
 
         $("#close_model").click(function () {
@@ -839,10 +835,7 @@
               newArray = jQuery.unique(newArray)
               var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif " style="    margin-left: 194px;"/>'
                 $("#loader3").append(html);
-               //$('#options_field').val(JSON.stringify(newArray));
               $(".voting_opt1").append('<input type ="text" name="options" value="'+newArray+'" hidden>')
-            //    index1 = index1 + 1
-
         $("#poll").modal("hide");
            
         })    
@@ -1019,8 +1012,6 @@
             var poll = originalData[parentId].polls[childId]
             var lastDate = new Date(originalData[parentId].startTime)
             var meeting_title = originalData[parentId].title
-            //lastDate = lastDate.setDate(lastDate.getDate() + 3);
-            //lastDate = new Date(lastDate)
             var diff = lastDate - new Date()
             var seconds = diff / 1000;
             var minutes = (diff / 1000) / 60;
@@ -1128,7 +1119,6 @@
                                             var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif " style="    margin-left: 194px;"/>'
                                              $("#loader").append(html);                                  
                                               location.reload()
-                                            //$("#dialog1").dialog('close');
                                            
                                         }
                                     },
@@ -1137,7 +1127,6 @@
                                         "class": btn1css,
                                         click: function (event) {                                           
                                              $(this).dialog("close");                                          
-                                            //$("#dialog1").dialog('close');
                                            
                                         }
                                     },
