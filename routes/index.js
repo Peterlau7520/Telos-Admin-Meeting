@@ -17,6 +17,10 @@ router.get('/aboutchn', (req, res) => {
   res.render('aboutchn', {layout: 'homepageLayout.hbs'});
 });
 
+router.get('/siteMap', (req, res) => {
+  res.render('siteMap', {layout: 'sitemap.hbs'});
+});
+
 router.use(function (req, res, next) {
   if (!req.user) {
     res.redirect('/login');
