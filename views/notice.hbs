@@ -432,7 +432,6 @@
                                         text: btn1text,
                                         "class": btn1css,
                                         click: function (event) {
-                                            console.log(window.location.origin, "origin")
                                             $.ajax({
                                                 url: HostName + `/deleteNotice?id=${notice_id}`,
                                                 type: 'GET',

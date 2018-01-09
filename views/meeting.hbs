@@ -810,7 +810,6 @@
                 err: function(err){
                     console.log(err)
                 }
-
             });
     })
 //        
@@ -1027,7 +1026,6 @@
             var minutes = (diff / 1000) / 60;
             var hours = minutes / 60;
             var one_day=1000*60*60*24;
-            console.log((diff/one_day).toFixed())
             if((diff/one_day).toFixed() > 14){
                 ShowCustomDialog1('you are not allowed to edit the poll.')
                 event.preventDefault()

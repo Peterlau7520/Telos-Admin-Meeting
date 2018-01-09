@@ -831,19 +831,14 @@
 
             
 <script type="text/javascript">
-
     function hd(){
         var hd = $("#customMainComponent").height()  
         $("#sidebarMenu").css({"min-height":hd})
     }
-
-
     $(document).ready(function () {  
     const HostName = window.location.origin
-
         hd();
         //datetimepicker
-        
         $("body").delegate(".flatpickr", "focusin", function(){
             var aWeekLater = new Date().setDate(new Date().getDate() + 14);
             $(this).flatpickr({
@@ -856,7 +851,6 @@
              $(".flatpickr-calendar").removeClass("open", 1000, "easeInBack" );
         })
         });
-
         $(".panel-heading").click(function(){
             setTimeout(()=>{hd();},500)
         })
@@ -886,7 +880,6 @@
             e.preventDefault(); $(this).parent('div').remove();
         })
         $(document).on("click",".custom_success_btn", function(e){
-            
             //return false;
         })
         var polls_array = [];
@@ -902,8 +895,6 @@
                 $("#popupError").text("*All field are Mandatory");
                 setTimeout(()=>{hd();},500)
             }
-
-            
         })
 
         // $(".arrow-img2").click(function(event){
@@ -928,8 +919,6 @@
             var firstDate = new Date(startTime);
             var secondDate = new Date(endTime);
             var diffDays = Math.round(Math.abs((secondDate.getTime() - firstDate.getTime())/(oneDay)));
-
-
                 var valid = true;
                 if(diffDays <= 7){
                     valid = false;
@@ -974,7 +963,6 @@
             if(validated === true){
                 return false
             }
-            
             var option = []
             $.each($(".input_fields_wrap_add :input[name*='option']"), function(data, key){  
               option.push($(this).val())
@@ -1076,7 +1064,6 @@ var originalData = '{{{stringify meetingsData}}}';
             });
             return form_json;
         }
-
         $('.meeting_li').click(function (event) {
             $('.MeetingTab').css('display','block');
             $('.add-meeting-wrap').remove()
@@ -1103,7 +1090,6 @@ var originalData = '{{{stringify meetingsData}}}';
             var seconds = diff / 1000;
             var minutes = (diff / 1000) / 60;
             var hours = minutes / 60;
-
             var hours = Math.floor(hours);
             if(hours < 0){
                 hours =0;
@@ -1166,7 +1152,6 @@ var originalData = '{{{stringify meetingsData}}}';
                 err: function(err){
                     console.log(err)
                 }
-
             });
     })
 //        
@@ -1183,7 +1168,6 @@ var originalData = '{{{stringify meetingsData}}}';
               $(".voting_opt").append('<input type ="hidden" name="options" value="'+newArray+'" />')
                index1 = index1 + 1
         })    
-
         $("#close_model_edit").click(function () {
             //optionEdit=[]
             var optionEdit = []
@@ -1212,7 +1196,6 @@ var originalData = '{{{stringify meetingsData}}}';
             $(docWrapper).append(`<div style="padding-bottom: 10px;"><input type="file" name=${index} class=" fileValue" style ="width: 50%; display: inline;" id="fileValues" value=""  accept="application/pdf"/><a href="#" class="remove_field">Remove</a></div>`); //add choose file box
             index = index + 1
         });
-
         var optionWrapper = $(".voting_opt"); //Fields wrapper
         var add_option_button = $(".add_field_button"); //Add button ID
                 var index1 = 1 
@@ -1223,7 +1206,6 @@ var originalData = '{{{stringify meetingsData}}}';
             $(optionWrapper).append('<div class="input_div tls-Vot-box"><input type="text" class="pull-left tls-Voting-options" name="option"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
              
         });
-       
         $(document).on("click",".remove_field", function(e){ //user click on remove text
             e.preventDefault(); 
             $(this).parent('div').remove();
@@ -1236,8 +1218,6 @@ var originalData = '{{{stringify meetingsData}}}';
             removedFile.push(name)
             $('.added_files').append(`<input type = "hidden" name="removedfile" value=${removedFile}>`)
         })
-
-
         function edit_popup(data){
             var html = '<div class="div-wrapper" style="padding: 10px;">'+
             '<h3 class= "heading">' + "Upcoming Meeting"+ '</h3>' + '                                        <button class=" btn btn-danger deleteMeeting deletebtn btn-danger" type="submit" id={{data._id}} data-id={{data._id}} data-time="">取消會議 | Delete Meeting</button>' + '<hr>' +
@@ -1336,7 +1316,6 @@ var originalData = '{{{stringify meetingsData}}}';
             var meetingform = $("#edit_meeting_popup").serializeArray();
             var meetingData = convertSerializeArrayToJson(meetingform);
         });
-
         //for add pole
         $('.add_pole').click(function(event) {
             const id = event.target.id
@@ -1344,7 +1323,6 @@ var originalData = '{{{stringify meetingsData}}}';
             var html = '<input type="hidden" name="meeting_id" value="'+id+'"/> '
              $("#poll2 .formlabel").append(html);
         })
-
         $('#dropdown ul>li').click(function () {
             $('#dropdown2 ul>li').removeClass('active');
         });

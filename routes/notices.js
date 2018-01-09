@@ -63,7 +63,6 @@ router.post('/addNotice', (req, res) => {
                 }))
                 Promise.all(promiseArr)
                 .then(function(aud, err){
-                    console.log(aud, "aud")
                     oneSignalIds = aud
                     const noticeBody = ` ${req.user.estateNameChn} 新通告 | ${req.user.estateName} New notice ! ` + req.body.title + ' | ' + req.body.titleChn
                     sendNotification(oneSignalIds, noticeBody)
@@ -75,7 +74,6 @@ router.post('/addNotice', (req, res) => {
     } else {
         //CASE OF SELECTED RESIDENTS
         const audience = floorInfo.Blocks;
-        console.log("audience",audience)
         for(var key in  audience){
             if(audience.hasOwnProperty(key)){
                 const subAudience = { 'block': key, 'floors': audience[key]};
@@ -132,11 +130,9 @@ function sendNotification(oneSignalIds, noticeBody){
             oneSignal.createNotification(message, options, oneSignalIds)
             .then(function(notify){
              if(notify){
-                console.log('sent out successfully')
                 return true
              }
              else{
-                console.log('sent out unsuccessful')
                     return false
              }
             })
@@ -167,7 +163,6 @@ exports.uploadPdf = function(req, res, targetAudience){
                 if (err) {
                     console.log('Error uploading data: ', err);
                 } else {
-                    console.log('succesfully uploaded the pdf!');
                     exports.saveNotice(req, res, fileLinks, targetAudience);
 
                 }
@@ -202,7 +197,6 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
             }
             estate.currentNotices.push(notice)
             //Redirecting routes.
-            console.log('redirect--------------')
             res.redirect('/noticeBoard');
         })
     })

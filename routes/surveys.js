@@ -43,8 +43,6 @@ router.post('/addSurvey', (req, res) => {
                 if(item.deviceToken != undefined && item.deviceToken != '') {
                     promiseArr.push(new Promise(function(resolve, reject){
                     let type = item.deviceToken.length > 40 ? 'android':'ios';
-                    console.log(item.deviceToken)
-                    console.log(type+'========'+item.deviceToken.length)
                     oneSignal.addDevice(item.deviceToken, type) 
                     .then(function(id){
                         resolve(id)
@@ -52,7 +50,6 @@ router.post('/addSurvey', (req, res) => {
                 }))
                 Promise.all(promiseArr)
                 .then(function(data, err){
-                    console.log(data, "data")
                     oneSignalIds = data
                     const messageBody = 'New survey! ' + req.body.title + ' | ' + req.body.titleChn
                     sendNotification(oneSignalIds, messageBody)
@@ -111,7 +108,6 @@ router.post('/addSurvey', (req, res) => {
     }
 
 function saveSurvey(req, res, targetAudience){
-    console.log(req.body.questions)
     const options = []
     var endDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
     var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
@@ -134,7 +130,6 @@ function saveSurvey(req, res, targetAudience){
                 j++
                 if(j < questions.length) {
             forEach(questions, function(question){
-                console.log(question, "question", j)
             var que = new Question({
                 questionEn: question.questionEng,
                 questionChn: question.questionChn,
@@ -144,7 +139,6 @@ function saveSurvey(req, res, targetAudience){
             order++;
             que.save()
             .then(function(q){
-                console.log(q)
                 if(question.options.length  > 0){
                     let i = -1
                     var fetch = function() {
@@ -202,11 +196,9 @@ function sendNotification(oneSignalIds, messageBody){
     oneSignal.createNotification(message , data, oneSignalIds)
     .then(function(data){
      if(data){
-        console.log('sent out successfully')
         return true
      }
      else{
-        console.log('sent out unsuccessful')
             return false
      }
     })
@@ -230,7 +222,6 @@ router.get('/getSurveys', (req, res) => {
             _.forEach(que, function(q, index1) {
                 UserAnswers.find({surveyId : surv._id, questionId: q._id })
                 .then(function(user, err){
-                    console.log("queque", q)
                     Question.update(
                         { _id:  q._id},
                         { $set: { userAnswered:  user.length} }
@@ -256,7 +247,6 @@ router.get('/getSurveys', (req, res) => {
                          res.send(err);
                         }
                         if(option){
-                             console.log("option", option)
                     resolve(survey)
                 }
                 })
@@ -275,9 +265,7 @@ router.get('/getSurveys', (req, res) => {
         var list = ''
         Promise.all(promiseArr)
         .then(function(data, err){
-            console.log("*************************************")
             list = data[0]
-        
             _.forEach(data[0], function(sur, index) {
             var currentDate = moment(new Date());
             currentDate = currentDate.format("D/MM/YYYY");

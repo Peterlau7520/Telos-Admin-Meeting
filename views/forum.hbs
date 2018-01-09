@@ -326,10 +326,6 @@ setTimeout(function(){
         socket.on('comment', function(data) {
           location.reload()
         })
-       /* socket.on('Getpost', function(data) {
-            console.log('Got announcement:', data);
-        });*/
-
         function refreshPage(refresh){
             if(refresh){
                 window.location.reload(1);
@@ -397,7 +393,7 @@ setTimeout(function(){
              $(this).removeClass("like_comment");
             const value = $('.like_comment').attr('id')
             var v1 = $(this).children().attr('id')
-            console.log(v1++, "v1")
+            console.log(v1++)
             $(this).children().text(v1++)
             $(this).css("color", "blue")
             const commentId= e.target.id
@@ -413,8 +409,6 @@ setTimeout(function(){
                             console.log(err)
                         }                       
                         })
-            
-            
         })
         $(document).on("click",".closeComment", function(e){
             refresh = true
@@ -428,7 +422,7 @@ setTimeout(function(){
             $(this).toggleClass('animating');
             const value = $('.like_post').attr('id')
             var v1 = $(this).children().attr('id')
-            console.log(v1++, "v1")
+            console.log(v1++)
             $(this).children().text(v1++)
             const postId= e.target.id
             event.preventDefault();
@@ -443,7 +437,6 @@ setTimeout(function(){
                             console.log(err)
                         }                       
                         })
-            
             }
             
         })
@@ -489,7 +482,6 @@ setTimeout(function(){
             if(liked.indexOf(user) > -1){
                 userLike = true
             }
-            
             var id = event.target.id
             const sno = id++
             $('.post-number').html((id++) + '.')
@@ -516,8 +508,6 @@ setTimeout(function(){
 $(".like_post").on('click touchstart', function(){
   $(this).toggleClass('animating');
 });
-
-
 $(".like_post").on('animationend', function(){
   $(this).toggleClass('animating');
 });

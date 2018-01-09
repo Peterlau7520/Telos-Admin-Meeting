@@ -14,9 +14,6 @@ var server = require('http').createServer(app);
 var socket = require('socket.io');
 //----------------MODELS----------------
 const models = require('./models/models');
-
-
-
 //----------------ROUTES----------------
 const forumRoutes = require('./routes/forum');
 const meetingRoutes = require('./routes/meetings');

@@ -43,7 +43,6 @@ router.get('/getForum', (req, res) => {
                if(post.timeLeft == 'NaN hours ago'){post.timeLeft = '0 hours ago'}
                post.timeLeftChinese = Math.round(hours) + " 几小时前"
                 if(post.timeLeftChinese == 'NaN 几小时前'){post.timeLeftChinese = '0 几小时前'}
-               //console.log(post.timeLeft)
             }
             post.postTime = moment(new Date(post.postTime)).format("DD/MM/YY hh:mm ")
             const numberOfLikes = post.likedBy.length;
@@ -155,7 +154,6 @@ router.post('/likeComment', (req,res) => {
 })
 
 router.post('/likePost', (req,res) => {
-    console.log("post liked")
     const postId = req.body.postId;
     Post.update({_id: postId
              }, {

@@ -109,7 +109,6 @@ router.get('/allMeetings', (req, res) => {
                      pastMeetings.push(item)
                     //end is less than start
                     }
-                   // console.log(currentMeetings, pastMeetings, "current")
                     resolve({meetingsData: currentMeetings, pastMeetingsData: pastMeetings})
                })
            }))
@@ -174,7 +173,6 @@ router.post('/addPollsOfMeeting', (req, res) => {
                     console.log('Error uploading data: ', err);
                 } else {
                     savePoll(req,res, fileLinks)
-                    console.log('succesfully uploaded the pdf!');
                 }
             });
         } 
@@ -264,7 +262,6 @@ router.post('/addPollsOfMeeting', (req, res) => {
 
 
 router.post('/editMeeting', (req, res) => {
-  console.log(req.body, "gggg")
     var fileLinks = []
     if(req.files && req.files.fileField) {
         var files = req.files.fileField
@@ -295,7 +292,6 @@ router.post('/editMeeting', (req, res) => {
                 if (err) {
                     console.log('Error uploading data: ', err);
                 } else {
-                    console.log('succesfully uploaded the pdf!');
                     save(req, res, fileLinks)
                 }
             });
@@ -377,7 +373,6 @@ router.post('/editMeeting', (req, res) => {
 
 router.post('/editPoll', (req, res) => {
     var data = req.body
-    console.log(data);
     var id = req.body.id
     var fileLinks = []
     var pollFileLinks = []
@@ -412,7 +407,6 @@ router.post('/editPoll', (req, res) => {
                           new: true 
                         })
                         .then(function (data1, err) {
-                            console.log(data1, "data")
                             
             var data = {
                 Bucket: BucketName,
@@ -426,7 +420,6 @@ router.post('/editPoll', (req, res) => {
                 if (err) {
                     console.log('Error uploading data: ', err);
                 } else {
-                    console.log('succesfully uploaded the pdf!');
                     resolve(data)
                 }
             });
@@ -625,7 +618,6 @@ function uploadFile(req, res){
                 if (err) {
                     console.log('Error uploading data: ', err);
                 } else {
-                    console.log('succesfully uploaded the pdf!', data);
                     savePoll(req, res, fileLinks);
 
                 }
@@ -637,10 +629,8 @@ function uploadFile(req, res){
         }
 
 function savePoll(req, res, fileLinks){
-  console.log(req.body)
     const promiseArr = []
     const startDate = new Date(req.body.startTime)
-    console.log(startDate)
     if(req.body.startTime) {
         var meetingStartDay = req.body.startTime.substring(0, req.body.startTime.indexOf('T'));
         var meetingStartHour = req.body.startTime.substring(req.body.startTime.indexOf('T') + 1, req.body.startTime.indexOf('T') + 9);
@@ -658,7 +648,6 @@ function savePoll(req, res, fileLinks){
         var pollEndHour = req.body.pollEndTime.substring(req.body.pollEndTime.indexOf('T') + 1, req.body.pollEndTime.indexOf('T') + 9);
         var pollEndFinal = dateFormat(pollEndDay + " " + pollEndHour, 'shortDate');
     }
-    console.log(meetingStartFinal, meetingEndFinal, pollEndFinal)
      const Polls = JSON.parse(req.body.poll_json)
       if(Polls.length  > 0){
             forEach(Polls, function(values){
@@ -712,9 +701,7 @@ function savePoll(req, res, fileLinks){
 }
 });
 router.post('/deleteMeeting',(req,res) => {
-  console.log(req.body, "reqq")
     Meeting.deleteOne({_id: req.body.meetingId}, function (err, todo) {
-      console.log(todo, "do")
         if (err) res.send(err);
         res.redirect('/allMeetings');
     });
@@ -750,18 +737,15 @@ function sendNotification(message, estateName){
             }))
             Promise.all(promiseArr)
             .then(function(Ids, err){
-                console.log(data, "data")
                 oneSignalIds = Ids
                 var data = {small_icon: "ic_telos_grey_background"}
                 if(oneSignalIds.length){
                 oneSignal.createNotification(message , oneSignalIds)
                 .then(function(notifiy){
                  if(notifiy){
-                    console.log('sent out successfully')
                     return true
                  }
                  else{
-                    console.log('sent out unsuccessful')
                         return false
                  }
                 })
