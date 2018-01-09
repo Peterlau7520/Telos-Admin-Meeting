@@ -1,0 +1,20 @@
+branch-defaults:
+  master:
+    environment: Telos-Admin-Meeting-dev
+    group_suffix: null
+  production:
+    environment: Telos-Admin-Meeting-dev
+global:
+  application_name: Telos-Admin-Meeting
+  branch: null
+  default_ec2_keyname: null
+  default_platform: node.js
+  default_region: ap-southeast-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  repository: null
+  sc: git
+  workspace_type: Application
