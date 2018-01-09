@@ -686,6 +686,8 @@
         $("#sidebarMenu").css({"min-height":hd})
     }
     $(document).ready(function () {
+        const HostName = window.location.origin
+
          hd();
         $("body").delegate(".flatpickr", "focusin", function(){
             $(this).flatpickr({
@@ -797,7 +799,7 @@
             const data = {}
             data.meetingId = originalData[parentId]._id
             data.pollId = originalData[parentId].polls[childId]._id
-            const HostName = "http://localhost:3000"
+            const HostName = window.location.origin
             $.ajax({
                 url: HostName + "/deletePoll",
                 data: data,
@@ -1118,7 +1120,6 @@
                                         text: btn1text,
                                         "class": btn1css,
                                         click: function (event) {
-                                           const HostName = "http://localhost:4000"
                                             $.ajax({
                                                 url: HostName + "/deleteMeeting",
                                                 data: {meetingId: meeting_id},

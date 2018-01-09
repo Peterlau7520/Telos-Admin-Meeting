@@ -255,6 +255,7 @@
                                                     </div>   
 <script>
     $(document).ready(function () {
+        const HostName = window.location.origin
         $(".flatpickr").flatpickr({
             enableTime: true,
             dateFormat: "m/d/YTh:i:K"
@@ -431,7 +432,7 @@
                                         text: btn1text,
                                         "class": btn1css,
                                         click: function (event) {
-                                           const HostName = "http://localhost:4000"
+                                            console.log(window.location.origin, "origin")
                                             $.ajax({
                                                 url: HostName + `/deleteNotice?id=${notice_id}`,
                                                 type: 'GET',

@@ -12,6 +12,7 @@ const flash = require('connect-flash');
 const http = require('http');
 var server = require('http').createServer(app);
 var socket = require('socket.io');
+var env = require('node-env-file');
 //----------------MODELS----------------
 const models = require('./models/models');
 

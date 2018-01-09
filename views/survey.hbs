@@ -286,7 +286,7 @@
 <script>
    
     $(document).ready(function () {
-
+const HostName = window.location.origin
         $(".flatpickr").flatpickr({
             enableTime: true,
             dateFormat: "m/d/YTh:i:K"
@@ -1195,7 +1195,7 @@ var myPieChart = new Chart(ctx,{
             }
          });
             values["questions"] = questions
-            const HostName = "http://localhost:4000"
+            
             $.ajax(HostName+'/addSurvey', {
                   type: 'POST',
                   data: JSON.stringify(values),

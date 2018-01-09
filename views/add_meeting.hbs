@@ -839,6 +839,8 @@
 
 
     $(document).ready(function () {  
+    const HostName = window.location.origin
+
         hd();
         //datetimepicker
         
@@ -1154,7 +1156,6 @@ var originalData = '{{{stringify meetingsData}}}';
             const data = {}
             data.meetingId = originalData[parentId]._id
             data.pollId = originalData[parentId].polls[childId]._id
-            const HostName = "http://localhost:3000"
             $.ajax({
                 url: HostName + "/deletePoll",
                 data: data,

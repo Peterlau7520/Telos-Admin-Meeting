@@ -302,6 +302,8 @@ $('#commentModal').on('hidden.bs.modal', function (e) {
 
 
     $(document).ready(function () {
+      const HostName = window.location.origin
+
        $(".parent-circle").hide();
         var refresh = true;
 /*if(refresh){
@@ -371,7 +373,6 @@ setTimeout(function(){
             const commentData = $('#comment_form').serializeArray();
             const comm = convertSerializeArrayToJson(commentData)
            $("#comments").append('<div class="col-lg-12 comment-width"><span class="pull-left estate">'+'admin'+'</span> <span class="comment-para">'+'hfghfg | 0 hours ago'+'</span><span class="report-link pull-right "><a href="#" class="report_comment"  id="">Report Comment</a></span> </div><span class=" fa-marign pt-comment"><a href="#" class=""  id=""><div class="heart like-fa like_comment" aria-hidden="true" id=""><div class="fa-count inc-count" id="">'+0+'</div></div></a></span><span class="commentContent">'+comm.comment+'</span> <br>')
-            const HostName = "http://localhost:4000"
              $.ajax({
                         url: HostName + "/newComment",
                         data: comm,
@@ -401,7 +402,6 @@ setTimeout(function(){
             $(this).css("color", "blue")
             const commentId= e.target.id
             event.preventDefault();
-            const HostName = "http://localhost:4000"
              $.ajax({
                         url: HostName + "/likeComment",
                         data: {commentId: commentId},
@@ -432,7 +432,6 @@ setTimeout(function(){
             $(this).children().text(v1++)
             const postId= e.target.id
             event.preventDefault();
-            const HostName = "http://localhost:4000"
              $.ajax({
                         url: HostName + "/likePost",
                         data: {postId: postId},
@@ -457,7 +456,6 @@ setTimeout(function(){
             const postData = $('#newpost').serializeArray();
             const post = convertSerializeArrayToJson(postData)
               $('.check-icon').html('<img src="../assets/img/check.png" alt="img">')
-              const HostName = "http://localhost:4000"
                $.ajax({
                         url: HostName + "/newPost",
                         data: post,
