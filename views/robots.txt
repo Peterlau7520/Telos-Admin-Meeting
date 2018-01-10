@@ -1,1 +1,3 @@
-Hello
+Sitemap: https://www.telos-technology.com/sitemap.xml   
+User-agent: *   
+Allow: /
