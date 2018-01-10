@@ -22,11 +22,16 @@ router.get('/siteMap', (req, res) => {
 });
 
 router.get('/sitemap.xml', (req, res) => {
+  res.type('text/plain');
   res.render('sitemap', {layout: 'sitemap.xml'});
 });
 
-router.get('/robots.txt', (req, res) => {
-  res.render('robots', {layout: 'robots.txt'});
+router.get('/robots.txt', function (req, res) {
+    res.type('text/plain');
+    //res.render('robots', {layout: 'robots.txt'})
+    res.send("Sitemap: https://www.telos-technology.com/sitemap.xml" + 
+      "   User-agent: *" +
+       "   Allow: /");
 });
 
 router.use(function (req, res, next) {
