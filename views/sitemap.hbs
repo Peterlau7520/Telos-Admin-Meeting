@@ -1,13 +1,102 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<html>
+ <head>
+    <meta charset="utf-8">
     <title>Building Management Software Hong Kong - Telos Technology</title>
+    <!-- SEO Meta Tags-->
     <meta name="description" content="Telos is a modern buildig management Software that enables property owners to take matters into their own hands, save valuable time, engage in open discussion, and make informed decisions about all sorts of projects at their estate.">
     <meta name="keywords" content="estate, property management, property, estate management, Hong Kong, hong kong building management, property owners, mobile, efficient, notice, annual general meeting, property management system, property management website, building management hong kong, building management system hong kong, estate management services, rental property management, real estate software, property management services, property survey, property apps, building management system software, building management services, building management and maintenance, building a management information system, building managment software hong kong, real estate management system project, telos real state, property asset management software, asset management, asset management software, asset management software hong kong, asset management real estate, real estate management, assets, asset, asset management software free, asset management software open source, asset management application">
-    <style>
-        body, head, #xsg {margin:0px 0px 0px 0px; line-height:22px; color:#666666; width:100%; padding:0px 0px 0px 0px; 
-                          font-family : Tahoma, Verdana,   Arial, sans-serif; font-size:13px;}
+    <meta name="author" content="8Guild">
+    <!-- Mobile Specific Meta Tag-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <!-- Favicon Icons-->
+     <link rel="icon" type="image/png" href="assets/img/favicon-32x32.png" sizes="32x32" />
+    <style type="text/css">
+      body { overflow-y: hidden; }.page-wrapper {-webkit-transition: opacity .7s .9s;transition: opacity .7s .9s;opacity: 0;}.page-wrapper.loading-done { opacity: 1; }.loading-screen {position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: #ffffff;z-index: 9999;opacity: 1;visibility: visible;-webkit-transition: all .1s;transition: all 1s;}.loading-screen.loading-done {opacity: 0;visibility: hidden;}.loading-screen .inner {position: absolute;width: 100%;top: 50%;left: 0;padding: 20px;-webkit-transform: translateY(-50%);-moz-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);}.loading-screen .preloader-logo {display: block;margin: 0 auto 30px auto;}.progress-wrap {display: block; position: relative;height: 2px;width: 220px;border-radius: 2px;background-color: #f0f0f0;overflow: hidden;margin: auto;}.progress-wrap .indeterminate {background-color: #3d59f9;}.progress-wrap .indeterminate::before,.progress-wrap .indeterminate::after {content: '';position: absolute;background-color: inherit;top: 0;left: 0;bottom: 0;will-change: left, right;}.progress-wrap .indeterminate::before { -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite; animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;}.progress-wrap .indeterminate::after { -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite; animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;-webkit-animation-delay: 1.15s;animation-delay: 1.15s;}@-webkit-keyframes indeterminate {0% {left: -35%;right: 100%;}60% {left: 100%;right: -90%;}100% {left: 100%;right: -90%;}}@keyframes indeterminate {0% {left: -35%;right: 100%;}60% {left: 100%;right: -90%;}100% {left: 100%;right: -90%;}}@-webkit-keyframes indeterminate-short {0% {left: -200%;right: 100%;}60% {left: 107%;right: -8%;}100% {left: 107%;right: -8%;}}@keyframes indeterminate-short {0% {left: -200%;right: 100%;}60% {left: 107%;right: -8%;}100% {left: 107%;right: -8%;}}
+
+/*custom fonts*/
+      @font-face {
+        font-family: "SF-Display-Regular";
+        font-weight: italic;
+        src: url('assets/fonts/SF-Pro-Display-RegularItalic.otf');
+      }
+      @font-face {
+        font-family: "SF-Display-Regular";
+        src: url('assets/fonts/SF-Pro-Display-Regular.otf');
+      }
+      @font-face {
+        font-family: "SF-Display-Medium";
+        font-weight: italic;
+        src: url('assets/fonts/SF-Pro-Display-MediumItalic.otf');
+      }
+      @font-face {
+        font-family: "SF-Display-Medium";
+        src: url('assets/fonts/SF-Pro-Display-Medium.otf');
+      }
+      @font-face {
+        font-family: "SF-Regular";
+        font-weight: italic;
+        src: url('assets/fonts/SF-Pro-Text-RegularItalic.otf');
+      }
+      @font-face {
+        font-family: "SF-Regular";
+        src: url('assets/fonts/SF-Pro-Text-Regular.otf');
+      }
+      @font-face {
+        font-family: "SF-Medium";
+        font-weight: italic;
+        src: url('assets/fonts/SF-Pro-Text-MediumItalic.otf');
+      }
+      @font-face {
+        font-family: "SF-Medium";
+        src: url('assets/fonts/SF-Pro-Text-Medium.otf');
+      }
+      @font-face {
+        font-family: "SF-Light";
+        font-weight: italic;
+        src: url('assets/fonts/SF-Pro-Text-LightItalic.otf');
+      }
+      @font-face {
+        font-family: "SF-Light";
+        src: url('assets/fonts/SF-Pro-Text-Light.otf');
+      }
+      @font-face {
+        font-family: "SF-Heavy";
+        src: url('assets/fonts/SF-Pro-Text-Heavy.otf');
+      }
+      @font-face {
+        font-family: "SF-Heavy";
+        font-weight: italic;
+        src: url('assets/fonts/SF-Pro-Text-HeavyItalic.otf');
+      }
+    </style>
+    <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
+    <link rel="stylesheet" media="screen" href="assets/css/vendor.min.css">
+    <!-- Home Intro styles-->
+    <link rel="stylesheet" media="screen" href="assets/css/intros.css">
+    <!-- Main Template Styles-->
+    <link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> -->
+    <script type="text/javascript">
+      ( function () {
+        window.onload = function () {
+        var body = document.querySelector( "body" );
+        var preloader = body.querySelector( ".loading-screen" );
+        var page = body.querySelector( ".page-wrapper" );
+        body.style.overflowY = "auto";
+        preloader.classList.add( "loading-done" );
+        page.classList.add( "loading-done" );
+        };
+      } )();
+
+    </script>
+    <!-- Modernizr-->
+    <script src="assets/js/modernizr.min.js"></script>
+  </head>
+
+
+
+<!-- Body-->
+<style>
         
         #xsg ul li a {font-weight:bold; }
         #xsg ul ul li a {font-weight:normal; }
@@ -27,18 +116,256 @@
         #xsgBody {padding:10px;float:left;}
         #xsgFooter { color:#999999; width:100%; float:left; margin:20px 0px 15px 0px; border-top:1px solid #999999;padding: 10px 0px 10px 0px; }
         #xsgFooter a {color:#999999; font-size:11px; text-decoration:none;   }    
-        #xsgFooter span {color:#999999; font-size:11px; text-decoration:none; margin-left:20px; }  
-    </style>
-</head>
-<body>
-<div id="xsg">
-<div id="xsgHeader">
-    <h1 style="text-align: center;">Telos Technology - Site Map</h1>
-</div>
-<div id="xsgBody">
+        #xsgFooter span {color:#999999; font-size:11px; text-decoration:none; margin-left:20px; }
+h2{
+     /* font-family: ""*/
+}
+{/*body{
+      font-family: -webkit-body !important;
+}*/}
+@media screen and (max-width: 480px){
+  #hide{
+    display: none;
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 400px){
+  #show{
+    display: block;
+  }
+}
+@media (max-height: 1099px){
+  .intro-app-showcase {
+      padding: 0px 0;
+      display: inline-block;
+      margin: 50px 0;
+  }
+}
+
+@media only screen and (max-width: 812px)  {
+  .aws-img-mobile{
+    content:url("assets/img/landing-page/security-flow-english-phone_2.svg") !important;
+    background-size: 134%;
+    width: 60%;
+    padding-top: 25px;
+    display: block;
+    margin: 0 auto;
+  }
+ .mobile-show{
+    display: block;
+  }
+  .mobile-hide{
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 767px)  {
+  .gadget-ios{
+    width:auto !important;
+  }
+  .gadget-android{
+    width:auto !important;
+  }
+  .gadget-windows{
+    width:auto !important;
+  }
+  .intro-app-showcase{
+    padding-top: 0px;
+  }
+}
+ 
+.intro-app-showcase{
+  height: 100%;
+}
+{/*.aws-img{
+    content:url("assets/img/landing-page/security-flow-english.svg");
+    background-size: 134%;
+  }*/}
+.mobile-show{
+  display: none;
+}
+.mobile-hide{
+  display: block;
+}
+.intro-app-showcase .platform-swith>a {
+    height: 30px;
+    padding: 0 5px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: .1em;
+    line-height: 30px;
+    text-decoration: none;
+    width: 105px;
+    margin: 0 0px;
+    display: inline-block;
+    box-sizing: content-box;
+  }
+</style>
+<body id="fontId">
+  <script src="assets/js/vendor.min.js"></script>
+    <script src="assets/js/theme.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+    <script src="assets/js/lottie.js"></script>
+
+<!-- animations -->
+  <div class="loading-screen">
+    <div class="inner">
+      <div class="preloader-logo" style="width: 90px;"><img class="attachment-full size-full" src="assets/img/telos.png" alt="estate management"></div>
+      <div class="progress-wrap">
+        <div class="indeterminate"></div>
+      </div>
+    </div>
+  </div>
+  <div class="offcanvas-container mobile-menu">
+
+    <nav class="main-navigation font-family-nav">
+      <ul class="menu">
+        <li class="active menu-item menu-item-has-children has-mega-menu"><a href="/"><span>Home</span></a>
 
 
-<ul><li><a href="https://www.telos-technology.com/"><span class="title">The new standard in property management - Telos Technology</span></a>
+        </li>
+        {{!-- <li class="menu-item menu-item-has-children"><a href="/">Portfolio</a>
+
+
+        </li> --}}
+
+        <li class="menu-item menu-item-has-children"><a href="/about"><span>About</span></a>
+
+
+        </li>
+        <li class="menu-item menu-item-has-children"><a href="/homepagechn"><span>繁體中文</span></a>
+
+
+        </li>
+          
+      </ul>
+    </nav>
+    <section class="widget widget_silicon_button padding-top-1x" style="padding-left: 30px; padding-right: 30px;"><a class="btn btn-solid btn-pill btn-danger btn-nl btn-block waves-effect waves-light" href="#">Contact Us</a><span class="text-sm"></span></section>
+  </div>
+  <!-- <div class="offcanvas-container offcanvas-cart">
+      <header class="cart-header">
+        <div class="column">
+          <h3 class="cart-title">Cart</h3>
+        </div>
+        <div class="column"><a class="view-cart-link font-family-nav navi-link-hover-color" href="shop/cart.html">View Cart                        <i class="si si-angle-right"></i></a></div>
+      </header>
+      <div class="si-wc-ajax-cart">
+        <div class="woocommerce-mini-cart cart_list product_list_widget product-items">
+          <div class="woocommerce-mini-cart-item product-item">
+            <h4 class="product-title"><span>1 x</span><a class="navi-link-hover-color" href="shop/singleProduct.html"></a>Bellabeat Leaf Health Tracker.</h4><span class="product-price font-family-headings"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>99.99</span></span><a class="remove-from-cart" href="#" data-product_id="296" data-product_sku=""><i class="si si-cross"></i></a>
+          </div>
+          <div class="woocommerce-mini-cart-item product-item">
+            <h4 class="product-title"><span>1 x</span><a class="navi-link-hover-color" href="shop/singleProduct.html"></a>Mevo Camera.</h4><span class="product-price font-family-headings"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>399.99</span></span><a class="remove-from-cart" href="#" data-product_id="294" data-product_sku=""><i class="si si-cross"></i></a>
+          </div>
+          <div class="woocommerce-mini-cart-item product-item">
+            <h4 class="product-title"><span>1 x</span><a class="navi-link-hover-color" href="shop/singleProduct.html"></a>Libratone Coolweave Mesh Fabric.</h4><span class="product-price font-family-headings"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>19.99</span></span><a class="remove-from-cart" href="#" data-product_id="298" data-product_sku=""><i class="si si-cross"></i></a>
+          </div>
+          <div class="woocommerce-mini-cart-item product-item">
+            <h4 class="product-title"><span>4 x</span><a class="navi-link-hover-color" href="shop/singleProduct.html"></a>HEOS Wireless Speaker.</h4><span class="product-price font-family-headings"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>199.00</span></span><a class="remove-from-cart" href="#" data-product_id="341" data-product_sku=""><i class="si si-cross"></i></a>
+          </div>
+        </div>
+        <footer class="cart-footer">
+          <div class="cart-subtotal font-family-headings">
+            <div class="column">Subtotal:</div>
+            <div class="column"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>1,315.97</span></div>
+          </div><a class="btn btn-pill btn-ghost btn-success btn-block" href="shop/checkout.html">Checkout</a>
+        </footer>
+      </div>
+    </div> -->
+  <!-- Page Wrapper-->
+  <main class="page-wrapper" style="background-color: #ffffff;">
+    <!-- Site header-->
+    <header class="site-header header-fullwidth header-floating">
+      <div class="navbar-horizontal navbar-ghost menu-skin-light border-default-bottom">
+
+        <div class="navbar-inner">
+          <div class="navbar-branding">
+            <div class="mobile-menu-toggle">
+              <i class="si si-menu"></i>
+            </div><a class="site-logo" href="/" style="width: 120px;">
+                <img alt="" style="width:50%" src="assets/img/telos_white.png" alt="asset management"></a>
+            <a class="mobile-logo" href="/" style="width: 120px;">
+                  <img style="width:50%" alt="" src="assets/img/telos_white.png" alt="property management">
+                </a>
+          </div>
+
+        </div>
+        <div class="menu-wrap">
+          <nav class="main-navigation font-family-nav">
+            <ul class="menu">
+              <li class="active menu-item menu-item-has-children has-mega-menu"><a href="/"><span>Home</span></a>
+
+              </li>
+              {{!-- <li class="menu-item menu-item-has-children"><a href="/">Portfolio</a>
+              </li> --}}
+              <li class="menu-item menu-item-has-children"><a href="/about"><span>About</span></a>
+
+              </li>
+              </li>
+              <li class="menu-item menu-item-has-children has-mega-menu"><a href="/homepagechn">繁体中文</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="navbar-horizontal navbar-sticky border-default-bottom">
+        <div class="navbar-inner">
+          <div class="navbar-branding">
+            <div class="mobile-menu-toggle"><i class="si si-menu"></i></div><a class="site-logo" href="/" style="width: 120px;"><img style="width:50%" alt="" src="assets/img/telos.png" alt="property"></a><a class="mobile-logo" href="/" style="width: 120px;"><img style="width:50%" alt="" src="assets/img/telos.png" alt="property management"></a>
+          </div>
+        </div>
+        <div class="menu-wrap">
+          <nav class="main-navigation font-family-nav">
+            <ul class="menu">
+              <li class="active menu-item menu-item-has-children has-mega-menu"><a href="/"><span>Home</span></a>
+
+              </li>
+              {{!-- <li class="menu-item menu-item-has-children"><a href="/">Portfolio</a>
+
+              </li> --}}
+              <li class="menu-item menu-item-has-children">
+                <a href="/about">About</a>
+              </li>
+              <li class="menu-item menu-item-has-children has-mega-menu"><a href="/homepagechn">繁體中文</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!-- Content Wrapper-->
+    <div class="content-wrapper">
+ <section class="fw-section layout-full section-no-gap main-intro background-gradient">
+        <div class="container-fluid padding-top-1x padding-bottom-1x">
+          <div class="main-intro-glare" style="background-image: url(assets/img/home/main_intro_glare.png?id=733) !important;"> </div>
+        </div>
+      </section>
+
+
+
+
+      <!--main section -->
+      <section class="layout-full section-no-gap with-parallax main-intro-bg padding-top-10x padding-bottom-10x" data-offset-top="180" data-jarallax="{&quot;type&quot;:&quot;scroll&quot;,&quot;speed&quot;:0.4,&quot;imgWidth&quot;:1920,&quot;imgHeight&quot;:1200,&quot;noAndroid&quot;:&quot;true&quot;,&quot;noIos&quot;:&quot;true&quot;}"
+        style="background-image: url(assets/img/home/main_hero_bg.png);">
+        <div class="container-fluid">
+          <div class="visible-lg" style=""></div>
+          <div class="visible-md" style="height: 80px;"></div>
+          <div class="visible-sm visible-xs" style="height: 40px;"></div>
+          <div style="position: absolute;top: 120px">
+          <ul><li style="color: #ffffff;"><a href="https://www.telos-technology.com/" style="color: #ffffff;font-size:18px;"><span class="title" ">The new standard in property management - Telos Technology</span></a>
+<ul><li><a href="https://www.telos-technology.com/login" style="color: #ffffff;font-size:18px;"><span class="title">Telos Technology</span></a>
+</li><li><a href="https://www.telos-technology.com/about" style="color: #ffffff;font-size:18px;"><span class="title">About Telos</span></a>
+<ul><li><a href="https://www.telos-technology.com/aboutchn " style="color: #ffffff;font-size:18px;"><span class="title">關於天羅</span></a>
+</li></ul></li><li><a href="https://www.telos-technology.com/homepagechn" style="color: #ffffff;font-size:18px;"><span class="title"> 迎接新一代物業管理 。</span></a>
+</li></ul></li></ul></div>
+        </div>
+      </section>
+      <!-- page-title.pug template-->
+      <!-- Page Content-->
+      <!-- <div class="fw-section layout-full section-no-gap main-intro background-gradient">
+
+        <div>
+          <ul><li><a href="https://www.telos-technology.com/"><span class="title">The new standard in property management - Telos Technology</span></a>
 <ul><li><a href="https://www.telos-technology.com/login"><span class="title">Telos Technology</span></a>
 </li><li><a href="https://www.telos-technology.com/about"><span class="title">About Telos</span></a>
 <ul><li><a href="https://www.telos-technology.com/aboutchn"><span class="title">關於天羅</span></a>
@@ -48,9 +375,128 @@
 
 
 
-</div>
+      <!--main section -->
+      
+      <!-- noticeboard secion  -->
+      
+      <!-- meetings section -->
+      
+      
+      <!-- Forum section -->
+      
 
-</div>
+      <!--security section -->
+      
+      <!-- security flow -->
+      
+
+      <!-- admin section -->
+      
+      <!-- compliance section -->
+      
+      <!-- footer.pug template -->
+      <!-- Footer-->
+      <footer class="site-footer footer-light" style="background-color: #000000;">
+        <div class="container">
+          <div class="footer-row">
+            <div class="row">
+              <!-- contact us -->
+              <div class="col-md-4 col-sm-6">
+                <section class="widget widget_silicon_contacts" id="silicon_contacts-2">
+                  <h3 class="widget-title">Contact Us</h3>
+                  <ul>
+                    <li><i class="si si-location background-white"></i><span class="contact-label">Find Us</span><span class="contact-info font-family-body">iDendron, 1/F, Knowles Building, The University of Hong Kong, Hong Kong</span></li>
+                    <li><i class="si si-phone background-white"></i><span class="contact-label font-family-nav">Call Us</span><a class="contact-info font-family-body" href="tel:+85298825917">(+852) 9882-5917</a></li>
+                    <li><i class="si si-email-black background-white"></i><span class="contact-label font-family-nav">Write Us</span><a class="contact-info font-family-body" href="mailto:support@telos-technology.com">support@telos-technology.com</a></li>
+                    <li class="menu-item menu-item-has-children"><i class="fa fa-sitemap"></i><a href="/siteMap"><span>Site Map</span></a>
+        </li>
+                  </ul>
+                </section>
+              </div>
+              <!-- terms and conditions -->
+              {{!-- <div class="col-md-3 col-sm-6">
+                <section class="widget widget_categories" id="categories-3">
+                  <h3 class="widget-title">Telos Technology ltd</h3>
+                  <ul>
+                    <li class="cat-item cat-item-39"><a href="/terms">Terms and Conditions</a> (8)</li>
+                    <li class="cat-item cat-item-42"><a href="/privacy">Privacy Policy</a> (6)</li>
+                  </ul>
+                </section>
+              </div> --}}
+              <!-- download buttons -->
+              <div class="container text-center padding-bottom-2x">
+                <div class="text-block">
+                </div><a class="market-btn btn-appstore waves-effect" href="#" style="background-image: url(assets/img/appstore.png);"><span>Download on the</span>App Store</a><a class="market-btn btn-playstore waves-effect" href="#" style="background-image: url(assets/img/playstore.png);"><span>Download on the</span>Google Play</a>
+              </div>
+            </div>
+          </div>
+          <!-- grey line -->
+          <div class="footer-row border-default-top">
+            <section class="widget widget_text" id="text-2">
+              <div class="textwidget">
+                <div class="social-bar text-center" style="margin-bottom:10px;">
+                  <a class="social-button sb-facebook sb-shape-no sb-monochrome sb-light" href="#">
+                      <i class="socicon-facebook unhvrd"></i><i class="socicon-facebook hvrd"></i>
+                    </a>
+                  <a class="social-button sb-linkedin sb-shape-no sb-monochrome sb-light" href="#">
+                      <i class="socicon-linkedin unhvrd"></i><i class="socicon-linkedin hvrd"></i>
+                    </a>
+                  <a class="social-button sb-twitter sb-shape-no sb-monochrome sb-light" href="#">
+                      <i class="socicon-twitter unhvrd"></i><i class="socicon-twitter hvrd"></i>
+                    </a
+                    ><a class="social-button sb-pinterest sb-shape-no sb-monochrome sb-light" href="#">
+                      <i class="socicon-pinterest unhvrd"></i><i class="socicon-pinterest hvrd"></i></a></div>
+                <p><a class="block-center" href="/" style="width:80px;"><img alt="property management softwares" src="assets/img/telos_white.png"></a></p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </footer>
+      </div>
+      <!-- Back To Top Button-->
+      <a class="scroll-to-top-btn" href="#"><i class="si si-angle-up"></i></a>
+      <!-- Backdrop-->
+      <div class="site-backdrop"></div>
+      <!-- JavaScript (jQuery) libraries, plugins and custom scripts-->
+      <script src="assets/js/vendor.min.js"></script>
+      <script src="assets/js/theme.min.js"></script>
+  </main>
+
+  
+<script id="zupScript" src="https://cp.zupportdesk.com/App/widget/ChatWidget.js?widgetId=962ebb6e-fb13-4afa-bd8c-7389a521a59b"></script> 
 
 </body>
+
 </html>
+ <script>
+    // Opera 8.0+
+    var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+    // Firefox 1.0+
+    var isFirefox = typeof InstallTrigger !== 'undefined';
+
+    // Safari 3.0+ "[object HTMLElementConstructor]" 
+    var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
+
+    // Internet Explorer 6-11
+    var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+    // Edge 20+
+    var isEdge = !isIE && !!window.StyleMedia;
+
+    // Chrome 1+
+    var isChrome = !!window.chrome && !!window.chrome.webstore;
+
+    // Blink engine detection
+    var isBlink = (isChrome || isOpera) && !!window.CSS;
+
+if(isChrome === true || isFirefox === true || isOpera === true){
+document.getElementById("fontId").style.fontFamily = "'SF-Display-Regular', sans-serif";
+}
+ else if(isSafari === true){
+document.getElementById("fontId").style.fontFamily = "'SF-Display-Regular', sans-serif";
+}
+else{
+  document.getElementById("fontId").style.fontFamily = "arial";
+}
+  </script>

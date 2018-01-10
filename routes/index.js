@@ -21,6 +21,14 @@ router.get('/siteMap', (req, res) => {
   res.render('sitemap', {layout: 'sitemap.hbs'});
 });
 
+router.get('/sitemap.xml', (req, res) => {
+  res.render('sitemap', {layout: 'sitemap.xml'});
+});
+
+router.get('/robots.txt', (req, res) => {
+  res.render('robots', {layout: 'robots.txt'});
+});
+
 router.use(function (req, res, next) {
   if (!req.user) {
     res.redirect('/login');
