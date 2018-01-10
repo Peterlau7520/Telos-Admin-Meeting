@@ -18,7 +18,7 @@ router.get('/aboutchn', (req, res) => {
 });
 
 router.get('/siteMap', (req, res) => {
-  res.render('siteMap', {layout: 'sitemap.hbs'});
+  res.render('sitemap', {layout: 'sitemap.hbs'});
 });
 
 router.use(function (req, res, next) {
