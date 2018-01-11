@@ -14,7 +14,7 @@ const _ = require('lodash');
 var Busboy = require('busboy');
 var moment = require("moment");
 const busboyBodyParser = require('busboy-body-parser');
-
+var schedule = require('node-schedule');
 const fs = require('fs');
 const router = express.Router();
 router.use(busboyBodyParser({multi: true}));
@@ -755,5 +755,39 @@ function sendNotification(message, estateName){
         })
 })
 }
+
+router.get('/cronJob',(req,res) => {
+var j = schedule.scheduleJob("*/1 * * * *", function(fireDate){
+  Meeting.find().then(function(meetings, err){
+        const promiseArr = []
+        var currentMeetings = []
+        var pastMeetings = []
+        var pollMeeting_title = '';
+        if(meetings.length > 0) {
+            promiseArr.push(new Promise(function(resolve, reject){
+               forEach(meetings, function(item, key, a){
+                var firstDate = new Date(item.startTime);
+                var secondDate = new Date();
+                console.log(firstDate, secondDate)
+                var diff = firstDate - secondDate;  
+                console.log(diff, "diff")
+                var seconds = diff / 1000;
+                var minutes = (diff / 1000) / 60;
+                var hours = minutes / 60;
+                 var one_day=1000*60*60*24;
+                var days = (diff/one_day).toFixed();
+                console.log(days, "days")
+                if(days == 1){
+                const message = '新會議已添加 | A Meeting is schedule tommorow!'
+                sendNotification(message,  req.user.estateName)
+                  console.log("hello")
+                      console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
+                } 
+              });
+             }))
+          }
+        })
+})
+})
 module.exports = router;
 

@@ -17,9 +17,9 @@ router.get('/aboutchn', (req, res) => {
   res.render('aboutchn', {layout: 'homepageLayout.hbs'});
 });
 
-router.get('/siteMap', (req, res) => {
+/*router.get('/siteMap', (req, res) => {
   res.render('sitemap', {layout: 'sitemap.hbs'});
-});
+});*/
 
 router.get('/sitemap.xml', (req, res) => {
   res.type('text/plain');
