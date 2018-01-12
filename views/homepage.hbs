@@ -95,7 +95,9 @@ h2{
     box-sizing: content-box;
   }
 </style>
-<body id="fontId">
+<body id="fontId" style="    overflow: hidden;
+    width: 100%;
+    height: 100%;">
   <div class="loading-screen">
     <div class="inner">
       <div class="preloader-logo" style="width: 90px;"><img class="attachment-full size-full" src="assets/img/telos.png" alt="Telos Technology"></div>
@@ -720,6 +722,7 @@ h2{
 </html>
  <script>
     // Opera 8.0+
+
     var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 
     // Firefox 1.0+
