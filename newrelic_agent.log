@@ -1,4 +1,0 @@
-{"v":0,"level":30,"name":"newrelic","hostname":"peter.lan","pid":21230,"time":"2018-01-12T11:40:18.615Z","msg":"Using New Relic for Node.js. Agent version: 2.5.0; Node version: v6.11.2."}
-{"v":0,"level":30,"name":"newrelic","hostname":"peter.lan","pid":21230,"time":"2018-01-12T11:40:18.782Z","msg":"Starting New Relic for Node.js connection process."}
-{"v":0,"level":30,"name":"newrelic","hostname":"peter.lan","pid":21230,"time":"2018-01-12T11:40:24.326Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/1843255/applications/40541962","component":"new_relic_response"}
-{"v":0,"level":30,"name":"newrelic","hostname":"peter.lan","pid":21230,"time":"2018-01-12T11:40:24.327Z","msg":"Connected to collector-234.newrelic.com:443 with agent run ID WzIse2E6Nzc0NDI1MTM3LGI6NDA3NjQ4NjEsYzoxODQzMjU1LGQ6IjIuNS4wIixlOiJub2RlanMiLGY6InBldGVyLmxhbiIsZzpbe2E6NDA1NDE5NjIsYjoiVGVsb3MifV19LDE4Nzg4Mjc3MDhd.","component":"collector_api"}

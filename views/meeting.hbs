@@ -747,7 +747,6 @@
             return form_json;
         }
         var originalData = `{{{stringify meetingsData}}}`;
-        console.log(originalData, "originalData")
         if(originalData != ''){
         originalData = JSON.parse(originalData);
         }
@@ -760,12 +759,9 @@
             var ids = 'tab_'+originalData[id]._id;
             localStorage.setItem("tab", id);
             localStorage.setItem("divTab", ids);
-            console.log(originalData[id].startTime, "original")
             var firstDate = new Date(originalData[id].startTime);
             var secondDate = new Date();
-            console.log(firstDate, secondDate)
             var diff = firstDate - secondDate;  
-            console.log(diff, "diff")
             var seconds = diff / 1000;
             var minutes = (diff / 1000) / 60;
             var hours = minutes / 60;
