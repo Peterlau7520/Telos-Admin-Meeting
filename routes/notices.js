@@ -205,6 +205,10 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
 router.get('/noticeBoard', (req, res) => {
 
   var blocksFloors = req.user.blockArray[0]
+  if(!blocksFloors){
+    blocksFloors = {};
+  }
+  console.log(blocksFloors);
   Notice
   .find({estate: req.user.estateName})
   .lean()

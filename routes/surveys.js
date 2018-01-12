@@ -212,6 +212,9 @@ router.get('/getSurveys', (req, res) => {
     const promiseArr =[]
     const promiseArr2 = []
   var blocksFloors = req.user.blockArray[0]
+  if(!blocksFloors){
+      blocksFloors = {};
+  }
   Survey.find({estate: req.user.estateName}).lean()
   .then(function(survey, err) {
     if(survey.length){
