@@ -3522,7 +3522,7 @@ button[type='submit']:focus, input[type='submit']:focus, input[type='button']:fo
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh !important;
+  height: 100vh;
   background-repeat: no-repeat !important;
   background-position: center !important;
   background-size: cover !important;

@@ -95,7 +95,7 @@ function sendNotification(message){
             })
             }
         })
-})
+    })
 }
 
 function sendNotificationForProxy(message, meeting){
@@ -129,9 +129,9 @@ function sendNotificationForProxy(message, meeting){
             })
             }
         })
-})
+    })
 }
-var j = schedule.scheduleJob("*/1 * * * *", function(fireDate){
+var j = schedule.scheduleJob("00 15 6 * * *", function(fireDate){
   Meeting.find().then(function(meetings, err){
         const promiseArr = []
         var currentMeetings = []
@@ -151,7 +151,7 @@ var j = schedule.scheduleJob("*/1 * * * *", function(fireDate){
                 if(days == 1){
                 const message = '新會議已添加 | A Meeting is schedule tommorow!'
                 sendNotification(message)
-                      console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
+                console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
                 } 
               });
              }))
@@ -159,7 +159,7 @@ var j = schedule.scheduleJob("*/1 * * * *", function(fireDate){
         })
 })
 
-var k = schedule.scheduleJob("*/1 * * * *", function(fireDate){
+var k = schedule.scheduleJob("*/55 * * * *", function(fireDate){
   Meeting.find().then(function(meetings, err){
         const promiseArr = []
         var currentMeetings = []
@@ -182,7 +182,7 @@ var k = schedule.scheduleJob("*/1 * * * *", function(fireDate){
         })
 })
 
-var j = schedule.scheduleJob("*/1 * * * *", function(fireDate){
+var l = schedule.scheduleJob("00 15 6 * * *", function(fireDate){
   Meeting.find().then(function(meetings, err){
         const promiseArr = []
         var currentMeetings = []
@@ -200,7 +200,7 @@ var j = schedule.scheduleJob("*/1 * * * *", function(fireDate){
                  var one_day=1000*60*60*24;
                 var days = (diff/one_day).toFixed();
                 if(days == 3){
-                const message = '新會議已添加 | A Meeting is schedule tommorow!'
+                const message = '新會議已添加 | A Poll will close after 3 days !'
                 sendNotificationForProxy(message, item._id)
                       console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
                 } 
@@ -209,7 +209,7 @@ var j = schedule.scheduleJob("*/1 * * * *", function(fireDate){
           }
         })
 })
-var l = schedule.scheduleJob("*/1 * * * *", function(fireDate){
+var m = schedule.scheduleJob("*/1 * * * *", function(fireDate){
    var sdate = formatStartDate(new Date())
     var edate = formatEndDate(new Date())
   Survey.find({effectiveTo: { 
