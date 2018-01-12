@@ -142,19 +142,15 @@ var j = schedule.scheduleJob("*/1 * * * *", function(fireDate){
                forEach(meetings, function(item, key, a){
                 var firstDate = new Date(item.startTime);
                 var secondDate = new Date();
-                console.log(firstDate, secondDate)
                 var diff = firstDate - secondDate;  
-                console.log(diff, "diff")
                 var seconds = diff / 1000;
                 var minutes = (diff / 1000) / 60;
                 var hours = minutes / 60;
                  var one_day=1000*60*60*24;
                 var days = (diff/one_day).toFixed();
-                console.log(days, "days")
                 if(days == 1){
                 const message = '新會議已添加 | A Meeting is schedule tommorow!'
                 sendNotification(message)
-                  console.log("hello")
                       console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
                 } 
               });
@@ -174,13 +170,10 @@ var k = schedule.scheduleJob("*/1 * * * *", function(fireDate){
                forEach(meetings, function(item, key, a){
                 var firstDate = new Date(item.startTime);
                 var secondDate = new Date();
-                console.log(firstDate, secondDate)
                 var hours = Math.abs(firstDate - secondDate) / 36e5;
-                console.log(hours, "diff")
                 if(hours < 1){
                 const message = '新會議已添加 | A Meeting is schedule tommorow!'
                 sendNotification(message)
-                  console.log("hello")
                       console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
                   }
               });
@@ -200,19 +193,15 @@ var j = schedule.scheduleJob("*/1 * * * *", function(fireDate){
                 promiseArr.push(new Promise(function(resolve, reject){
                 var firstDate = new Date(item.pollEndTime);
                 var secondDate = new Date();
-                console.log(firstDate, secondDate)
                 var diff = firstDate - secondDate;  
-                console.log(diff, "diff")
                 var seconds = diff / 1000;
                 var minutes = (diff / 1000) / 60;
                 var hours = minutes / 60;
                  var one_day=1000*60*60*24;
                 var days = (diff/one_day).toFixed();
-                console.log(days, "days")
                 if(days == 3){
                 const message = '新會議已添加 | A Meeting is schedule tommorow!'
                 sendNotificationForProxy(message, item._id)
-                  console.log("hello")
                       console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
                 } 
               }))
@@ -234,6 +223,8 @@ var l = schedule.scheduleJob("*/1 * * * *", function(fireDate){
         var pollMeeting_title = '';
         forEach(Surveys, function(sur, index) {
           console.log(sur, "sur")
+          const message = '新會議已添加 | A Meeting is schedule tommorow!'
+          sendNotification(message)
            //promiseArr.push(new Promise(function(resolve, reject){
               /*  var todayDate = new Date()
             var now1 = moment(new Date(sur.effectiveTo));

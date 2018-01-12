@@ -676,6 +676,7 @@ function savePoll(req, res, fileLinks){
             })
         Promise.all(promiseArr)
         .then(function(d){ 
+          console.log(req.body.startTime, "startTime")
             //saveMeeting(req, res, fileLinks, polls)
         var meeting = new Meeting({
                 title: req.body.meeting_title,

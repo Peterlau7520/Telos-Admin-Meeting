@@ -241,7 +241,9 @@
                                 <div class="clearfix"></div>
                                 <div id="loader2"></div>
                                 <div class="clearfix"></div>
+                                <div class="form-group col-sm-6">
                                  <button class="btn btn-primary add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a poll | 添加投票</button>
+                                 </div>
                                </div>
                             </div>
                            
@@ -733,7 +735,10 @@
             return form_json;
         }
         var originalData = '{{{stringify meetingsData}}}';
+        console.log(originalData, "originalData")
+        if(originalData != ''){
         originalData = JSON.parse(originalData);
+        }
         $('.meeting_li').click(function (event) {
             $('.save_meeting').hide()
             $('#heading3').text('Upcoming Meeting | 近期會議')

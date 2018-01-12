@@ -502,9 +502,6 @@ body > .navbar-collapse {
   .btn.btn-icon {
     padding: 8px; }
 
-.btn-primary {
-  border-color: #3472F7;
-  color: #3472F7; }
   .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
     background-color: transparent;
     color: #1D62F0;
@@ -560,11 +557,11 @@ body > .navbar-collapse {
     border-color: #1DC7EA; }
   .btn-info.btn-fill {
     color: #FFFFFF;
-    background-color: #1DC7EA;
+    background-color: #4FA6FF;
     opacity: 1;
     filter: alpha(opacity=100); }
     .btn-info.btn-fill:hover, .btn-info.btn-fill:focus, .btn-info.btn-fill:active, .btn-info.btn-fill.active, .open > .btn-info.btn-fill.dropdown-toggle {
-      background-color: #42d0ed;
+      background-color: #4FA6FF;
       color: #FFFFFF; }
     .btn-info.btn-fill .caret {
       border-top-color: #FFFFFF; }

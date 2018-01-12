@@ -15,6 +15,14 @@
  */
 /*      light colors         */
 /*css open*/
+.nav-getForum{
+  width: 100%;
+}
+.forum-new-post-btn{
+  display: inline-block;
+  float: right;
+  width: 207px !important;
+}
 .add-meeting-btn{
   bottom: 50px;
   float: right;
@@ -1169,7 +1177,8 @@ body > .navbar-collapse {
 .table .td-actions {
   min-width: 90px; }
 .table > tbody > tr {
-  position: relative; }
+  position: relative;
+  cursor: pointer; }
   .table > tbody > tr:hover .td-actions .btn {
     opacity: 1;
     filter: alpha(opacity=100); }
@@ -3279,6 +3288,7 @@ body > .navbar-collapse {
 /*post css close*/
 
 /*HEADER*/
+
 .forum-heading-btn{
    border-color: rgb(66, 149, 251);
     color: #fff;
