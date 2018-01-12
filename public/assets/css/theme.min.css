@@ -1255,7 +1255,7 @@ p, .p {
 }
 
 .pFont{
-  font-size: 20px !important;
+  font-size: 16px !important;
 }
 
 small, .small {
@@ -3522,7 +3522,7 @@ button[type='submit']:focus, input[type='submit']:focus, input[type='button']:fo
   top: 0;
   left: 0;
   width: 100%;
-  height: auto;
+  height: 100vh !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
   background-size: cover !important;
