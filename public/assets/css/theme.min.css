@@ -348,8 +348,8 @@ iframe {
 }
 
 body {
-  -moz-transform:scale(2) !important;
-  zoom: 1.15;
+  /*-moz-transform:scale(2) !important;
+  zoom: 1.15;*/
   background-position: center;
   background-color: #fff;
   background-repeat: no-repeat;

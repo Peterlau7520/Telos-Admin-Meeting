@@ -67,7 +67,7 @@
     <div class="main-panel">
         <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
-                <div class="navbar-header">
+                <div class="navbar-header nav-getForum">
                 <div class="sk-circle parent-circle">
   <div class="sk-circle1 sk-child"></div>
   <div class="sk-circle2 sk-child"></div>
@@ -88,10 +88,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Forum/論壇</a>
+                    <a class="navbar-brand" href="#">Forum | 論壇</a>
 
-                    <div class = "add-meeting-btn" style="margin-top: -3px; padding-left: 563px;">
-                   <a href="" class="btn btn-info forum-heading-btn btn-primary new_post">  New Post | 添加會議</a>
+                    <div class = "add-meeting-btn forum-new-post-btn" style="margin-top: -3px;">
+                   <a href="" class="btn btn-info  forum-heading-btn btn-primary new_post">  New Post | 添加會議</a>
                     </div>
                 </div>
                 <div class="collapse navbar-collapse">
@@ -106,7 +106,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Forum/論壇</h4>
+                                <h4 class="title">Forum | 論壇</h4>
                             </div>
                                 <div class="content table-responsive table-full-width">
                                 <table class="table ">
@@ -479,6 +479,7 @@ setTimeout(function(){
             refresh = false
             userLike = false
             const data= originalData[event.target.id]   
+            console.log(data, "dattttttttttttta")
             var liked = originalData[event.target.id].likedBy
             if(liked.indexOf(user) > -1){
                 userLike = true
@@ -488,7 +489,7 @@ setTimeout(function(){
             const sno = id++
             $('.post-number').html((id++) + '.')
             $('#postid').html('<input type="hidden" name="postId" value="'+data._id+'" />')
-            $("#title").html('<span class="post-text">'+data.content+'<span class="posted-date"><h6>Posted: '+data.postTime+'</h6></span><span class="report-link"><a href="#"  class="report_post"  id="'+data._id+'">Report Post</a> </span></span><span class="post-thumb-icon"> <a href="#"><div class="heart like-fa like_post" aria-hidden="true" id="'+data._id+'"><div class="fa-count" id="'+data.numberOfLikes+'">'+data.numberOfLikes+'</div></div></a></span>')
+            $("#title").html('<span class="post-text">'+data.content+'<span class="posted-date"><h6>張貼日期 | Posted: '+data.postTime+'</h6></span><span class="report-link"><a href="#"  class="report_post"  id="'+data._id+'">投訴 | Report Post</a> </span></span><span class="post-thumb-icon"> <a href="#"><div class="heart like-fa like_post" aria-hidden="true" id="'+data._id+'"><div class="fa-count" id="'+data.numberOfLikes+'">'+data.numberOfLikes+'</div></div></a></span>')
             $("#comments").html('')
             $.each(data.comments, function(key,com){ 
                 var userConLike = false
@@ -497,7 +498,7 @@ setTimeout(function(){
                 userConLike = true
             }
             const length =  com.likedBy.length 
-            var html = '<div class="col-lg-12 comment-width"><span class="pull-left estate">'+com.account+'</span> <span class="comment-para">'+com.timeLeftChinese+' | '+com.timeLeft+'</span><span class="report-link pull-right "><a href="#" class="report_comment"  id="'+com._id+'">Report Comment</a></span> </div><span class=" fa-marign pt-comment"><a href="#" class=""  id="'+com._id+'">';
+            var html = '<div class="col-lg-12 comment-width"><span class="pull-left estate">'+com.account+'</span> <span class="comment-para">'+com.timeLeftChinese+' | '+com.timeLeft+'</span><span class="report-link pull-right "><a href="#" class="report_comment"  id="'+com._id+'">投訴 | Report Comment</a></span> </div><span class=" fa-marign pt-comment"><a href="#" class=""  id="'+com._id+'">';
             if(!userConLike){
              html = html + '<div class="heart like-fa + like_comment" aria-hidden="true" id="'+com._id+'">'
             }else{
