@@ -208,7 +208,6 @@ router.get('/noticeBoard', (req, res) => {
   if(!blocksFloors){
     blocksFloors = {};
   }
-  console.log(blocksFloors);
   Notice
   .find({estate: req.user.estateName})
   .lean()

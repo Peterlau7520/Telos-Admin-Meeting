@@ -276,7 +276,6 @@ router.get('/getSurveys', (req, res) => {
             var currentDate = moment(new Date());
             currentDate = currentDate.format("D/MM/YYYY");
             var now1 = moment(new Date(sur.effectiveTo));
-            console.log(now1, "now1")
             if(!(todayDate > sur.effectiveTo && todayDate != sur.effectiveTo)){
                     list[index].effectiveTo =   now1.format("D/MM/YYYY")
          }else{
