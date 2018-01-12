@@ -109,13 +109,16 @@ router.post('/addSurvey', (req, res) => {
 
 function saveSurvey(req, res, targetAudience){
     const options = []
+    console.log(req.body.endTime, "time")
     var endDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
     var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
     var endFinal = dateFormat( endDay + " " + endHour , 'shortDate');
+    var date = new Date(req.body.endTime)
+    console.log(date, "datee")
     var survey = new Survey({
             title: req.body.title,
             titleChn: req.body.titleChn,
-            effectiveTo: endFinal,
+            effectiveTo: req.body.endTime,
             targetAudience: targetAudience,
             estate: req.user.estateName,
         });
@@ -270,6 +273,7 @@ router.get('/getSurveys', (req, res) => {
             var currentDate = moment(new Date());
             currentDate = currentDate.format("D/MM/YYYY");
             var now1 = moment(new Date(sur.effectiveTo));
+            console.log(now1, "now1")
             if(!(todayDate > sur.effectiveTo && todayDate != sur.effectiveTo)){
                     list[index].effectiveTo =   now1.format("D/MM/YYYY")
          }else{

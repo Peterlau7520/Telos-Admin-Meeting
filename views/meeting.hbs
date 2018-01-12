@@ -241,7 +241,9 @@
                                 <div class="clearfix"></div>
                                 <div id="loader2"></div>
                                 <div class="clearfix"></div>
+                                <div class="form-group col-sm-6">
                                  <button class="btn btn-primary add_pole" type="button" id="{{_id}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a poll | 添加投票</button>
+                                 </div>
                                </div>
                             </div>
                            
@@ -253,12 +255,18 @@
                                         <a role="button" data-toggle="collapse" style='color:black' data-parent="#accordion" href="#poll_{{_id}}" aria-expanded="true"
                                             aria-controls="collapseOne">
                                             <div class="panel-heading" role="tab">
-                                                <h4 class="panel-title">
-                                                    {{pollNameChn}} | {{pollName}} 
-                                                </h4>
-                                                <h6 class="pull-right" style="margin-top: -23px">
-                                                Vote by | 投票截止於: {{endTime}}
-                                                </h6>
+                                                <div class="row">
+                                                    <div class="col-lg-7 col-md-7">
+                                                        <h4 class="panel-title">
+                                                            {{pollNameChn}} | {{pollName}} 
+                                                        </h4>
+                                                    </div>
+                                                    <div class="col-lg-5 col-md-5">
+                                                        <h6 class="pull-right">
+                                                        Vote by | 投票截止於: {{endTime}}
+                                                        </h6>
+                                                     </div>
+                                                </div>
                                             </div>
                                         </a>
                                         {{#if @key}}
@@ -412,12 +420,18 @@
                                         <a role="button" data-toggle="collapse" style='color:black' data-parent="#accordion" href="#poll_{{_id}}" aria-expanded="true"
                                             aria-controls="collapseOne">
                                             <div class="panel-heading" role="tab">
-                                                <h4 class="panel-title">
-                                                    {{pollNameChn}} | {{pollName}} 
-                                                </h4>
-                                                <h6 class="pull-right" style="margin-top: -23px">
-                                                Vote by | 投票截止於: {{endTime}}
-                                                </h6>
+                                                <div class="row">
+                                                    <div class="col-lg-7 col-md-7">
+                                                        <h4 class="panel-title">
+                                                            {{pollNameChn}} | {{pollName}} 
+                                                        </h4>
+                                                    </div>
+                                                    <div class="col-lg-5 col-md-5">
+                                                        <h6 class="pull-right">
+                                                        Vote by | 投票截止於: {{endTime}}
+                                                        </h6>
+                                                     </div>
+                                                </div>
                                             </div>
                                         </a>
                                         {{#if @key}}
@@ -732,8 +746,10 @@
             });
             return form_json;
         }
-        var originalData = '{{{stringify meetingsData}}}';
+        var originalData = `{{{stringify meetingsData}}}`;
+        if(originalData != ''){
         originalData = JSON.parse(originalData);
+        }
         $('.meeting_li').click(function (event) {
             $('.save_meeting').hide()
             $('#heading3').text('Upcoming Meeting | 近期會議')
@@ -743,12 +759,9 @@
             var ids = 'tab_'+originalData[id]._id;
             localStorage.setItem("tab", id);
             localStorage.setItem("divTab", ids);
-            console.log(originalData[id].startTime, "original")
             var firstDate = new Date(originalData[id].startTime);
             var secondDate = new Date();
-            console.log(firstDate, secondDate)
             var diff = firstDate - secondDate;  
-            console.log(diff, "diff")
             var seconds = diff / 1000;
             var minutes = (diff / 1000) / 60;
             var hours = minutes / 60;
@@ -794,7 +807,7 @@
         $(".delete_poll_btn").on('click' , function(event){
         var parentId = event.target.parentElement.id;
         var childId = event.target.id;
-         var originalData = '{{{stringify meetingsData}}}';
+         var originalData = `{{{stringify meetingsData}}}`;
          originalData = JSON.parse(originalData);
             var poll = originalData[parentId].polls[childId]
             const data = {}
@@ -1010,7 +1023,7 @@
         $('.edit_pole_button').click(function (event) {
               var parentId = event.target.parentElement.id;
             var childId = event.target.id;
-            var originalData = '{{{stringify meetingsData}}}';
+            var originalData = `{{{stringify meetingsData}}}`;
              originalData = JSON.parse(originalData);
             var poll = originalData[parentId].polls[childId]
             var lastDate = new Date(originalData[parentId].startTime)
@@ -1123,8 +1136,8 @@
                                              $("#loader").append(html);                                  
                                               location.reload()
                                            
-                                        }
-                                    },
+                                                }
+                                            },
                                     {
                                         text: "Cancel",
                                         "class": btn1css,

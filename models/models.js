@@ -135,7 +135,7 @@ const noticeSchema = new Schema({
 const surveySchema = new Schema({
     title: String,
     titleChn: String,
-    effectiveTo: Date,
+    effectiveTo: String,
     postDate: {type: Date, default: new Date()},
     targetAudience: [{block: String, floors: Array}],
     estate: String

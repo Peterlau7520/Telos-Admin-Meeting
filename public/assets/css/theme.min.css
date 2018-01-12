@@ -348,13 +348,15 @@ iframe {
 }
 
 body {
+  /*-moz-transform:scale(2) !important;
+  zoom: 1.15;*/
   background-position: center;
   background-color: #fff;
   background-repeat: no-repeat;
   background-size: cover;
   color: #404040;
   font-family: "SF-Regular", serif;
-  font-size: 14px;
+  font-size: 18px;
   font-style: normal;
   font-weight: normal;
   line-height: 1.5;
@@ -1173,7 +1175,7 @@ hr {
 h1, .h1 {
   margin-bottom: 24px;
   color: #222;
-  font-size: 40px;
+  font-size: 45px;
   font-style: normal;
   font-weight: 900;
   line-height: 1.15;
@@ -1250,6 +1252,10 @@ h6, .h6 {
 
 p, .p {
   margin: 0 0 16px
+}
+
+.pFont{
+  font-size: 16px !important;
 }
 
 small, .small {
@@ -8279,13 +8285,13 @@ button[type='submit']:focus, input[type='submit']:focus, input[type='button']:fo
 
 .testimonial .testimonial-author-name {
   margin-bottom: 3px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold
 }
 
 .testimonial .testimonial-author-position {
   margin: 0;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: normal
 }
 

@@ -1067,7 +1067,7 @@
         })
 // meeting js
 
-var originalData = '{{{stringify meetingsData}}}';
+var originalData = `{{{stringify meetingsData}}}`;
         originalData = JSON.parse(originalData);
          function convertSerializeArrayToJson(serilizeArray) {
             var form_json = {};
@@ -1145,7 +1145,7 @@ var originalData = '{{{stringify meetingsData}}}';
         $(".delete_poll_btn").on('click' , function(event){
         var parentId = event.target.parentElement.id;
         var childId = event.target.id;
-         var originalData = '{{{stringify meetingsData}}}';
+         var originalData = `{{{stringify meetingsData}}}`;
          originalData = JSON.parse(originalData);
             var poll = originalData[parentId].polls[childId]
             const data = {}
@@ -1341,7 +1341,7 @@ var originalData = '{{{stringify meetingsData}}}';
         $('.edit_pole_button').click(function (event) {
               var parentId = event.target.parentElement.id;
             var childId = event.target.id;
-            var originalData = '{{{stringify meetingsData}}}';
+            var originalData = `{{{stringify meetingsData}}}`;
              originalData = JSON.parse(originalData);
             var poll = originalData[parentId].polls[childId]
             var lastDate = new Date(originalData[parentId].createdAt)

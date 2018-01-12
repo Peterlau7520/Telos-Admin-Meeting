@@ -4,6 +4,10 @@ branch-defaults:
     group_suffix: null
   production:
     environment: Telos-Admin-Meeting-dev
+environment-defaults:
+  Telos-Admin-Meeting-dev:
+    branch: production
+    repository: Telos-Admin-Meeting
 global:
   application_name: Telos-Admin-Meeting
   branch: null
