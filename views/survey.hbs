@@ -1072,8 +1072,9 @@ var myPieChart = new Chart(ctx,{
 }
 
         var data = '{{{stringify data}}}';
+        if(data != ''){
         data = JSON.parse(data);
-        
+        }
         var selectedAudiance = null;
         var selectedBlook = null;
         var selectedData = {};

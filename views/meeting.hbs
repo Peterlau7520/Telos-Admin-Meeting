@@ -735,7 +735,10 @@
             return form_json;
         }
         var originalData = '{{{stringify meetingsData}}}';
+        console.log(originalData, "originalData")
+        if(originalData != ''){
         originalData = JSON.parse(originalData);
+        }
         $('.meeting_li').click(function (event) {
             $('.save_meeting').hide()
             $('#heading3').text('Upcoming Meeting | 近期會議')

@@ -334,7 +334,9 @@ setTimeout(function(){
         }
 
          var originalData = '{{{stringify forum}}}';
+         if(originalData != ''){
             originalData = JSON.parse(originalData);
+          }
 
             var user = '{{{user}}}';
 
