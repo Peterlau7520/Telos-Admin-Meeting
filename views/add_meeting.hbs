@@ -989,25 +989,12 @@
             var filesName = []
             $.each($("#documents_file :input[type='file']"), function(data, key){ 
                 var fileData = this.files[0]
-                filesName.push(this.files[0].name.replace(/ /g,''))
+                filesName.push(this.files[0].name.replace(/[^A-Z0-9]/ig, ""))
               file.push(fileData)
             });
             console.log(file, "file")
             formData.append('files', JSON.stringify(file))
             formData.append('filesName', filesName)
-            $.ajax({
-                url: HostName + "/addPollsOfMeeting",
-                data: formData,
-                contentType: false,
-                processData: false,
-                type: 'POST',
-                success: function (data) {
-                    //location.reload()
-                },
-                err: function(err){
-                    console.log(err)
-                }
-            });
             form_json["option"] = option
             form_json["files"] = file
             form_json["filesName"] = filesName
