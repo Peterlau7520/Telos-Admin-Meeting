@@ -134,6 +134,7 @@ router.get('/allMeetings', (req, res) => {
 })
 
 router.post('/addPollsOfMeeting', (req, res) => {
+  console.log(req.body, "hhhh", req.files)
     if(req.body.meeting_id){
       var meeting_title = ''
       Meeting.findOne({_id: req.body.meeting_id}).then(function(meetings, err){
@@ -185,6 +186,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
 }
     else{
           let formData = req.body;
+          console.log(req.files, "formData")
         for (var key in req.files) {
             var info = req.files[key][0].data;
             var name = req.files[key][0].name.replace(/ /g,'');
@@ -200,6 +202,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
                       fileLinksLink = fileLinksLink.replace(/ /g,'');
                   }
                   meeting_title = meeting_title.replace(/ /g,'');
+                  console.log("hlll")
             var data = {
                 Bucket: BucketName,
                 Key: `${req.user.estateName}/${meeting_title}/${titleLink}/${fileLinksLink}`,
@@ -208,15 +211,17 @@ router.post('/addPollsOfMeeting', (req, res) => {
                 ContentDisposition: 'inline',
                 ACL: "public-read"
             }; // req.user.estateName
+            console.log(data, "data")
             bucket.putObject(data, function (err, data) {
                 if (err) {
                     console.log('Error uploading data: ', err);
                 } else {
                     console.log('succesfully uploaded the pdf!');
-
+                      //res.redirect('/addMeeting');
                 }
             });
         }       
+        res.json({})
     }
 
     function savePoll(req, res, files){
