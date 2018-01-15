@@ -380,7 +380,44 @@ router.post('/editPoll', (req, res) => {
     var id = req.body.id
     var fileLinks = []
     var pollFileLinks = []
+    var promiseArr = []
     var promiseArr2 = []
+    if(req.body.removedfiles){
+        var file = req.body.removedfiles
+         filearray = file.split(',')
+          promiseArr.push(new Promise(function(resolve, reject){
+          forEach(filearray, function(item){
+            var titleLink =''
+            var fileLinksLink =''
+            var meeting_title = ''
+                  if(req.body.meeting_title){
+                    meeting_title = req.body.meeting_title.replace(/[^A-Z0-9]/ig, "");
+                  }
+                  if(req.body.pollName){
+                    titleLink = req.body.pollName.replace(/[^A-Z0-9]/ig, "");
+                  }
+                  if(item){
+                    fileLinksLink = item.replace(/[^A-Z0-9]/ig, "");
+                   }
+                 Poll.findOneAndUpdate({_id: req.body.id
+            }, {
+              $pull: { 
+                 fileLinks: item,
+              }
+            })
+                 .then(function(d, err){
+                    resolve(d)
+            })
+                })
+                })) 
+             Promise.all(promiseArr)
+            .then(function(dd){
+             upload(req, res)
+            })
+    }else{
+        upload(req, res)
+}  
+function upload(req, res){
     if(req.files && !(_.isEmpty(req.files))){
           promiseArr2.push(new Promise(function(resolve, reject){
          for (var key in req.files) {
@@ -438,6 +475,7 @@ router.post('/editPoll', (req, res) => {
     else{
         updatePoll(req, res, fileLinks)
     }
+  }
     function updatePoll(req, res, files){
         var array = []
         var promiseArr = [] 
@@ -450,42 +488,7 @@ router.post('/editPoll', (req, res) => {
         array = req.body.option
     }
     
-     if(req.body.removedfiles){
-        var file = req.body.removedfiles
-         filearray = file.split(',')
-          promiseArr.push(new Promise(function(resolve, reject){
-          forEach(filearray, function(item){
-            var titleLink =''
-            var fileLinksLink =''
-            var meeting_title = ''
-                  if(req.body.meeting_title){
-                    meeting_title = req.body.meeting_title.replace(/[^A-Z0-9]/ig, "");
-                  }
-                  if(req.body.pollName){
-                    titleLink = req.body.pollName.replace(/[^A-Z0-9]/ig, "");
-                  }
-                  if(item){
-                    fileLinksLink = item.replace(/[^A-Z0-9]/ig, "");
-                   }
-                 Poll.findOneAndUpdate({_id: req.body.id
-            }, {
-              $pull: { 
-                 fileLinks: item,
-              }
-            })
-                 .then(function(d, err){
-                    resolve(d)
-            })
-                })
-                })) 
-             Promise.all(promiseArr)
-            .then(function(dd){
-             update(req, res)
-            })
-    }else{
-        update(req, res)
-}  
-    function update(req, res){
+     
          const data = req.body
         Poll.findOneAndUpdate({_id: id
     }, {
@@ -512,7 +515,6 @@ router.post('/editPoll', (req, res) => {
         }
     })    
     }
-}
 })
 
 router.get('/addMeeting',(req,res) => {

@@ -276,9 +276,8 @@ router.get('/getSurveys', (req, res) => {
             _.forEach(data[0], function(sur, index) {
             var currentDate = moment(new Date());
             var now1 = moment(new Date(sur.effectiveTo));
-            console.log('currentDate', currentDate)
-            console.log('sur.effectiveTo', now1)
-            if(!(currentDate > now1 && currentDate != now1)){
+            console.log(todayDate, "date" )
+            if(!(todayDate > new Date(sur.effectiveTo) && todayDate != new Date(sur.effectiveTo))){
                     list[index].effectiveTo =   now1.format("D/MM/YYYY")
          }else{
                         list[index].effectiveTo =  'expired'
