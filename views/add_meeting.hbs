@@ -641,8 +641,9 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Add a poll | 添加投票</h4>
             </div>
+            <iframe name="my_iframe" src="not_submitted_yet.aspx" class="iframe"></iframe>
             <div class="modal-body">
-                <form role="form" name="#poll_form" id="poll_form" action="/addPollsOfMeeting"  method="post" enctype="multipart/form-data">
+                <form role="form" name="#poll_form" id="poll_form" action="/addPollsOfMeeting"  method="post" enctype="multipart/form-data" target="my_iframe">
                     <div class="form-group col-sm-6">
                         <label>Poll Title</label>
                         <input type="hidden" name="pollMeeting_title" class="form-control" />
@@ -684,7 +685,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <hr>
-                    <button type="submit" class="btn btn-primary pull-right" id="close_model" > Confirm | 确认</button>
+                    <button type="submit" class="btn btn-primary pull-right" id="close_model" onclick="window.stop();"> Confirm | 确认</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -857,6 +858,7 @@
         $("#sidebarMenu").css({"min-height":hd})
     }
     $(document).ready(function () {  
+        $('.iframe').hide();
     const HostName = window.location.origin
         hd();
         //datetimepicker
@@ -953,6 +955,9 @@
             setTimeout(()=>{hd();},500)
         })
         $("#close_model").click(function (event) {
+            event.stopPropagation();
+           // event.preventDefault();
+           window.stop();
             var meeting_title = $('input[name=meeting_title]').val()
             $('input[name=pollMeeting_title]').val(meeting_title)
             var form_data_array = $("#poll_form").serializeArray();
@@ -987,8 +992,22 @@
                 filesName.push(this.files[0].name.replace(/ /g,''))
               file.push(fileData)
             });
+            console.log(file, "file")
             formData.append('files', JSON.stringify(file))
             formData.append('filesName', filesName)
+            $.ajax({
+                url: HostName + "/addPollsOfMeeting",
+                data: formData,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    //location.reload()
+                },
+                err: function(err){
+                    console.log(err)
+                }
+            });
             form_json["option"] = option
             form_json["files"] = file
             form_json["filesName"] = filesName
