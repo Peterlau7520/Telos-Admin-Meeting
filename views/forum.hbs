@@ -312,7 +312,7 @@ setTimeout(function(){
    refreshPage(refresh)
 }, 5000);
 }*/
-     var forum = '{{{stringify forum}}}'
+     var forum = `{{{stringify forum}}}`
      forum = JSON.parse(forum);
      var socket =  io.connect(window.location.origin)
          
@@ -333,7 +333,7 @@ setTimeout(function(){
             }
         }
 
-         var originalData = '{{{stringify forum}}}';
+         var originalData = `{{{stringify forum}}}`;
          if(originalData != ''){
             originalData = JSON.parse(originalData);
           }
