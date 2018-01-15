@@ -36,7 +36,6 @@ const appId = '72ae436c-554c-4364-bd3e-03af71505447';
 const apiKey = 'YTU4NmE5OGItODM3NC00YTYwLWExNjUtMTEzOTE2YjUwOWJk';
 const oneSignal = require('onesignal')(apiKey, appId, true);
 
-
 let currDate = new Date(); 
 let currentDate = currDate.getFullYear()+"-"+(currDate.getMonth()+1)+"-"+currDate.getDate()+" "+currDate.getHours()+":"+currDate.getMinutes()+":"+currDate.getSeconds();
 router.get('/allMeetings', (req, res) => {
@@ -54,12 +53,12 @@ router.get('/allMeetings', (req, res) => {
                       var fileLinksLink = ''
                       if(item.title){
                       titleLink = item.title
-                      titleLink = titleLink.replace(/ /g,'');
+                      titleLink = titleLink.replace(/[^A-Z0-9]/ig, "");
                       pollMeeting_title = titleLink
                   }
                   if(item.fileLinks[0]){
                       fileLinksLink = item.fileLinks[0]
-                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9]/ig, "");
                   }
                         let Key = `${req.user.estateName}/${titleLink}/${fileLinksLink}`;
                         fileLinks.push({
@@ -80,11 +79,11 @@ router.get('/allMeetings', (req, res) => {
                       var fileLinksLink = ''
                       if(poll.pollName){
                       titleLink = poll.pollName
-                      titleLink = titleLink.replace(/ /g,'');
+                      titleLink = titleLink.replace(/[^A-Z0-9]/ig, "");
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9]/ig, "");
                   }
                         let Key = `${req.user.estateName}/${pollMeeting_title}/${titleLink}/${fileLinksLink}`;
                         polefileLinks.push({
@@ -144,21 +143,21 @@ router.post('/addPollsOfMeeting', (req, res) => {
                     if(req.files && !(_.isEmpty(req.files))){
                        for (var key in req.files) {
             var info = req.files[key][0].data;
-            var name = req.files[key][0].name.replace(/ /g,'');
+            var name = req.files[key][0].name.replace(/[^A-Z0-9]/ig, "");
             fileLinks.push(name)
             var titleLink = ''
                       var fileLinksLink = ''
                       if(req.body.title){
                       titleLink = req.body.title
-                      titleLink = titleLink.replace(/ /g,'');
+                      titleLink = titleLink.replace(/[^A-Z0-9]/ig, "");
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9]/ig, "");
                   }
                   if(meeting_title){
 
-                      meeting_title = meeting_title.replace(/ /g,'');
+                      meeting_title = meeting_title.replace(/[^A-Z0-9]/ig, "");
                   }
             var data = {
                 Bucket: BucketName,
@@ -189,20 +188,20 @@ router.post('/addPollsOfMeeting', (req, res) => {
           console.log(req.files, "formData")
         for (var key in req.files) {
             var info = req.files[key][0].data;
-            var name = req.files[key][0].name.replace(/ /g,'');
+            var name = req.files[key][0].name.replace(/[^A-Z0-9]/ig, "");
             var meeting_title = req.body.pollMeeting_title;
             var titleLink = ''
                       var fileLinksLink = ''
                       if(req.body.title){
                       titleLink = req.body.title
-                      titleLink = titleLink.replace(/ /g,'');
+                      titleLink = titleLink.replace(/[^A-Z0-9]/ig, "");
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9]/ig, "");
                   }
-                  meeting_title = meeting_title.replace(/ /g,'');
-                  console.log("hlll")
+                  meeting_title = meeting_title.replace(/[^A-Z0-9]/ig, "");
+                  console.log("hlll", meeting_title)
             var data = {
                 Bucket: BucketName,
                 Key: `${req.user.estateName}/${meeting_title}/${titleLink}/${fileLinksLink}`,
@@ -272,18 +271,18 @@ router.post('/editMeeting', (req, res) => {
         var files = req.files.fileField
         for (var i = 0; i < files.length; i++) {
             var info = files[i].data;
-            var name = files[i].name.replace(/ /g,'');
+            var name = files[i].name.replace(/[^A-Z0-9]/ig, "");
             //meeting.fileLinks.push(name);
             fileLinks.push(name)
              var titleLink = ''
                       var fileLinksLink = ''
                       if(req.body.title){
                       titleLink = req.body.title
-                      titleLink = titleLink.replace(/ /g,'');
+                      titleLink = titleLink.replace(/[^A-Z0-9]/ig, "");
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9]/ig, "");
                   }
                 var data = {
                 Bucket: BucketName,
@@ -344,10 +343,10 @@ router.post('/editMeeting', (req, res) => {
                   var titleLink = ''
                   var fileLinksLink = ''
                   if(data.title){
-                    titleLink = data.title.replace(/ /g,'');
+                    titleLink = data.title.replace(/[^A-Z0-9]/ig, "");
                   }
                   if(data.removedfiles){
-                    fileLinksLink = data.removedfiles.replace(/ /g,'');
+                    fileLinksLink = data.removedfiles.replace(/[^A-Z0-9]/ig, "");
                   }
                   let Key = `${req.user.estateName}/${titleLink}/${fileLinksLink}`
                   bucket.deleteObject({
@@ -386,21 +385,21 @@ router.post('/editPoll', (req, res) => {
           promiseArr2.push(new Promise(function(resolve, reject){
          for (var key in req.files) {
             var info = req.files[key][0].data;
-            var name = req.files[key][0].name.replace(/ /g,'');
+            var name = req.files[key][0].name.replace(/[^A-Z0-9]/ig, "");
                       var titleLink = ''
                       var fileLinksLink = ''
                       var meeting_title =''
                       if(req.body.pollName){
                       titleLink = req.body.pollName
-                      titleLink = titleLink.replace(/ /g,'');
+                      titleLink = titleLink.replace(/[^A-Z0-9]/ig, "");
                   }
                   if(req.body.meeting_title){
-                    meeting_title = req.body.meeting_title.replace(/ /g,'');
+                    meeting_title = req.body.meeting_title.replace(/[^A-Z0-9]/ig, "");
                   }
 
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9]/ig, "");
                   }
             fileLinks.push(name)
             Poll.findOneAndUpdate({_id: id
@@ -460,13 +459,13 @@ router.post('/editPoll', (req, res) => {
             var fileLinksLink =''
             var meeting_title = ''
                   if(req.body.meeting_title){
-                    meeting_title = req.body.meeting_title.replace(/ /g,'');
+                    meeting_title = req.body.meeting_title.replace(/[^A-Z0-9]/ig, "");
                   }
                   if(req.body.pollName){
-                    titleLink = req.body.pollName.replace(/ /g,'');
+                    titleLink = req.body.pollName.replace(/[^A-Z0-9]/ig, "");
                   }
                   if(item){
-                    fileLinksLink = item.replace(/ /g,'');
+                    fileLinksLink = item.replace(/[^A-Z0-9]/ig, "");
                    }
                  Poll.findOneAndUpdate({_id: req.body.id
             }, {
@@ -524,9 +523,10 @@ router.get('/addMeeting',(req,res) => {
         if(meetings.length > 0) {
             promiseArr.push(new Promise(function(resolve, reject){
                forEach(meetings, function(item, key, a){
+                console.log(item, "item")
                 if( item.fileLinks && item.fileLinks.length > 0) {
                       let fileLinks = [];
-                        let Key = `${req.user.estateName}/${item.title}/${item.fileLinks[0]}`;
+                        let Key = `${req.user.estateName.replace(/[^A-Z0-9]/ig, "")}/${item.title.replace(/[^A-Z0-9]/ig, "")}/${item.fileLinks[0].replace(/[^A-Z0-9]/ig, "")}`;
                         fileLinks.push({
                           name: item.fileLinks[0],
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
@@ -535,14 +535,16 @@ router.get('/addMeeting',(req,res) => {
                 }   
                 if(item.polls){
                 forEach(item.polls, function(poll, key, a){ 
+                  console.log(poll, "poll")
                     var pollEndTime = moment(new Date(poll.endTime));
                     item.polls[key].endTime = pollEndTime.format("D-MM-YYYY");
                 let polefileLinks = []; 
                 if(poll.fileLinks){ 
                     forEach(poll.fileLinks, function(name, key, a){ 
-                        let Key = `${req.user.estateName}/${item.title}/${poll.title}/${name}`;
+                      console.log(name, "name")
+                        let Key = `${req.user.estateName.replace(/[^A-Z0-9]/ig, "")}/${item.title.replace(/[^A-Z0-9]/ig, "")}/${poll.pollName.replace(/[^A-Z0-9]/ig, "")}/${name.replace(/[^A-Z0-9]/ig, "")}`;
                         polefileLinks.push({
-                          name: name,
+                          name: name.replace(/[^A-Z0-9]/ig, ""),
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
                         })
                       poll.fileLinks = polefileLinks;
@@ -598,18 +600,18 @@ function uploadFile(req, res){
     if (files && files[0].size != 0) {
         for (var i = 0; i < files.length; i++) {
             var info = files[i].data;
-            var name = files[i].name.replace(/ /g,'');
+            var name = files[i].name.replace(/[^A-Z0-9]/ig, "");
             //meeting.fileLinks.push(name);
             fileLinks.push(name)
             var titleLink = ''
                       var fileLinksLink = ''
                       if(req.body.meeting_title){
                       titleLink = req.body.meeting_title
-                      titleLink = titleLink.replace(/ /g,'');
+                      titleLink = titleLink.replace(/[^A-Z0-9]/ig, "");
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/ /g,'');
+                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9]/ig, "");
                   }
             var data = {
                 Bucket: BucketName,
