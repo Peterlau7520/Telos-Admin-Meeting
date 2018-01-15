@@ -212,6 +212,9 @@ router.get('/getSurveys', (req, res) => {
     const promiseArr =[]
     const promiseArr2 = []
   var blocksFloors = req.user.blockArray[0]
+  if(!blocksFloors){
+      blocksFloors = {};
+  }
   Survey.find({estate: req.user.estateName}).lean()
   .then(function(survey, err) {
     if(survey.length){
@@ -273,7 +276,6 @@ router.get('/getSurveys', (req, res) => {
             var currentDate = moment(new Date());
             currentDate = currentDate.format("D/MM/YYYY");
             var now1 = moment(new Date(sur.effectiveTo));
-            console.log(now1, "now1")
             if(!(todayDate > sur.effectiveTo && todayDate != sur.effectiveTo)){
                     list[index].effectiveTo =   now1.format("D/MM/YYYY")
          }else{

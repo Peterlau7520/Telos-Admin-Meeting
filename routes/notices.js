@@ -47,7 +47,8 @@ router.post('/addNotice', (req, res) => {
     }
     const targetAudience = [];
     if(req.body.audience == 'allResidents'){
-        exports.uploadPdf(req, res, targetAudience);
+        //exports.uploadPdf(req, res, targetAudience);
+        exports.saveNotice(req,res,targetAudience);
         //CASE OF ALL RESIDENTS USING ONESIGNAL AS AN EXAMPLE
         Resident.find({estateName: req.user.estateName}, function(err, residents){
             var oneSignalIds = [];
@@ -80,7 +81,7 @@ router.post('/addNotice', (req, res) => {
                 targetAudience.push(subAudience);
             }
         }
-        exports.uploadPdf(req, res, targetAudience);
+        exports.saveNotice(req,res,targetAudience);
 
         //CASE OF SEGMENTED USERS USING ONESIGNAL AS AN EXAMPLE
         Resident.find({estateName: req.user.estateName}, function(err, residents){
@@ -140,20 +141,16 @@ function sendNotification(oneSignalIds, noticeBody){
         }
 }
 
-exports.uploadPdf = function(req, res, targetAudience){
+exports.uploadPdf = function(req, res, noticeId, targetAudience){
     var files = req.files && req.files.filefield ? req.files.filefield : false;
     var fileLinks = []
     if (files && files[0].size != 0) {
         for (var i = 0; i < files.length; i++) {
             var info = files[i].data;
-            var name = files[i].name.replace(/ /g,'');
-            var title = req.body.title.replace(/ /g,'');
-            fileLinks.push(name)
-            const estatePath = req.user.estateName.split(" ").join("");
-            const noticeDateTimePath = dateFormat(new Date(), 'yyyy-mm-dd HH:MM').split(" ").join("");
+            const estatePath = req.user.estateName;
             var data = {
                 Bucket: BucketName,
-                Key: `${estatePath}/Notices/${title}/${noticeDateTimePath}/${name}`,
+                Key: `${estatePath}/Notices/${noticeId}`,
                 Body: info,
                 ContentType: 'application/pdf',
                 ContentDisposition: 'inline',
@@ -163,18 +160,23 @@ exports.uploadPdf = function(req, res, targetAudience){
                 if (err) {
                     console.log('Error uploading data: ', err);
                 } else {
-                    exports.saveNotice(req, res, fileLinks, targetAudience);
+                    res.redirect('/noticeBoard')
 
                 }
             });
         }
     } else {
-        exports.saveNotice(req, res, fileLinks, targetAudience);
+        res.redirect('/noticeBoard')
+
     }
 }
 
 
-exports.saveNotice = function(req, res, fileLinks, targetAudience){
+exports.saveNotice = function(req, res, targetAudience){
+    var files = req.files && req.files.filefield ? req.files.filefield : false;
+    var fileLinks = []
+    var name = files[0].name;
+    fileLinks.push(name);
     var postDate = dateFormat(new Date(), 'yyyy-mm-dd HH:MM');
     var endDay = req.body.endTime.substring(0, req.body.endTime.indexOf('T'));
     var endHour = req.body.endTime.substring(req.body.endTime.indexOf('T') + 1, req.body.endTime.indexOf('T') + 9);
@@ -196,8 +198,8 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
                 res.render('error')
             }
             estate.currentNotices.push(notice)
-            //Redirecting routes.
-            res.redirect('/noticeBoard');
+            //upload pdf
+            exports.uploadPdf(req,res, notice._id, targetAudience);
         })
     })
 }
@@ -205,6 +207,9 @@ exports.saveNotice = function(req, res, fileLinks, targetAudience){
 router.get('/noticeBoard', (req, res) => {
 
   var blocksFloors = req.user.blockArray[0]
+  if(!blocksFloors){
+    blocksFloors = {};
+  }
   Notice
   .find({estate: req.user.estateName})
   .lean()
@@ -219,8 +224,7 @@ router.get('/noticeBoard', (req, res) => {
     var uniqueList2 = _.filter(notices, function(item, key, a){   
         if(item.fileLinks.length > 0) {
               let fileLinks = [];
-              const estatePath = req.user.estateName.split(" ").join("");
-                let Key = `${req.user.estateName}/Notices/${item.title.replace(/ /g,'')}/${item.postDate.split(" ").join("")}/${item.fileLinks[0]}`;
+                let Key = `${req.user.estateName}/Notices/${item._id}`
                 fileLinks.push({
                   name: item.fileLinks[0],
                   url: "https://"+BucketName+".s3.amazonaws.com/"+Key
