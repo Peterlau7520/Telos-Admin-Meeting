@@ -17,6 +17,7 @@ router.get('/aboutchn', (req, res) => {
   res.render('aboutchn', {layout: 'homepageLayout.hbs'});
 });
 
+/*router.get('/siteMap', (req, res) => {
 
 router.get('/privacy', (req, res) => {
   res.render('privacy', {layout: 'privacyLayout.hbs'});
