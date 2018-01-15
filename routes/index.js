@@ -38,7 +38,7 @@ router.get('/termschn', (req, res) => {
 router.get('/siteMap', (req, res) => {
   res.render('sitemap', {layout: 'sitemap.hbs'});
 });
-
+*/
 router.get('/sitemap.xml', (req, res) => {
   res.type('text/plain');
   res.render('sitemap', {layout: 'sitemap.xml'});

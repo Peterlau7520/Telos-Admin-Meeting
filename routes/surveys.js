@@ -120,6 +120,7 @@ function saveSurvey(req, res, targetAudience){
             titleChn: req.body.titleChn,
             effectiveTo: req.body.endTime,
             targetAudience: targetAudience,
+            postDate: new Date(),
             estate: req.user.estateName,
         });
     survey.save()
@@ -274,9 +275,10 @@ router.get('/getSurveys', (req, res) => {
             list = data[0]
             _.forEach(data[0], function(sur, index) {
             var currentDate = moment(new Date());
-            currentDate = currentDate.format("D/MM/YYYY");
             var now1 = moment(new Date(sur.effectiveTo));
-            if(!(todayDate > sur.effectiveTo && todayDate != sur.effectiveTo)){
+            console.log('currentDate', currentDate)
+            console.log('sur.effectiveTo', now1)
+            if(!(currentDate > now1 && currentDate != now1)){
                     list[index].effectiveTo =   now1.format("D/MM/YYYY")
          }else{
                         list[index].effectiveTo =  'expired'
