@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <link rel="stylesheet" href="assets/css/flatpickr.min.css">
-    <script src="https://unpkg.com/flatpickr"></script>
+    <script src="assets/js/flatpickr.js"></script>
     <!--  Survey CSS 1    -->
     <link href="assets/css/admin-survey-css/light-bootstrap-dashboard.css" rel="stylesheet"/>
     <!--  Survey CSS 2     -->
@@ -138,7 +138,7 @@
                                         <div class="col-md-10">
                                             <div class="form-group">
                                                 <label for="example-datetime-local-input">Effective Until | 問卷有效時間</label>
-                                               <input name="endTime" id="flat" class="flatpickr datetimepicker" type="text" placeholder="Select Date.." data-id="confirmDate" required>
+                                               <input name="endTime" class="flatpickr datetimepicker" type="text" placeholder="Select Date.." data-id="confirmDate" required>
                                             </div>
                                         </div>
                                     </div>
@@ -148,7 +148,7 @@
                                                 <label>Audience | 受眾</label>
                                                 <select class="form-control" name="audience"  id="audience">
                                                     <option value="">Please select</option>
-                                                    <option value="allResidents">All Residents/所有住戶</option>
+                                                    <option value="allResidents">All Owners/所有住戶</option>
                                                     {{#each data}}
                                                     <option value="{{@key}}">{{@key}}/Towers/座</option>
                                                     {{/each}}
@@ -289,24 +289,15 @@
 const HostName = window.location.origin
         $(".flatpickr").flatpickr({
             enableTime: true,
+            disabled: false,
+            toggle: true,
+            //allowInput: true
             //dateFormat: "m/d/YTh:i:K"
         });
-        /*$(".flatpickr").on("click", function () {
-            $(".flatpickr").flatpicker.open();
-        });*/
         const html = `<p class="close-calendar">Confirm | 確認</p>`;
         $(".flatpickr-calendar").append(html);
         $(".close-calendar").click(function(){
-            //console.log($('.flatpickr-calendar').prop('className').hasClass( "open" ))
-            const flat = $('#flat').prop('className')
-            console.log(flat, "flat")
-            if( flat.indexOf('active') >= 0){
-                console.log("yes")
-                $('#flat').removeClass('active')
-                // Found world
-            }
              $(".flatpickr-calendar").removeClass("open", 1000, "easeInBack" );
-             $(".flatpickr-calendar").removeClass("active");
         })
         function get_list(data) {
             var html = "";
@@ -646,7 +637,7 @@ const HostName = window.location.origin
                             '</div>'+
                             '<div>'+
                                 '<div class="col-md-2 RemPadRt margLf hr-line" id="chnCost">'+
-                                    '<div class="form-group" id="chnDivKey'+indexChn+'">'+              '<input type="text" class="form-control" name="optionChnKey" placeholder="e.g. Cost" required/>'+
+                                    '<div class="form-group" id="chnDivKey'+indexChn+'">'+              '<input type="text" class="form-control" name="optionChnKey" placeholder="e.g. 價錢" required/>'+
                                 '</div>'+
                                 '<div id="chnKey'+index+'"></div>'+
 

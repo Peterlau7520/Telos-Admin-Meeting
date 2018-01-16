@@ -1093,7 +1093,6 @@ function FlatpickrInstance(element, instanceConfig) {
             self.calendarContainer.classList.remove("open");
             self._input.classList.remove("active");
         }
-        self._input.classList.remove("active");
         triggerEvent("onClose");
     }
     function destroy() {
