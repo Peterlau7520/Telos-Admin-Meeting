@@ -513,7 +513,7 @@ body > .navbar-collapse {
   display: block;
   z-index: 1;
   color: #fff;
-  border-color: #E2E3E4;
+  border: 1px solid #E2E3E4;
   border-style: solid;
   font-weight: 200;
   background-size: cover;

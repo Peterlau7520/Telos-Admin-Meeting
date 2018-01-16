@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <link rel="stylesheet" href="assets/css/flatpickr.min.css">
-    <script src="https://unpkg.com/flatpickr"></script>
+    <script src="assets/js/flatpickr.js"></script>
     <!--  Survey CSS 1    -->
     <link href="assets/css/admin-survey-css/light-bootstrap-dashboard.css" rel="stylesheet"/>
     <!--  Survey CSS 2     -->
@@ -32,6 +32,9 @@
     .validateTips { border: 1px solid transparent; padding: 0.3em; }
     .datetimepicker {
         background-color: #FFFFFF;border: 1px solid #E3E3E3;border-radius: 4px;color: #565656;padding: 8px 12px;"
+    }
+    .close-calendar{
+            cursor: pointer;
     }
   </style>
 <div class="wrapper">
@@ -148,7 +151,7 @@
                                                 <label>Audience | 受眾</label>
                                                 <select class="form-control" name="audience"  id="audience">
                                                     <option value="">Please select</option>
-                                                    <option value="allResidents">All Residents/所有住戶</option>
+                                                    <option value="allResidents">All Owners/所有住戶</option>
                                                     {{#each data}}
                                                     <option value="{{@key}}">{{@key}}/Towers/座</option>
                                                     {{/each}}
@@ -289,6 +292,9 @@
 const HostName = window.location.origin
         $(".flatpickr").flatpickr({
             enableTime: true,
+            disabled: false,
+            toggle: true,
+            //allowInput: true
             //dateFormat: "m/d/YTh:i:K"
         });
         const html = `<p class="close-calendar">Confirm | 確認</p>`;
@@ -634,7 +640,7 @@ const HostName = window.location.origin
                             '</div>'+
                             '<div>'+
                                 '<div class="col-md-2 RemPadRt margLf hr-line" id="chnCost">'+
-                                    '<div class="form-group" id="chnDivKey'+indexChn+'">'+              '<input type="text" class="form-control" name="optionChnKey" placeholder="e.g. Cost" required/>'+
+                                    '<div class="form-group" id="chnDivKey'+indexChn+'">'+              '<input type="text" class="form-control" name="optionChnKey" placeholder="e.g. 價錢" required/>'+
                                 '</div>'+
                                 '<div id="chnKey'+index+'"></div>'+
 
