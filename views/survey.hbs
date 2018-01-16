@@ -138,7 +138,7 @@
                                         <div class="col-md-10">
                                             <div class="form-group">
                                                 <label for="example-datetime-local-input">Effective Until | 問卷有效時間</label>
-                                               <input name="endTime" class="flatpickr datetimepicker" type="text" placeholder="Select Date.." data-id="confirmDate" required>
+                                               <input name="endTime" id="flat" class="flatpickr datetimepicker" type="text" placeholder="Select Date.." data-id="confirmDate" required>
                                             </div>
                                         </div>
                                     </div>
@@ -291,10 +291,22 @@ const HostName = window.location.origin
             enableTime: true,
             //dateFormat: "m/d/YTh:i:K"
         });
+        /*$(".flatpickr").on("click", function () {
+            $(".flatpickr").flatpicker.open();
+        });*/
         const html = `<p class="close-calendar">Confirm | 確認</p>`;
         $(".flatpickr-calendar").append(html);
         $(".close-calendar").click(function(){
+            //console.log($('.flatpickr-calendar').prop('className').hasClass( "open" ))
+            const flat = $('#flat').prop('className')
+            console.log(flat, "flat")
+            if( flat.indexOf('active') >= 0){
+                console.log("yes")
+                $('#flat').removeClass('active')
+                // Found world
+            }
              $(".flatpickr-calendar").removeClass("open", 1000, "easeInBack" );
+             $(".flatpickr-calendar").removeClass("active");
         })
         function get_list(data) {
             var html = "";
