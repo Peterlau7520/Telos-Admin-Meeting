@@ -1027,7 +1027,7 @@
              originalData = JSON.parse(originalData);
             var poll = originalData[parentId].polls[childId]
             var lastDate = new Date(originalData[parentId].startTime)
-            var meeting_title = originalData[parentId].title
+            var meeting_title = originalData[parentId]._id
             var diff = lastDate - new Date()
             var seconds = diff / 1000;
             var minutes = (diff / 1000) / 60;
