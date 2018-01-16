@@ -21,7 +21,7 @@ const surveyRoutes = require('./routes/surveys');
 const noticeRoutes = require('./routes/notices');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
-const cronRoutes = require('./routes/cron');
+//const cronRoutes = require('./routes/cron');
 const Estate = models.Estate;
 
 //----------------MIDDLEWARES----------------
