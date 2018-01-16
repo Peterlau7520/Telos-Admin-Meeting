@@ -21,7 +21,7 @@ const surveyRoutes = require('./routes/surveys');
 const noticeRoutes = require('./routes/notices');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
-//const cronRoutes = require('./routes/cron');
+const cronRoutes = require('./routes/cron');
 const Estate = models.Estate;
 
 //----------------MIDDLEWARES----------------
@@ -84,7 +84,7 @@ app.use('/', meetingRoutes);
 app.use('/', noticeRoutes);
 app.use('/', surveyRoutes);
 app.use('/', forumRoutes);
-//app.use('/', cronRoutes);
+app.use('/', cronRoutes);
 //----------------ERRORS----------------
 app.use(function(err, req, res, next) {
     //console.log(typeof req.render);

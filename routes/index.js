@@ -29,6 +29,7 @@ router.get('/termschn', (req, res) => {
   res.render('termschn', {layout: 'termsLayout.hbs'});
 });
 
+/**/
 /*router.get('/siteMap', (req, res) => {
   res.render('sitemap', {layout: 'sitemap.hbs'});
 });
