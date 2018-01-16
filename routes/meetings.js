@@ -60,7 +60,7 @@ router.get('/allMeetings', (req, res) => {
                       fileLinksLink = item.fileLinks[0]
                       fileLinksLink = fileLinksLink.replace(/[^A-Z0-9]/ig, "");
                   }
-                        let Key = `${req.user.estateName}/${titleLink}/${fileLinksLink}`;
+                        let Key = `${req.user.estateName}/${item.guid}/${fileLinksLink}`;
                         fileLinks.push({
                           name: item.fileLinks[0],
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
@@ -376,6 +376,7 @@ router.post('/editMeeting', (req, res) => {
 })
 
 router.post('/editPoll', (req, res) => {
+  console.log(req.files, "data")
     var data = req.body
     var id = req.body.id
     var fileLinks = []
@@ -585,6 +586,17 @@ router.get('/addMeeting',(req,res) => {
   })
 
 router.post('/saveMeeting',(req,res) =>{
+  function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
+}
+var GUID = guid()
+console.log(GUID, "GUID")
     var data = req.body;
     var body = {
     fields: {},
@@ -617,7 +629,7 @@ function uploadFile(req, res){
                   }
             var data = {
                 Bucket: BucketName,
-                Key:  `${req.user.estateName}/${titleLink}/${fileLinksLink}`,
+                Key:  `${req.user.estateName}/${GUID}/${fileLinksLink}`,// `${req.user.estateName}/${titleLink}/${fileLinksLink}`,
                 Body: info,
                 ContentType: 'application/pdf',
                 ContentDisposition: 'inline',
@@ -699,6 +711,7 @@ function savePoll(req, res, fileLinks){
                 estate: req.user.estateName,
                 fileLinks: fileLinks,
                 polls: d,
+                guid: GUID, 
                 active: true
             });
             meeting.save(function(err, meeting){
