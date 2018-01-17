@@ -18,7 +18,7 @@ router.get('/aboutchn', (req, res) => {
 });
 
 router.get('/404', (req, res) => {
-  res.render('error', {layout: 'error.hbs'});
+  res.render('error', {layout: 'errorLayout.hbs'});
 });
 
 /*router.get('/siteMap', (req, res) => {

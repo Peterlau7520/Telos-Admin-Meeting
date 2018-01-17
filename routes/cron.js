@@ -163,8 +163,8 @@ var j = schedule.scheduleJob("00 15 6 * * *", function(fireDate){
         })
 })
 
-var k = schedule.scheduleJob("*/55 * * * *", function(fireDate){
-  Meeting.find().then(function(meetings, err){
+var k = schedule.scheduleJob("*/10 * * * *", function(fireDate){
+  Meeting.find({NotificationStatus: false}).then(function(meetings, err){
         const promiseArr = []
         var currentMeetings = []
         var pastMeetings = []
@@ -176,9 +176,15 @@ var k = schedule.scheduleJob("*/55 * * * *", function(fireDate){
                 var secondDate = new Date();
                 var hours = Math.abs(firstDate - secondDate) / 36e5;
                 if(hours < 1){
+                  Meeting.findOneAndUpdate({_id: item._id},{
+                  $set: {
+                    NotificationStatus: true
+                  }
+                }).then(function(mee, err){
                 const message = ` 大會將於一小時後進行 | `+ item.title+ ` will start one hour later.`
                 sendNotification(message)
-                      //console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
+                      console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
+                    })
                   }
               });
              }))
