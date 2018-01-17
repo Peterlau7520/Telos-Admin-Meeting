@@ -838,7 +838,7 @@
             var one_day=1000*60*60*24;
             console.log(diff,one_day)
             if((diff/one_day).toFixed() < 7 || (diff/one_day).toFixed() == 7){
-                ShowCustomDialog1('you are not allowed to Delete the poll.')
+                ShowCustomDialog1('您無法刪除投票 | you are not allowed to delete the poll.')
                 event.preventDefault()
             }else{
             const HostName = window.location.origin
@@ -1048,7 +1048,7 @@
             var one_day=1000*60*60*24;
             console.log(diff,one_day)
             if((diff/one_day).toFixed() < 7 || (diff/one_day).toFixed() == 7){
-                ShowCustomDialog1('you are not allowed to Add the poll.')
+                ShowCustomDialog1('您無法增加投票 | you are not allowed to add the poll.')
                 event.preventDefault()
             }else{
             $("#poll2").modal();
@@ -1079,7 +1079,7 @@
             var one_day=1000*60*60*24;
             console.log((diff/one_day), "diff")
             if((diff/one_day).toFixed() < 7 || (diff/one_day).toFixed() == 7){
-                ShowCustomDialog1('you are not allowed to edit the poll.')
+                ShowCustomDialog1('您無法更改投票 | you are not allowed to edit the poll.')
                 event.preventDefault()
             }else{
                 
