@@ -163,7 +163,7 @@ var j = schedule.scheduleJob("00 15 6 * * *", function(fireDate){
         })
 })
 
-var k = schedule.scheduleJob("*/1 * * * *", function(fireDate){
+var k = schedule.scheduleJob("*/10 * * * *", function(fireDate){
   Meeting.find({NotificationStatus: false}).then(function(meetings, err){
         const promiseArr = []
         var currentMeetings = []
