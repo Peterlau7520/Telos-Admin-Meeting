@@ -738,9 +738,10 @@ router.post('/deleteMeeting',(req,res) => {
 });
 
 router.post('/deletePoll',(req,res) => {
+  
      Poll.deleteOne({_id: req.body.pollId}, function (err, todo) {
         if (err) { res.redirect('/allMeetings')}
-        Meeting.update(
+        Meeting.findOneAndUpdate(
             { _id: req.body.meetingId },
             { $pull: { polls:  req.body.pollId} } 
         )
