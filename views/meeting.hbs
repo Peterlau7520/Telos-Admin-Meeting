@@ -772,7 +772,8 @@
             var ids = 'tab_'+originalData[id]._id;
             localStorage.setItem("tab", id);
             localStorage.setItem("divTab", ids);
-            var firstDate = new Date(originalData[id].startTime);
+            var firstDate = new Date(originalData[id].pollEndTime);
+            console.log(originalData[id], "idsss")
             var secondDate = new Date();
             var diff = firstDate - secondDate;  
             var seconds = diff / 1000;
@@ -781,11 +782,8 @@
              var one_day=1000*60*60*24;
             var days = (diff/one_day).toFixed();
             console.log(days, "days")
-            if( days < 7 || days == 7){
+            if( days < 0){
                 days =0;
-            }
-            else{
-                days = days - 7
             }
             days = 'Days remaining to edit or delete polls | 剩下的時間可以取消或修改投票: ' + days + ' 天';
             $( "#endhour" ).text(days)
@@ -832,13 +830,13 @@
             data.pollId = originalData[parentId].polls[childId]._id
              var m = new Date(originalData[parentId].startTime)
             var diff = m - new Date()
-            var seconds = diff / 1000;
-            var minutes = (diff / 1000) / 60;
-            var hours = minutes / 60;
             var one_day=1000*60*60*24;
-            console.log(diff,one_day)
-            if((diff/one_day).toFixed() < 7 || (diff/one_day).toFixed() == 7){
-                ShowCustomDialog1('您無法刪除投票 | you are not allowed to delete the poll.')
+            var pollTime = new Date(originalData[parentId].pollEndTime)
+            var diffPoll = pollTime - new Date()
+            diffPoll = (diffPoll/one_day)
+            console.log(diffPoll,"difffffffff")
+            if((diff/one_day).toFixed() < 7 || (diff/one_day).toFixed() == 7 || diffPoll < 0 ){
+                ShowCustomDialog1('您無法刪除投票 | you are not allowed to delete the poll, Poll Time has ended.')
                 event.preventDefault()
             }else{
             const HostName = window.location.origin
@@ -1046,9 +1044,12 @@
             var minutes = (diff / 1000) / 60;
             var hours = minutes / 60;
             var one_day=1000*60*60*24;
+            var pollTime = new Date(originalData[id].pollEndTime)
+            var diffPoll = pollTime - new Date()
+            diffPoll = (diffPoll/one_day)
             console.log(diff,one_day)
-            if((diff/one_day).toFixed() < 7 || (diff/one_day).toFixed() == 7){
-                ShowCustomDialog1('您無法增加投票 | you are not allowed to add the poll.')
+            if((diff/one_day).toFixed() < 7 || (diff/one_day).toFixed() == 7 || diffPoll < 0){
+                ShowCustomDialog1('您無法增加投票 | you are not allowed to add the poll, Poll Time has ended.')
                 event.preventDefault()
             }else{
             $("#poll2").modal();
@@ -1077,9 +1078,12 @@
             var minutes = (diff / 1000) / 60;
             var hours = minutes / 60;
             var one_day=1000*60*60*24;
+            var pollTime = new Date(originalData[parentId].pollEndTime)
+            var diffPoll = pollTime - new Date()
+            diffPoll = (diffPoll/one_day)
             console.log((diff/one_day), "diff")
-            if((diff/one_day).toFixed() < 7 || (diff/one_day).toFixed() == 7){
-                ShowCustomDialog1('您無法更改投票 | you are not allowed to edit the poll.')
+            if((diff/one_day).toFixed() < 7 || (diff/one_day).toFixed() == 7 || diffPoll < 0){
+                ShowCustomDialog1('您無法更改投票 | you are not allowed to edit the poll, Poll Time has ended.')
                 event.preventDefault()
             }else{
                 

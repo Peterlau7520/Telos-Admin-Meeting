@@ -770,8 +770,9 @@ function sendNotification(message, estateName){
             .then(function(Ids, err){
                 oneSignalIds = Ids
                 var data = {small_icon: "ic_telos_grey_background"}
+                var options = {}
                 if(oneSignalIds.length){
-                oneSignal.createNotification(message , oneSignalIds)
+                oneSignal.createNotification(message ,options, oneSignalIds)
                 .then(function(notifiy){
                  if(notifiy){
                     return true

@@ -188,7 +188,8 @@ const meetingSchema = new Schema({
     youtubelink: String,
     views: { type: String, default: 0 },
     pollReport: Array,
-    guid: String
+    guid: String,
+    NotificationStatus: { type: Boolean, default: false },
 })
 
 //FORUM
