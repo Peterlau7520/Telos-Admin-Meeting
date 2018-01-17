@@ -66,6 +66,7 @@ router.post('/addNotice', (req, res) => {
                 .then(function(aud, err){
                     oneSignalIds = aud
                     const noticeBody = ` ${req.user.estateNameChn} 新通告 | ${req.user.estateName} New notice ! ` + req.body.title + ' | ' + req.body.titleChn
+                    var message =  noticeBody;
                     sendNotification(oneSignalIds, noticeBody)
                 })
                 }
@@ -130,6 +131,7 @@ function sendNotification(oneSignalIds, noticeBody){
             if(oneSignalIds.length){
             oneSignal.createNotification(message, options, oneSignalIds)
             .then(function(notify){
+                console.log(notify, "notify")
              if(notify){
                 return true
              }
