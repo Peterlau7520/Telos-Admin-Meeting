@@ -780,8 +780,12 @@
             var hours = minutes / 60;
              var one_day=1000*60*60*24;
             var days = (diff/one_day).toFixed();
-            if( days < 0){
+            console.log(days, "days")
+            if( days < 7 || days == 7){
                 days =0;
+            }
+            else{
+                days = days - 7
             }
             days = 'Days remaining to edit or delete polls | 剩下的時間可以取消或修改投票: ' + days + ' 天';
             $( "#endhour" ).text(days)
@@ -833,7 +837,7 @@
             var hours = minutes / 60;
             var one_day=1000*60*60*24;
             console.log(diff,one_day)
-            if((diff/one_day).toFixed() < 14){
+            if((diff/one_day).toFixed() < 7 || (diff/one_day).toFixed() == 7){
                 ShowCustomDialog1('you are not allowed to Delete the poll.')
                 event.preventDefault()
             }else{
@@ -1043,7 +1047,7 @@
             var hours = minutes / 60;
             var one_day=1000*60*60*24;
             console.log(diff,one_day)
-            if((diff/one_day).toFixed() < 14){
+            if((diff/one_day).toFixed() < 7 || (diff/one_day).toFixed() == 7){
                 ShowCustomDialog1('you are not allowed to Add the poll.')
                 event.preventDefault()
             }else{
@@ -1074,7 +1078,7 @@
             var hours = minutes / 60;
             var one_day=1000*60*60*24;
             console.log((diff/one_day), "diff")
-            if((diff/one_day).toFixed() < 14){
+            if((diff/one_day).toFixed() < 7 || (diff/one_day).toFixed() == 7){
                 ShowCustomDialog1('you are not allowed to edit the poll.')
                 event.preventDefault()
             }else{
