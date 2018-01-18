@@ -379,7 +379,7 @@
         $(document).on('click','.submitNotice',function(event){
 
              if ($("#noticeForm").valid()) {
-                var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'
+                var html = '<img id="theImg" class ="loader" alt="Telos Technology" src= "assets/img/load.gif "/>'
                     $("#loading").append(html);
                     setTimeout(function(){ $(".submitNotice").prop('disabled', true); }, 200);
              }else{
@@ -442,7 +442,7 @@
                                                 
                                             })
                                              $(this).dialog("close"); 
-                                            var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif " style="    margin-left: 194px;"/>'
+                                            var html = '<img id="theImg" class ="meeting-loader" alt="Telos Technology" src= "assets/img/load.gif " style="    margin-left: 194px;"/>'
                                              $("#loader").append(html);                                  
                                               location.reload()
                                            

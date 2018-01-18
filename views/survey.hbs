@@ -1206,7 +1206,7 @@ var myPieChart = new Chart(ctx,{
                   data: JSON.stringify(values),
                   contentType: 'application/json',
                   beforeSend: function() { 
-                    var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'
+                    var html = '<img id="theImg" class ="loader" alt="Telos Technology" src= "assets/img/load.gif "/>'
                       $("#loading").append(html);
                       $("#submit").prop('disabled', true); // disable button
                     },
