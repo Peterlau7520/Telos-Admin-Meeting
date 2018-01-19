@@ -9,32 +9,47 @@
 
 <url>
   <loc>https://telos-technology.com/</loc>
-  <lastmod>2018-01-10T05:57:47+00:00</lastmod>
+  <lastmod>2018-01-19T07:09:06+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://telos-technology.com/about</loc>
-  <lastmod>2018-01-10T05:57:47+00:00</lastmod>
+  <lastmod>2018-01-19T07:09:06+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://telos-technology.com/homepagechn</loc>
-  <lastmod>2018-01-10T05:57:47+00:00</lastmod>
+  <lastmod>2018-01-19T07:09:06+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://telos-technology.com/login</loc>
-  <lastmod>2018-01-10T05:57:47+00:00</lastmod>
+  <lastmod>2018-01-19T07:09:06+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://telos-technology.com/siteMap</loc>
-  <lastmod>2018-01-10T05:57:47+00:00</lastmod>
+  <loc>https://telos-technology.com/terms</loc>
+  <lastmod>2018-01-19T07:09:06+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://telos-technology.com/privacy</loc>
+  <lastmod>2018-01-19T07:09:06+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://telos-technology.com/aboutchn</loc>
-  <lastmod>2018-01-10T05:57:47+00:00</lastmod>
+  <lastmod>2018-01-19T07:09:06+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://telos-technology.com/termschn</loc>
+  <lastmod>2018-01-19T07:09:06+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://telos-technology.com/privacychn</loc>
+  <lastmod>2018-01-19T07:09:06+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 
