@@ -614,7 +614,7 @@ const HostName = window.location.origin
                                 '<input type="text" class="form-control" name="optionEngDetailKey" placeholder="e.g. Details" required/>'+
                             '</div>'+
 
-                                '<button id="'+index+'" class="addbtn addEng">Add</button>'+
+                                '<button id="'+index+'" class="addbtn addEng">Add | 加</button>'+
                             '</div>'+
                              '<div class="col-md-3 RemPad">'+
                                 '<div class="form-group" id="engDivValue'+indexEng+'">'+
@@ -648,8 +648,8 @@ const HostName = window.location.origin
                                 '<input type="text" class="form-control" name="optionChnDetailKey" placeholder="e.g. 描述" required/>'+
                             '</div>'+
 
-                                '<button id="'+index+'" class="addbtn addBtn engBtn'+index+'">Add</button>'+ '</br>' +
-                                '<button type="submit" class="RmBtnOptions" style="margin-top: 10px;margin-left: -6px;width: 100px;padding-left: 10px;border-width: 1px;background-color: transparent;/* font-weight: 400; *//* opacity: 0.8; */filter: alpha(opacity=80);/* padding: 8px 16px; */border-color: #bdbaba;color: #1f1b1b;float: right;margin-right: 6px;background: none;border: 1px solid #ccc;font-size: 11px;width: 103px;height: 26px;line-height: 17px;border-radius: 2px;" id="'+index+'">Remove Option</button>'+
+                                '<button id="'+index+'" class="addbtn addBtn engBtn'+index+'">Add | 加</button>'+ '</br>' +
+                                '<button type="submit" class="RmBtnOptions" style="margin-top: 10px;margin-left: -6px;width: 100px;padding-left: 4px;border-width: 1px;background-color: transparent;/* font-weight: 400; *//* opacity: 0.8; */filter: alpha(opacity=80);/* padding: 8px 16px; */border-color: #bdbaba;color: #1f1b1b;float: right;margin-right: 6px;background: none;border: 1px solid #ccc;font-size: 9px;width: 117px;height: 26px;line-height: 17px;border-radius: 2px;" id="'+index+'">Remove Option | 刪除選項</button>'+
                             '</div>'+
                              '<div class="col-md-3 RemPad">'+
                                 '<div class="form-group" id="chnDivValue'+indexChn+'">'+
@@ -746,7 +746,7 @@ const HostName = window.location.origin
                             '</div>'+
 
 
-                                            '<button id="0" class="addbtn addEng">Add</button>'+
+                                            '<button id="0" class="addbtn addEng">Add | 加</button>'+
 
                                         '</div>'+
                                          '<div class="col-md-3 RemPad">'+
@@ -782,7 +782,7 @@ const HostName = window.location.origin
                                 '<input type="text" class="form-control" name="optionChnDetailKey" placeholder="e.g. 描述" required/>'+
                             '</div>'+
 
-                                            '<button id="0" class="addbtn addBtn">Add</button></div>'+
+                                            '<button id="0" class="addbtn addBtn">Add | 加</button></div>'+
                                         '</div>'+
                                          '<div class="col-md-3 RemPad">'+
                                             '<div class="form-group" id="chnDivValue'+index+'">'+
@@ -907,7 +907,7 @@ const HostName = window.location.origin
                     
                         blockOption =  blockOption +
                         '<div id="engKey'+indexOpt+'"></div>'  
-                        +'<button id="'+indexOpt+'" class="addbtn addEng">Add</button>'+
+                        +'<button id="'+indexOpt+'" class="addbtn addEng">Add | 加</button>'+
                                                      '</div>'+'<div class="col-md-3 RemPad">';
                     opt['optionEng'].forEach(function(optionKey, indexOptKey){
                         blockOption = blockOption + 
@@ -937,7 +937,7 @@ const HostName = window.location.origin
                     
                         blockOption =  blockOption +
                         '<div id="chnKey'+indexOpt+'"></div>'+  
-                        '<button id="'+indexOpt+'" class="addbtn addBtn">Add</button>'+
+                        '<button id="'+indexOpt+'" class="addbtn addBtn">Add | 加</button>'+
                                                      '</div>'+'<div class="col-md-3 RemPad">';
                     opt['optionChn'].forEach(function(optionChnKey, indexOptChnKey){
                         blockOption = blockOption + 
