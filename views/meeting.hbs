@@ -789,7 +789,7 @@
             $( "#endhour" ).text(days)
         }) 
         $('.past-meeting').click(function (event) {
-            var data = '{{{stringify pastMeetingsData}}}'
+            var data = `{{{stringify pastMeetingsData}}}`
             data = JSON.parse(data)
             $('.save_meeting').hide()
             $('#heading3').text('Past Meetings | 過往會議')
