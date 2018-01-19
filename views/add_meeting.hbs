@@ -644,7 +644,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Add a poll | 添加投票</h4>
             </div>
-            <iframe name="my_iframe" src="not_submitted_yet.aspx" class="iframe"></iframe>
+            <iframe name="my_iframe" src="" class="iframe"></iframe>
             <div class="modal-body">
                 <form role="form" name="#poll_form" id="poll_form" action="/addPollsOfMeeting"  method="post" enctype="multipart/form-data" target="my_iframe">
                     <div class="form-group col-sm-6">
@@ -688,7 +688,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <hr>
-                    <button type="submit" class="btn btn-primary pull-right" id="close_model" onclick="window.stop();"> Confirm | 确认</button>
+                    <button type="submit" class="btn btn-primary pull-right" id="close_model" onclick="window.stop();"> Confirm | 確認</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -767,7 +767,7 @@
                         </div>
                         </p>
                     </div>
-                                    <button type="submit" class="btn btn-primary" id="close_model_edit" style="float: right;"> 确认 | Confirm</button>
+                                    <button type="submit" class="btn btn-primary" id="close_model_edit" style="float: right;"> Confirm | 確認</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -926,8 +926,9 @@
             event.preventDefault();
             const id = event.target.id
             var originalData = `{{{stringify meetingsData}}}`;
+            if(originalData != ''){
              originalData = JSON.parse(originalData);
-             console.log(originalData[id])
+            }
             var m = moment(originalData[id].startTime, "DD.MM.YYYY HH:mm:ss");
             var dt = m.toDate();
             var diff = dt - new Date()
@@ -1088,7 +1089,9 @@
 // meeting js
 
 var originalData = `{{{stringify meetingsData}}}`;
+            if(originalData != ''){
         originalData = JSON.parse(originalData);
+        }
          function convertSerializeArrayToJson(serilizeArray) {
             var form_json = {};
             serilizeArray.forEach(function (obj) {
