@@ -313,7 +313,9 @@ setTimeout(function(){
 }, 5000);
 }*/
      var forum = `{{{stringify forum}}}`
+     if(forum != ''){
      forum = JSON.parse(forum);
+    }
      var socket =  io.connect(window.location.origin)
          
         socket.on('post', function(data) {
