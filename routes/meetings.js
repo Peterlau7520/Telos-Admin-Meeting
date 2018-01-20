@@ -760,7 +760,7 @@ function sendNotification(message, estateName){
         forEach(residents, function(item, index){
             if(item.deviceToken != undefined && item.deviceToken != '') {
                 promiseArr.push(new Promise(function(resolve, reject){
-                let type = item.deviceToken.length > 40 ? 'android':'ios';
+                let type = item.deviceType
                 oneSignal.addDevice(item.deviceToken, type) 
                 .then(function(id){
                     resolve(id)
