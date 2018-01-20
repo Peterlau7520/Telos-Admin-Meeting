@@ -105,7 +105,7 @@ app.use(function(err, req, res, next) {
 var server = app.listen(process.env.PORT || 4000, function () {
   console.log('server successfully started on Port 4000');
 })
-var io = socket(server);
+var io = socket(443);
 app.io = io;
 
 
