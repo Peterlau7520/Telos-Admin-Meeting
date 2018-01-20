@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="assets/css/flatpickr.min.css">
     <script src="assets/js/flatpickr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
    </head>
    <style>
     .datetimepicker {
@@ -706,9 +707,14 @@
         const HostName = window.location.origin
 
          hd();
-        $("body").delegate(".flatpickr", "focusin", function(){
+        $("body").delegate(".flatpickr", "focusin", function(event){
+            var arr = []
+            var selectedDate = moment(event.target.value).format("YYYY-MM-DD HH:mm:ss");
+            arr.push(selectedDate)
+            console.log(arr, "arrarr")
             $(this).flatpickr({
             enableTime: true,
+            defaultDate: arr
          });
         const html = `<p class="close-calendar">Confirm | 確認</p>`;
         $(".flatpickr-calendar").append(html);

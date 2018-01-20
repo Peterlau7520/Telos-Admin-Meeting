@@ -40,6 +40,7 @@ const residentSchema = new Schema({
             ref: 'Meeting'}
             ], //ALL THE MEETINGS WHERE THEY APPOINT US AS THE PROXY.
     deviceToken: String,
+    deviceType: String,
     posts: [
         {
             type: Schema.Types.ObjectId,

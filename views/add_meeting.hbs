@@ -867,9 +867,13 @@
         //datetimepicker
         $("body").delegate(".flatpickr", "focusin", function(){
             var aWeekLater = new Date().setDate(new Date().getDate() + 14);
+            var arr = []
+            var selectedDate = moment(event.target.value).format("YYYY-MM-DD HH:mm:ss");
+            arr.push(selectedDate)
+            console.log(arr, "arrarr")
             $(this).flatpickr({
-            //minDate: aWeekLater,
-            enableTime: true
+            enableTime: true,
+            defaultDate: arr
          });
         const html = `<p class="close-calendar">Confirm | 確認</p>`;
         $(".flatpickr-calendar").append(html);
