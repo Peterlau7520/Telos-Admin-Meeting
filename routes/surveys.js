@@ -293,9 +293,15 @@ router.get('/getSurveys', (req, res) => {
         })  
             return (todayDate != item.effectiveTo && todayDate > item.effectiveTo) ? item._id : ''
         });
-        var result = _.map(uniqueList, '_id');
-        Estate.findOneAndUpdate({_id: req.user._id}, {$set: {surveys: result }})
+        var result = _.map(list, '_id');
+        console.log(req.user._id, "idddddd", result)
+        Estate.findOneAndUpdate({_id: req.user._id},
+         {$set: {surveys: result } },
+         { 
+            new: true 
+        })
         .then(function(est) {
+            console.log(est, "est")
             res.render('survey', {"data": blocksFloors, 'surveys': list, "estateNameDisplay": req.user.estateNameDisplay, "estateNameChn": req.user.estateNameChn});
         })
     })
