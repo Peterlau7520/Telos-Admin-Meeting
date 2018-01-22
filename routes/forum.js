@@ -189,7 +189,7 @@ router.post('/newPost', (req,res)=>{
   console.log(req.user, "ffffffffff")
     Resident.findOne({
         estateName: req.user.estateName,
-        account: req.user.username
+        account: "admin"
     },function(err, user){
       console.log(user, "user")
       if(err){
@@ -199,7 +199,7 @@ router.post('/newPost', (req,res)=>{
         userContent = userContent.replace(/'/g,'');
         var post = new Post({
             content: userContent,
-            account: user.username,
+            account: "admin",
             postedBy: user._id,
             estateName: req.user.estateName,
             //postTime: new Date()
@@ -216,7 +216,7 @@ router.post('/newComment', (req,res)=>{
     const postId = req.body.postid;
     Resident.findOne({
         estateName: req.user.estateName,
-        account: req.user.username
+        account: "admin"
     },function(err, user){
       if(err) res.send(err);
         var userComment = req.body.comment.trim()
@@ -225,7 +225,7 @@ router.post('/newComment', (req,res)=>{
             content: userComment,
             commentedTime: new Date(),
             commentedBy: user._id,
-            account: user.username,
+            account: "admin",
             estateName: req.user.estateName
         }).save(function(err, comment){
           if(err) res.send(err);
@@ -264,7 +264,8 @@ router.post('/newComment', (req,res)=>{
 router.post('/reportPost', (req,res)=> {
     const postId = req.body.postId;
     Resident.findOne({
-        account: req.user.username
+          estateName: req.user.estateName,
+        account: "admin"
     }, function(err, user){
       if(err) res.send(err);
             new PostReport({
@@ -281,7 +282,8 @@ router.post('/reportPost', (req,res)=> {
 router.post('/reportComment', (req,res)=> {
     const commentId = req.body.commentId;
     Resident.findOne({
-        account: req.user.username
+        estateName: req.user.estateName,
+        account: "admin"
     }, function(err, user){
       if(err) res.send(err);
             new CommentReport({
