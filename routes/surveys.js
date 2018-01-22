@@ -12,10 +12,8 @@ const fs = require('fs');
 const _ = require('lodash');
 var moment = require("moment");
 var Promise = require('bluebird');
-
-
-const appId = '72ae436c-554c-4364-bd3e-03af71505447';
-const apiKey = 'YTU4NmE5OGItODM3NC00YTYwLWExNjUtMTEzOTE2YjUwOWJk';
+const appId = process.env.ONESIGNAL_APPID;
+const apiKey = process.env.ONESIGNAL_APIKEY;
 const oneSignal = require('onesignal')(apiKey, appId, true);
 
 

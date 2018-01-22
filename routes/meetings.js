@@ -26,14 +26,14 @@ const async = require('async');
 let docFileName,pathParams,dataFile;
 const BucketName = 'telospdf';
 AWS.config.update({
-  accessKeyId: 'AKIAIMLMZLII2XCKU6UA',
-  secretAccessKey: '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'
+  accessKeyId: process.env.AWS_accessKeyId ,
+  secretAccessKey: process.env.AWS_secretAccessKey
 });
 const bucket = new AWS.S3({params: {Bucket: BucketName}});
 
 
-const appId = '72ae436c-554c-4364-bd3e-03af71505447';
-const apiKey = 'YTU4NmE5OGItODM3NC00YTYwLWExNjUtMTEzOTE2YjUwOWJk';
+const appId = process.env.ONESIGNAL_APPID;
+const apiKey = process.env.ONESIGNAL_APIKEY;
 const oneSignal = require('onesignal')(apiKey, appId, true);
 function guid() {
   function s4() {
