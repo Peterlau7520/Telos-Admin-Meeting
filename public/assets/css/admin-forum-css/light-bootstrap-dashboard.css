@@ -4482,6 +4482,10 @@ fieldset[disabled] .form-control {
   display: inline-block;
   vertical-align: middle
 }
+.new-post-text-box::selection {
+    background-color: blue;
+    color: white;
+}
 
 .modal-footer {
   text-align: unset
