@@ -199,7 +199,7 @@ router.post('/newPost', (req,res)=>{
         userContent = userContent.replace(/'/g,'');
         var post = new Post({
             content: userContent,
-            account: user.account,
+            account: user.username,
             postedBy: user._id,
             estateName: req.user.estateName,
             //postTime: new Date()
@@ -225,7 +225,7 @@ router.post('/newComment', (req,res)=>{
             content: userComment,
             commentedTime: new Date(),
             commentedBy: user._id,
-            account: user.account,
+            account: user.username,
             estateName: req.user.estateName
         }).save(function(err, comment){
           if(err) res.send(err);

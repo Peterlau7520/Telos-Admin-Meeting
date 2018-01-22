@@ -12,6 +12,9 @@ const flash = require('connect-flash');
 const http = require('http');
 var server = require('http').createServer(app);
 var socket = require('socket.io');
+var io = socket(server);
+app.io = io;
+
 //----------------MODELS----------------
 const models = require('./models/models');
 //----------------ROUTES----------------
@@ -105,8 +108,6 @@ app.use(function(err, req, res, next) {
 var server = app.listen(process.env.PORT || 4000, function () {
   console.log('server successfully started on Port 4000');
 })
-var io = socket(server);
-app.io = io;
 
 
   
