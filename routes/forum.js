@@ -43,8 +43,8 @@ router.get('/getForum', (req, res) => {
             else{
                post.timeLeft = Math.round(hours) + " hours ago"
                if(post.timeLeft == 'NaN hours ago'){post.timeLeft = '0 hours ago'}
-               post.timeLeftChinese = Math.round(hours) + " 几小时前"
-                if(post.timeLeftChinese == 'NaN 几小时前'){post.timeLeftChinese = '0 几小时前'}
+               post.timeLeftChinese = Math.round(hours) + " 小時"
+                if(post.timeLeftChinese == 'NaN 小時'){post.timeLeftChinese = '0 小時'}
             }
             post.postTime = moment(new Date(post.postTime)).format("DD/MM/YY hh:mm ")
             const numberOfLikes = post.likedBy.length;
@@ -71,8 +71,8 @@ router.get('/getForum', (req, res) => {
                         console.log(hoursComment, "hoursComment")
                        comment.timeLeft = Math.round(hoursComment) + " hours ago"
                        if(comment.timeLeft == 'NaN hours ago'){post.timeLeft = '0 hours ago'}
-                       comment.timeLeftChinese = Math.round(hoursComment) + " 几小时前"
-                       if(comment.timeLeftChinese == 'NaN 几小时前'){post.timeLeftChinese = '0 几小时前'}
+                       comment.timeLeftChinese = Math.round(hoursComment) + " 小時"
+                       if(comment.timeLeftChinese == 'NaN 小時'){post.timeLeftChinese = '0 小時'}
                     }
                 })
              //posts.sort(sortPost)

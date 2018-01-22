@@ -91,7 +91,7 @@
                     <a class="navbar-brand" href="#">Forum | 論壇</a>
 
                     <div class = "add-meeting-btn forum-new-post-btn" style="margin-top: -3px;">
-                   <a href="" class="btn btn-info  forum-heading-btn btn-primary new_post">  New Post | 添加會議</a>
+                   <a href="" class="btn btn-info  forum-heading-btn btn-primary new_post"> New Post | 新帖子</a>
                     </div>
                 </div>
                 <div class="collapse navbar-collapse">
@@ -223,7 +223,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title new-model-title">  | NEW POST</h4>
+        <h4 class="modal-title new-model-title"> New Post | 新帖子</h4>
       </div>
       <div class="modal-body new-model-body">
         <div class="output"></div>
@@ -374,7 +374,7 @@ setTimeout(function(){
             if(comment){
             const commentData = $('#comment_form').serializeArray();
             const comm = convertSerializeArrayToJson(commentData)
-           $("#comments").prepend('<div class="col-lg-12 comment-width"><span class="pull-left estate">'+'admin'+'</span> <span class="comment-para">'+'hfghfg | 0 hours ago'+'</span><span class="report-link pull-right "><a href="#" class="report_comment"  id="">Report Comment</a></span> </div><span class=" fa-marign pt-comment"><a href="#" class=""  id=""><div class="heart like-fa like_comment" aria-hidden="true" id=""><div class="fa-count inc-count" id="">'+0+'</div></div></a></span><span class="commentContent">'+comm.comment+'</span> <br>')
+           $("#comments").prepend('<div class="col-lg-12 comment-width"><span class="pull-left estate">'+'admin'+'</span> <span class="comment-para">'+'hfghfg | 0 hours ago'+'</span><span class="report-link pull-right "><a href="#" class="report_comment"  id="">投訴 | Report Comment</a></span> </div><span class=" fa-marign pt-comment"><a href="#" class=""  id=""><div class="heart like-fa like_comment" aria-hidden="true" id=""><div class="fa-count inc-count" id="">'+0+'</div></div></a></span><span class="commentContent">'+comm.comment+'</span> <br>')
              $.ajax({
                         url: HostName + "/newComment",
                         data: comm,
