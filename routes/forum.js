@@ -129,6 +129,7 @@ router.get('/postsComments', function(req,res){
     .populate('Comment')
     .populate('Resident')
     .then(function(err, post){
+      if(err) res.send(err);
         const comments = post.comments;
             var sorted_comments = [];
             forEach(comments, function(comment){
@@ -161,6 +162,7 @@ router.post('/likeComment', (req,res) => {
                new: true 
              })
     .then(function(comm, err){
+      if(err) res.send(err);
         res.redirect("/getForum")
         //YOUR WORK HERE
     })
@@ -177,21 +179,27 @@ router.post('/likePost', (req,res) => {
                new: true 
              })
     .then(function(comm, err){
+      if(err) res.send(err);
         res.redirect("/getForum")
         //YOUR WORK HERE
     })
 })
 
 router.post('/newPost', (req,res)=>{
+  console.log(req.user, "ffffffffff")
     Resident.findOne({
         estateName: req.user.estateName,
-        account: "admin"
+        account: req.user.username
     },function(err, user){
+      console.log(user, "user")
+      if(err){
+        res.send(err)
+        }
         var userContent = req.body.content.trim()
         userContent = userContent.replace(/'/g,'');
         var post = new Post({
             content: userContent,
-            account: "admin",
+            account: user.account,
             postedBy: user._id,
             estateName: req.user.estateName,
             //postTime: new Date()
@@ -201,24 +209,26 @@ router.post('/newPost', (req,res)=>{
           res.redirect("/getForum") 
 
         })
-    })
+})
 })
 
 router.post('/newComment', (req,res)=>{ 
     const postId = req.body.postid;
     Resident.findOne({
         estateName: req.user.estateName,
-        account: "admin"
+        account: req.user.username
     },function(err, user){
+      if(err) res.send(err);
         var userComment = req.body.comment.trim()
         userComment = userComment.replace(/'/g,'');
         new Comment({
             content: userComment,
             commentedTime: new Date(),
             commentedBy: user._id,
-            account: "admin",
+            account: user.account,
             estateName: req.user.estateName
         }).save(function(err, comment){
+          if(err) res.send(err);
             console.log(comment, "comment")
             Post.update({_id: req.body.postId
              }, {
@@ -254,8 +264,9 @@ router.post('/newComment', (req,res)=>{
 router.post('/reportPost', (req,res)=> {
     const postId = req.body.postId;
     Resident.findOne({
-        account: 'admin'
+        account: req.user.username
     }, function(err, user){
+      if(err) res.send(err);
             new PostReport({
                 postReport: req.body.postReport,
                 reportedPost: postId,
@@ -270,8 +281,9 @@ router.post('/reportPost', (req,res)=> {
 router.post('/reportComment', (req,res)=> {
     const commentId = req.body.commentId;
     Resident.findOne({
-        account: 'admin'
+        account: req.user.username
     }, function(err, user){
+      if(err) res.send(err);
             new CommentReport({
                 commentReport: req.body.commentReport,
                 reportedComment: commentId,
