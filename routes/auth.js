@@ -6,7 +6,11 @@ var Estate = models.Estate;
 module.exports = function(passport) {
   // main login routes
   router.post('/register', (req, res) => {
-    const checkEstate = req.body.estateName.split(" ").join("").trim();
+    console.log(req.body, "dataaaaaaaa") 
+    var PassCode = "telos-admin"
+    if(req.body.passcode == PassCode){
+        //console.log("matched")
+        const checkEstate = req.body.estateName.split(" ").join("").trim();
     Estate.findOne({"estateName" : checkEstate}, function(err, estate){
       if(estate){
         res.render('login', {
@@ -31,6 +35,16 @@ module.exports = function(passport) {
         })
       }
     })
+    }
+    else{
+        console.log("not matched")
+        res.render('login', {
+          title: 'Register in',
+          flash: "Passcode Does Not Match",
+          layout: 'loginLayout.hbs'
+        });
+    }
+    
   })
 
   router.get('/login', (req,res) => {
