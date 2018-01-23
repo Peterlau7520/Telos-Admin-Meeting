@@ -61,9 +61,11 @@ router.post('/addNotice', (req, res) => {
             forEach(residents, function(item, index){
                 if(item.deviceToken != undefined && item.deviceToken != '') {
                     promiseArr.push(new Promise(function(resolve, reject){
-                    let type = item.deviceType
+                    let type = item.deviceToken.length > 40 ? 'android':'ios';
+                    console.log(item, "typetypetypetype")
                     oneSignal.addDevice(item.deviceToken, type) 
                     .then(function(id){
+                        console.log(id, "idddddddd")
                         resolve(id)
                     })
                 }))
@@ -135,8 +137,8 @@ function sendNotification(oneSignalIds, noticeBody){
             var options = {} //{small_icon: "ic_telos_grey_background"}
             if(oneSignalIds.length){
             oneSignal.createNotification(message, options, oneSignalIds)
-            .then(function(notify){
-                console.log(notify, "notify")
+            .then(function(notify, err){
+                console.log(notify, "notify", err)
              if(notify){
                 return true
              }
