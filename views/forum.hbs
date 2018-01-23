@@ -316,8 +316,8 @@ setTimeout(function(){
      /*if(forum != ''){
      forum = JSON.parse(forum);
     }*/
-    console.log(window.location.origin, "orrrr")
-     var socket =  io.connect("https://telos-technology.com:443")
+     var host = window.location.origin;
+     var socket =  io.connect(host)
          
         socket.on('post', function(data) {
            if(data){
@@ -380,7 +380,8 @@ setTimeout(function(){
                         data: comm,
                         type: 'POST',
                          success: function (data) {
-                          var socket =  io.connect("https://telos-technology.com:443")
+                          var host = window.location.origin;
+                          var socket =  io.connect(host)
                           socket.emit('comment', {data:'data'});
                           //  location.reload()
                         },

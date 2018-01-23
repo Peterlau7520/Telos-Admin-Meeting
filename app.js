@@ -13,7 +13,6 @@ const http = require('http');
 var server = require('http').createServer(app);
 var socket = require('socket.io');
 
-  
 
 //----------------MODELS----------------
 const models = require('./models/models');
@@ -105,9 +104,10 @@ app.use(function(err, req, res, next) {
   
 
 //----------------START----------------
-var server = app.listen(process.env.PORT || 443, function () {
+var server = app.listen(process.env.PORT || 4000, function () {
   console.log('server successfully started on Port 4000');
 })
 
 var io = socket(server);
 app.io = io;
+  
