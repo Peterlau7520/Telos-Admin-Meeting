@@ -929,10 +929,10 @@
           $(".delete_meeting").click(function(event){
             event.preventDefault();
             const id = event.target.id
-            var originalData = `{{{stringify meetingsData}}}`;
-            if(originalData != ''){
+            var originalData = {{{json meetingsData}}};
+            /*if(originalData != ''){
              originalData = JSON.parse(originalData);
-            }
+            }*/
             var m = moment(originalData[id].startTime, "DD.MM.YYYY HH:mm:ss");
             var dt = m.toDate();
             var diff = dt - new Date()
@@ -1092,10 +1092,10 @@
         })
 // meeting js
 
-var originalData = `{{{stringify meetingsData}}}`;
-            if(originalData != ''){
+var originalData = {{{json meetingsData}}};
+            /*if(originalData != ''){
         originalData = JSON.parse(originalData);
-        }
+        }*/
          function convertSerializeArrayToJson(serilizeArray) {
             var form_json = {};
             serilizeArray.forEach(function (obj) {
@@ -1172,8 +1172,8 @@ var originalData = `{{{stringify meetingsData}}}`;
         $(".delete_poll_btn").on('click' , function(event){
         var parentId = event.target.parentElement.id;
         var childId = event.target.id;
-         var originalData = `{{{stringify meetingsData}}}`;
-         originalData = JSON.parse(originalData);
+         var originalData = {{{json meetingsData}}};
+         //originalData = JSON.parse(originalData);
             var poll = originalData[parentId].polls[childId]
             const data = {}
             data.meetingId = originalData[parentId]._id
@@ -1371,8 +1371,8 @@ var originalData = `{{{stringify meetingsData}}}`;
         //for add pole
         $('.add_pole').click(function(event) {
             const id = event.target.id
-            var originalData = `{{{stringify meetingsData}}}`;
-             originalData = JSON.parse(originalData);
+            var originalData = {{{json meetingsData}}};
+            //riginalData = JSON.parse(originalData);
              console.log(originalData[id])
             var m = moment(originalData[id].startTime, "DD.MM.YYYY HH:mm:ss");
             var dt = m.toDate();
@@ -1404,8 +1404,8 @@ var originalData = `{{{stringify meetingsData}}}`;
         $('.edit_pole_button').click(function (event) {
               var parentId = event.target.parentElement.id;
             var childId = event.target.id;
-            var originalData = `{{{stringify meetingsData}}}`;
-             originalData = JSON.parse(originalData);
+            var originalData = {{{json meetingsData}}};
+             //originalData = JSON.parse(originalData);
             var poll = originalData[parentId].polls[childId]
             console.log(originalData[parentId].startTime)
             var m = moment(originalData[parentId].startTime, "DD.MM.YYYY HH:mm:ss");

@@ -743,8 +743,8 @@
         $(".delete_meeting").click(function(event){
             event.preventDefault();
             const id = event.target.id
-            var originalData = `{{{stringify meetingsData}}}`;
-             originalData = JSON.parse(originalData);
+            var originalData = {{{json meetingsData}}};
+            // originalData = JSON.parse(originalData);
              console.log(originalData[id])
             var m = new Date(originalData[id].startTime);
             var diff = m - new Date()
@@ -765,10 +765,10 @@
             });
             return form_json;
         }
-        var originalData = `{{{stringify meetingsData}}}`;
-        if(originalData != ''){
+        var originalData = {{{json meetingsData}}};
+        /*if(originalData != ''){
         originalData = JSON.parse(originalData);
-        }
+        }*/
         $('.meeting_li').click(function (event) {
             $('.save_meeting').hide()
             $('#heading3').text('Upcoming Meeting | 近期會議')
@@ -795,8 +795,8 @@
             $( "#endhour" ).text(days)
         }) 
         $('.past-meeting').click(function (event) {
-            var data = `{{{stringify pastMeetingsData}}}`
-            data = JSON.parse(data)
+            var data = {{{json pastMeetingsData}}}
+            //data = JSON.parse(data)
             $('.save_meeting').hide()
             $('#heading3').text('Past Meetings | 過往會議')
             $( "#endhour" ).text('')
@@ -828,8 +828,8 @@
         $(".delete_poll_btn").on('click' , function(event){
         var parentId = event.target.parentElement.id;
         var childId = event.target.id;
-         var originalData = `{{{stringify meetingsData}}}`;
-         originalData = JSON.parse(originalData);
+         var originalData = {{{json meetingsData}}};
+         //originalData = JSON.parse(originalData);
             var poll = originalData[parentId].polls[childId]
             const data = {}
             data.meetingId = originalData[parentId]._id
@@ -1041,8 +1041,8 @@
     
             $('.add_pole').click(function(event) {
             const id = event.target.id
-            var originalData = `{{{stringify meetingsData}}}`;
-             originalData = JSON.parse(originalData);
+            var originalData = {{{json meetingsData}}};
+             //originalData = JSON.parse(originalData);
              console.log(originalData[id])
             var m = new Date(originalData[id].startTime);
             var diff = m - new Date()
@@ -1074,8 +1074,8 @@
         $('.edit_pole_button').click(function (event) {
               var parentId = event.target.parentElement.id;
             var childId = event.target.id;
-            var originalData = `{{{stringify meetingsData}}}`;
-             originalData = JSON.parse(originalData);
+            var originalData = {{{json meetingsData}}};
+             //originalData = JSON.parse(originalData);
             var poll = originalData[parentId].polls[childId]
             var lastDate = new Date(originalData[parentId].startTime)
             var meeting_title = originalData[parentId]._id

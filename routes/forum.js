@@ -11,6 +11,10 @@ const busboyBodyParser = require('busboy-body-parser');
 const fs = require('fs');
 const _ = require('lodash');
 var moment = require("moment");
+var json = require('hbs-json');
+var hbs = require('hbs');
+ 
+hbs.registerHelper('json', json);
 
 //Data models
 const Question = models.Question;

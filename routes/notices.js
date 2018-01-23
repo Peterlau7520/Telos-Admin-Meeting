@@ -12,6 +12,11 @@ const busboyBodyParser = require('busboy-body-parser');
 const fs = require('fs');
 var AWS = require('aws-sdk');
 var Promise = require('bluebird');
+var json = require('hbs-json');
+var hbs = require('hbs');
+ 
+hbs.registerHelper('json', json);
+
 
 const appId = process.env.ONESIGNAL_APPID;
 const apiKey = process.env.ONESIGNAL_APIKEY;

@@ -19,6 +19,10 @@ const fs = require('fs');
 const router = express.Router();
 router.use(busboyBodyParser({multi: true}));
 const dateFormat = require('dateformat');
+var json = require('hbs-json');
+var hbs = require('hbs');
+ 
+hbs.registerHelper('json', json);
 
 
 var AWS = require('aws-sdk');

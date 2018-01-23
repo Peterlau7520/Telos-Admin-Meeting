@@ -982,10 +982,10 @@ const HostName = window.location.origin
                                     return html;
                                     // })
         }
-        var cardData = `{{{stringify surveys}}}`;
-        if(cardData){
-        cardData = JSON.parse(cardData);
-        }
+        var cardData = {{{ json surveys }}};
+        console.log(cardData, "cardData")
+        //console.log({{{ json surveys }}}
+      
         function card_modal(blockdata){
             const optionsDetailsChnAndEng = [];
             

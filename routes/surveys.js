@@ -15,7 +15,10 @@ var Promise = require('bluebird');
 const appId = process.env.ONESIGNAL_APPID;
 const apiKey = process.env.ONESIGNAL_APIKEY;
 const oneSignal = require('onesignal')(apiKey, appId, true);
-
+var json = require('hbs-json');
+var hbs = require('hbs');
+ 
+hbs.registerHelper('json', json);
 
 //Data models
 const Estate = models.Estate;
@@ -206,7 +209,6 @@ function sendNotification(oneSignalIds, messageBody){
     })
 }
 }
-
 router.get('/getSurveys', (req, res) => {
     const promiseArr =[]
     const promiseArr2 = []
@@ -299,12 +301,13 @@ router.get('/getSurveys', (req, res) => {
             new: true 
         })
         .then(function(est) {
-            console.log(est, "est")
+            console.log(list, 'List ')
             res.render('survey', {"data": blocksFloors, 'surveys': list, "estateNameDisplay": req.user.estateNameDisplay, "estateNameChn": req.user.estateNameChn});
         })
     })
     }
     else{
+
         res.render('survey', {"data": blocksFloors, 'surveys': list, "estateNameDisplay": req.user.estateNameDisplay, "estateNameChn": req.user.estateNameChn});
     }
     })
