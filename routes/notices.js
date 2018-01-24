@@ -28,6 +28,8 @@ AWS.config.update({
   secretAccessKey: process.env.AWS_secretAccessKey
 });
 
+
+
 const bucket = new AWS.S3({params: {Bucket: BucketName}});
  
 //Data models
