@@ -336,7 +336,7 @@
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>
-                                <div id="loading1"></div>
+                                <div id="loader2"></div>
                                  <button class="btn btn-primary add_pole" type="button" id="{{meeting_key}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a Poll | 添加投票</button>
                                </div>
                             </div>
@@ -1214,8 +1214,6 @@ var originalData = {{{json meetingsData}}};
 //        
         $("#close_model2").click(function () {
             $("#poll2").modal("hide");
-            var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'
-            $("#loading1").append(html);
             $(".add_pole").prop('disabled', true);
              $.each($(".voting_opt :input[name*='option']"), function(data, key){  
               options1.push($(this).val())
@@ -1224,6 +1222,8 @@ var originalData = {{{json meetingsData}}};
               newArray = jQuery.unique(newArray)
               $(".voting_opt").append('<input type ="hidden" name="options" value="'+newArray+'" />')
                index1 = index1 + 1
+               var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'
+            $("#loader2").append(html);
         })    
         $("#close_model_edit").click(function () {
             //optionEdit=[]
