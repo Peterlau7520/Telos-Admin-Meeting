@@ -18,8 +18,8 @@ var hbs = require('hbs');
 hbs.registerHelper('json', json);
 
 
-const appId = process.env.ONESIGNAL_APPID;
-const apiKey = process.env.ONESIGNAL_APIKEY;
+const appId = "72ae436c-554c-4364-bd3e-03af71505447" //||process.env.ONESIGNAL_APPID ;
+const apiKey = "YTU4NmE5OGItODM3NC00YTYwLWExNjUtMTEzOTE2YjUwOWJk" // ||process.env.ONESIGNAL_APIKEY;
 const oneSignal = require('onesignal')(apiKey, appId, true);
 
 const BucketName = 'telospdf';
@@ -61,11 +61,11 @@ router.post('/addNotice', (req, res) => {
             forEach(residents, function(item, index){
                 if(item.deviceToken != undefined && item.deviceToken != '') {
                     promiseArr.push(new Promise(function(resolve, reject){
-                    let type = item.deviceToken.length > 40 ? 'android':'ios';
+                    let type = item.deviceType;
                     console.log(item, "typetypetypetype")
                     oneSignal.addDevice(item.deviceToken, type) 
-                    .then(function(id){
-                        console.log(id, "idddddddd")
+                    .then(function(id, err){
+                        console.log(id, "idddddddd", err)
                         resolve(id)
                     })
                 }))

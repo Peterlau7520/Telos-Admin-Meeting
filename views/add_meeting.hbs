@@ -868,12 +868,13 @@
         $("body").delegate(".flatpickr", "focusin", function(){
             var aWeekLater = new Date().setDate(new Date().getDate() + 14);
             var arr = []
-            var selectedDate = moment(event.target.value).format("YYYY-MM-DD HH:mm:ss");
+            var selectedDate = moment(event.target.value).format("MM/DD/YYYY HH:mm:ss");
             arr.push(selectedDate)
             console.log(arr, "arrarr")
             $(this).flatpickr({
             enableTime: true,
-            defaultDate: arr
+            defaultDate: arr,
+            minDate: "today",
          });
         const html = `<p class="close-calendar">Confirm | 確認</p>`;
         $(".flatpickr-calendar").append(html);
@@ -1008,7 +1009,7 @@
             var filesName = []
             $.each($("#documents_file :input[type='file']"), function(data, key){ 
                 var fileData = this.files[0]
-                filesName.push(this.files[0].name.replace(/[^A-Z0-9]/ig, ""))
+                filesName.push(this.files[0].name.replace(/[^A-Z0-9.]/ig, ""))
               file.push(fileData)
             });
             console.log(file, "file")
@@ -1116,17 +1117,20 @@ var originalData = {{{json meetingsData}}};
             
             var id = event.target.id
             var ids = 'tab_'+originalData[id]._id;
+            console.log(originalData[id])
             localStorage.setItem("tab", id);
             localStorage.setItem("divTab", ids);
             var m = moment(originalData[id].pollEndTime, "DD.MM.YYYY HH:mm:ss");
-            var dt = m.toDate();
+            var dt = new Date(originalData[id].pollEndTime); //m.toDate();
             var secondDate = new Date();
             var diff = dt - secondDate;  
+            console.log(diff, "diff")
             var seconds = diff / 1000;
             var minutes = (diff / 1000) / 60;
             var hours = minutes / 60;
              var one_day=1000*60*60*24;
             var days = (diff/one_day).toFixed();
+            console.log(days, "days")
             if( days < 0){
                 days =0;
             }

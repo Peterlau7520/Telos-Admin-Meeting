@@ -54,6 +54,7 @@ let currDate = new Date();
 let currentDate = currDate.getFullYear()+"-"+(currDate.getMonth()+1)+"-"+currDate.getDate()+" "+currDate.getHours()+":"+currDate.getMinutes()+":"+currDate.getSeconds();
 router.get('/allMeetings', (req, res) => {
     Meeting.find({estate: req.user.estateName}).populate('polls').lean().then(function(meetings, err){
+      console.log(meetings, "meetings")
         const promiseArr = []
         var currentMeetings = []
         var pastMeetings = []
@@ -72,7 +73,7 @@ router.get('/allMeetings', (req, res) => {
                   }
                   if(item.fileLinks[0]){
                       fileLinksLink = item.fileLinks[0]
-                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9]/ig, "");
+                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9.]/ig, "");
                   }
                         let Key = `${req.user.estateName}/${item.guid}/${fileLinksLink}`;
                         fileLinks.push({
@@ -97,7 +98,7 @@ router.get('/allMeetings', (req, res) => {
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9]/ig, "");
+                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9.]/ig, "");
                   }
                         let Key = `${req.user.estateName}/${item.guid}/Poll/${fileLinksLink}`;
                         polefileLinks.push({
@@ -122,11 +123,13 @@ router.get('/allMeetings', (req, res) => {
                      pastMeetings.push(item)
                     //end is less than start
                     }
+                   // console.log(currentMeetings, "currentMeetings")
                     resolve({meetingsData: currentMeetings, pastMeetingsData: pastMeetings})
                })
            }))
             Promise.all(promiseArr)
             .then(function(data){
+              //console.log(req.user._id, "id", data[0])
               Estate.findOneAndUpdate({_id: req.user._id},{
                 $set: {
                   currentMeetings: data[0].meetingsData,
@@ -147,6 +150,7 @@ router.get('/allMeetings', (req, res) => {
 })
 
 router.post('/addPollsOfMeeting', (req, res) => {
+  var promiseArr = [] 
     if(req.body.meeting_id){
       var meeting_title = ''
       Meeting.findOne({_id: req.body.meeting_id}).then(function(meetings, err){
@@ -155,8 +159,9 @@ router.post('/addPollsOfMeeting', (req, res) => {
         var pollFileLinks = []
                     if(req.files && !(_.isEmpty(req.files))){
                        for (var key in req.files) {
+                      promiseArr.push(new Promise(function(resolve, reject){
             var info = req.files[key][0].data;
-            var name = req.files[key][0].name.replace(/[^A-Z0-9]/ig, "");
+            var name = req.files[key][0].name.replace(/[^A-Z0-9.]/ig, "");
             fileLinks.push(name)
             var titleLink = ''
                       var fileLinksLink = ''
@@ -166,7 +171,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9]/ig, "");
+                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9.]/ig, "");
                   }
                   if(meeting_title){
 
@@ -185,12 +190,17 @@ router.post('/addPollsOfMeeting', (req, res) => {
                 if (err) {
                     console.log('Error uploading data: ', err);
                 } else {
-                    savePoll(req,res, fileLinks)
+                    resolve(fileLinks)
                 }
             });
-        } 
-
+        }))
     }
+        Promise.all(promiseArr)
+            .then(function(data){
+
+              savePoll(req,res, data[0])
+            })
+  }
     else{
         savePoll(req,res, fileLinks)
     }
@@ -201,7 +211,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
           let formData = req.body;
         for (var key in req.files) {
             var info = req.files[key][0].data;
-            var name = req.files[key][0].name.replace(/[^A-Z0-9]/ig, "");
+            var name = req.files[key][0].name.replace(/[^A-Z0-9.]/ig, "");
             var meeting_title = req.body.pollMeeting_title;
             var titleLink = ''
                       var fileLinksLink = ''
@@ -211,7 +221,7 @@ router.post('/addPollsOfMeeting', (req, res) => {
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9]/ig, "");
+                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9.]/ig, "");
                   }
                   meeting_title = meeting_title.replace(/[^A-Z0-9]/ig, "");
             var data = {
@@ -282,12 +292,11 @@ router.post('/editMeeting', (req, res) => {
     if(req.files && req.files.fileField) {
       Meeting.findOne({_id: req.body.meeting_id})
       .then(function(meeting, err){
-        console.log(meeting, "mmmmmmmmmmmmm")
            GUID = meeting.guid
         var files = req.files.fileField
         for (var i = 0; i < files.length; i++) {
             var info = files[i].data;
-            var name = files[i].name.replace(/[^A-Z0-9]/ig, "");
+            var name = files[i].name.replace(/[^A-Z0-9.]/ig, "");
             //meeting.fileLinks.push(name);
             fileLinks.push(name)
              var titleLink = ''
@@ -298,7 +307,7 @@ router.post('/editMeeting', (req, res) => {
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9]/ig, "");
+                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9.]/ig, "");
                   }
                 var data = {
                 Bucket: BucketName,
@@ -339,7 +348,7 @@ router.post('/editMeeting', (req, res) => {
                     titleLink = data.title.replace(/[^A-Z0-9]/ig, "");
                   }
                   if(data.removedfiles){
-                    fileLinksLink = data.removedfiles.replace(/[^A-Z0-9]/ig, "");
+                    fileLinksLink = data.removedfiles.replace(/[^A-Z0-9.]/ig, "");
                   }
                   let Key = `${req.user.estateName}/${GUID}/${fileLinksLink}`
                   bucket.deleteObject({
@@ -419,7 +428,7 @@ router.post('/editPoll', (req, res) => {
                     titleLink = req.body.pollName.replace(/[^A-Z0-9]/ig, "");
                   }
                   if(item){
-                    fileLinksLink = item.replace(/[^A-Z0-9]/ig, "");
+                    fileLinksLink = item.replace(/[^A-Z0-9.]/ig, "");
                    }
                        Poll.findOneAndUpdate({_id: req.body.id
                   }, {
@@ -441,15 +450,13 @@ router.post('/editPoll', (req, res) => {
 }  
 function upload(req, res){
     if(req.files && !(_.isEmpty(req.files))){
-      console.log(req.body, "req.body")
       Meeting.findOne({_id: req.body.meeting_title})
       .then(function(meeting, err){
-        console.log(meeting)
            GUID = meeting.guid
           promiseArr2.push(new Promise(function(resolve, reject){
          for (var key in req.files) {
             var info = req.files[key][0].data;
-            var name = req.files[key][0].name.replace(/[^A-Z0-9]/ig, "");
+            var name = req.files[key][0].name.replace(/[^A-Z0-9.]/ig, "");
                       var titleLink = ''
                       var fileLinksLink = ''
                       var meeting_title =''
@@ -463,7 +470,7 @@ function upload(req, res){
 
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9]/ig, "");
+                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9.]/ig, "");
                   }
             fileLinks.push(name)
             Poll.findOneAndUpdate({_id: id
@@ -553,7 +560,7 @@ router.get('/addMeeting',(req,res) => {
                forEach(meetings, function(item, key, a){
                 if( item.fileLinks && item.fileLinks.length > 0) {
                       let fileLinks = [];
-                        let Key = `${req.user.estateName.replace(/[^A-Z0-9]/ig, "")}/${item.guid}/${item.fileLinks[0].replace(/[^A-Z0-9]/ig, "")}`;
+                        let Key = `${req.user.estateName.replace(/[^A-Z0-9]/ig, "")}/${item.guid}/${item.fileLinks[0].replace(/[^A-Z0-9.]/ig, "")}`;
                         fileLinks.push({
                           name: item.fileLinks[0],
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
@@ -567,9 +574,9 @@ router.get('/addMeeting',(req,res) => {
                 let polefileLinks = []; 
                 if(poll.fileLinks){ 
                     forEach(poll.fileLinks, function(name, key, a){ 
-                        let Key = `${req.user.estateName.replace(/[^A-Z0-9]/ig, "")}/Poll/${name.replace(/[^A-Z0-9]/ig, "")}`;
+                        let Key = `${req.user.estateName.replace(/[^A-Z0-9]/ig, "")}/Poll/${name.replace(/[^A-Z0-9.]/ig, "")}`;
                         polefileLinks.push({
-                          name: name.replace(/[^A-Z0-9]/ig, ""),
+                          name: name.replace(/[^A-Z0-9.]/ig, ""),
                           url: "https://"+BucketName+".s3.amazonaws.com/"+Key
                         })
                       poll.fileLinks = polefileLinks;
@@ -578,15 +585,16 @@ router.get('/addMeeting',(req,res) => {
                 })
             }
                     var startTime = moment.utc(new Date(item.startTime));
-                    item.startTime =  startTime.format("DD/MM/YYYY hh:mm a");
+                    item.startTime =  startTime.format("MM/DD/YYYY hh:mm a");
+                    console.log(item.startTime, "heloooooooooooooooooooooooooooooooooooooo")
                     if(Date.parse(new Date(item.endTime)) > Date.parse(new Date)){
                       var endTime = moment.utc(new Date(item.endTime));
-                    item.endTime =  endTime.format("DD/MM/YYYY hh:mm a");
+                    item.endTime =  endTime.format("MM/DD/YYYY hh:mm a");
                     currentMeetings.push(item)
                    //start is less than End
                     }else{
                       var endTime = moment.utc(new Date(item.endTime));
-                    item.endTime =  endTime.format("DD/MM/YYYY hh:mm a");
+                    item.endTime =  endTime.format("MM/DD/YYYY hh:mm a");
                      pastMeetings.push(item)
                     //end is less than start
                     }
@@ -625,7 +633,7 @@ function uploadFile(req, res){
     if (files && files[0].size != 0) {
         for (var i = 0; i < files.length; i++) {
             var info = files[i].data;
-            var name = files[i].name.replace(/[^A-Z0-9]/ig, "");
+            var name = files[i].name.replace(/[^A-Z0-9.]/ig, "");
             //meeting.fileLinks.push(name);
             fileLinks.push(name)
             var titleLink = ''
@@ -636,7 +644,7 @@ function uploadFile(req, res){
                   }
                   if(name){
                       fileLinksLink = name
-                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9]/ig, "");
+                      fileLinksLink = fileLinksLink.replace(/[^A-Z0-9.]/ig, "");
                   }
             var data = {
                 Bucket: BucketName,
@@ -725,6 +733,7 @@ function savePoll(req, res, fileLinks){
                 active: true
             });
             meeting.save(function(err, meeting){
+              console.log(meeting, "meeeeeee")
               MeetingGUID = ''
                 const message = '新會議已添加 | A New Meeting has just been added!'
                 sendNotification(message,  req.user.estateName)

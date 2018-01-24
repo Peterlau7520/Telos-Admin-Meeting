@@ -43,6 +43,7 @@ router.post('/addSurvey', (req, res) => {
             forEach(residents, function(item, index){
                 if(item.deviceToken != undefined && item.deviceToken != '') {
                     promiseArr.push(new Promise(function(resolve, reject){
+                        console.log(item, "item")
                     let type = item.deviceType
                     oneSignal.addDevice(item.deviceToken, type) 
                     .then(function(id){
@@ -199,8 +200,9 @@ function sendNotification(oneSignalIds, messageBody){
     var data = {}
     if(oneSignalIds.length){
     oneSignal.createNotification(message , data, oneSignalIds)
-    .then(function(data){
-     if(data){
+    .then(function(notify, err){
+            console.log(notify, "notify", err)
+     if(notify){
         return true
      }
      else{
