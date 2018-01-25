@@ -184,7 +184,7 @@
                                         <div id='title_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{title}} | {{titleChn}}</div>
                                     </div>
                                     <div class="form-group col-sm-6 text-right">
-                                        <div id="loading1"></div>
+                                        <div id="loading1_{{meeting_key}}"></div>
                                         <button class="btn edit_meeting1 btn-primary" id={{meeting_key}} type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"  >Edit Meeting | 編輯會議</button>
                                         <div id ="loader"></div>
                                         <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" id="{{meeting_key}}" data-time="{{created_at}}">Delete Meeting | 取消會議</button>
@@ -243,7 +243,7 @@
                                     <div class="clearfix"></div>
                                 </form>
                                 <div class="clearfix"></div>
-                                <div id="loader2"></div>
+                                <div id="loader2_{{meeting_key}}"></div>
                                 <div class="clearfix"></div>
                                 <div class="form-group col-sm-6">
                                  <button class="btn btn-primary add_pole" type="button" id="{{meeting_key}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a poll | 添加投票</button>
@@ -769,12 +769,14 @@
         /*if(originalData != ''){
         originalData = JSON.parse(originalData);
         }*/
+        var Tab = ''
         $('.meeting_li').click(function (event) {
             $('.save_meeting').hide()
             $('#heading3').text('Upcoming Meeting | 近期會議')
             var html = ''
             $('#headingBottom2').html('')
             var id = event.target.id
+            Tab = id
             var ids = 'tab_'+originalData[id]._id;
             localStorage.setItem("tab", id);
             localStorage.setItem("divTab", ids);
@@ -871,7 +873,10 @@
               $(".voting_opt").append('<input type ="hidden" name="options" value="'+newArray+'"/>')
                index1 = index1 + 1
                var html = '<img id="theImg" class ="meeting-loader" alt="Telos Technology" src= "assets/img/load.gif " />'
-                $("#loader2").append(html);
+               //console.log(Tab, "tab")
+               const id = "#loader2_" + localStorage.getItem('tab')
+               console.log(id, "idddd")
+                $(id).append(html);
         })    
 
         $("#close_model").click(function () {
@@ -1032,7 +1037,8 @@
         $(document).on('click','.save_meeting',function(event){
             $("#edit_model").modal('hide');
             var html = '<img id="theImg" alt="Telos Technology" class ="meeting-loader" src= "assets/img/load.gif " style="    margin-left: 194px;"/>'
-            $("#loading1").append(html);
+            const id = "#loading1_" + localStorage.getItem('tab')
+            $(id).append(html);
             $(".edit_meeting1").prop('disabled', true);
             var meetingform = $("#edit_meeting_popup").serializeArray();
             var meetingData = convertSerializeArrayToJson(meetingform);

@@ -72,7 +72,7 @@ router.post('/addNotice', (req, res) => {
             forEach(residents, function(item, index){
                 if(item.deviceToken != undefined && item.deviceToken != '') {
                     promiseArr.push(new Promise(function(resolve, reject){
-                    let type = item.deviceType;
+                    let type = 1//item.deviceType;
                     console.log(item, "typetypetypetype")
                     oneSignal.addDevice(item.deviceToken, type) 
                     .then(function(id, err){
@@ -118,6 +118,7 @@ router.post('/addNotice', (req, res) => {
                         if(selectedFloors.includes(item.floor)){
                              if(item.deviceToken != undefined && item.deviceToken != '') {
                                  promiseArr.push(new Promise(function(resolve, reject){
+                                    console.log(item.deviceType, "device")
                                 let type = item.deviceType
                                     oneSignal.addDevice(item.deviceToken, type) 
                                     .then(function(id){
@@ -144,7 +145,7 @@ router.post('/addNotice', (req, res) => {
 
 
 function sendNotification(oneSignalIds, noticeBody){
-            var note = new apn.Notification();
+           /* var note = new apn.Notification();
           note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
           note.badge = 1;
           note.payload = {};
@@ -153,9 +154,9 @@ function sendNotification(oneSignalIds, noticeBody){
           apnProvider.send(note, deviceToken).then( (result) => {
             console.log(result, "result")
             // see documentation for an explanation of result
-        });
+        });*/
 
-            /*var message =  noticeBody;
+            var message =  noticeBody;
             var options = {} //{small_icon: "ic_telos_grey_background"}
             if(oneSignalIds.length){
             oneSignal.createNotification(message, options, oneSignalIds)
@@ -169,7 +170,7 @@ function sendNotification(oneSignalIds, noticeBody){
              }
             })
 
-        }*/
+        }
 }
 
 exports.uploadPdf = function(req, res, noticeId, targetAudience){

@@ -291,7 +291,7 @@
                                         <div id='title_div_{{meeting_key}}' class='display_meetings_detail_{{meeting_key}}'>{{title}} | {{titleChn}}</div>
                                     </div>
                                     <div class="form-group col-sm-6 text-right">
-                                        <div id="loading2"></div>
+                                        <div id="loading2_{{meeting_key}}"></div>
                                         <button class="btn edit_meeting1 btn-primary" id={{meeting_key}} type="button" data-id="{{meeting_key}}" data-time="{{created_at}}"  >編輯會議 | Edit Meeting</button>
                                         <button class="btn btn-danger delete_meeting" type="submit" data-id="{{meeting_key}}" id="{{meeting_key}}" data-time="{{created_at}}">Delete Meeting</button>
                                         <button style='display:none' class="btn btn-primary save_meeting" type="button" data-id="{{meeting_key}}">保存會議 | Save Meeting</button>
@@ -336,7 +336,7 @@
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>
-                                <div id="loader2"></div>
+                                <div id="loader2_{{meeting_key}}"></div>
                                  <button class="btn btn-primary add_pole" type="button" id="{{meeting_key}}" data-id="{{meeting_key}}" data-time="{{created_at}}"> Add a Poll | 添加投票</button>
                                </div>
                             </div>
@@ -788,7 +788,7 @@
             </div>
             <div class="modal-body">
                 <form role="form" name="#poll_form" id="poll_form" 
-                action="/addPollsOfMeeting"  method="post" enctype="multipart/form-data" target="uploader_iframe" onsubmit="return false">
+                action="/addPollsOfMeeting"  method="post" enctype="multipart/form-data">
                     <div class="form-group col-sm-6 formlabel">
                         <label>Poll Title</label>
                         <input type="text" name="title" class="form-control">
@@ -868,7 +868,7 @@
         $("body").delegate(".flatpickr", "focusin", function(){
             var aWeekLater = new Date().setDate(new Date().getDate() + 14);
             var arr = []
-            var selectedDate = moment(event.target.value).format("MM/DD/YYYY HH:mm:ss");
+            var selectedDate = moment(event.target.value).format("YYYY-MM-DD HH:mm:ss");
             arr.push(selectedDate)
             console.log(arr, "arrarr")
             $(this).flatpickr({
@@ -1223,7 +1223,8 @@ var originalData = {{{json meetingsData}}};
               $(".voting_opt").append('<input type ="hidden" name="options" value="'+newArray+'" />')
                index1 = index1 + 1
                var html = '<img id="theImg" class ="loader" src= "assets/img/load.gif "/>'
-            $("#loader2").append(html);
+               const id = "#loader2_" + localStorage.getItem('tab')
+            $(id).append(html);
         })    
         $("#close_model_edit").click(function () {
             //optionEdit=[]
@@ -1276,7 +1277,7 @@ var originalData = {{{json meetingsData}}};
         })
         function edit_popup(data){
             var html = '<div class="div-wrapper" style="padding: 10px;">'+
-            '<h3 class= "heading">' + "Upcoming Meeting"+ '</h3>' + '                                        <button class=" btn btn-danger deleteMeeting deletebtn btn-danger" type="submit" id={{data._id}} data-id={{data._id}} data-time="">取消會議 | Delete Meeting</button>' + '<hr>' +
+            '<h3 class= "heading">' + "Upcoming Meeting"+ '</h3>'  +'                                        <button class=" btn btn-danger deleteMeeting deletebtn btn-danger" type="submit" id={{data._id}} data-id={{data._id}} data-time="">取消會議 | Delete Meeting</button>' + '<hr>' +
             
 '                                <form role="form" enctype="multipart/form-data" name="edit_meeting_popup" id="edit_meeting_popup" action="/editMeeting" method="post">'+
 '                                    <div class="form-group col-sm-6">'+
@@ -1367,7 +1368,8 @@ var originalData = {{{json meetingsData}}};
         $(document).on('click','.save_meeting',function(event){
             $("#edit_model").modal('hide');
             var html = '<img id="theImg" class ="meeting-loader" src= "assets/img/load.gif "/>'
-            $("#loading2").append(html);
+            const id = "#loading2_" + localStorage.getItem('tab')
+            $(id).append(html);
             $(".edit_meeting1").prop('disabled', true);
             var meetingform = $("#edit_meeting_popup").serializeArray();
             var meetingData = convertSerializeArrayToJson(meetingform);
