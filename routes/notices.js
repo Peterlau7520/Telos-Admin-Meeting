@@ -26,7 +26,7 @@ var options = {
   production: false
 };
 
-var deviceToken = ["a7acb47466c5067ec7680bcbfec8eac096c7a083eb0c6b0134e388c3ac4f5094"]
+var deviceToken = "ad229cdcfe2dfaf2c86ba00131525c96c752f731768a955a5d08124b3e1adf3d"//, "APA91bEpuuCbsSP6mV7BH7hmC6mIaE1fkR7VXk1o4Bgd-zm61EaLVkOgLKRRWz90nCU-701_S7eU9MN88FZWkdy8a2XZf5Rbq8SvYFQSA2zsUjfR-93YbmENNeGesFJGIJ6vzwb0yhZP"]
 var apnProvider = new apn.Provider(options);
 
 const appId = "72ae436c-554c-4364-bd3e-03af71505447" //||process.env.ONESIGNAL_APPID ;
@@ -72,8 +72,15 @@ router.post('/addNotice', (req, res) => {
             forEach(residents, function(item, index){
                 if(item.deviceToken != undefined && item.deviceToken != '') {
                     promiseArr.push(new Promise(function(resolve, reject){
-                    let type = 1//item.deviceType;
-                    console.log(item, "typetypetypetype")
+                    let type = item.deviceType;
+                    console.log(type, "typetypetypetype")
+                    if(type === "iOS"){
+                        type = "ios"
+                    }
+                    else{
+                        type = "android"
+                    }
+                    console.log(type, "fianllll")
                     oneSignal.addDevice(item.deviceToken, type) 
                     .then(function(id, err){
                         console.log(id, "idddddddd", err)
@@ -145,14 +152,17 @@ router.post('/addNotice', (req, res) => {
 
 
 function sendNotification(oneSignalIds, noticeBody){
-           /* var note = new apn.Notification();
+    console.log(oneSignalIds, "oneSignalIds")
+            /*var note = new apn.Notification();
           note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
           note.badge = 1;
           note.payload = {};
+          note.topic = "com.telostechnology.telos";
           note.alert = 'You have Action Item(s) due today that have not been completed yet. Tap here for details';
           //var myDevice = new apn.Notification(deviceToken);
-          apnProvider.send(note, deviceToken).then( (result) => {
-            console.log(result, "result")
+          let deviceToken1 = Buffer.from(deviceToken, 'base64').toString('hex');
+          apnProvider.send(note, deviceToken1).then( (result) => {
+            console.log(result.failed[0].response, "result")
             // see documentation for an explanation of result
         });*/
 
