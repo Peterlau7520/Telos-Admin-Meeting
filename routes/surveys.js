@@ -27,7 +27,7 @@ const Question = models.Question;
 const UserAnswers = models.UserAnswers;
 const Options = models.Options;
 const Resident = models.Resident;
-router.use(busboyBodyParser({multi: true ,limit: '50mb'}));
+router.use(busboyBodyParser({multi: true}));
 
 
 router.post('/addSurvey', (req, res) => { 

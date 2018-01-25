@@ -17,7 +17,7 @@ const busboyBodyParser = require('busboy-body-parser');
 var schedule = require('node-schedule');
 const fs = require('fs');
 const router = express.Router();
-router.use(busboyBodyParser({multi: true ,limit: '50mb'}));
+router.use(busboyBodyParser({multi: true }));
 const dateFormat = require('dateformat');
 var json = require('hbs-json');
 var hbs = require('hbs');

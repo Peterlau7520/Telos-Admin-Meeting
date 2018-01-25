@@ -16,7 +16,18 @@ var json = require('hbs-json');
 var hbs = require('hbs');
  
 hbs.registerHelper('json', json);
+var apn = require("apn");
+var options = {
+  token: {
+    key: "apns/AuthKey_ERAULNRLLN.p8",
+    keyId: "ERAULNRLLN",
+    teamId: "8BP9RPB8ZB"
+  },
+  production: false
+};
 
+var deviceToken = ["a7acb47466c5067ec7680bcbfec8eac096c7a083eb0c6b0134e388c3ac4f5094"]
+var apnProvider = new apn.Provider(options);
 
 const appId = "72ae436c-554c-4364-bd3e-03af71505447" //||process.env.ONESIGNAL_APPID ;
 const apiKey = "YTU4NmE5OGItODM3NC00YTYwLWExNjUtMTEzOTE2YjUwOWJk" // ||process.env.ONESIGNAL_APIKEY;
@@ -28,15 +39,13 @@ AWS.config.update({
   secretAccessKey: process.env.AWS_secretAccessKey
 });
 
-
-
 const bucket = new AWS.S3({params: {Bucket: BucketName}});
  
 //Data models
 const Estate = models.Estate;
 const Notice = models.Notice;
 const Resident = models.Resident;
-router.use(busboyBodyParser({multi: true ,limit: '50mb'}));
+router.use(busboyBodyParser({multi: true}));
 
 
 //Sort function
@@ -135,7 +144,18 @@ router.post('/addNotice', (req, res) => {
 
 
 function sendNotification(oneSignalIds, noticeBody){
-            var message =  noticeBody;
+            var note = new apn.Notification();
+          note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+          note.badge = 1;
+          note.payload = {};
+          note.alert = 'You have Action Item(s) due today that have not been completed yet. Tap here for details';
+          //var myDevice = new apn.Notification(deviceToken);
+          apnProvider.send(note, deviceToken).then( (result) => {
+            console.log(result, "result")
+            // see documentation for an explanation of result
+        });
+
+            /*var message =  noticeBody;
             var options = {} //{small_icon: "ic_telos_grey_background"}
             if(oneSignalIds.length){
             oneSignal.createNotification(message, options, oneSignalIds)
@@ -149,7 +169,7 @@ function sendNotification(oneSignalIds, noticeBody){
              }
             })
 
-        }
+        }*/
 }
 
 exports.uploadPdf = function(req, res, noticeId, targetAudience){
