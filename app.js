@@ -9,8 +9,8 @@ const cookieParser = require('cookie-parser');
 const exphbs = require('express-handlebars');
 var hbs = require('hbs');
 const flash = require('connect-flash');
-const http = require('http');
-var server = require('http').createServer(app);
+const https = require('https');
+var server = require('https').createServer(app);
 var socket = require('socket.io');
 
 

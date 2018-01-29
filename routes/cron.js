@@ -18,7 +18,16 @@ const fs = require('fs');
 const router = express.Router();
 router.use(busboyBodyParser({multi: true}));
 const dateFormat = require('dateformat');
-
+var apn = require('apn');
+var options = {
+    token: {
+      key: process.env.apnKey ,//"apns/AuthKey_4M22X8PPJQ.p8",
+      keyId: process.env.apnKeyId ,//"4M22X8PPJQ",
+      teamId: process.env.apnTeamId //"8BP9RPB8ZB"
+    },
+    production: true
+  };
+var apnProvider = new apn.Provider(options);
 
 var AWS = require('aws-sdk');
 const async = require('async');
@@ -71,6 +80,17 @@ function sendNotification(message){
         forEach(residents, function(item, index){
             if(item.deviceToken != undefined && item.deviceToken != '') {
                 promiseArr.push(new Promise(function(resolve, reject){
+                var note = new apn.Notification();
+                note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+                note.badge = 1;
+                note.sound = "ping.aiff";
+                note.alert = message;
+                note.payload = {};
+                note.topic = "com.telostechnology.telos";
+                apnProvider.send(note, item.deviceToken).then( (result) => {
+                console.log(result, "result");
+                //resolve(result)
+                });
                 let type = item.deviceType
                 oneSignal.addDevice(item.deviceToken, type) 
                 .then(function(id){
@@ -106,7 +126,18 @@ function sendNotificationForProxy(message, meeting){
         forEach(residents, function(item, index){
             if(item.deviceToken != undefined && item.deviceToken != '') {
                 promiseArr.push(new Promise(function(resolve, reject){
-                let type = item.deviceToken.length > 40 ? 'android':'ios';
+                var note = new apn.Notification();
+                note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+                note.badge = 1;
+                note.sound = "ping.aiff";
+                note.alert = message;
+                note.payload = {};
+                note.topic = "com.telostechnology.telos";
+                apnProvider.send(note, item.deviceToken).then( (result) => {
+                console.log(result, "result");
+                //resolve(result)
+                });
+                let type = item.deviceType
                 oneSignal.addDevice(item.deviceToken, type) 
                 .then(function(id){
                     resolve(id)

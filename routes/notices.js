@@ -16,29 +16,24 @@ var json = require('hbs-json');
 var hbs = require('hbs');
  
 hbs.registerHelper('json', json);
-var apn = require("apn");
+var apn = require('apn');
 var options = {
-  token: {
-    key: "apns/AuthKey_ERAULNRLLN.p8",
-    keyId: "ERAULNRLLN",
-    teamId: "8BP9RPB8ZB"
-  },
-  production: false
-};
-
-var deviceToken = "ad229cdcfe2dfaf2c86ba00131525c96c752f731768a955a5d08124b3e1adf3d"//, "APA91bEpuuCbsSP6mV7BH7hmC6mIaE1fkR7VXk1o4Bgd-zm61EaLVkOgLKRRWz90nCU-701_S7eU9MN88FZWkdy8a2XZf5Rbq8SvYFQSA2zsUjfR-93YbmENNeGesFJGIJ6vzwb0yhZP"]
+    token: {
+      key: process.env.apnKey ,//"apns/AuthKey_4M22X8PPJQ.p8",
+      keyId: process.env.apnKeyId ,//"4M22X8PPJQ",
+      teamId: process.env.apnTeamId //"8BP9RPB8ZB"
+    },
+    production: true
+  };
 var apnProvider = new apn.Provider(options);
-
-const appId = "72ae436c-554c-4364-bd3e-03af71505447" //||process.env.ONESIGNAL_APPID ;
-const apiKey = "YTU4NmE5OGItODM3NC00YTYwLWExNjUtMTEzOTE2YjUwOWJk" // ||process.env.ONESIGNAL_APIKEY;
-const oneSignal = require('onesignal')(apiKey, appId, true);
-
 const BucketName = 'telospdf';
 AWS.config.update({
   accessKeyId: process.env.AWS_accessKeyId ,
   secretAccessKey: process.env.AWS_secretAccessKey
 });
-
+const appId = "72ae436c-554c-4364-bd3e-03af71505447" //||process.env.ONESIGNAL_APPID ;
+const apiKey = "YTU4NmE5OGItODM3NC00YTYwLWExNjUtMTEzOTE2YjUwOWJk" // ||process.env.ONESIGNAL_APIKEY;
+const oneSignal = require('onesignal')(apiKey, appId, true);
 const bucket = new AWS.S3({params: {Bucket: BucketName}});
  
 //Data models
@@ -63,39 +58,36 @@ router.post('/addNotice', (req, res) => {
     }
     const targetAudience = [];
     if(req.body.audience == 'allResidents'){
+        var oneSignalIds = [];
+        var deviceToken = []
+            var promiseArr = [];
         //exports.uploadPdf(req, res, targetAudience);
         exports.saveNotice(req,res,targetAudience);
         //CASE OF ALL RESIDENTS USING ONESIGNAL AS AN EXAMPLE
         Resident.find({estateName: req.user.estateName}, function(err, residents){
-            var oneSignalIds = [];
-            var promiseArr = [];
             forEach(residents, function(item, index){
                 if(item.deviceToken != undefined && item.deviceToken != '') {
                     promiseArr.push(new Promise(function(resolve, reject){
                     let type = item.deviceType;
                     console.log(type, "typetypetypetype")
-                    if(type === "iOS"){
-                        type = "ios"
-                    }
-                    else{
-                        type = "android"
-                    }
-                    console.log(type, "fianllll")
-                    oneSignal.addDevice(item.deviceToken, type) 
-                    .then(function(id, err){
-                        console.log(id, "idddddddd", err)
-                        resolve(id)
-                    })
-                }))
-                Promise.all(promiseArr)
-                .then(function(aud, err){
-                    oneSignalIds = aud
-                    const noticeBody = ` ${req.user.estateNameChn} 新通告 | ${req.user.estateName} New notice ! ` + req.body.title + ' | ' + req.body.titleChn
-                    var message =  noticeBody;
-                    sendNotification(oneSignalIds, noticeBody)
-                })
+                        oneSignal.addDevice(item.deviceToken, type) 
+                        .then(function(id){
+                        oneSignalIds.push(id)
+                        deviceToken.push(item.deviceToken)
+                        resolve({OnesignalId:oneSignalIds, deviceId:deviceToken})
+                        })
+                   }))
                 }
             })
+            Promise.all(promiseArr)
+                .then(function(aud, err){
+                    console.log(aud, "aud")
+                    oneSignalIds = aud[0].OnesignalId
+                    deviceToken = aud[0].deviceId
+                    const noticeBody = ` ${req.user.estateNameChn} 新通告 | ${req.user.estateNameDisplay} New notice ! ` + req.body.title + ' | ' + req.body.titleChn + "\uD83D\uDC4B"
+                    var message =  noticeBody;
+                    sendNotification(oneSignalIds, noticeBody,deviceToken)
+                })
         })
 
     } else {
@@ -117,30 +109,40 @@ router.post('/addNotice', (req, res) => {
             else{
                 const blocks = Object.keys(audience)
                 var promiseArr = [];
+                var deviceToken2 = []
                  var  segmentedAudience= [];
+                 console.log(residents, "residents")
                 forEach(residents, function(item, index){
                     //MAKE AN ARRAY OF BLOCKS
                    if (blocks.includes(item.block)){
+                    console.log("hello,")
                         const selectedFloors = audience[item.block].toString().split(',');
                         if(selectedFloors.includes(item.floor)){
+                             console.log("hello,", item)
                              if(item.deviceToken != undefined && item.deviceToken != '') {
+                                 console.log("hello,", item)
                                  promiseArr.push(new Promise(function(resolve, reject){
                                     console.log(item.deviceType, "device")
-                                let type = item.deviceType
-                                    oneSignal.addDevice(item.deviceToken, type) 
-                                    .then(function(id){
-                                        resolve(id)
-                                    })
+                                    let type = item.deviceType;
+                                        oneSignal.addDevice(item.deviceToken, type) 
+                                        .then(function(id){
+                                            console.log('id', id)
+                                        segmentedAudience.push(id)
+                                        deviceToken2.push(item.deviceToken)
+                                        resolve({OnesignalId:segmentedAudience, deviceId:deviceToken2})
+                                        })
                                  }))
-                                Promise.all(promiseArr)
-                                .then(function(audience, err){
-                                    segmentedAudience = audience;
-                                    const noticeBody = 'New notice! ' + req.body.title + ' | ' + req.body.titleChn
-                                    sendNotification(segmentedAudience, noticeBody)
-                                })
                             }
                         }
                     }
+                })
+                Promise.all(promiseArr)
+                    .then(function(aud, err){
+                        console.log(aud, "audience")
+                    deviceToken2 = aud[0].deviceId
+                    segmentedAudience = aud[0].OnesignalId;
+                     const noticeBody = `${req.user.estateNameChn} 新通告 | ${req.user.estateNameDisplay} New notice ! ` + req.body.title + ' | ' + req.body.titleChn + "\uD83D\uDC4B"
+                    sendNotification(segmentedAudience, noticeBody,deviceToken2)
                 })
             }
 
@@ -149,23 +151,28 @@ router.post('/addNotice', (req, res) => {
 
 });
 
-
-
-function sendNotification(oneSignalIds, noticeBody){
-    console.log(oneSignalIds, "oneSignalIds")
-            /*var note = new apn.Notification();
-          note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
-          note.badge = 1;
-          note.payload = {};
-          note.topic = "com.telostechnology.telos";
-          note.alert = 'You have Action Item(s) due today that have not been completed yet. Tap here for details';
-          //var myDevice = new apn.Notification(deviceToken);
-          let deviceToken1 = Buffer.from(deviceToken, 'base64').toString('hex');
-          apnProvider.send(note, deviceToken1).then( (result) => {
-            console.log(result.failed[0].response, "result")
-            // see documentation for an explanation of result
-        });*/
-
+function sendNotification(oneSignalIds, noticeBody, deviceToken){
+    var promiseArr = [];
+    forEach(deviceToken, function(item, index){
+        if(item != undefined && item != '') {
+            promiseArr.push(new Promise(function(resolve, reject){
+                var note = new apn.Notification();
+                note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+                note.badge = 1;
+                note.sound = "ping.aiff";
+                note.alert = noticeBody;
+                note.payload = {};
+                note.topic = "com.telostechnology.telos";
+                apnProvider.send(note, item).then( (result) => {
+                console.log(result, "result");
+                resolve(result)
+                });
+            }))
+        }
+    })
+    Promise.all(promiseArr)
+        .then(function(data, err){
+            if(err) return false
             var message =  noticeBody;
             var options = {} //{small_icon: "ic_telos_grey_background"}
             if(oneSignalIds.length){
@@ -181,6 +188,8 @@ function sendNotification(oneSignalIds, noticeBody){
             })
 
         }
+            //return true
+        })
 }
 
 exports.uploadPdf = function(req, res, noticeId, targetAudience){

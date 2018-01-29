@@ -15,7 +15,16 @@ var json = require('hbs-json');
 var hbs = require('hbs');
  
 hbs.registerHelper('json', json);
-
+var apn = require('apn');
+var options = {
+    token: {
+      key: process.env.apnKey ,//"apns/AuthKey_4M22X8PPJQ.p8",
+      keyId: process.env.apnKeyId ,//"4M22X8PPJQ",
+      teamId: process.env.apnTeamId //"8BP9RPB8ZB"
+    },
+    production: true
+  };
+var apnProvider = new apn.Provider(options);
 //Data models
 const Question = models.Question;
 const Options = models.Options;

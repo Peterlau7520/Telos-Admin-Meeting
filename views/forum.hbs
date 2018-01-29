@@ -316,7 +316,7 @@ setTimeout(function(){
      /*if(forum != ''){
      forum = JSON.parse(forum);
     }*/
-     var host = "http://104.28.5.112/" //window.location.origin;
+     var host = "https://104.28.5.112/" //window.location.origin;
      var socket =  io.connect(host)
          
         socket.on('post', function(data) {
@@ -380,7 +380,7 @@ setTimeout(function(){
                         data: comm,
                         type: 'POST',
                          success: function (data) {
-                          var host = "http://104.28.5.112/"//window.location.origin;
+                          var host = "https://104.28.5.112/"//window.location.origin;
                           var socket =  io.connect(host)
                           socket.emit('comment', {data:'data'});
                           //  location.reload()

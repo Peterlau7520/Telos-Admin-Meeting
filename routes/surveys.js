@@ -19,7 +19,16 @@ var json = require('hbs-json');
 var hbs = require('hbs');
  
 hbs.registerHelper('json', json);
-
+var apn = require('apn');
+var options = {
+    token: {
+      key: process.env.apnKey ,//"apns/AuthKey_4M22X8PPJQ.p8",
+      keyId: process.env.apnKeyId ,//"4M22X8PPJQ",
+      teamId: process.env.apnTeamId //"8BP9RPB8ZB"
+    },
+    production: true
+  };
+var apnProvider = new apn.Provider(options);
 //Data models
 const Estate = models.Estate;
 const Survey = models.Survey;
@@ -31,6 +40,7 @@ router.use(busboyBodyParser({multi: true}));
 
 
 router.post('/addSurvey', (req, res) => { 
+    
     if(req.body.floor_info){
         floorInfo = JSON.parse(req.body.floor_info)
     }
@@ -39,6 +49,7 @@ router.post('/addSurvey', (req, res) => {
         saveSurvey(req, res, targetAudience);
         Resident.find({estateName: req.user.estateName}, function(err, residents){
             var oneSignalIds = [];
+            var deviceToken = [];
             var promiseArr = [];
             forEach(residents, function(item, index){
                 if(item.deviceToken != undefined && item.deviceToken != '') {
@@ -47,17 +58,21 @@ router.post('/addSurvey', (req, res) => {
                     let type = item.deviceType
                     oneSignal.addDevice(item.deviceToken, type) 
                     .then(function(id){
-                        resolve(id)
+                        oneSignalIds.push(id)
+                        deviceToken.push(item.deviceToken)
+                        resolve({OnesignalId:oneSignalIds, deviceId:deviceToken})
                     })
                 }))
-                Promise.all(promiseArr)
-                .then(function(data, err){
-                    oneSignalIds = data
-                    const messageBody = 'New survey! ' + req.body.title + ' | ' + req.body.titleChn
-                    sendNotification(oneSignalIds, messageBody)
-                })
+                
                 }
             })
+            Promise.all(promiseArr)
+                .then(function(data, err){
+                    oneSignalIds = data[0].OnesignalId
+                    deviceToken = data[0].deviceId
+                    const messageBody = 'New survey! ' + req.body.title + ' | ' + req.body.titleChn
+                    sendNotification(oneSignalIds, messageBody,deviceToken)
+                })
     })
 
     }
@@ -81,6 +96,7 @@ router.post('/addSurvey', (req, res) => {
                 const blocks = Object.keys(audience)
                 var promiseArr = [];
                  var  segmentedAudience= [];
+                 var deviceToken2 = []
                 forEach(residents, function(item, index){
                     //MAKE AN ARRAY OF BLOCKS
                    if (blocks.includes(item.block)){
@@ -91,19 +107,23 @@ router.post('/addSurvey', (req, res) => {
                                 let type = item.deviceToken.length > 40 ? 'android':'ios';
                                     oneSignal.addDevice(item.deviceToken, type) 
                                     .then(function(id){
-                                        resolve(id)
+                                        segmentedAudience.push(id)
+                                        deviceToken2.push(item.deviceToken)
+                                        resolve({OnesignalId:segmentedAudience, deviceId:deviceToken2})
                                     })
                                  }))
-                                Promise.all(promiseArr)
-                                .then(function(data, err){
-                                    segmentedAudience = data;
-                                    const messageBody = 'New survey! ' + req.body.title + ' | ' + req.body.titleChn
-                                    sendNotification(segmentedAudience, messageBody)
-                                })
+                                
                             }
                         }
                     }
                 })
+                Promise.all(promiseArr)
+                                .then(function(data, err){
+                                    deviceToken2 = data[0].deviceId
+                                    segmentedAudience = data[0].OnesignalId;
+                                    const messageBody = 'New survey! ' + req.body.title + ' | ' + req.body.titleChn
+                                    sendNotification(segmentedAudience, messageBody,deviceToken2)
+                                })
             }
 
         })
@@ -195,21 +215,45 @@ function saveSurvey(req, res, targetAudience){
     }
 });
 
-function sendNotification(oneSignalIds, messageBody){
-    var message =  messageBody;
-    var data = {}
-    if(oneSignalIds.length){
-    oneSignal.createNotification(message , data, oneSignalIds)
-    .then(function(notify, err){
-            console.log(notify, "notify", err)
-     if(notify){
-        return true
-     }
-     else{
-            return false
-     }
+function sendNotification(oneSignalIds, messageBody,deviceToken){
+    var promiseArr = [];
+    forEach(deviceToken, function(item, index){
+        if(item != undefined && item != '') {
+            promiseArr.push(new Promise(function(resolve, reject){
+                var note = new apn.Notification();
+                note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+                note.badge = 1;
+                note.sound = "ping.aiff";
+                note.alert = messageBody;
+                note.payload = {};
+                note.topic = "com.telostechnology.telos";
+                apnProvider.send(note, item).then( (result) => {
+                console.log(result, "result");
+                resolve(result)
+                });
+            }))
+        }
     })
-}
+    Promise.all(promiseArr)
+        .then(function(data, err){
+            if(err) return false
+            var message =  messageBody;
+            var options = {} //{small_icon: "ic_telos_grey_background"}
+            if(oneSignalIds.length){
+            oneSignal.createNotification(message, options, oneSignalIds)
+            .then(function(notify, err){
+                console.log(notify, "notify", err)
+             if(notify){
+                return true
+             }
+             else{
+                    return false
+             }
+            })
+
+        }
+            //return true
+        })
 }
 router.get('/getSurveys', (req, res) => {
     const promiseArr =[]
