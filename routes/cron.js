@@ -173,7 +173,6 @@ var j = schedule.scheduleJob("00 15 6 * * *", function(fireDate){
         if(meetings.length > 0) {
             promiseArr.push(new Promise(function(resolve, reject){
                forEach(meetings, function(item, key, a){
-                console.log(item)
                 var firstDate = new Date(item.startTime);
                 var secondDate = new Date();
                 var diff = firstDate - secondDate;  
@@ -184,7 +183,6 @@ var j = schedule.scheduleJob("00 15 6 * * *", function(fireDate){
                 var days = (diff/one_day).toFixed();
                 if(days == 1){
                 const message = ` 大會將於明天 ` + item.startTime+  `進行 | Our `+ item.title +` will start at tomorrow `+ item.startTime+ `.`
-                console.log(message, "message")
                 sendNotification(message)
                 //console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
                 } 
@@ -194,31 +192,37 @@ var j = schedule.scheduleJob("00 15 6 * * *", function(fireDate){
         })
 })
 
-var k = schedule.scheduleJob("*/10 * * * *", function(fireDate){
+var k = schedule.scheduleJob("*/1 * * * *", function(fireDate){
+  console.log("working")
   Meeting.find({NotificationStatus: false}).then(function(meetings, err){
         const promiseArr = []
         var currentMeetings = []
         var pastMeetings = []
         var pollMeeting_title = '';
+        console.log("meetings", meetings)
         if(meetings.length > 0) {
-            promiseArr.push(new Promise(function(resolve, reject){
                forEach(meetings, function(item, key, a){
+                promiseArr.push(new Promise(function(resolve, reject){
+                console.log(item, "item")
                 var firstDate = new Date(item.startTime);
                 var secondDate = new Date();
                 var hours = Math.abs(firstDate - secondDate) / 36e5;
+                console.log(hours, "hours")
                 if(hours < 1){
                   Meeting.findOneAndUpdate({_id: item._id},{
                   $set: {
                     NotificationStatus: true
                   }
                 }).then(function(mee, err){
+                  console.log(mee, "mee")
                 const message = ` 大會將於一小時後進行 | `+ item.title+ ` will start one hour later.`
                 sendNotification(message)
                       console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
                     })
                   }
-              });
              }))
+           });
+
           }
         })
 })
