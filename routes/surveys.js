@@ -121,7 +121,7 @@ router.post('/addSurvey', (req, res) => {
                                 .then(function(data, err){
                                     deviceToken2 = data[0].deviceId
                                     segmentedAudience = data[0].OnesignalId;
-                                    const messageBody = 'New survey! ' + req.body.title + ' | ' + req.body.titleChn
+                                    const messageBody = '新问卷 | New survey ! ' + req.body.title + ' | ' + req.body.titleChn
                                     sendNotification(segmentedAudience, messageBody,deviceToken2)
                                 })
             }

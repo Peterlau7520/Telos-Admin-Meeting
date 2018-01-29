@@ -193,21 +193,17 @@ var j = schedule.scheduleJob("00 15 6 * * *", function(fireDate){
 })
 
 var k = schedule.scheduleJob("*/1 * * * *", function(fireDate){
-  console.log("working")
   Meeting.find({NotificationStatus: false}).then(function(meetings, err){
         const promiseArr = []
         var currentMeetings = []
         var pastMeetings = []
         var pollMeeting_title = '';
-        console.log("meetings", meetings)
         if(meetings.length > 0) {
                forEach(meetings, function(item, key, a){
                 promiseArr.push(new Promise(function(resolve, reject){
-                console.log(item, "item")
                 var firstDate = new Date(item.startTime);
                 var secondDate = new Date();
                 var hours = Math.abs(firstDate - secondDate) / 36e5;
-                console.log(hours, "hours")
                 if(hours < 1){
                   Meeting.findOneAndUpdate({_id: item._id},{
                   $set: {
@@ -255,38 +251,45 @@ var l = schedule.scheduleJob("00 15 6 * * *", function(fireDate){
         })
 })
 var m = schedule.scheduleJob("*/1 * * * *", function(fireDate){
-   var sdate = formatStartDate(new Date())
-    var edate = formatEndDate(new Date())
-  Survey.find({effectiveTo: { 
-        "$gte" : sdate,
-        "$lte": edate
-      }}).lean().then(function(Surveys, err){
+  console.log("woerkkkkk")
+   /*var sdate = formatStartDate(new Date())
+    var edate = formatEndDate(new Date())*/
+  Survey.find({NotificationStatus: false}).lean().then(function(Surveys, err){
+        console.log(Surveys, "Surveys")
         const promiseArr = []
         var currentMeetings = []
         var pastMeetings = []
         var pollMeeting_title = '';
-        if(Surveys.length !=0){
+        if(Surveys.length > 0){
         forEach(Surveys, function(sur, index) {
-          const message = ` `+ sur.title+ `的問卷結果已公佈，請查看 | `+sur.title+ `'s results are available, please check ! `
-          sendNotification(message)
-           //promiseArr.push(new Promise(function(resolve, reject){
-              /*  var todayDate = new Date()
-            var now1 = moment(new Date(sur.effectiveTo));
-            if(!(todayDate > sur.effectiveTo && todayDate != sur.effectiveTo)){
-              console.log("dtae not expired")
-              var dateSurvey = new Date(sur.effectiveTo);
-              var diffMs = (dateSurvey - todayDate); // milliseconds between now & Christmas
-              var diffDays = Math.floor(diffMs / 86400000); // days
-              var diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
-              var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); 
-                console.log(diffMins, "diffMins")
-                    Surveys[index].effectiveTo =   now1.format("D/MM/YYYY")
-            }else{
-                        Surveys[index].effectiveTo =  'expired'
-            }   
-            var now = moment(new Date(sur.postDate));
-            Surveys[index].postDate =  now.format("D/MM/YYYY");*/
-          //}))
+          console.log(sur, "sur")
+           promiseArr.push(new Promise(function(resolve, reject){
+                var firstDate = new Date(sur.effectiveTo);
+                var secondDate = new Date();
+                var diff = firstDate - secondDate;  
+                var seconds = diff / 1000;
+                var minutes = (diff / 1000) / 60;
+                var hours = minutes / 60;
+                 var one_day=1000*60*60*24;
+                var days = (diff/one_day).toFixed();
+                console.log(days, "days")
+                if(days == 1){
+                Survey.findOneAndUpdate({_id: sur._id},{
+                  $set: {
+                    NotificationStatus: true
+                  }
+                }).then(function(mee, err){
+                const message = ` `+ sur.title+ `的問卷結果已公佈，請查看 | `+sur.title+ `'s survey Ends tommorow! `
+                sendNotification(message)
+                resolve(mee)
+                })
+                      //console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
+                } 
+              }))
+        })
+        Promise.all(promiseArr)
+        .then(function(h, err){
+          console.log(h, "h")
         })
     }
     })
