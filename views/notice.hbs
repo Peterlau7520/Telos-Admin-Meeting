@@ -152,7 +152,7 @@
                                     <div class="row">        
                                         <div class="col-md-6">
                                             <div class="documents_wrapper">
-                                                <input type="file" name="filefield" accept="application/pdf" required/>
+                                                <input type="file" name="filefield" accept="application/pdf" id="filefield" required/>
 
                                                 
                                             </div>
@@ -376,13 +376,30 @@
         $(document).on('click','.submitNotice',function(event){
 
              if ($("#noticeForm").valid()) {
-                var html = '<img id="theImg" class ="loader" alt="Telos Technology" src= "assets/img/load.gif "/>'
-                    $("#loading").append(html);
-                    setTimeout(function(){ $(".submitNotice").prop('disabled', true); }, 200);
+                    if($('#filefield').val() != '') {            
+                  $.each($('#filefield').prop("files"), function(k,v){
+                      var filename = v['name'];    
+                      var ext = filename.split('.').pop().toLowerCase();
+                      if($.inArray(ext, ['pdf','doc','docx']) == -1) {
+                        $("#popupError").text("*Please upload only pdf,doc,docx format files | 請填寫所有欄目");
+                        event.preventDefault(); 
+                          //alert('Please upload only pdf,doc,docx format files.');
+                          //return false;
+                      }
+                      else{
+                        $("#popupError").text('')
+                        var html = '<img id="theImg" class ="loader" alt="Telos Technology" src= "assets/img/load.gif "/>'
+                        $("#loading").append(html);
+                        setTimeout(function(){ $(".submitNotice").prop('disabled', true); }, 200);
+                      }
+                    });        
+                    }
+                    
              }else{
+                //filefield
                 $("#popupError").text("*All fields are mandatory | 請填寫所有欄目"); 
              }
-            
+             
                        
         })
         $(document).on('click','#closePdf',function(){
