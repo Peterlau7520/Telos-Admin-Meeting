@@ -49,6 +49,8 @@ const residentSchema = new Schema({
         }
     ],
     registered: {type: Boolean , default: false},
+    viewedNotice: [{ type: Schema.Types.ObjectId,
+            ref: 'Notice'}]
 });
 
 //ESTATE
