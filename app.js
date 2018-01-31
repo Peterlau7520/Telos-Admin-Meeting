@@ -32,6 +32,7 @@ app.set('view engine', 'hbs');
 hbs.registerHelper('stringify', function (context) {
     return JSON.stringify(context);
 });
+app.use(bodyParser());
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: false ,limit: '50mb'}));
 app.use(express.static(path.join(__dirname, 'public')));
