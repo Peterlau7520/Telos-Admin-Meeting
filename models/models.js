@@ -169,6 +169,7 @@ const userAnswersSchema = new Schema({
     surveyId: { type: Schema.ObjectId, ref: 'Survey' },
     optionId: { type: Schema.ObjectId, ref: 'Option' },
     userId: { type: Schema.ObjectId, ref: 'User' },
+    estateName: String
 })
 //MEETING SCHEMA
 const meetingSchema = new Schema({

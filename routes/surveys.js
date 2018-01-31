@@ -341,7 +341,7 @@ router.get('/getSurveys', (req, res) => {
         });
         var result = _.map(list, '_id');
         console.log(req.user._id, "idddddd", result)
-        Estate.findOneAndUpdate({_id: req.user._id},
+        Resident.findOneAndUpdate({_id: req.user._id},
          {$set: {surveys: result } },
          { 
             new: true 
