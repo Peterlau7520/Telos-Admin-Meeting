@@ -104,7 +104,7 @@ app.use(function(err, req, res, next) {
   
 
 //----------------START----------------
-var server = app.listen(process.env.PORT || 5000, function () {
+var server = app.listen(process.env.PORT || 4000, function () {
   console.log('server successfully started on Port 4000');
 })
 
