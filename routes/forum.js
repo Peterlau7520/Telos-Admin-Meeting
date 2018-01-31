@@ -34,7 +34,7 @@ const Comment = models.Comment;
 const PostReport = models.PostReport;
 const CommentReport = models.CommentReport;
 
-router.use(busboyBodyParser({multi: true }));
+router.use(busboyBodyParser({multi: true , limit: '150mb' }));
 
 router.get('/getForum', (req, res) => {
     Post.find(
