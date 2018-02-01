@@ -196,6 +196,7 @@ const meetingSchema = new Schema({
     pollReport: Array,
     guid: String,
     NotificationStatus: { type: Boolean, default: false },
+    proxyFullName: String,
 })
 
 //FORUM
