@@ -32,9 +32,9 @@ app.set('view engine', 'hbs');
 hbs.registerHelper('stringify', function (context) {
     return JSON.stringify(context);
 });
-//app.use(bodyParser());
-app.use(bodyParser.json({limit: '5mb'}));
-app.use(bodyParser.urlencoded({ extended: false ,limit: '5mb'}));
+app.use(bodyParser());
+app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.urlencoded({ extended: false ,limit: '10mb'}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //----------------AUTH----------------
@@ -50,7 +50,7 @@ passport.deserializeUser(function(id, done) {
   Estate.findById(id, function(err, user) {
     done(err, user);
   });
-});
+}
 
 passport.use(new LocalStrategy(
   function(username, password, done) {

@@ -40,7 +40,7 @@ const bucket = new AWS.S3({params: {Bucket: BucketName}});
 const Estate = models.Estate;
 const Notice = models.Notice;
 const Resident = models.Resident;
-router.use(busboyBodyParser({multi: true, limit: '5mb' }));
+router.use(busboyBodyParser({multi: true}));
 
 
 //Sort function
