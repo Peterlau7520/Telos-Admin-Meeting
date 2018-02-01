@@ -50,7 +50,7 @@ passport.deserializeUser(function(id, done) {
   Estate.findById(id, function(err, user) {
     done(err, user);
   });
-}
+});
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
