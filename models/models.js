@@ -120,7 +120,8 @@ const pollSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Resident'
     }}],
-    votes: Array
+    votes: Array,
+    pollReport: Array
 });
 
 //NOTICE
@@ -139,7 +140,7 @@ const noticeSchema = new Schema({
 const surveySchema = new Schema({
     title: String,
     titleChn: String,
-    effectiveTo: String,
+    effectiveTo: Date,
     postDate: {type: Date, default: new Date()},
     targetAudience: [{block: String, floors: Array}],
     estate: String,
@@ -167,8 +168,8 @@ const optionSchema = new Schema({
 const userAnswersSchema = new Schema({
     questionId: { type: Schema.ObjectId, ref: 'Question' },
     surveyId: { type: Schema.ObjectId, ref: 'Survey' },
-    optionId: { type: Schema.ObjectId, ref: 'Option' },
-    userId: { type: Schema.ObjectId, ref: 'User' },
+    optionId: { type: Schema.ObjectId, ref: 'Options' },
+    userId: { type: Schema.ObjectId, ref: 'Resident' },
     estateName: String
 })
 //MEETING SCHEMA

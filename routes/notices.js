@@ -175,7 +175,7 @@ function sendNotification(oneSignalIds, noticeBody, deviceToken){
         .then(function(data, err){
             if(err) return false
             var message =  noticeBody;
-            var options = {} //{small_icon: "ic_telos_grey_background"}
+            var options = {android_accent_color: 'FF00FF00'} /*{message_icon: 'ic_stat_onesignal_default'}*/ //
             if(oneSignalIds.length){
             oneSignal.createNotification(message, options, oneSignalIds)
             .then(function(notify, err){
