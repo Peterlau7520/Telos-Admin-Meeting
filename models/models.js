@@ -8,6 +8,7 @@ const Schema = mongoose.Schema;
 //const bcrypt = require('bcrypt');
 
 //RESIDENTS
+
 const residentSchema = new Schema({
     name: String,
     email: String,
