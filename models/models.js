@@ -9,6 +9,7 @@ const Schema = mongoose.Schema;
 
 //RESIDENTS
 
+
 const residentSchema = new Schema({
     name: String,
     email: String,
