@@ -1,16 +1,137 @@
-<body>
+<html>
+
+<head>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+<!-- Body-->
+<style>
+  h2 {
+    /* font-family: ""*/
+  }
+
+  {
+    /*body{
+      font-family: -webkit-body !important;
+}*/
+  }
+
+  @media screen and (max-width: 480px) {
+    #hide {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 0px) and (max-width: 400px) {
+    #show {
+      display: block;
+    }
+  }
+
+  @media (max-height: 1099px) {
+    .intro-app-showcase {
+      padding: 0px 0;
+      display: inline-block;
+      margin: 0px 0;
+    }
+  }
+
+  @media only screen and (max-width: 812px) {
+    .aws-img-mobile {
+      content: url("assets/img/landing-page/security-flow-english-phone 3.svg") !important;
+      background-size: 134%;
+      width: 60%;
+      padding-top: 25px;
+      display: block;
+      margin: 0 auto;
+    }
+    /* .sponsors-mobile {
+      content: url("assets/img/landing-page/sponsors-mobile.jpg") !important;
+      background-size: 134%;
+      width: 60%;
+      padding-top: 25px;
+      display: block;
+      margin: 0 auto;
+    } */
+    .mobile-show {
+      display: block;
+    }
+    .mobile-hide {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .gadget-ios {
+      width: auto !important;
+    }
+    .gadget-android {
+      width: auto !important;
+    }
+    .gadget-windows {
+      width: auto !important;
+    }
+    .intro-app-showcase {
+      padding-top: 0px;
+    }
+  }
+
+  .intro-app-showcase {
+    height: 100%;
+  }
+
+  {
+    /*.aws-img{
+    content:url("assets/img/landing-page/security-flow-english.svg");
+    background-size: 134%;
+  }*/
+  }
+
+  .mobile-show {
+    display: none;
+  }
+
+  .mobile-hide {
+    display: block;
+  }
+
+  .intro-app-showcase .platform-swith>a {
+    height: 30px;
+    padding: 0 5px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: .1em;
+    line-height: 30px;
+    text-decoration: none;
+    width: 105px;
+    margin: 0 0px;
+    display: inline-block;
+    box-sizing: content-box;
+  }
+</style>
+
+<body id="fontId" style="overflow: hidden;
+    width: 100%;
+    height: 100%;">
   <div class="loading-screen">
     <div class="inner">
-      <div class="preloader-logo" style="width: 90px;"><img class="attachment-full size-full" src="assets/img/telos.svg"></div>
+      <div class="preloader-logo" style="width: 90px;"><img class="attachment-full size-full" src="assets/img/telos.svg" alt="Telos Technology"></div>
       <div class="progress-wrap">
         <div class="indeterminate"></div>
       </div>
     </div>
   </div>
   <div class="offcanvas-container mobile-menu">
+
     <nav class="main-navigation font-family-nav">
       <ul class="menu">
         <li class="menu-item menu-item-has-children has-mega-menu"><a href="/"><span>Home</span></a>
+
 
         </li>
         <li class="menu-item menu-item-has-children has-mega-menu"><a href="/app"><span>App</span></a>
@@ -19,15 +140,19 @@
         <li class="menu-item menu-item-has-children has-mega-menu"><a href="/contact"><span>Contact</span></a>
 
         </li>
-        <li class="menu-item menu-item-has-children"><a href="/about">About</a>
+
+        <li class="menu-item menu-item-has-children"><a href="/about"><span>About</span></a>
+
 
         </li>
-        <li class="menu-item menu-item-has-children"><a href="/contractorchn">繁体中文</a>
+
+        <li class="menu-item menu-item-has-children"><a href="/contractorchn"><span>繁體中文</span></a>
+
 
         </li>
+
       </ul>
     </nav>
-
   </div>
   <!-- Page Wrapper-->
   <main class="page-wrapper">
@@ -108,7 +233,7 @@
             <div class="text-block padding-top-1x">
               <p style="text-align: center; font-size:24px"><span class="text-gray">Contractors using our platform receive information about new projects faster and more frequently than others; as a result, they have been able to significantly streamline their workflow. Our mission: find you as many clients so you can rapidly grow your business.</span></p>
             </div>
-            <div class="text-center"><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="#" style="font-size:14px">Sign Up<i class="si si-arrow-right"></i></a><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="#" style="font-size:14px">Contact Sales<i class="si si-arrow-right"></i></a></div>
+            <div class="text-center"><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="#" style="font-size:14px">Sign Up<i class="si si-arrow-right"></i></a><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="/contact" style="font-size:14px">Contact Sales<i class="si si-arrow-right"></i></a></div>
           </div>
           <div class="col-lg-7 col-sm-12"><img class="block" width="1080" height="621" src="img/home/macbook_angular.png" alt=""></div>
         </div>
@@ -127,14 +252,13 @@
               <p style="text-align: center; font-size:24px"><span class="text-light opacity-60">We will email you any time a property manager posts a project requiring your field of expertise. Don't worry, we ensure that project requests are legitimate before notifying you.</span></p>
             </div>
           </div>
-          <!-- <div class="col-lg-7 col-sm-12"><img class="block" width="1080" height="621" src="img/home/macbook_angular.png" alt=""></div> -->
+          <div class="col-lg-7 col-sm-12"><img class="block" width="1080" height="621" src="assets/img/source/screen-1.svg" alt=""></div>
         </div>
       </div>
     </section>
     <section class="fw-section layout-full-equal section-no-gap overflow-hidden padding-top-5x" data-offset-top="180" style="background-color: #1a1a1a;">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-7 col-sm-12" style="background-image: url(img/home/chart_d3.png);"></div>
           <div class="col-lg-5 col-sm-12 padding-top-3x padding-bottom-4x">
             <div class="row">
               <div class="col-sm-12">
@@ -145,6 +269,7 @@
                   <p style="text-align: center; font-size:24px"><span class="text-light opacity-60">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat…</span></p>
                 </div>
               </div>
+              <div class="col-lg-7 col-sm-12"><img class="block" width="1080" height="621" src="assets/img/source/screen-2.svg" alt=""></div>
             </div>
           </div>
         </div>
@@ -161,15 +286,15 @@
               <p style="text-align: center; font-size:22px"><span class="text-light opacity-60">Small-scale projects usually just require quotations (e.g. price estimates, cost breakdown, and work methodology). Large-scale projects will require tender documents. You can use our chat function to discuss project details and share relevant documents with the property manager.</span></p>
             </div>
           </div>
-          <!-- <div class="col-lg-7 col-sm-12"><img class="block" width="1080" height="621" src="img/home/macbook_angular.png" alt=""></div> -->
+          <div class="col-lg-7 col-sm-12"><img class="block" width="1080" height="621" src="assets/img/source/screen-3.svg" alt=""></div>
         </div>
       </div>
     </section>
     <section class="fw-section layout-full-equal section-no-gap overflow-hidden padding-top-5x" data-offset-top="180" style="background-color: #1a1a1a;">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-7 col-sm-12" style="background-image: url(img/home/chart_d3.png);"></div>
-          <div class="col-lg-5 col-sm-12 padding-top-3x padding-bottom-4x">
+          <!-- <div class="col-lg-7 col-sm-12" style="background-image: url(img/home/chart_d3.png);"></div> -->
+          <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1 col-sm-12 padding-top-3x padding-bottom-4x">
             <div class="row">
               <div class="col-sm-12">
                 <div class="text-block">

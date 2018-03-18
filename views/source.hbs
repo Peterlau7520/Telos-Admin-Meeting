@@ -113,19 +113,23 @@
   }
 </style>
 
-<body>
+<body id="fontId" style="overflow: hidden;
+    width: 100%;
+    height: 100%;">
   <div class="loading-screen">
     <div class="inner">
-      <div class="preloader-logo" style="width: 90px;"><img class="attachment-full size-full" src="assets/img/telos.svg"></div>
+      <div class="preloader-logo" style="width: 90px;"><img class="attachment-full size-full" src="assets/img/telos.svg" alt="Telos Technology"></div>
       <div class="progress-wrap">
         <div class="indeterminate"></div>
       </div>
     </div>
   </div>
   <div class="offcanvas-container mobile-menu">
+
     <nav class="main-navigation font-family-nav">
       <ul class="menu">
         <li class="active menu-item menu-item-has-children has-mega-menu"><a href="/"><span>Home</span></a>
+
 
         </li>
         <li class="menu-item menu-item-has-children has-mega-menu"><a href="/app"><span>App</span></a>
@@ -134,15 +138,19 @@
         <li class="menu-item menu-item-has-children has-mega-menu"><a href="/contact"><span>Contact</span></a>
 
         </li>
-        <li class="menu-item menu-item-has-children"><a href="/about">About</a>
+
+        <li class="menu-item menu-item-has-children"><a href="/about"><span>About</span></a>
+
 
         </li>
-        <li class="menu-item menu-item-has-children"><a href="/sourcechn">繁体中文</a>
+
+        <li class="menu-item menu-item-has-children"><a href="/sourcechn"><span>繁體中文</span></a>
+
 
         </li>
+
       </ul>
     </nav>
-
   </div>
 
   <!-- Page Wrapper-->
@@ -156,7 +164,7 @@
           <div class="navbar-branding">
             <div class="mobile-menu-toggle">
               <i class="si si-menu"></i></div>
-            <a class="site-logo" href="/" style="width: 120px;"><img alt="" style="width:50%" src="assets/img/telos.svg"></a><a class="mobile-logo" href="assets/index.html" style="width: 120px;"><img alt="" src="assets/img/telos.svg"></a>
+            <a class="site-logo" href="/" style="width: 120px;"><img alt="" style="width:50%" src="assets/img/telos.svg"></a><a class="mobile-logo" href="/" style="width: 120px;"><img alt="" src="assets/img/telos.svg"></a>
           </div>
 
         </div>
@@ -451,21 +459,21 @@
                 <div class="counter counter-simple counter-light text-left mobile-center">
                   <h4 class="counter-digit"><span>246</span></h4>
                   <h4 class="counter-title">Project Requests</h4>
-                  <p class="counter-text pFont">Lorem ipsum dolor sit amet consectetur</p>
+                  <p class="counter-text">Tell us what you need, and we'll get it done.</p>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="counter counter-simple counter-light text-left mobile-center">
                   <h4 class="counter-digit"><span>627</span></h4>
                   <h4 class="counter-title">Quotations & Tenders</h4>
-                  <p class="counter-text pFont"></p>
+                  <p class="counter-text">Receive bids faster than ever.</p>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="counter counter-simple counter-light text-left mobile-center">
                   <h4 class="counter-digit"><span>891</span></h4>
                   <h4 class="counter-title">Contractors</h4>
-                  <p class="counter-text pFont">All the industry professionals in one place</p>
+                  <p class="counter-text">All the industry professionals in one place.</p>
                 </div>
               </div>
             </div>
@@ -492,7 +500,7 @@
     </section>
 
     <!-- diagram section -->
-    <section class="fw-section layout-full padding-top-5x with-parallax">
+    <section class="fw-section layout-full padding-top-4x with-parallax">
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-12">
@@ -662,3 +670,38 @@
 </body>
 
 </html>
+
+<script>
+mixpanel.track("Video play");
+// Opera 8.0+
+
+var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+// Firefox 1.0+
+var isFirefox = typeof InstallTrigger !== 'undefined';
+
+// Safari 3.0+ "[object HTMLElementConstructor]"
+var isSafari = /constructor/i.test(window.HTMLElement) || (function(p) {
+return p.toString() === "[object SafariRemoteNotification]";
+})(!window['safari'] || safari.pushNotification);
+
+// Internet Explorer 6-11
+var isIE = /*@cc_on!@*/ false || !!document.documentMode;
+
+// Edge 20+
+var isEdge = !isIE && !!window.StyleMedia;
+
+// Chrome 1+
+var isChrome = !!window.chrome && !!window.chrome.webstore;
+
+// Blink engine detection
+var isBlink = (isChrome || isOpera) && !!window.CSS;
+
+if (isChrome === true || isFirefox === true || isOpera === true) {
+document.getElementById("fontId").style.fontFamily = "'SF-Display-Regular', sans-serif";
+} else if (isSafari === true) {
+document.getElementById("fontId").style.fontFamily = "'SF-Display-Regular', sans-serif";
+} else {
+document.getElementById("fontId").style.fontFamily = "arial";
+}
+</script>
