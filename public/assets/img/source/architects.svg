@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400px" height="400px" viewBox="0 0 400 400" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>architects</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="architects">
+            <circle id="Oval-8" fill="#FCF7DE" cx="200" cy="200" r="200"></circle>
+            <g id="Group-71" transform="translate(91.000000, 85.000000)">
+                <g id="Group-70" transform="translate(0.000000, 140.800000)">
+                    <g id="Group-69">
+                        <rect id="Rectangle-73" fill="#FCD669" x="22.020202" y="6.6" width="178.363636" height="13.2"></rect>
+                        <ellipse id="Oval-36" fill="#E6A03E" cx="204.787879" cy="13.2" rx="13.2121212" ry="13.2"></ellipse>
+                        <ellipse id="Oval-36-Copy" fill="#E6A03E" cx="13.2121212" cy="13.2" rx="13.2121212" ry="13.2"></ellipse>
+                    </g>
+                </g>
+                <rect id="Rectangle-71" fill="#E6A03E" x="96.8888889" y="0" width="22.020202" height="35.2"></rect>
+                <path d="M107.89899,103.4 C87.2245729,103.4 70.4646465,86.6554496 70.4646465,66 C70.4646465,45.3445504 87.2245729,28.6 107.89899,28.6 C128.573407,28.6 145.333333,45.3445504 145.333333,66 C145.333333,86.6554496 128.573407,103.4 107.89899,103.4 Z M107.89899,90.2 C121.276554,90.2 132.121212,79.3652909 132.121212,66 C132.121212,52.6347091 121.276554,41.8 107.89899,41.8 C94.521426,41.8 83.6767677,52.6347091 83.6767677,66 C83.6767677,79.3652909 94.521426,90.2 107.89899,90.2 Z" id="Combined-Shape" fill="#FCD669"></path>
+                <g id="Group-57" transform="translate(19.818182, 85.800000)">
+                    <g id="Group-68">
+                        <rect id="Rectangle-72" fill="#E6A03E" transform="translate(9.595835, 135.571916) scale(-1, 1) rotate(63.000000) translate(-9.595835, -135.571916) " x="1.41665658" y="131.171916" width="16.3583578" height="8.8"></rect>
+                        <polygon id="Path-16" fill="#FCD669" transform="translate(47.018558, 67.254419) scale(-1, 1) rotate(-3.000000) translate(-47.018558, -67.254419) " points="38.4667151 2.2 83.0270145 96.556387 83.0270145 127.73613 72.8502132 132.308838 11.010101 2.2"></polygon>
+                    </g>
+                    <g id="Group-68" transform="translate(132.121212, 72.600000) scale(-1, 1) translate(-132.121212, -72.600000) translate(88.080808, 0.000000)">
+                        <rect id="Rectangle-72" fill="#E6A03E" transform="translate(9.595835, 135.571916) scale(-1, 1) rotate(63.000000) translate(-9.595835, -135.571916) " x="1.41665658" y="131.171916" width="16.3583578" height="8.8"></rect>
+                        <polygon id="Path-16" fill="#FCD669" transform="translate(47.018558, 67.254419) scale(-1, 1) rotate(-3.000000) translate(-47.018558, -67.254419) " points="38.4667151 2.2 83.0270145 96.556387 83.0270145 127.73613 72.8502132 132.308838 11.010101 2.2"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

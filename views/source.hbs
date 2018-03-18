@@ -1,0 +1,664 @@
+<html>
+
+<head>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<style>
+  h2 {
+    /* font-family: ""*/
+  }
+
+  {
+    /*body{
+      font-family: -webkit-body !important;
+}*/
+  }
+
+  @media screen and (max-width: 480px) {
+    #hide {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 0px) and (max-width: 400px) {
+    #show {
+      display: block;
+    }
+  }
+
+  @media (max-height: 1099px) {
+    .intro-app-showcase {
+      padding: 0px 0;
+      display: inline-block;
+      margin: 0px 0;
+    }
+  }
+
+  @media only screen and (max-width: 812px) {
+    /* .aws-img-mobile {
+      content: url("assets/img/landing-page/security-flow-english-phone 3.svg") !important;
+      background-size: 134%;
+      width: 60%;
+      padding-top: 25px;
+      display: block;
+      margin: 0 auto;
+    } */
+    .sponsors-mobile {
+      content: url("assets/img/landing-page/sponsors-mobile.jpg") !important;
+      background-size: 134%;
+      width: 60%;
+      padding-top: 25px;
+      display: block;
+      margin: 0 auto;
+    }
+    .mobile-show {
+      display: block;
+    }
+    .mobile-hide {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    /* .gadget-ios {
+      width: auto !important;
+    }
+    .gadget-android {
+      width: auto !important;
+    }
+    .gadget-windows {
+      width: auto !important;
+    } */
+    .intro-app-showcase {
+      padding-top: 0px;
+    }
+  }
+
+  .intro-app-showcase {
+    height: 100%;
+  }
+
+  {
+    /*.aws-img{
+    content:url("assets/img/landing-page/security-flow-english.svg");
+    background-size: 134%;
+  }*/
+  }
+
+  .mobile-show {
+    display: none;
+  }
+
+  .mobile-hide {
+    display: block;
+  }
+
+  .intro-app-showcase .platform-swith>a {
+    height: 30px;
+    padding: 0 5px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: .1em;
+    line-height: 30px;
+    text-decoration: none;
+    width: 105px;
+    margin: 0 0px;
+    display: inline-block;
+    box-sizing: content-box;
+  }
+</style>
+
+<body>
+  <div class="loading-screen">
+    <div class="inner">
+      <div class="preloader-logo" style="width: 90px;"><img class="attachment-full size-full" src="assets/img/telos.svg"></div>
+      <div class="progress-wrap">
+        <div class="indeterminate"></div>
+      </div>
+    </div>
+  </div>
+  <div class="offcanvas-container mobile-menu">
+    <nav class="main-navigation font-family-nav">
+      <ul class="menu">
+        <li class="active menu-item menu-item-has-children has-mega-menu"><a href="/"><span>Home</span></a>
+
+        </li>
+        <li class="menu-item menu-item-has-children has-mega-menu"><a href="/app"><span>App</span></a>
+
+        </li>
+        <li class="menu-item menu-item-has-children has-mega-menu"><a href="/contact"><span>Contact</span></a>
+
+        </li>
+        <li class="menu-item menu-item-has-children"><a href="/about">About</a>
+
+        </li>
+        <li class="menu-item menu-item-has-children"><a href="/sourcechn">繁体中文</a>
+
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+
+  <!-- Page Wrapper-->
+  <main class="page-wrapper">
+    <!-- Site header-->
+    <header class="site-header header-fullwidth">
+      <!-- Topbar-->
+      <div class="navbar-horizontal border-default-bottom">
+
+        <div class="navbar-inner">
+          <div class="navbar-branding">
+            <div class="mobile-menu-toggle">
+              <i class="si si-menu"></i></div>
+            <a class="site-logo" href="/" style="width: 120px;"><img alt="" style="width:50%" src="assets/img/telos.svg"></a><a class="mobile-logo" href="assets/index.html" style="width: 120px;"><img alt="" src="assets/img/telos.svg"></a>
+          </div>
+
+        </div>
+        <div class="menu-wrap">
+          <nav class="main-navigation font-family-nav">
+            <ul class="menu">
+              <li class="active menu-item menu-item-has-children has-mega-menu"><a href="/"><span>Home</span></a>
+
+              </li>
+              <li class="menu-item menu-item-has-children has-mega-menu"><a href="/app"><span>App</span></a>
+
+              </li>
+              <li class="menu-item menu-item-has-children has-mega-menu"><a href="/contact"><span>Contact</span></a>
+
+              </li>
+              <li class="menu-item menu-item-has-children"><a href="/about">About</a>
+
+              </li>
+              <li class="menu-item menu-item-has-children"><a href="/sourcechn">繁体中文</a>
+
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="navbar-horizontal navbar-sticky border-default-bottom">
+
+        <div class="navbar-inner">
+          <div class="navbar-branding">
+            <div class="mobile-menu-toggle"><i class="si si-menu"></i></div><a class="site-logo" href="/" style="width: 120px;"><img alt="" style="width:50%" src="assets/img/telos.svg"></a><a class="mobile-logo" href="/" style="width: 120px;"><img alt="" style="width:50%" src="assets/img/telos.svg"></a>
+          </div>
+
+        </div>
+        <div class="menu-wrap">
+          <nav class="main-navigation font-family-nav">
+            <ul class="menu">
+              <li class="active menu-item menu-item-has-children has-mega-menu"><a href="/"><span>Home</span></a>
+
+              </li>
+              <li class="menu-item menu-item-has-children has-mega-menu"><a href="/app"><span>App</span></a>
+
+              </li>
+              <li class="menu-item menu-item-has-children has-mega-menu"><a href="/contact"><span>Contact</span></a>
+
+              </li>
+              <li class="menu-item menu-item-has-children"><a href="/about">About</a>
+
+              </li>
+              <li class="menu-item menu-item-has-children"><a href="/sourcechn">繁体中文</a>
+
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- intro-content -->
+    <section class="fw-section with-overlay with-parallax padding-top-6x padding-bottom-6x" data-offset-top="180" data-jarallax="{&quot;type&quot;:&quot;scroll&quot;,&quot;speed&quot;:0.4,&quot;imgWidth&quot;:1920,&quot;imgHeight&quot;:950,&quot;noAndroid&quot;:&quot;true&quot;,&quot;noIos&quot;:&quot;true&quot;}"
+      style="background-image: url(assets/img/landing-page/compliance-background.png);"><span class="overlay" style="opacity: 0; background-color: #000000;"></span>
+      <div class="container-fluid">
+        <div class="visible-lg" style="height: 140px;"></div>
+        <div class="visible-md" style="height: 80px;"></div>
+        <div class="visible-sm visible-xs" style="height: 40px;"></div>
+        <div class="text-block">
+          <h1 style="text-align: center;"><span class="text-dark font-family-headings">Find the best contractor for your project<span class="text-primary">.</span></span></h1>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-12">
+            <div class="text-block">
+              <p style="text-align: center; font-size:24px"><span class="text-dark opacity-80">Bringing precision to the procurement process.</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center" style="margin-top: 10px">
+          <a class="btn btn-solid btn-pill btn-primary btn-nl waves-effect waves-light scroll-to" style="color: #f2f2f2 !important;" href="#">Admin Login / Sign Up</a>
+        </div>      </div>
+    </section>
+
+    <!--sponsors section-->
+    <section class="fw-section with-parallax  aws-img sponsors-mobile" id="aws-img" style=" background-size: 100% 100%;">
+      <img class="mobile-show" src="assets/img/landing-page/sponsors-mobile.jpg" alt="Property management" />
+      <img class="mobile-hide" style="max-width: 75%;margin: 20px auto;" src="assets/img/landing-page/sponsors.jpg" alt="Telos Technology Hong Kong" />
+    </section>
+
+    <!-- different contractors section-->
+    <section class="fw-section padding-top-4x padding-bottom-2x">
+      <div class="container text-center">
+        <h1 class="font-family-headings padding-bottom-2x">We cover a wide range of services.</h1>
+        <div class="row padding-top-1x">
+          <div class="col-sm-3"><img class="block-center" width="80" height="80" src="assets/img/source/architects.svg" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">Architects</h4>
+              <p style="text-align: center;"><span class="text-gray pFont">Experts to guide you through the planning, design, and development stages of your project.</span></p>
+            </div>
+          </div>
+          <div class="col-sm-3"><img class="block-center" width="80" height="80" src="assets/img/source/engineers.svg" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">Engineers</h4>
+              <p style="text-align: center;"><span class="text-gray pFont">Structural Engineers <br> Geotechnical Engineers</span></p>
+            </div>
+          </div>
+          <div class="col-sm-3"><img class="block-center" width="80" height="80" src="assets/img/source/surveyors.svg" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">Surveyors</h4>
+              <p style="text-align: center;"><span class="text-gray pFont">General Practice Surveyors <br> Quantity Surveyors <br> Building Surveyors <br> Land Surveyors</span></p>
+            </div>
+          </div>
+          <div class="col-sm-3"><img class="block-center" width="80" height="80" src="assets/img/source/general-contractor.svg" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">RGBC & RSC</h4>
+              <p style="text-align: center;"><span class="text-gray pFont">Registered General Building Contractors <br> Registered Specialist Contractors</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3"><img class="block-center" width="80" height="80" src="assets/img/source/security-firm.svg" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">Security Firms</h4>
+              <p style="text-align: center;"><span class="text-gray pFont">Install state-of-the-art security systems for your estate.</span></p>
+            </div>
+          </div>
+          <div class="col-sm-3"><img class="block-center" width="80" height="80" src="assets/img/source/maintenance.svg" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">Maintenance</h4>
+              <p style="text-align: center;"><span class="text-gray pFont">Repair windows, drainage, plumbing systems, water taps, piping, etc. Safety first.</span></p>
+            </div>
+          </div>
+          <div class="col-sm-3"><img class="block-center" width="80" height="80" src="assets/img/source/RIs.svg" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">Registered Inspectors</h4>
+              <p style="text-align: center;"><span class="text-gray pFont">Authorized Persons <br> Registered Structural Engineers <br> Building Authority approved RI's</span></p>
+            </div>
+          </div>
+          <div class="col-sm-3"><img class="block-center" width="80" height="80" src="assets/img/source/minor-works.svg" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">Minor Works</h4>
+              <p style="text-align: center;"><span class="text-gray pFont">40+ types of minor works contractors for class I, II, & III projects.</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- introduction -->
+    <section class="fw-section padding-top-6x padding-bottom-6x" data-aos="fade-up">
+      <div class="container text-center">
+        <div class="text-block">
+          <h1 class="font-family-headings">More choices. Better decisions.</h1>
+          <p class="text-gray col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12" style="font-size:24px">Property owners need reliable contractors to ensure smooth construction and renovation works, and we're here to make that happen. Our sourcing platform makes it easy for you to request for quotations or tenders from thousands of contractors all over Hong Kong.</p>
+        </div>
+        <!-- <div class="row" style="font-size:15px;">
+          <div class="col-sm-6">
+            <div class="text-block">
+              <p>Property owners need good and reliable contractors to ensure smooth construction and renovation works, and we are here to make that happen.</p>
+              <p>Our tender platform makes it as easy for your property management to request for tenders, sourcing from thousands of contractors all over Hong Kong.</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="text-block">
+              <p>We believe that property owners deserve to know what goes on at their estates, so we've given you complete access to our database of publicly vetted service providers. Just log in with your Telos user account.</p>
+              <p></p>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </section>
+
+    <!-- how it works section -->
+    <section class="fw-section padding-top-3x padding-bottom-3x">
+      <div class="container text-center">
+        <h1 class="font-family-headings padding-bottom-1x">How does it work?</h1>
+        <!-- <h2>Our Tendering Process</h2>
+        <p class="text-gray padding-bottom-2x"> Get the job done faster.</p> -->
+        <div class="row">
+          <div class="col-sm-3"><img class="block-center" width="90" height="90" src="assets/img/source/post.svg" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">1. Find</h4>
+              <p style="text-align: center;"><span class="text-gray">Post a project request onto our open marketplace to source professional service providers.</span></p>
+            </div>
+          </div>
+          <div class="col-sm-3"><img class="block-center" width="95" height="95" src="assets/img/source/quotation.svg" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">2. Compare</h4>
+              <p style="text-align: center;"><span class="text-gray">Comparing your list of bids. Browse profiles and reviews.</span></p>
+            </div>
+          </div>
+          <div class="col-sm-3"><img class="block-center" width="155" height="155" src="assets/img/source/work.svg" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">3. Interview</h4>
+              <p style="text-align: center;"><span class="text-gray">Use the Telos platform to chat, share files, and manage your projects.</span></p>
+            </div>
+          </div>
+          <div class="col-sm-3"><img class="block-center" width="125" height="125" src="assets/img/source/hire.svg" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">4. Hire</h4>
+              <p style="text-align: center;"><span class="text-gray">Either invite your favorite contractors to tender or immediately hire after receiving quotations!</span></p>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-sm-3"><img class="block-center" width="100" height="100" src="img/home/web_app-feature_05-150x150.png" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">Events Calendar</h4>
+              <p style="text-align: center;"><span class="text-gray pFont">Ut enim ad minim veniam, quis nostrud exercitation</span></p>
+            </div>
+          </div>
+          <div class="col-sm-3"><img class="block-center" width="100" height="100" src="img/home/web_app-feature_06-150x150.png" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">Hardware Animations</h4>
+              <p style="text-align: center;"><span class="text-gray pFont">Ut enim ad minim veniam, quis nostrud exercitation</span></p>
+            </div>
+          </div>
+          <div class="col-sm-3"><img class="block-center" width="100" height="100" src="img/home/web_app-feature_07-150x150.png" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">Clean & exportable code</h4>
+              <p style="text-align: center;"><span class="text-gray pFont">Ut enim ad minim veniam, quis nostrud exercitation</span></p>
+            </div>
+          </div>
+          <div class="col-sm-3"><img class="block-center" width="100" height="100" src="img/home/web_app-feature_08-150x150.png" alt="">
+            <div class="text-block padding-bottom-1x padding-top-1x">
+              <h4 style="text-align: center;">Priority support</h4>
+              <p style="text-align: center;"><span class="text-gray pFont">Ut enim ad minim veniam, quis nostrud exercitation</span></p>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </section>
+
+    <!-- process section -->
+    <!-- <section class="fw-section with-parallax padding-top-3x padding-bottom-2x page-title page-title-lg" data-offset-top="180" data-jarallax="{&quot;type&quot;:&quot;scroll&quot;,&quot;speed&quot;:0.4,&quot;imgWidth&quot;:1920,&quot;imgHeight&quot;:1199,&quot;noAndroid&quot;:&quot;true&quot;,&quot;noIos&quot;:&quot;true&quot;}"
+      style="background-image: url(assets/img/home/main_hero_bg.png);">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-4 col-md-8 col-md-offset-4 col-sm-12">
+            <div class="text-block">
+              <h2><span class="text-light">Our Tendering Process</span></h2>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="step step-simple step-light">
+                  <h3 class="step-digit">01</h3>
+                  <div class="step-body">
+                    <h4 class="step-title">Submit</h4>
+                    <p class="step-text pFont">Upload and post tender notice in a matter of seconds.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="step step-simple step-light">
+                  <h3 class="step-digit">02</h3>
+                  <div class="step-body">
+                    <h4 class="step-title">Instant Notification</h4>
+                    <p class="step-text pFont">All our contractors get instantly notified about new tender notices.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="step step-simple step-light">
+                  <h3 class="step-digit">03</h3>
+                  <div class="step-body">
+                    <h4 class="step-title">Contact</h4>
+                    <p class="step-text pFont">All contractors interested in your project will contact you about when and where to submit tenders.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="step step-simple step-light">
+                  <h3 class="step-digit">04</h3>
+                  <div class="step-body">
+                    <h4 class="step-title">Tendering</h4>
+                    <p class="step-text pFont">Wait for contractor bids!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- stats sections -->
+    <section class="fw-section padding-top-6x padding-bottom-5x with-parallax page-title page-title-lg" data-offset-top="180" data-jarallax="{&quot;type&quot;:&quot;scroll&quot;,&quot;speed&quot;:0.4,&quot;imgWidth&quot;:1920,&quot;imgHeight&quot;:1199,&quot;noAndroid&quot;:&quot;true&quot;,&quot;noIos&quot;:&quot;true&quot;}"
+      style="background-image: url(assets/img/source/pexels-photo-373965.jpeg);"><span class="overlay" style="background-color:#000;opacity:0.5;"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="counter counter-simple counter-light text-left mobile-center">
+                  <h4 class="counter-digit"><span>246</span></h4>
+                  <h4 class="counter-title">Project Requests</h4>
+                  <p class="counter-text pFont">Lorem ipsum dolor sit amet consectetur</p>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="counter counter-simple counter-light text-left mobile-center">
+                  <h4 class="counter-digit"><span>627</span></h4>
+                  <h4 class="counter-title">Quotations & Tenders</h4>
+                  <p class="counter-text pFont"></p>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="counter counter-simple counter-light text-left mobile-center">
+                  <h4 class="counter-digit"><span>891</span></h4>
+                  <h4 class="counter-title">Contractors</h4>
+                  <p class="counter-text pFont">All the industry professionals in one place</p>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="row padding-top-3x padding-bottom-3x rounded background-white">
+              <div class="col-lg-7 col-lg-offset-1 col-md-offset-1 col-sm-8 col-sm-offset-1 mobile-center">
+                <div class="text-block">
+                  <h2><span class="text-black font-family-headings">Sign up as a contractor for free</span></h2>
+                </div>
+                <div class="text-block margin-top-1x pFont">
+                  <p>Through our platform, our contractors receive information about new projects faster and more frequently than others. As a result, they have been able to rapidly streamline their hunt for contracts.</p>
+                </div>
+              </div>
+              <div class="col-lg-4 col-sm-3">
+                <div class="wpb_wrapper">
+                  <div class="padding-top-2x hidden-xs"></div>
+                  <div class="padding-top-1x visible-xs"></div>
+                </div>
+                <div class="text-center"><a class="btn btn-solid btn-pill btn-primary btn-nl waves-effect waves-light" href="#">Sign Up</a></div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- diagram section -->
+    <section class="fw-section layout-full padding-top-5x with-parallax">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="text-block">
+              <h1 class="font-family-headings" style="text-align: center;">Optimizing your search.</h1>
+              <!-- <p style="text-align: center; font-size:24px"><span class="text-gray">Optimizing your search.</span></p> -->
+            </div>
+            <!-- <img class="margin-top-2x block-center" width="914" height="477" src="assets/img/landing-page/source-diagram.png" alt=""> -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="fw-section with-parallax aws-img" id="aws-img" style="background-size: 100% 100%; text-align: center;">
+      <!-- <img class="mobile-show" src="assets/img/landing-page/security-flow-english-phone 3.svg" alt="Property management" /> -->
+      <img style="max-width: 80%;margin: 30px auto;" src="assets/img/source/network-diagram.svg" alt="Telos Technology Hong Kong" />
+    </section>
+    <!-- <section class="fw-section with-parallax aws-img padding-bottom-3x" id="aws-img" style="background-size: 100% 100%; text-align: center;">
+      <img style="max-width: 75%;margin: 30px auto;" src="assets/img/landing-page/tender-diagram2.svg" alt="Telos Technology Hong Kong" />
+    </section> -->
+
+    <!-- contractor section -->
+    <section class="fw-section layout-full padding-top-4x overflow-hidden" data-offset-top="-2" style="background-color:#f6f9fc;">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 padding-bottom-3x">
+            <div class="text-block">
+              <h1 style="text-align: center;"><span class="font-family-headings text-dark">Sign up as a contractor</span></h1>
+              <p style="text-align: center; font-size:24px"><span class="text-dark">We have the perfect job for you.</span></p>
+            </div>
+            <!-- <div class="text-block padding-top-1x padding-bottom-1x">
+              <p style="text-align: center; font-size:24px"><span class="text-light opacity-50">Hunting for projects? Contractors using our platform receive information about new projects faster and more frequently than others. As a result, they have been able to significantly streamline their workflow. Learn more about our free platform, so you never miss a potential project.</span></p>
+            </div> -->
+            <div class="text-center"><a class="btn btn-solid btn-pill btn-primary btn-nl margin-top-1x" href="/contractor">Learn More <i class="si si-arrow-right"></i></a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- <section class="fw-section layout-full-equal section-no-gap overflow-hidden" data-offset-top="180" style="background-color: #18b167;">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-7 col-sm-12 padding-top-9x padding-bottom-9x" style="background-image: url(img/home/chart_d3.png);"></div>
+          <div class="col-lg-5 col-sm-12 padding-top-3x padding-bottom-3x">
+            <div class="row">
+              <div class="col-sm-12"><img class="block-center margin-bottom-1x attachment-101x202 size-101x202" width="101" height="96" src="img/home/d3_logo.png" alt="">
+                <div class="text-block">
+                  <h1 style="text-align: center;"><span class="text-huge text-light">Data-Driven Documents</span></h1>
+                </div>
+                <div class="text-block padding-top-1x">
+                  <p class="text-xl" style="text-align: center;"><span class="text-light opacity-50">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat…</span></p>
+                </div>
+                <div class="text-center"><a class="btn btn-solid btn-pill btn-white btn-nl margin-top-1x" href="#">Read More <i class="si si-arrow-right"></i></a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- contact us section-->
+    <!-- <section class="fw-section padding-top-3x padding-bottom-2x">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12">
+            <div class="text-block">
+              <h1 style="text-align: center;">Drop Us A Line</h1>
+            </div>
+            <div role="form" lang="en-US" dir="ltr">
+              <div class="screen-reader-response"></div>
+              <form method="post" novalidate="novalidate">
+                <div style="display: none;">
+                  <input type="hidden" name="" value="359">
+                  <input type="hidden" name="version" value="4.8">
+                  <input type="hidden" name="locale" value="en_US">
+                  <input type="hidden" name="unit_tag" value="wpcf7-f359-p357-o1">
+                  <input type="hidden" name="container_post" value="357">
+                  <input type="hidden" name="nonce" value="4d6a0f1df1">
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label for="contact_name">Your name</label><br>
+                    <span-wrap class="contact_name">
+                      <input type="text" name="contact_name" value="" size="40" aria-required="true" aria-invalid="false" placeholder="Enter your name">
+                    </span-wrap>
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="contact_email">Your e-mail</label><br>
+                    <span-wrap class="contact_email">
+                      <input id="contact_email" type="email" name="contact_email" value="" size="40" aria-required="true" aria-invalid="false" placeholder="Enter your e-mail">
+                    </span-wrap>
+                  </div>
+                </div>
+                <p>
+                  <label for="contact_message">Your message</label><br>
+                  <span-wrap class="contact_message">
+                    <textarea id="contact_message" name="contact_message" cols="40" rows="10" aria-required="true" aria-invalid="false" placeholder="Enter your message"></textarea>
+                  </span-wrap>
+                </p>
+                <div class="text-center" style="padding-top: 10px;">
+                  <button class="btn btn-solid btn-pill btn-primary" type="submit">Send Message</button>
+                </div>
+                <div class="wpcf7-response-output wpcf7-display-none"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Footer-->
+    <footer class="site-footer footer-light" style="background-color: #000000;    font-size: 80%;">
+      <div class="container">
+        <div class="footer-row">
+          <div class="row">
+            <!-- contact us -->
+            <div class="col-md-4 col-sm-6">
+              <section class="widget widget_silicon_contacts" id="silicon_contacts-2">
+                <h3 class="widget-title">Contact Us</h3>
+                <ul>
+                  <li><i class="si si-location background-white"></i><span class="contact-label">Find Us</span><span class="contact-info font-family-body">Room 1706, 17/F, OfficePlus@Sheung Wan, 93-103 Wing Lok Street, Sheung Wan, Hong Kong</span></li>
+                  <li><i class="si si-phone background-white"></i><span class="contact-label font-family-nav">Call Us</span><a class="contact-info font-family-body" href="tel:+85221160950">(+852) 2116-0950</a></li>
+                  <li><i class="si si-email-black background-white"></i><span class="contact-label font-family-nav">Write Us</span><a class="contact-info font-family-body" href="mailto:support@telos-technology.com">support@telos-technology.com</a></li>
+                </ul>
+              </section>
+            </div>
+            <!-- terms and conditions -->
+            <div class="col-md-3 col-sm-6">
+              <section class="widget widget_categories" id="categories-3">
+                <h3 class="widget-title">Telos Technology ltd</h3>
+                <ul>
+                  <li class="cat-item cat-item-39"><a href="/terms">Terms and Conditions</a></li>
+                  <li class="cat-item cat-item-42"><a href="/privacy">Privacy Policy</a></li>
+                </ul>
+              </section>
+            </div>
+            <!-- download buttons -->
+            <div class="container text-center padding-bottom-2x">
+              <div class="text-block">
+                <!-- </div><a class="market-btn btn-appstore waves-effect" href="#" style="background-image: url(assets/img/appstore.png);"><span>Download on the</span>App Store</a><a class="market-btn btn-playstore waves-effect" href="#" style="background-image: url(assets/img/playstore.png);"><span>Download on the</span>Google Play</a> -->
+              </div>
+            </div>
+          </div>
+          <!-- grey line -->
+          <div class="footer-row border-default-top">
+            <section class="widget widget_text" id="text-2">
+              <div class="textwidget">
+                <div class="social-bar text-center" style="margin-bottom:10px;">
+                  <a class="social-button sb-facebook sb-shape-no sb-monochrome sb-light" href="#">
+                    <i class="socicon-facebook unhvrd"></i><i class="socicon-facebook hvrd"></i>
+                  </a>
+                  <a class="social-button sb-linkedin sb-shape-no sb-monochrome sb-light" href="#">
+                    <i class="socicon-linkedin unhvrd"></i><i class="socicon-linkedin hvrd"></i>
+                  </a>
+                  <!-- <a class="social-button sb-twitter sb-shape-no sb-monochrome sb-light" href="#">
+                    <i class="socicon-twitter unhvrd"></i><i class="socicon-twitter hvrd"></i>
+                  </a
+                  ><a class="social-button sb-pinterest sb-shape-no sb-monochrome sb-light" href="#">
+                    <i class="socicon-pinterest unhvrd"></i><i class="socicon-pinterest hvrd"></i></a>--></div>
+                <p><a class="block-center" href="/" style="width:80px;"><img alt="Silicon" src="assets/img/telos-black.svg"></a></p>
+              </div>
+            </section>
+          </div>
+        </div>
+    </footer>
+
+
+  </main>
+</body>
+
+</html>

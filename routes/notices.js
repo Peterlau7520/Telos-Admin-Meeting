@@ -14,7 +14,8 @@ var AWS = require('aws-sdk');
 var Promise = require('bluebird');
 var json = require('hbs-json');
 var hbs = require('hbs');
- 
+
+
 hbs.registerHelper('json', json);
 var apn = require('apn');
 var options = {

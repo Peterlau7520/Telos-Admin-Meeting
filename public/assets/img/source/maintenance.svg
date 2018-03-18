@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400px" height="400px" viewBox="0 0 400 400" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>maintenance</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="maintenance">
+            <circle id="Oval-29" fill="#FCF7DE" cx="200" cy="200" r="200"></circle>
+            <g id="Group-66" transform="translate(97.000000, 99.000000)">
+                <g id="Group-65" fill="#FDD760" stroke="#FDD760" stroke-width="10.242045">
+                    <path d="M201.405135,157.650865 L143.366385,99.6719846 C150.121082,64.3268322 145.048141,38.2103131 128.147562,21.3224272 C111.246982,4.43454122 83.5912584,-2.15302337 45.1803896,1.55973337 L86.8381397,43.1745113 L77.4271752,79.605299" id="Path-15"></path>
+                    <path d="M133.711682,225.511705 L180.874134,178.060859 L122.835383,120.081979 C129.590081,84.7368267 124.51714,58.6203076 107.61656,41.7324216 C90.7159809,24.8445357 63.0602568,18.2569711 24.649388,21.9697278 L66.3071381,63.5845058 L56.8961736,100.015294" id="Path-15" transform="translate(102.761761, 123.238867) scale(1, -1) rotate(-90.000000) translate(-102.761761, -123.238867) "></path>
+                </g>
+                <path d="M121.913104,142.691134 L196.098153,142.691134 L196.098153,162.891134 L121.913104,162.891134 C116.335028,162.891134 111.813104,158.36921 111.813104,152.791134 L111.813104,152.791134 C111.813104,147.213058 116.335028,142.691134 121.913104,142.691134 Z" id="Rectangle-70" fill="#E6A03E" transform="translate(153.955629, 152.791134) rotate(-315.000000) translate(-153.955629, -152.791134) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

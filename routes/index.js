@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.render('homepage', {layout: 'homepageLayout.hbs'});
+router.get('/app', (req, res) => {
+  res.render('app', {layout: 'homepageLayout.hbs'});
 });
 
-router.get('/homepagechn', (req, res) => {
-  res.render('homepagechn', {layout: 'homepageLayout.hbs'});
+router.get('/appchn', (req, res) => {
+  res.render('appchn', {layout: 'homepageLayout.hbs'});
 });
 
 router.get('/about', (req, res) => {
@@ -38,6 +38,29 @@ router.get('/termschn', (req, res) => {
   res.render('termschn', {layout: 'termsLayout.hbs'});
 });
 
+router.get('/', (req, res) => {
+  res.render('source', {layout: 'homepageLayout.hbs'});
+});
+
+router.get('/sourcechn', (req, res) => {
+  res.render('sourcechn', {layout: 'homepageLayout.hbs'});
+});
+
+router.get('/contractor', (req, res) => {
+  res.render('contractor', {layout: 'homepageLayout.hbs'});
+});
+
+router.get('/contractorchn', (req, res) => {
+  res.render('contractorchn', {layout: 'homepageLayout.hbs'});
+});
+
+router.get('/contact', (req, res) => {
+  res.render('contact', {layout: 'homepageLayout.hbs'});
+});
+
+router.get('/contactchn', (req, res) => {
+  res.render('contactchn', {layout: 'homepageLayout.hbs'});
+});
 
 router.get('/siteMap', (req, res) => {
   res.render('sitemap', {layout: 'sitemap.hbs'});
@@ -68,4 +91,3 @@ router.use(function (req, res, next) {
 
 
 module.exports = router;
-
