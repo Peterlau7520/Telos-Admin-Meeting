@@ -8306,6 +8306,13 @@ button[type=submit]:focus, input[type=button]:focus, input[type=file]:focus, inp
   line-height: .8
 }
 
+.counter-new {
+  color: rgba(255, 255, 255, .2);
+  font-size: 80px;
+  font-weight: 900;
+  line-height: .8
+}
+
 .counter.counter-iconed {
   display: -ms-flexbox;
   display: flex;

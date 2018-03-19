@@ -151,6 +151,8 @@
 
         </li>
 
+        <a class="btn btn-solid btn-pill btn-solid btn-nl btn-danger waves-effect waves-light scroll-to" style="color: #f2f2f2 !important; margin:26px;" href="/contractorchn">合約商資料</a>
+
       </ul>
     </nav>
   </div>
@@ -189,6 +191,10 @@
 
               </li>
             </ul>
+
+            <!-- contractor information button -->
+            <a class="btn btn-solid btn-pill btn-solid btn-nl btn-danger waves-effect waves-light scroll-to" style="color: #f2f2f2 !important; margin:26px;" href="/contractorchn">合約商資料</a>
+
           </nav>
         </div>
       </div>
@@ -242,8 +248,10 @@
           </div>
         </div>
         <div class="text-center" style="margin-top: 10px">
-          <a class="btn btn-solid btn-pill btn-primary btn-nl waves-effect waves-light scroll-to" style="color: #f2f2f2 !important;" href="#">管理登入 / 註冊</a>
-        </div>      </div>
+          <a class="btn btn-solid btn-pill btn-primary btn-nl waves-effect waves-light scroll-to" style="color: #f2f2f2 !important;" href="#">管理登入 / 註冊</a><a class="btn btn-solid btn-pill btn-primary btn-nl waves-effect waves-light scroll-to" style="color: #f2f2f2 !important;"
+            href="#">合約商登入 / 註冊</a>
+        </div>
+      </div>
     </section>
 
     <!--sponsors section-->
@@ -253,7 +261,7 @@
     </section>
 
     <!-- different contractors section-->
-    <section class="fw-section padding-top-4x padding-bottom-2x">
+    <section class="fw-section padding-top-4x padding-bottom-3x">
       <div class="container text-center">
         <h1 class="font-family-headings padding-bottom-2x">全方位建築工程人才配對服務。</h1>
         <div class="row padding-top-1x">
@@ -312,28 +320,14 @@
     </section>
 
     <!-- introduction -->
-    <section class="fw-section padding-top-6x padding-bottom-6x" data-aos="fade-up">
+    <!-- <section class="fw-section padding-top-6x padding-bottom-6x" data-aos="fade-up">
       <div class="container text-center">
         <div class="text-block">
           <h1 class="font-family-headings">More choices. Better decisions.</h1>
           <p class="text-gray col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12" style="font-size:24px">Property owners need reliable contractors to ensure smooth construction and renovation works, and we're here to make that happen. Our sourcing platform makes it easy for you to request for quotations or tenders from thousands of contractors all over Hong Kong.</p>
         </div>
-        <!-- <div class="row" style="font-size:15px;">
-          <div class="col-sm-6">
-            <div class="text-block">
-              <p>Property owners need good and reliable contractors to ensure smooth construction and renovation works, and we are here to make that happen.</p>
-              <p>Our tender platform makes it as easy for your property management to request for tenders, sourcing from thousands of contractors all over Hong Kong.</p>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="text-block">
-              <p>We believe that property owners deserve to know what goes on at their estates, so we've given you complete access to our database of publicly vetted service providers. Just log in with your Telos user account.</p>
-              <p></p>
-            </div>
-          </div>
-        </div> -->
       </div>
-    </section>
+    </section> -->
 
     <!-- how it works section -->
     <section class="fw-section padding-top-3x padding-bottom-3x">
@@ -351,7 +345,7 @@
           <div class="col-sm-3"><img class="block-center" width="95" height="95" src="assets/img/source/quotation.svg" alt="">
             <div class="text-block padding-bottom-1x padding-top-1x">
               <h4 style="text-align: center;">2. 獲得報價</h4>
-              <p style="text-align: center;"><span class="text-gray">Comparing your list of bids. Browse profiles and reviews.</span></p>
+              <p style="text-align: center;"><span class="text-gray">Comparing your list of bids. Browse profiles, work history, and reviews.</span></p>
             </div>
           </div>
           <div class="col-sm-3"><img class="block-center" width="155" height="155" src="assets/img/source/work.svg" alt="">
@@ -473,7 +467,7 @@
               </div>
               <div class="col-sm-4">
                 <div class="counter counter-simple counter-light text-left mobile-center">
-                  <h4 class="counter-digit"><span>891</span></h4>
+                  <h4 class="counter-new"><span>5k+</span></h4>
                   <h4 class="counter-title">合約商</h4>
                   <p class="counter-text">All the industry professionals in one place.</p>
                 </div>
@@ -674,36 +668,36 @@
 </html>
 
 <script>
-mixpanel.track("Video play");
-// Opera 8.0+
+  mixpanel.track("Video play");
+  // Opera 8.0+
 
-var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+  var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 
-// Firefox 1.0+
-var isFirefox = typeof InstallTrigger !== 'undefined';
+  // Firefox 1.0+
+  var isFirefox = typeof InstallTrigger !== 'undefined';
 
-// Safari 3.0+ "[object HTMLElementConstructor]"
-var isSafari = /constructor/i.test(window.HTMLElement) || (function(p) {
-return p.toString() === "[object SafariRemoteNotification]";
-})(!window['safari'] || safari.pushNotification);
+  // Safari 3.0+ "[object HTMLElementConstructor]"
+  var isSafari = /constructor/i.test(window.HTMLElement) || (function(p) {
+    return p.toString() === "[object SafariRemoteNotification]";
+  })(!window['safari'] || safari.pushNotification);
 
-// Internet Explorer 6-11
-var isIE = /*@cc_on!@*/ false || !!document.documentMode;
+  // Internet Explorer 6-11
+  var isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
-// Edge 20+
-var isEdge = !isIE && !!window.StyleMedia;
+  // Edge 20+
+  var isEdge = !isIE && !!window.StyleMedia;
 
-// Chrome 1+
-var isChrome = !!window.chrome && !!window.chrome.webstore;
+  // Chrome 1+
+  var isChrome = !!window.chrome && !!window.chrome.webstore;
 
-// Blink engine detection
-var isBlink = (isChrome || isOpera) && !!window.CSS;
+  // Blink engine detection
+  var isBlink = (isChrome || isOpera) && !!window.CSS;
 
-if (isChrome === true || isFirefox === true || isOpera === true) {
-document.getElementById("fontId").style.fontFamily = "'SF-Display-Regular', sans-serif";
-} else if (isSafari === true) {
-document.getElementById("fontId").style.fontFamily = "'SF-Display-Regular', sans-serif";
-} else {
-document.getElementById("fontId").style.fontFamily = "arial";
-}
+  if (isChrome === true || isFirefox === true || isOpera === true) {
+    document.getElementById("fontId").style.fontFamily = "'SF-Display-Regular', sans-serif";
+  } else if (isSafari === true) {
+    document.getElementById("fontId").style.fontFamily = "'SF-Display-Regular', sans-serif";
+  } else {
+    document.getElementById("fontId").style.fontFamily = "arial";
+  }
 </script>
