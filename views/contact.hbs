@@ -1,7 +1,15 @@
   <body id="fontId" style="overflow: hidden;
       width: 100%;
       height: 100%;">
-
+<style>
+ .hide-menu{
+    left: -100% !important;
+    /*display: none !important;*/
+  }
+  .mobmenu{
+    transform: translate3d(0, 0, 0) !important;
+  }
+  </style>
       <!-- loading screen -->
     <div class="loading-screen">
       <div class="inner">
@@ -11,7 +19,7 @@
         </div>
       </div>
     </div>
-    <div class="offcanvas-container mobile-menu">
+    <div class="offcanvas-container mobile-menu" id="navBar">
 
       <nav class="main-navigation font-family-nav">
         <ul class="menu">
@@ -44,11 +52,11 @@
   <main class="page-wrapper">
     <header class="site-header header-fullwidth">
       <!-- Topbar-->
-      <div class="navbar-horizontal border-default-bottom">
+      <div class="navbar-horizontal border-default-bottom" id="hidehorizontal">
 
         <div class="navbar-inner">
           <div class="navbar-branding">
-            <div class="mobile-menu-toggle">
+            <div class="mobile-menu-toggle" id="menu">
               <i class="si si-menu"></i></div>
             <a class="site-logo" href="/" style="width: 120px;"><img alt="Telos Technology" style="width:50%" src="assets/img/telos.svg"></a><a class="mobile-logo" href="assets/index.html" style="width: 120px;"><img alt="Telos Technology" src="assets/img/telos.svg"></a>
           </div>
@@ -81,7 +89,7 @@
 
         <div class="navbar-inner">
           <div class="navbar-branding">
-            <div class="mobile-menu-toggle"><i class="si si-menu"></i></div><a class="site-logo" href="/" style="width: 120px;"><img alt="Telos Technology" style="width:50%" src="assets/img/telos.svg"></a><a class="mobile-logo" href="/" style="width: 120px;"><img alt="Telos Technology" style="width:50%" src="assets/img/telos.svg"></a>
+            <div class="mobile-menu-toggle" id="menu"><i class="si si-menu"></i></div><a class="site-logo" href="/" style="width: 120px;"><img alt="Telos Technology" style="width:50%" src="assets/img/telos.svg"></a><a class="mobile-logo" href="/" style="width: 120px;"><img alt="Telos Technology" style="width:50%" src="assets/img/telos.svg"></a>
           </div>
 
         </div>
@@ -283,3 +291,23 @@ document.getElementById("fontId").style.fontFamily = "'SF-Display-Regular', sans
 document.getElementById("fontId").style.fontFamily = "arial";
 }
 </script>
+<script type="text/javascript">
+    $(document).ready(function () {
+       $("#menu").click(function(event){
+        console.log("hello")
+        var open = $("#navBar").hasClass( "hide-menu" )
+        console.log("open", open)
+        if(open === false){
+           $("#navBar").removeClass("offcanvas-container.mobile-menu")
+        $("#navBar").addClass('hide-menu')
+        $("#hidehorizontal").addClass("mobmenu")
+        }
+        else{
+           $("#navBar").removeClass("hide-menu")
+           $("#hidehorizontal").removeClass("mobmenu")
+        }
+       
+      })
+    })
+
+    </script>

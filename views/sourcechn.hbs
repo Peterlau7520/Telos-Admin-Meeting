@@ -111,6 +111,24 @@
     display: inline-block;
     box-sizing: content-box;
   }
+  .hide-menu{
+    left: -100% !important;
+    /*display: none !important;*/
+  }
+  .mobmenu{
+    transform: translate3d(0, 0, 0) !important;
+  }
+  .navclass{
+    width: 100%;
+    margin-left: 33% !important;
+  }
+  .navinside {
+    width: 50%;
+  }
+  .contractors-btn{
+    position: absolute;
+    right: 10px;
+  }
 </style>
 
 <body id="fontId" style="overflow: hidden;
@@ -126,7 +144,7 @@
     </div>
   </div>
 
-  <div class="offcanvas-container mobile-menu">
+  <div class="offcanvas-container mobile-menu hide-menu" id="navBar">
 
     <nav class="main-navigation font-family-nav">
       <ul class="menu">
@@ -162,19 +180,19 @@
     <!-- Site header-->
     <header class="site-header header-fullwidth">
       <!-- Topbar-->
-      <div class="navbar-horizontal border-default-bottom">
+      <div class="navbar-horizontal border-default-bottom" id="hidehorizontal">
 
         <div class="navbar-inner">
           <div class="navbar-branding">
-            <div class="mobile-menu-toggle">
+            <div class="mobile-menu-toggle" id="menu">
               <i class="si si-menu"></i></div>
             <a class="site-logo" href="/sourcechn" style="width: 120px;"><img alt="" style="width:50%" src="assets/img/telos.svg"></a><a class="mobile-logo" href="/sourcechn" style="width: 120px;"><img alt="" src="assets/img/telos.svg"></a>
           </div>
 
         </div>
         <div class="menu-wrap">
-          <nav class="main-navigation font-family-nav">
-            <ul class="menu">
+          <nav class="main-navigation font-family-nav navclass">
+            <ul class="menu navinside">
               <li class="active menu-item menu-item-has-children has-mega-menu"><a href="/sourcechn"><span>主頁</span></a>
 
               </li>
@@ -193,7 +211,8 @@
             </ul>
 
             <!-- contractor information button -->
-            <a class="btn btn-solid btn-pill btn-solid btn-nl btn-danger waves-effect waves-light scroll-to" style="color: #f2f2f2 !important; margin:26px;" href="/contractorchn">合約商資料</a>
+             <div class="contractors-btn">
+            <a class="btn btn-solid btn-pill btn-solid btn-nl btn-danger waves-effect waves-light scroll-to" style="color: #f2f2f2 !important; margin:26px;" href="/contractorchn">合約商資料</a></div>
 
           </nav>
         </div>
@@ -202,7 +221,7 @@
 
         <div class="navbar-inner">
           <div class="navbar-branding">
-            <div class="mobile-menu-toggle"><i class="si si-menu"></i></div><a class="site-logo" href="/" style="width: 120px;"><img alt="" style="width:50%" src="assets/img/telos.svg"></a><a class="mobile-logo" href="/" style="width: 120px;"><img alt="" style="width:50%" src="assets/img/telos.svg"></a>
+            <div class="mobile-menu-toggle" id="menu"><i class="si si-menu"></i></div><a class="site-logo" href="/" style="width: 120px;"><img alt="" style="width:50%" src="assets/img/telos.svg"></a><a class="mobile-logo" href="/" style="width: 120px;"><img alt="" style="width:50%" src="assets/img/telos.svg"></a>
           </div>
 
         </div>
@@ -701,3 +720,23 @@
     document.getElementById("fontId").style.fontFamily = "arial";
   }
 </script>
+<script type="text/javascript">
+    $(document).ready(function () {
+       $("#menu").click(function(event){
+        console.log("hello")
+        var open = $("#navBar").hasClass( "hide-menu" )
+        console.log("open", open)
+        if(open === false){
+           $("#navBar").removeClass("offcanvas-container.mobile-menu")
+        $("#navBar").addClass('hide-menu')
+        $("#hidehorizontal").addClass("mobmenu")
+        }
+        else{
+           $("#navBar").removeClass("hide-menu")
+           $("#hidehorizontal").removeClass("mobmenu")
+        }
+       
+      })
+    })
+
+    </script>
