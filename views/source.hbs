@@ -712,11 +712,11 @@
 
   // Blink engine detection
   var isBlink = (isChrome || isOpera) && !!window.CSS;
-
+  console.log("yesssssss", isSafari)
   if (isChrome === true || isFirefox === true || isOpera === true) {
     document.getElementById("fontId").style.fontFamily = "'SF-Display-Regular', sans-serif";
   } else if (isSafari === true) {
-    document.getElementById("fontId").style.fontFamily = "'SF-Display-Regular', sans-serif";
+    document.getElementById("fontId").style.fontFamily = "'Helvetica Neue', sans-serif !important" ;
   } else {
     document.getElementById("fontId").style.fontFamily = "arial";
   }

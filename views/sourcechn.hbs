@@ -120,14 +120,17 @@
   }
   .navclass{
     width: 100%;
-    margin-left: 33% !important;
+    // margin-left: 33% !important;
   }
   .navinside {
-    width: 50%;
-  }
+    width: 100%;
+    max-width: max-content;
+    margin: 39px auto !important;
+   }
   .contractors-btn{
     position: absolute;
     right: 10px;
+    top: 0px;
   }
 </style>
 
@@ -719,7 +722,8 @@ I類，II類和III類項目的40多種小型工程承包商。</span></p>
   if (isChrome === true || isFirefox === true || isOpera === true) {
     document.getElementById("fontId").style.fontFamily = "'SF-Display-Regular', sans-serif";
   } else if (isSafari === true) {
-    document.getElementById("fontId").style.fontFamily = "'SF-Display-Regular', sans-serif";
+    console.log("yesssssss")
+    document.getElementById("fontId").style.fontFamily = "'Helvetica Neue', sans-serif";
   } else {
     document.getElementById("fontId").style.fontFamily = "arial";
   }
