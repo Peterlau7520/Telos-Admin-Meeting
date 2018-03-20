@@ -1,25 +1,23 @@
+<html>
+ <head>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</head>
 <body id="fontId" style="overflow: hidden;
     width: 100%;
     height: 100%;">
-<style>
-.hide-menu{
-    left: -100% !important;
-    /*display: none !important;*/
-  }
-  .mobmenu{
-    transform: translate3d(0, 0, 0) !important;
-  }
-  </style>
-    <!-- loading screen -->
+
   <div class="loading-screen">
     <div class="inner">
-      <div class="preloader-logo" style="width: 90px;"><img class="attachment-full size-full" src="assets/img/telos.svg" alt="Telos Technology"></div>
+      <div class="preloader-logo" style="width: 90px;"><img class="attachment-full size-full" src="assets/img/telos.svg" alt="Telos Technology"/></div>
       <div class="progress-wrap">
         <div class="indeterminate"></div>
       </div>
     </div>
   </div>
-  <div class="offcanvas-container mobile-menu hide-menu" id="navBar">
+  <div class="offcanvas-container mobile-menu" id="navBar">
     <nav class="main-navigation font-family-nav">
       <ul class="menu">
         <li class="menu-item menu-item-has-children has-mega-menu"><a href="/sourcechn"><span>主頁</span></a>
@@ -256,7 +254,7 @@
 </body>
 
 </html>
-<script type="text/javascript">
+{/*<script type="text/javascript">
     $(document).ready(function () {
        $("#menu").click(function(event){
         console.log("hello")
@@ -275,7 +273,7 @@
       })
     })
 
-    </script>
+    </script>*/}
 <script>
 
 mixpanel.track("Video play");

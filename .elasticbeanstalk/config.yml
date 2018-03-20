@@ -1,7 +1,12 @@
 branch-defaults:
+  production:
+    environment: Telos-Admin-Meeting-production
   staging:
     environment: Telos-Admin-Meeting-staging
 environment-defaults:
+  Telos-Admin-Meeting-production:
+    branch: null
+    repository: null
   Telos-Admin-Meeting-staging:
     branch: null
     repository: null
