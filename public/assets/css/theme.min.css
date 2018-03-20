@@ -70,15 +70,16 @@
 }
 
 .navbar-horizontal .menu-wrap .main-navigation {
-  display: table;
+/*  display: table;*/
+display: inline-block;
   height: 100%;
   min-height: 100%;
   margin: 0 auto
 }
 
 .navbar-horizontal .menu-wrap .main-navigation>ul {
-  display: table-cell;
-  margin: 0;
+/*  display: table-cell;*/
+ /*  margin: 0;*/
   padding: 0;
   list-style: none
 }
@@ -108,6 +109,13 @@
   text-transform: uppercase;
   text-decoration: none
 }
+
+.navbar-horizontal .menu-wrap .main-navigation>ul>li{
+    height: 100%;
+    min-height: 100%;
+    display: inline-block;
+    text-align: center;
+  }
 
 .navbar-horizontal .menu-wrap .main-navigation>ul>li.active>a, .navbar-horizontal .menu-wrap .main-navigation>ul>li>a:hover {
   color: #3d59f9
