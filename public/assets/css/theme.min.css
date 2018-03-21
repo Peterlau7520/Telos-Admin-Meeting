@@ -387,7 +387,8 @@ body {
 
 html * {
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+   -webkit-font-smoothing: subpixel-antialiased !important;
+  -webkit-font-family: "Helvetica Neue",sans-serif !important ;
   -moz-osx-font-smoothing: grayscale
 }
 
