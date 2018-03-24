@@ -56,6 +56,7 @@ passport.use(new LocalStrategy(
   function(username, password, done) {
     // Find the user with the given username
     Estate.findOne({ 'username': username }, function (err, estate) {
+      console.log(estate, "estate")
       // if there's an error, finish trying to authenticate (auth failed)
       if (err) {
         console.error(err);

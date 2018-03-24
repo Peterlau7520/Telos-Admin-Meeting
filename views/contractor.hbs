@@ -1,0 +1,409 @@
+<html>
+
+<head>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</head>
+
+
+<!-- Body-->
+<style>
+  h2 {
+    /* font-family: ""*/
+  }
+
+  {
+    /*body{
+      font-family: -webkit-body !important;
+}*/
+  }
+
+  @media screen and (max-width: 480px) {
+    #hide {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 0px) and (max-width: 400px) {
+    #show {
+      display: block;
+    }
+  }
+
+  @media (max-height: 1099px) {
+    .intro-app-showcase {
+      padding: 0px 0;
+      display: inline-block;
+      margin: 0px 0;
+    }
+  }
+
+  @media only screen and (max-width: 812px) {
+    .aws-img-mobile {
+      content: url("assets/img/landing-page/security-flow-english-phone 3.svg") !important;
+      background-size: 134%;
+      width: 60%;
+      padding-top: 25px;
+      display: block;
+      margin: 0 auto;
+    }
+    /* .sponsors-mobile {
+      content: url("assets/img/landing-page/sponsors-mobile.jpg") !important;
+      background-size: 134%;
+      width: 60%;
+      padding-top: 25px;
+      display: block;
+      margin: 0 auto;
+    } */
+    .mobile-show {
+      display: block;
+    }
+    .mobile-hide {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .gadget-ios {
+      width: auto !important;
+    }
+    .gadget-android {
+      width: auto !important;
+    }
+    .gadget-windows {
+      width: auto !important;
+    }
+    .intro-app-showcase {
+      padding-top: 0px;
+    }
+  }
+
+  .intro-app-showcase {
+    height: 100%;
+  }
+
+  {
+    /*.aws-img{
+    content:url("assets/img/landing-page/security-flow-english.svg");
+    background-size: 134%;
+  }*/
+  }
+
+  .mobile-show {
+    display: none;
+  }
+
+  .mobile-hide {
+    display: block;
+  }
+
+  .intro-app-showcase .platform-swith>a {
+    height: 30px;
+    padding: 0 5px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: .1em;
+    line-height: 30px;
+    text-decoration: none;
+    width: 105px;
+    margin: 0 0px;
+    display: inline-block;
+    box-sizing: content-box;
+  }
+   .hide-menu{
+    left: -617px  !important;
+    /*display: none !important;*/
+  }
+  .mobmenu{
+    transform: translate3d(0, 0, 0) !important;
+  }
+</style>
+
+<body id="fontId" style="overflow: hidden;
+    width: 100%;
+    height: 100%;">
+  <div class="loading-screen">
+    <div class="inner">
+      <div class="preloader-logo" style="width: 90px;"><img class="attachment-full size-full" src="assets/img/telos.svg" alt="Telos Technology"></div>
+      <div class="progress-wrap">
+        <div class="indeterminate"></div>
+      </div>
+    </div>
+  </div>
+  <div class="offcanvas-container mobile-menu hide-menu" id="navBar">
+
+    <nav class="main-navigation font-family-nav">
+      <ul class="menu">
+        <li class="menu-item menu-item-has-children has-mega-menu"><a href="/"><span>Home</span></a>
+
+
+        </li>
+        <li class="menu-item menu-item-has-children has-mega-menu"><a href="/app"><span>App</span></a>
+
+        </li>
+        <li class="menu-item menu-item-has-children has-mega-menu"><a href="/contact"><span>Contact</span></a>
+
+        </li>
+
+        <li class="menu-item menu-item-has-children"><a href="/about"><span>About</span></a>
+
+
+        </li>
+
+        <li class="menu-item menu-item-has-children"><a href="/contractorchn"><span>繁體中文</span></a>
+
+
+        </li>
+
+      </ul>
+    </nav>
+  </div>
+  <!-- Page Wrapper-->
+  <main class="page-wrapper">
+    <!-- Site header-->
+    <header class="site-header header-fullwidth">
+      <!-- Topbar-->
+      <div class="navbar-horizontal border-default-bottom" id="hidehorizontal">
+
+        <div class="navbar-inner">
+          <div class="navbar-branding">
+            <div class="mobile-menu-toggle" id="menu">
+              <i class="si si-menu"></i></div>
+            <a class="site-logo" href="/" style="width: 120px;"><img alt="" style="width:50%" src="assets/img/telos.svg"></a><a class="mobile-logo" href="assets/index.html" style="width: 120px;"><img alt="" src="assets/img/telos.svg"></a>
+          </div>
+
+        </div>
+        <div class="menu-wrap">
+          <nav class="main-navigation font-family-nav navclass">
+            <ul class="menu navinside">
+              <li class="menu-item menu-item-has-children has-mega-menu"><a href="/"><span>Home</span></a>
+
+              </li>
+              <li class="menu-item menu-item-has-children has-mega-menu"><a href="/app"><span>App</span></a>
+
+              </li>
+              <li class="menu-item menu-item-has-children has-mega-menu"><a href="/contact"><span>Contact</span></a>
+
+              </li>
+              <li class="menu-item menu-item-has-children"><a href="/about">About</a>
+
+              </li>
+              <li class="menu-item menu-item-has-children"><a href="/contractorchn">繁體中文</a>
+
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="navbar-horizontal navbar-sticky border-default-bottom">
+
+        <div class="navbar-inner">
+          <div class="navbar-branding">
+            <div class="mobile-menu-toggle" id="menu"><i class="si si-menu"></i></div><a class="site-logo" href="/" style="width: 120px;"><img alt="" style="width:50%" src="assets/img/telos.svg"></a><a class="mobile-logo" href="/" style="width: 120px;"><img alt="" style="width:50%" src="assets/img/telos.svg"></a>
+          </div>
+
+        </div>
+        <div class="menu-wrap">
+          <nav class="main-navigation font-family-nav navclass">
+            <ul class="menu navinside">
+              <li class="menu-item menu-item-has-children has-mega-menu"><a href="/"><span>Home</span></a>
+
+              </li>
+              <li class="menu-item menu-item-has-children has-mega-menu"><a href="/app"><span>App</span></a>
+
+              </li>
+              <li class="menu-item menu-item-has-children has-mega-menu"><a href="/contact"><span>Contact</span></a>
+
+              </li>
+              <li class="menu-item menu-item-has-children"><a href="/about">About</a>
+
+              </li>
+              <li class="menu-item menu-item-has-children"><a href="/contractorchn">繁體中文</a>
+
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <section class="fw-section layout-full padding-top-5x overflow-hidden" data-offset-top="-2" style="background-color: #ffffff;">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 padding-top-4x padding-bottom-4x">
+            <div class="text-block">
+              <h1 style="text-align: center;"><span class="text-black font-family-headings">Looking for projects?</span></h1>
+            </div>
+            <div class="text-block padding-top-1x">
+              <p style="text-align: center; font-size:24px"><span class="text-gray">Contractors using our platform receive information about new projects faster and more frequently than others; as a result, they have been able to significantly streamline their workflow. Our mission: find you as many clients so you can rapidly grow your business.</span></p>
+            </div>
+            <div class="text-center"><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="#" style="font-size:14px">Login / Sign Up<i class="si si-arrow-right"></i></a><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="/contact" style="font-size:14px">Contact Sales<i class="si si-arrow-right"></i></a></div>
+          </div>
+          <div class="col-lg-7 col-sm-12"><img class="block" width="1080" height="621" src="img/home/macbook_angular.png" alt=""></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- flow section -->
+    <section class="fw-section layout-full padding-top-5x overflow-hidden" data-offset-top="-2" style="background-color: #101010;">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-5 col-sm-12 padding-top-3x padding-bottom-4x">
+            <div class="text-block">
+              <h1 style="text-align: center;"><span class="text-light font-family-headings">1. We send you project requests instantly</span></h1>
+            </div>
+            <div class="text-block padding-top-1x">
+              <p style="text-align: center; font-size:24px"><span class="text-light opacity-60">We will email you any time a client posts a project requiring your field of expertise. Don't worry, we ensure that project requests are legitimate before notifying you.</span></p>
+            </div>
+          </div>
+          <div class="col-lg-7 col-sm-12"><img class="block" width="1080" height="621" src="assets/img/source/screen-1.svg" alt=""></div>
+        </div>
+      </div>
+    </section>
+    <section class="fw-section layout-full-equal section-no-gap overflow-hidden padding-top-5x" data-offset-top="180" style="background-color: #1a1a1a;">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="">
+            <div class="row">
+              <div class="col-lg-6 col-sm-12 "><img class="block" width="1080" height="621" src="assets/img/source/screen-2.svg" alt=""></div>
+              <div class="col-sm-6 padding-top-3x padding-bottom-4x">
+                <div class="text-block">
+                  <h1 style="text-align: center;"><span class="font-family-headings text-light">2. You decide which projects to take on.</span></h1>
+                </div>
+                <div class="text-block padding-top-1x">
+                  <p style="text-align: center; font-size:24px"><span class="text-light opacity-60">If you're interested in a project, just click "interested" and the client will immediately be notified. After viewing your profile, work history, and reviews, the client will contact you through our platform if you meet their requirements.</span></p>
+                </div>
+              </div>              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="fw-section layout-full padding-top-5x overflow-hidden" data-offset-top="-2" style="background-color: #101010;">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-5 col-sm-12 padding-top-3x padding-bottom-4x">
+            <div class="text-block">
+              <h1 style="text-align: center;"><span class="text-light font-family-headings">3. Bid.</span></h1>
+            </div>
+            <div class="text-block padding-top-1x">
+              <p style="text-align: center; font-size:22px"><span class="text-light opacity-60">The client will contact you through our chat function to discuss project details and share relevant documents. Submit your quotation through our platform, or physically deliver a tender if requested.</span></p>
+            </div>
+          </div>
+          <div class="col-lg-7 col-sm-12"><img class="block" width="1080" height="621" src="assets/img/source/screen-3.svg" alt=""></div>
+        </div>
+      </div>
+    </section>
+    <section class="fw-section layout-full-equal section-no-gap overflow-hidden padding-top-5x" data-offset-top="180" style="background-color: #1a1a1a;">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- <div class="col-lg-7 col-sm-12" style="background-image: url(img/home/chart_d3.png);"></div> -->
+          <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1 col-sm-12 padding-top-3x padding-bottom-4x">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="text-block">
+                  <h1 style="text-align: center;"><span class="font-family-headings text-light">4. Done. Get hired and commence work.</span></h1>
+                </div>
+                <div class="text-block padding-top-1x">
+                  <p style="text-align: center; font-size:24px"><span class="text-light opacity-60">The client will evaluate all applications, and decide who to award the project to.</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="fw-section layout-full-equal section-no-gap overflow-hidden padding-top-4x" data-offset-top="180" style="background-color: #ffffff;">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 padding-top-4x padding-bottom-4x">
+            <div class="text-block">
+              <h1 style="text-align: center;"><span class="text-black font-family-headings">Never miss a potential project.</span></h1>
+            </div>
+            <div class="text-center"><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="#" style="font-size:14px">Login / Sign Up<i class="si si-arrow-right"></i></a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <footer class="site-footer footer-light" style="background-color: #000000;    font-size: 80%;">
+      <div class="container">
+        <div class="footer-row">
+          <div class="row">
+            <!-- contact us -->
+            <div class="col-md-4 col-sm-6">
+              <section class="widget widget_silicon_contacts" id="silicon_contacts-2">
+                <h3 class="widget-title">Contact Us</h3>
+                <ul>
+                  <li><i class="si si-location background-white"></i><span class="contact-label">Find Us</span><span class="contact-info font-family-body">Room 1706, 17/F, OfficePlus@Sheung Wan, 93-103 Wing Lok Street, Sheung Wan, Hong Kong</span></li>
+                  <li><i class="si si-phone background-white"></i><span class="contact-label font-family-nav">Call Us</span><a class="contact-info font-family-body" href="tel:+85221160950">(+852) 2116-0950</a></li>
+                  <li><i class="si si-email-black background-white"></i><span class="contact-label font-family-nav">Write Us</span><a class="contact-info font-family-body" href="mailto:support@telos-technology.com">support@telos-technology.com</a></li>
+                </ul>
+              </section>
+            </div>
+            <!-- terms and conditions -->
+            <div class="col-md-3 col-sm-6">
+              <section class="widget widget_categories" id="categories-3">
+                <h3 class="widget-title">Telos Technology ltd</h3>
+                <ul>
+                  <li class="cat-item cat-item-39"><a href="/terms">Terms and Conditions</a></li>
+                  <li class="cat-item cat-item-42"><a href="/privacy">Privacy Policy</a></li>
+                </ul>
+              </section>
+            </div>
+            <!-- download buttons -->
+            <div class="container text-center padding-bottom-2x">
+              <div class="text-block">
+              <!-- </div><a class="market-btn btn-appstore waves-effect" href="#" style="background-image: url(assets/img/appstore.png);"><span>Download on the</span>App Store</a><a class="market-btn btn-playstore waves-effect" href="#" style="background-image: url(assets/img/playstore.png);"><span>Download on the</span>Google Play</a> -->
+            </div>
+          </div>
+        </div>
+        <!-- grey line -->
+        <div class="footer-row border-default-top">
+          <section class="widget widget_text" id="text-2">
+            <div class="textwidget">
+              <div class="social-bar text-center" style="margin-bottom:10px;">
+                <a class="social-button sb-facebook sb-shape-no sb-monochrome sb-light" href="#">
+                    <i class="socicon-facebook unhvrd"></i><i class="socicon-facebook hvrd"></i>
+                  </a>
+                <a class="social-button sb-linkedin sb-shape-no sb-monochrome sb-light" href="#">
+                    <i class="socicon-linkedin unhvrd"></i><i class="socicon-linkedin hvrd"></i>
+                  </a>
+                <!-- <a class="social-button sb-twitter sb-shape-no sb-monochrome sb-light" href="#">
+                    <i class="socicon-twitter unhvrd"></i><i class="socicon-twitter hvrd"></i>
+                  </a
+                  ><a class="social-button sb-pinterest sb-shape-no sb-monochrome sb-light" href="#">
+                    <i class="socicon-pinterest unhvrd"></i><i class="socicon-pinterest hvrd"></i></a>--></div>
+              <p><a class="block-center" href="/" style="width:80px;"><img alt="Silicon" src="assets/img/telos-black.svg"></a></p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+       $("#menu").click(function(event){
+        console.log("hello")
+        var open = $("#navBar").hasClass( "hide-menu" )
+        console.log("open", open)
+        if(open === false){
+           $("#navBar").removeClass("offcanvas-container.mobile-menu")
+        $("#navBar").addClass('hide-menu')
+        $("#hidehorizontal").addClass("mobmenu")
+        }
+        else{
+           $("#navBar").removeClass("hide-menu")
+           $("#hidehorizontal").removeClass("mobmenu")
+        }
+       
+      })
+    })
+
+    </script>
