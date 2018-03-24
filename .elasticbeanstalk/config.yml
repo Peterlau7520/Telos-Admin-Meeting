@@ -10,9 +10,6 @@ environment-defaults:
   Telos-Admin-Meeting-staging:
     branch: null
     repository: null
-  Telos-Admin-Meeting-production:
-    branch: null
-    repository: null
 global:
   application_name: Telos-Admin-Meeting
   default_ec2_keyname: telos-prod
