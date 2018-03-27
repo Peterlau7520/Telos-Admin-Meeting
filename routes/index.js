@@ -25,7 +25,9 @@ router.get('/privacy', (req, res) => {
   res.render('privacy', {layout: 'privacyLayout.hbs'});
 });
 
-
+router.get('/test', (req, res) => {
+  res.render('contractor', {layout: 'privacyLayout.hbs'});
+}); 
 router.get('/privacychn', (req, res) => {
   res.render('privacychn', {layout: 'privacyLayout.hbs'});
 });
@@ -47,11 +49,11 @@ router.get('/sourcechn', (req, res) => {
 });
 
 router.get('/contractor', (req, res) => {
-  res.render('contractor', {layout: 'homepageLayout.hbs'});
+  res.render('contractor', {layout: 'privacyLayout.hbs'});
 });
 
 router.get('/contractorchn', (req, res) => {
-  res.render('contractorchn', {layout: 'homepageLayout.hbs'});
+  res.render('contractorchn', {layout: 'privacyLayout.hbs'});
 });
 
 router.get('/contact', (req, res) => {

@@ -4,7 +4,159 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+   <meta charset="utf-8">
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+         <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">   
+        <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script> -->
+
+        <link href="assets/css/animate.min.css" rel="stylesheet"/>
+        
+        <!--                  Light Bootstrap Table core CSS    -->
+        <link href="assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+        <!--CSS for Demo Purpose, don't include it in your project-->     
+        <link href="assets/css/demo.css" rel="stylesheet" />
+        <!--{{!-- css stylesheet for login page  --}}-->
+        <link rel="stylesheet" href="assets/css/login.css">
+
+        <!--Fonts and icons-->     
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+        <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       
+        <!--Core JS Files-->   
+        <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
+ 
+        <script type="text/javascript" src="DataTables/datatables.min.js"></script> -->
+        <!--Checkbox, Radio & Switch Plugins--> 
+        <script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
+
+        <!--Charts Plugin--> 
+        <script src="assets/js/chartist.min.js"></script>
+
+        <!--Notifications Plugin-->    
+        <script src="assets/js/bootstrap-notify.js"></script>
+
+        <!--Light Bootstrap Table Core javascript and methods for Demo purpose--> 
+        <script src="assets/js/light-bootstrap-dashboard.js"></script>
+        <!--{{!-- jquery --}}-->
+        <!--{{!-- login validator --}}-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.js"></script>
+        
+        <!--{{!-- boostrap js file --}}-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <!--{{!-- boostrap confirmation --}}-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.validate.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
 </head>
+<script type="text/javascript">
+           
+           $(document).ready(function () {
+            console.log("heyyyyyyyy")
+                $('#spinnerbig').hide();
+                var a="https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=1cqTns5ABiz67v6ST-h7mUWwd3zWZ6c1-ToyETH0xpL4&sheet=Categories";
+                // alert(a);
+                var select="  <select class=\"form-control input-rounded text-semibold\" id=\"category\" name=\"category\">";
+                select +=" <option value=\"-1\">None</option>";
+                $.get( a, function( data ) {
+                    //var json = $.parseJSON(data);
+                    for(var i = 0; i < data['Categories'].length; i++) {
+                        var obj = data['Categories'][i];
+                        var option = "<option value=\""+obj['id']+"\"" +"selected"+">"+obj['name']+"</option>"
+                        console.log(option)
+                        select +=option;
+                    }
+                    console.log(option)
+                    select +="</select>";
+                    $('#spinner').hide();
+                    $('#categoryselect').append(select);
+                });
+                $("#btnsave").click(function(event){
+                  event.preventDefault();
+                  $('#spinnerbig').show();
+                        $('#tblbody').hide();
+                        var b="https://script.googleusercontent.com/macros/echo?user_content_key=j5SLDi3010AxHkJ17x7odwTH9-7z7qzqn0zucy_-9UJ8t6FeNwk9sfSC1xtPoaWuQ8Nk-jbi98RktGxpncuZWeqzWMjx1W7zOJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1ZsYSbt7G4nMhEEDL32U4DxjO7V7yvmJPXJTBuCiTGh3rUPjpYM_V0PJJG7TIaKp7hGQLcdSyuHgWR9MmX3gZhzaKGcTZmIqkWevjnIbot6-gvkAx5I8N5uxXBVsaeutJL1G7k5khVrzOQ8leImcTU&lib=MbpKbbfePtAVndrs259dhPT7ROjQYJ8yx";
+                        var tblbody="";
+                        var categoryid=$('#categoryselect').find(":selected").val();
+                        if(categoryid == '-1')
+                        {
+                            alert('Select Category');
+                            return;
+                        }
+                        $.ajax({ url: b,
+                            type: 'get', 
+                            success: function(response){
+                                tblbody="";
+                                $('#tblbody').html('');
+                                $('#tblbody').empty();
+                                tblbody="<table class=\"display\" id=\"tablemain\"><thead><tr><th>Posted On</th><th>Tender Deadline</th><th>Notice Title</th><th>Estate</th><th>District</th></tr></thead> <tbody>";
+                                for(var i = 0; i < response['Contacts'].length; i++) {
+                                    var obj = response['Contacts'][i];
+                                    if(obj['category'] == categoryid) {
+                                        var option = "<tr><td>"+obj['Posted_On']+"</td><td>"+obj['Tender_Deadline']+"</td><td>"+obj['Notice_Title']+"</td><td>"+obj['Estate']+"</td><td>"+obj['District']+"</td></tr>"
+                                        tblbody +=option;
+                                    }
+                                }
+                                $('#spinnerbig').hide();
+                                $('#tblbody').show();
+                                tblbody +="</tbody></table>";
+                                $('#tblbody').html(tblbody);
+                                $('#tablemain').DataTable({
+                                    "scrollX": true
+                                });
+                            }  
+                        });
+                })
+               /* $('#form').validate({     
+                    rules:{            
+                    },    
+                    submitHandler : function(form)  
+                    {
+                        $('#spinnerbig').show();
+                        $('#tblbody').hide();
+                        var b="https://script.googleusercontent.com/macros/echo?user_content_key=j5SLDi3010AxHkJ17x7odwTH9-7z7qzqn0zucy_-9UJ8t6FeNwk9sfSC1xtPoaWuQ8Nk-jbi98RktGxpncuZWeqzWMjx1W7zOJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1ZsYSbt7G4nMhEEDL32U4DxjO7V7yvmJPXJTBuCiTGh3rUPjpYM_V0PJJG7TIaKp7hGQLcdSyuHgWR9MmX3gZhzaKGcTZmIqkWevjnIbot6-gvkAx5I8N5uxXBVsaeutJL1G7k5khVrzOQ8leImcTU&lib=MbpKbbfePtAVndrs259dhPT7ROjQYJ8yx";
+                        var tblbody="";
+                        var categoryid=$('#categoryselect').find(":selected").val();
+                        if(categoryid == '-1')
+                        {
+                            alert('Select Category');
+                            return;
+                        }
+                        $.ajax({ url: b,
+                            type: 'get', 
+                            success: function(response){
+                                tblbody="";
+                                $('#tblbody').html('');
+                                $('#tblbody').empty();
+                                tblbody="<table class=\"display\" id=\"tablemain\"><thead><tr><th>Posted On</th><th>Tender Deadline</th><th>Notice Title</th><th>Estate</th><th>District</th></tr></thead> <tbody>";
+                                for(var i = 0; i < response['Contacts'].length; i++) {
+                                    var obj = response['Contacts'][i];
+                                    if(obj['category'] == categoryid) {
+                                        var option = "<tr><td>"+obj['Posted_On']+"</td><td>"+obj['Tender_Deadline']+"</td><td>"+obj['Notice_Title']+"</td><td>"+obj['Estate']+"</td><td>"+obj['District']+"</td></tr>"
+                                        tblbody +=option;
+                                    }
+                                }
+                                $('#spinnerbig').hide();
+                                $('#tblbody').show();
+                                tblbody +="</tbody></table>";
+                                $('#tblbody').html(tblbody);
+                                $('#tablemain').DataTable({
+                                    "scrollX": true
+                                });
+                            }  
+                        });
+                        
+                    }
+                });*/
+            });
+        </script>
 <body>
 <style>
  .hide-menu{
@@ -17,6 +169,158 @@
   body{
       font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
 }
+.tabl-header input:hover,.tabl-header select:hover {
+        border-color: #5e35b1 !important;
+    }
+    .tabl-header button,.tabl-header #categoryselect{
+        margin: 0px;
+    }
+
+    .tabl-header #categoryselect select{
+        padding: 0 10px;
+        height: 45px;
+    }
+    #datatable{
+        max-width: 918px;
+        margin: 0 auto;
+    }
+    #datatable .dataTables_scrollBody{
+        border-left: 1px solid #eee;
+        border-right: 1px solid #eee;
+    }
+    #datatable table{
+        width: 100% !important;
+    }
+    #datatable .dataTables_length{
+        width: 100%;
+        display: inline-block;
+        max-width: 359px;
+    }
+    #datatable .dataTables_length,.dataTables_wrapper .dataTables_filter{
+        margin: 35px 0 20px 0;
+        width: 360px;
+    }
+    #datatable .dataTables_length label{
+        display: inline-flex;
+        line-height: 43px;
+        width: 100%;
+        font-size: 16px;
+    }
+    #datatable .dataTables_length label select{
+        margin: 0 10px;
+        width: 100%;
+        display: inline-block;
+    }
+    #datatable #tablemain_filter label{
+        display: inline-block;
+        line-height: 40px;
+        font-size: 16px;
+        width: 100%;
+    }
+    #datatable #tablemain_filter input{
+        margin: 0px;
+        float: right;
+        width: 100%;
+        max-width: 249px;
+        margin-left: 10px;
+    }   
+
+    /*pagination css*/
+    #datatable .dataTables_info, #datatable .dataTables_paginate{
+        margin-top: 30px;
+    }
+    #datatable .paginate_button{
+        box-shadow: none;
+        background: #fdfdfd !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+     }
+    #datatable .paginate_button:hover{
+        box-shadow: none !important;
+        background-color: #5e35b1 !important;
+        border-color: #5e35b1 !important;
+        color: #fff !important;        
+    }
+    #datatable table.dataTable thead th{
+        text-align: center;
+    }
+    #datatable table.dataTable thead th,#datatable table.dataTable thead td{
+        background-color: #1d1d26;
+        color: #fff;
+        height: 50px;
+        padding: 0 10px;
+        line-height: 50px;
+    }
+    #datatable table.dataTable tbody th, table.dataTable tbody td{
+        padding: 15px 10px;
+    }
+    #datatable table.dataTable tbody tr td{
+        background-color: #fff !important;
+        color: #222;
+        font-family: SF-Display-Regular, sans-serif;
+        border-right: 1px solid #eee;
+    }
+    #datatable table.dataTable tbody tr td:hover{
+        background-color: #f1f1f1 !important;
+    }
+    footer{
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
+
+    @media only screen and (max-width: 767px) {
+        #datatable .dataTables_info, #datatable .dataTables_paginate{
+            margin-top: 0px;
+        }
+        #datatable .dataTables_length label select option{
+            text-align: center;
+        }
+        #datatable .dataTables_length{
+            max-width: 100%;
+            margin: 20px 0 0 0;
+        }
+        #datatable #tablemain_filter input{
+            width: 100%;
+            max-width: 89%;
+        }
+        #datatable #tablemain_filter label{
+            width: 100%;
+            max-width: 100%;
+        }
+        #datatable #tablemain_filter{
+            width: 100%;
+            max-width: 100%;
+            margin: 10px 0;
+        }
+        footer ul li a{
+            text-align: center;
+        }
+        .footer .copyright{
+            text-align: center;
+        }
+    }
+    @media only screen and (max-width: 414px) {
+        #datatable #tablemain_filter input{
+            max-width: 318px;
+        }
+    }
+    @media only screen and (max-width: 375px) {
+        #datatable #tablemain_filter input{
+            max-width: 280px;
+        }
+    }
+
+     
+    @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+    }
   </style>
   <div class="loading-screen">
     <div class="inner">
@@ -118,6 +422,7 @@
     </header>
 
     <section class="fw-section layout-full padding-top-5x overflow-hidden" data-offset-top="-2" style="background-color: #ffffff;">
+      
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 padding-top-4x padding-bottom-4x">
@@ -131,6 +436,48 @@
           </div>
           <!-- <div class="col-lg-7 col-sm-12"><img class="block" width="1080" height="621" src="img/home/macbook_angular.png" alt=""></div> -->
         </div>
+        <div class="row">
+            <div>
+
+                <header class="tabl-header">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-offset-4">
+                                <div class="row">
+                                    <form role="form" method="post" id="form">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+                                            <div class="form-group" id="categoryselect">
+                                                <div class="loader" id="spinner"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+                                            <button type="submit" class="btn btn-default" name="btnsave" value="btnsave" id="btnsave">Search</button>
+                                        </div>                                        
+
+                                    </form> 
+                                </div>                       
+                            </div>
+                        </div>
+                    </div>
+                    <div class="loaderbig" id="spinnerbig"></div>
+                </header>        
+
+                <div class="data-table-wrapper">
+                    <div class="container-fluid">
+                        <div class="row">                
+                            <div class="col-xs-12">
+                                <div id="datatable">
+                                    <div id="tblbody"></div>
+                                </div>
+                            </div>              
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="content" style="padding-bottom:0; min-height:10vh">
+                </div>            
+        </div>
+      </div>
       </div>
     </section>
 
@@ -155,9 +502,9 @@
       <div class="container-fluid">
         <div class="row">
           <div class="">
-            <div class="row">
-               <div class="col-lg-6 col-sm-12"><img class="block" width="1080" height="621" src="assets/img/source/screen-2.svg" alt=""></div>
-              <div class="col-sm-6 padding-top-3x padding-bottom-4x">
+            <div class="">
+               <div class="col-lg-7 col-sm-12"><img class="block" width="1080" height="621" src="assets/img/source/screen-2.svg" alt=""></div>
+              <div class="col-sm-5 padding-top-3x padding-bottom-4x">
                 <div class="text-block">
                   <h1 style="text-align: center;"><span class="font-family-headings text-light">2.建築項目，有您選擇。</span></h1>
                 </div>
@@ -219,7 +566,7 @@
 
 
     <footer class="site-footer footer-light" style="background-color: #000000;    font-size: 80%;">
-      <div class="container">
+      <div class="">
         <div class="footer-row">
           <div class="row">
             <!-- contact us -->
