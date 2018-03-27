@@ -93,12 +93,12 @@
                                 tblbody="";
                                 $('#tblbody').html('');
                                 $('#tblbody').empty();
-                                tblbody="<table class=\"display\" id=\"tablemain\"><thead><tr><th>Posted On</th><th>Tender Deadline</th><th>Notice Title</th><th>Estate</th><th>District</th></tr></thead> <tbody>";
+                                tblbody="<table class=\"display\" id=\"tablemain\"><thead><tr><th>登出時間 </th><th>截標時間</th><th>招標項目</th></tr></thead> <tbody>";
                                 for(var i = 0; i < response['Contacts'].length; i++) {
                                     var obj = response['Contacts'][i];
                                     var mPath = "http://localhost:4000/login"
                                     /*if(obj['category'] == categoryid) {*/
-                                        var option =  "<tr onclick='redirect()' style='cursor: pointer;'><td>"+obj['Posted_On']+"</td><td>"+obj['Tender_Deadline']+"</td><td>"+obj['Notice_Title']+"</td><td>"+obj['Estate']+"</td><td>"+obj['District']+"</td></tr>"
+                                        var option =  "<tr onclick='redirect()' style='cursor: pointer;'><td>"+obj['Posted_On']+"</td><td>"+obj['Tender_Deadline']+"</td><td>"+obj['Notice_Title']+"</td></tr>"
                                         tblbody +=option;
                                    // }
                                 }
@@ -107,7 +107,24 @@
                                 tblbody +="</tbody></table>";
                                 $('#tblbody').html(tblbody);
                                 $('#tablemain').DataTable({
-                                    "scrollX": true
+                                    "scrollX": true,
+                                    "oLanguage": {
+                                       "sSearch": "搜尋",
+                                        "sLengthMenu": '<span style="width: 57px">顯示</span>'+'<select>'+
+                                          '<option value="10">10</option>'+
+                                          '<option value="20">20</option>'+
+                                          '<option value="30">30</option>'+
+                                          '<option value="40">40</option>'+
+                                          '<option value="50">50</option>'+
+                                          '<option value="-1">All</option>'+
+                                          '</select> <span style="width: 57px">項目</span>',
+                                          "sInfo": "展示 頁 _PAGE_ of _PAGES_",
+                                          "oPaginate":  {
+                                              "sPrevious": "以前",
+                                                "sNext": "下一個"
+                                            }
+                                     },
+
                                 });
                             }  
                         });
@@ -188,10 +205,10 @@
     .loaderbig {
         position: absolute;
         left: 53%;
-        top: 30%;
+        top: 187%;
         z-index: 1;
-        width: 75px;
-        height: 75px;
+        width: 55px;
+        height: 55px;
         margin: -75px 0 0 -75px;
         border: 16px solid #f3f3f3;
         border-radius: 50%;
@@ -477,7 +494,7 @@
             <div class="text-block padding-top-1x">
               <p style="text-align: center; font-size:24px"><span class="text-gray">使用我們免費快速的平台，更頻繁地獲取有關新項目的信息。我們的使命：為您找到盡可能多的客戶，以便快速發展您的業務。</span></p>
             </div>
-            <div class="text-center"><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="#" style="font-size:16px">登入 / 註冊<i class="si si-arrow-right"></i></a><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="/contactchn" style="font-size:16px">聯絡<i class="si si-arrow-right"></i></a></div>
+            <div class="text-center"><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="https://tender.telos-technology.com/login" style="font-size:16px">登入 / 註冊<i class="si si-arrow-right"></i></a><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="" style="font-size:16px">聯絡<i class="si si-arrow-right"></i></a></div>
           </div>
           <!-- <div class="col-lg-7 col-sm-12"><img class="block" width="1080" height="621" src="img/home/macbook_angular.png" alt=""></div> -->
         </div>
@@ -492,7 +509,6 @@
                                     <form role="form" method="post" id="form">
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-9 text-center">
                                             <div class="form-group" id="">
-                                                <div class="loader" id="spinner"></div>
                                                  <div style="padding-top: 5%;"><button type="submit" class="btn btn-default btn-primary" name="btnsave" value="btnsave" id="btnsave">顯示所有招標公告</button></div>
                                             </div>
 
@@ -521,7 +537,7 @@
                     </div>
                 </div>
                
-                <div class="content" style="padding-bottom:0; min-height:10vh">
+                <div class="content" style="padding-bottom:70px; min-height:10vh">
                 </div>            
         </div>
       </div>
@@ -605,7 +621,7 @@
             <div class="text-block">
               <h1 style="text-align: center;"><span class="text-black font-family-headings">有天羅，您不會錯過任何機會。</span></h1>
             </div>
-            <div class="text-center"><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="#" style="font-size:16px">登入 / 註冊<i class="si si-arrow-right"></i></a></div>
+            <div class="text-center"><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="https://tender.telos-technology.com/login" style="font-size:16px">登入 / 註冊<i class="si si-arrow-right"></i></a></div>
           </div>
         </div>
       </div>

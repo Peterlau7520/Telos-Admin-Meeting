@@ -91,12 +91,12 @@
                                 tblbody="";
                                 $('#tblbody').html('');
                                 $('#tblbody').empty();
-                                tblbody="<table class=\"display\" id=\"tablemain\"><thead><tr><th>Posted On</th><th>Tender Deadline</th><th>Notice Title</th><th>Estate</th><th>District</th></tr></thead> <tbody>";
+                                tblbody="<table class=\"display\" id=\"tablemain\"><thead><tr><th>Posted On</th><th>Tender Deadline</th><th>Notice Title</th></tr></thead> <tbody>";
                                 for(var i = 0; i < response['Contacts'].length; i++) {
                                     var obj = response['Contacts'][i];
                                     var mPath = "http://localhost:4000/login"
                                     /*if(obj['category'] == categoryid) {*/
-                                        var option =  "<tr onclick='redirect()' style='cursor: pointer;'><td>"+obj['Posted_On']+"</td><td>"+obj['Tender_Deadline']+"</td><td>"+obj['Notice_Title']+"</td><td>"+obj['Estate']+"</td><td>"+obj['District']+"</td></tr>"
+                                        var option =  "<tr onclick='redirect()' style='cursor: pointer;'><td>"+obj['Posted_On']+"</td><td>"+obj['Tender_Deadline']+"</td><td>"+obj['Notice_Title']+"</td></tr>"
                                         tblbody +=option;
                                    // }
                                 }
@@ -287,10 +287,10 @@
     .loaderbig {
         position: absolute;
         left: 53%;
-        top: 30%;
+        top: 187%;
         z-index: 1;
-        width: 75px;
-        height: 75px;
+        width: 55px;
+        height: 55px;
         margin: -75px 0 0 -75px;
         border: 16px solid #f3f3f3;
         border-radius: 50%;
@@ -586,7 +586,7 @@
             <div class="text-block padding-top-1x">
               <p style="text-align: center; font-size:24px"><span class="text-gray">Contractors using our platform receive information about new projects faster and more frequently than others; as a result, they have been able to significantly streamline their workflow. Our mission: find you as many clients so you can rapidly grow your business.</span></p>
             </div>
-            <div class="text-center"><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="#" style="font-size:14px">Login / Sign Up<i class="si si-arrow-right"></i></a><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="/contact" style="font-size:14px">Contact Sales<i class="si si-arrow-right"></i></a></div>
+            <div class="text-center"><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="https://tender.telos-technology.com/login" style="font-size:14px">Login / Sign Up<i class="si si-arrow-right"></i></a><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="" style="font-size:14px">Contact Sales<i class="si si-arrow-right"></i></a></div>
           </div>
           <div class="col-lg-7 col-sm-12"><img class="block" width="1080" height="621" src="img/home/macbook_angular.png" alt=""></div>
         </div>
@@ -601,7 +601,6 @@
                                     <form role="form" method="post" id="form">
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-9 text-center">
                                             <div class="form-group" id="">
-                                                <div class="loader" id="spinner"></div>
                                                  <div style="padding-top: 5%"><button type="submit" class="btn btn-default btn-primary" name="btnsave" value="btnsave" id="btnsave">Show All Tender Notices</button></div>
                                             </div>
 
@@ -611,14 +610,18 @@
                                         </div>                                        
 
                                     </form> 
+
                                 </div>                       
                             </div>
+
                         </div>
+
                     </div>
                     <div class="loaderbig" id="spinnerbig"></div>
                 </header>        
 
                 <div class="data-table-wrapper">
+
                     <div class="container-fluid">
                         <div class="row">                
                             <div class="col-xs-12">
@@ -630,7 +633,7 @@
                     </div>
                 </div>
                
-                <div class="content" style="padding-bottom:0; min-height:10vh">
+                <div class="content" style="padding-bottom:70px; min-height:10vh">
                 </div>            
         </div>
       </div>
@@ -713,7 +716,7 @@
             <div class="text-block">
               <h1 style="text-align: center;"><span class="text-black font-family-headings">Never miss a potential project.</span></h1>
             </div>
-            <div class="text-center"><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="#" style="font-size:14px">Login / Sign Up<i class="si si-arrow-right"></i></a></div>
+            <div class="text-center"><a class="btn btn-solid btn-pill btn-nl margin-top-1x" href="https://tender.telos-technology.com/login" style="font-size:14px">Login / Sign Up<i class="si si-arrow-right"></i></a></div>
           </div>
         </div>
       </div>
