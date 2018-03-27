@@ -57,7 +57,6 @@
 <script type="text/javascript">
            
            $(document).ready(function () {
-            console.log("heyyyyyyyy")
                 $('#spinnerbig').hide();
                 var a="https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=1cqTns5ABiz67v6ST-h7mUWwd3zWZ6c1-ToyETH0xpL4&sheet=Categories";
                 // alert(a);
@@ -80,12 +79,12 @@
                         $('#tblbody').hide();
                         var b="https://script.googleusercontent.com/macros/echo?user_content_key=j5SLDi3010AxHkJ17x7odwTH9-7z7qzqn0zucy_-9UJ8t6FeNwk9sfSC1xtPoaWuQ8Nk-jbi98RktGxpncuZWeqzWMjx1W7zOJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1ZsYSbt7G4nMhEEDL32U4DxjO7V7yvmJPXJTBuCiTGh3rUPjpYM_V0PJJG7TIaKp7hGQLcdSyuHgWR9MmX3gZhzaKGcTZmIqkWevjnIbot6-gvkAx5I8N5uxXBVsaeutJL1G7k5khVrzOQ8leImcTU&lib=MbpKbbfePtAVndrs259dhPT7ROjQYJ8yx";
                         var tblbody="";
-                        var categoryid=$('#categoryselect').find(":selected").val();
-                        if(categoryid == '-1')
+                        //var categoryid=$('#categoryselect').find(":selected").val();
+                       /* if(categoryid == '-1')
                         {
                             alert('Select Category');
                             return;
-                        }
+                        }*/
                         $.ajax({ url: b,
                             type: 'get', 
                             success: function(response){
@@ -95,10 +94,11 @@
                                 tblbody="<table class=\"display\" id=\"tablemain\"><thead><tr><th>Posted On</th><th>Tender Deadline</th><th>Notice Title</th><th>Estate</th><th>District</th></tr></thead> <tbody>";
                                 for(var i = 0; i < response['Contacts'].length; i++) {
                                     var obj = response['Contacts'][i];
-                                    if(obj['category'] == categoryid) {
-                                        var option = "<tr><td>"+obj['Posted_On']+"</td><td>"+obj['Tender_Deadline']+"</td><td>"+obj['Notice_Title']+"</td><td>"+obj['Estate']+"</td><td>"+obj['District']+"</td></tr>"
+                                    var mPath = "http://localhost:4000/login"
+                                    /*if(obj['category'] == categoryid) {*/
+                                        var option =  "<tr onclick='redirect()' style='cursor: pointer;'><td>"+obj['Posted_On']+"</td><td>"+obj['Tender_Deadline']+"</td><td>"+obj['Notice_Title']+"</td><td>"+obj['Estate']+"</td><td>"+obj['District']+"</td></tr>"
                                         tblbody +=option;
-                                    }
+                                   // }
                                 }
                                 $('#spinnerbig').hide();
                                 $('#tblbody').show();
@@ -151,6 +151,7 @@
                         
                     }
                 });*/
+
             });
         </script>
 
@@ -285,7 +286,7 @@
     }
     .loaderbig {
         position: absolute;
-        left: 50%;
+        left: 53%;
         top: 30%;
         z-index: 1;
         width: 75px;
@@ -578,7 +579,7 @@
       
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12  padding-bottom-4x">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12  padding-top-4x">
             <div class="text-block">
               <h1 style="text-align: center;"><span class="text-black font-family-headings">Looking for projects?</span></h1>
             </div>
@@ -598,13 +599,15 @@
                             <div class="col-xs-12 col-md-offset-4">
                                 <div class="row">
                                     <form role="form" method="post" id="form">
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
-                                            <div class="form-group" id="categoryselect">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-9 text-center">
+                                            <div class="form-group" id="">
                                                 <div class="loader" id="spinner"></div>
+                                                 <div style="padding-top: 5%"><button type="submit" class="btn btn-default btn-primary" name="btnsave" value="btnsave" id="btnsave">Show All Tender Notices</button></div>
                                             </div>
+
                                         </div>
                                         <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
-                                            <button type="submit" class="btn btn-default" name="btnsave" value="btnsave" id="btnsave">Search</button>
+                                            
                                         </div>                                        
 
                                     </form> 
@@ -777,9 +780,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
        $("#menu").click(function(event){
-        console.log("hello")
         var open = $("#navBar").hasClass( "hide-menu" )
-        console.log("open", open)
         if(open === false){
            $("#navBar").removeClass("offcanvas-container.mobile-menu")
         $("#navBar").addClass('hide-menu')
@@ -790,8 +791,13 @@
            $("#hidehorizontal").removeClass("mobmenu")
         }
        
-      })
+      })      
     })
+
+    function redirect (){
+        window.location.href= "https://tender.telos-technology.com/login"
+    }
+    
 
     </script>
     
