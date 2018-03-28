@@ -41,11 +41,11 @@ router.get('/termschn', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  res.render('source', {layout: 'homepageLayout.hbs'});
+  res.render('sourcechn', {layout: 'homepageLayout.hbs'});
 });
 
-router.get('/sourcechn', (req, res) => {
-  res.render('sourcechn', {layout: 'homepageLayout.hbs'});
+router.get('/source', (req, res) => {
+  res.render('source', {layout: 'homepageLayout.hbs'});
 });
 
 router.get('/contractor', (req, res) => {
