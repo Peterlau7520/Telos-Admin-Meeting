@@ -56,7 +56,12 @@
 
 </head>
 <script type="text/javascript">
-           
+             function sortDate(a,b)
+                                    {
+                                        var a = new Date(a.startDateTime),
+                                            b = new Date(b.startDateTime);
+                                        return (a.getTime() - b.getTime());
+                                    }
            $(document).ready(function () {
                 $('#spinnerbig').hide();
                 var a="https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=1cqTns5ABiz67v6ST-h7mUWwd3zWZ6c1-ToyETH0xpL4&sheet=Categories";
@@ -107,7 +112,8 @@
                                 tblbody +="</tbody></table>";
                                 $('#tblbody').html(tblbody);
                                 $('#tablemain').DataTable({
-                                    "scrollX": true
+                                    "scrollX": true,
+                                    "order": [[ 0, 'desc' ]]
                                 });
                             }  
                         });
