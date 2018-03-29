@@ -5,6 +5,16 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!--{{!-- login validator --}}-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.js"></script>
+        <!--{{!-- boostrap js file --}}-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <!--{{!-- boostrap confirmation --}}-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.validate.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
 </head>
 
 
@@ -121,7 +131,43 @@
     transform: translate3d(0, 0, 0) !important;
   }
 </style>
+ <style>
+            .loader {
+                border: 16px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 16px solid #3498db;
+                width: 40px;
+                height: 40px;
+                -webkit-animation: spin 2s linear infinite;
+                animation: spin 2s linear infinite;
+            }
+            .loaderbig {
+                position: absolute;
+                left: 50%;
+                top: 30%;
+                z-index: 1;
+                width: 150px;
+                height: 150px;
+                margin: -75px 0 0 -75px;
+                border: 16px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 16px solid #3498db;
+                width: 120px;
+                height: 120px;
+                -webkit-animation: spin 2s linear infinite;
+                animation: spin 2s linear infinite;
+            }
 
+            @-webkit-keyframes spin {
+                0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+            }
+        </style>
 <body id="fontId" style="overflow: hidden;
     width: 100%;
     height: 100%;">
@@ -132,6 +178,7 @@
         <div class="indeterminate"></div>
       </div>
     </div>
+
   </div>
   <div class="offcanvas-container mobile-menu hide-menu" id="navBar">
 
@@ -229,6 +276,31 @@
         </div>
       </div>
     </header>
+
+  <section>
+
+        <form role="form" method="post" id="form">
+            <div class="col-xs-3">
+                <div class="form-group" id="categoryselect">
+                    <div class="loader" id="spinner"></div>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <button type="submit" class="btn btn-default" name="btnsave" value="btnsave" id="btnsave">Search</button>
+            </div>
+        </form>
+
+        <div class="col-xs-12" id="tblbody">
+        </div>
+        <div class="loaderbig" id="spinnerbig"></div>
+
+        <div class="content" style="padding-bottom:0; min-height:800px">
+
+        </div>
+
+
+
+  </section>
 
     <section class="fw-section layout-full padding-top-5x overflow-hidden" data-offset-top="-2" style="background-color: #ffffff;">
       <div class="container-fluid">
@@ -404,6 +476,66 @@
         }
        
       })
+       $('#spinnerbig').hide();
+                var a="https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=1cqTns5ABiz67v6ST-h7mUWwd3zWZ6c1-ToyETH0xpL4&sheet=Categories";
+                // alert(a);
+                var select="  <select class=\"form-control input-rounded text-semibold\" id=\"category\" name=\"category\">";
+                select +=" <option value=\"-1\">None</option>";
+                $.get( a, function( data ) {
+                    //var json = $.parseJSON(data);
+                    for(var i = 0; i < data['Categories'].length; i++) {
+                        var obj = data['Categories'][i];
+                        var option = "<option value=\""+obj['id']+"\">"+obj['name']+"</option>"
+                        select +=option;
+                    }
+                    select +="</select>";
+                    $('#spinner').hide();
+                    $('#categoryselect').append(select);
+                });
+                
+                $('#form').validate({     
+                    rules:{            
+                    },    
+                    submitHandler : function(form)  
+                    {
+                        $('#spinnerbig').show();
+                        $('#tblbody').hide();
+                        var b="https://script.googleusercontent.com/macros/echo?user_content_key=j5SLDi3010AxHkJ17x7odwTH9-7z7qzqn0zucy_-9UJ8t6FeNwk9sfSC1xtPoaWuQ8Nk-jbi98RktGxpncuZWeqzWMjx1W7zOJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1ZsYSbt7G4nMhEEDL32U4DxjO7V7yvmJPXJTBuCiTGh3rUPjpYM_V0PJJG7TIaKp7hGQLcdSyuHgWR9MmX3gZhzaKGcTZmIqkWevjnIbot6-gvkAx5I8N5uxXBVsaeutJL1G7k5khVrzOQ8leImcTU&lib=MbpKbbfePtAVndrs259dhPT7ROjQYJ8yx";
+                        var tblbody="";
+                        var categoryid=$('#categoryselect').find(":selected").val();
+                        if(categoryid == '-1')
+                        {
+                            alert('Select Category');
+                            return;
+                        }
+                        $.ajax({ url: b,
+                            type: 'get', 
+                            success: function(response){
+                                tblbody="";
+                                $('#tblbody').html('');
+                                $('#tblbody').empty();
+                                tblbody="<table class=\"display\" id=\"tablemain\"><thead><tr><th>Posted On</th><th>Tender Deadline</th><th>Notice Title</th><th>Estate</th><th>District</th></tr></thead> <tbody>";
+                                for(var i = 0; i < response['Contacts'].length; i++) {
+                                    var obj = response['Contacts'][i];
+                                    if(obj['category'] == categoryid) {
+                                        var option = "<tr><td>"+obj['Posted_On']+"</td><td>"+obj['Tender_Deadline']+"</td><td>"+obj['Notice_Title']+"</td><td>"+obj['Estate']+"</td><td>"+obj['District']+"</td></tr>"
+                                        tblbody +=option;
+                                    }
+                                }
+                                $('#spinnerbig').hide();
+                                $('#tblbody').show();
+                                tblbody +="</tbody></table>";
+                                $('#tblbody').html(tblbody);
+                                $('#tablemain').DataTable({
+                                    "scrollX": true
+                                });
+                            }  
+                        });
+                        
+                    }
+                });
+      
     })
 
     </script>
+
