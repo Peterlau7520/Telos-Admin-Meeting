@@ -49,11 +49,11 @@ router.get('/source', (req, res) => {
 });
 
 router.get('/contractor', (req, res) => {
-  res.render('contractor', {layout: 'privacyLayout.hbs'});
+  res.render('contractor', {layout: 'contractorLayout.hbs'});
 });
 
 router.get('/contractorchn', (req, res) => {
-  res.render('contractorchn', {layout: 'privacyLayout.hbs'});
+  res.render('contractorchn', {layout: 'contractorLayout.hbs'});
 });
 
 router.get('/contact', (req, res) => {
