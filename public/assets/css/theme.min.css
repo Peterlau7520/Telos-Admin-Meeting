@@ -27,9 +27,16 @@
     width: 100%;
     // margin-left: 33% !important;
 }
-.navinside {
+.navinside-chn{
     width: 100%;
-    max-width: max-content;
+    min-width: 27% !important;
+    max-width: 30% !important;
+    margin: 39px auto !important;
+   }
+   .navinside-eng{
+    width: 100%;
+    min-width: 31% !important;
+    max-width: 30% !important;
     margin: 39px auto !important;
    }
 .contractors-btn{
