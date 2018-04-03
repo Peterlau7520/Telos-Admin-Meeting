@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="195px" height="306px" viewBox="0 0 195 306" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
-    <title>tenderguard_1</title>
+<svg width="416px" height="242px" viewBox="0 0 416 242" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.2 (51160) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2</title>
     <desc>Created with Sketch.</desc>
-    <defs></defs>
+    <defs>
+        <linearGradient x1="50.7455939%" y1="39.6899991%" x2="49.2148467%" y2="60.9377079%" id="linearGradient-1">
+            <stop stop-color="#333333" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50.2699234%" y1="41.4294394%" x2="49.6534483%" y2="60.6811257%" id="linearGradient-2">
+            <stop stop-color="#333333" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+    </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="tenderguard_1" transform="translate(-2.000000, 0.000000)">
-            <g id="Group-25">
-                <g id="tenderguard_logo" transform="translate(11.000000, 0.000000)">
-                    <g id="Group">
-                        <polygon id="Shape" fill="#000000" fill-rule="nonzero" points="177.6 35.9 0.5 35.9 18.8 0.8 160.8 0.8"></polygon>
-                        <rect id="Rectangle-path" fill="#000000" fill-rule="nonzero" x="0.5" y="35.9" width="177.1" height="152.7"></rect>
-                        <path d="M0.5,52 L177.6,52" id="Shape" stroke="#42BFFE" stroke-width="4"></path>
-                        <path d="M53,22 L125.3,22" id="Shape" stroke="#405FF4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
-                        <path d="M92.1048035,73 L85.8951965,73 C82.6724891,73 80,70.2131148 80,66.852459 L80,53 L98,53 L98,66.852459 C98,70.2131148 95.3275109,73 92.1048035,73 Z" id="Shape" stroke="#42BFFE" stroke-width="2.4"></path>
+        <g id="Group-2">
+            <g id="tenderguard_3" transform="translate(239.000000, 56.000000)" fill="#000000" font-family="PingFangTC-Medium, PingFang TC" font-size="90" font-weight="400">
+                <g id="保標">
+                    <g>
+                        <text>
+                            <tspan x="0" y="95">保標</tspan>
+                        </text>
                     </g>
-                    <g id="Group-19" transform="translate(62.000000, 66.000000)">
-                        <g id="Group">
-                            <path d="M33.0631579,79.6144578 L21.1263158,79.6144578 C9.94736842,79.6144578 0.852631579,70.3614458 0.852631579,58.9879518 L0.852631579,29.7831325 C0.852631579,27.7590361 2.46315789,26.1204819 4.45263158,26.1204819 L49.8315789,26.1204819 C51.8210526,26.1204819 53.4315789,27.7590361 53.4315789,29.7831325 L53.4315789,58.9879518 C53.4315789,70.3614458 44.3368421,79.6144578 33.0631579,79.6144578 Z" id="Shape" fill="#405FF4" fill-rule="nonzero"></path>
-                            <path d="M10.1368421,26.7951807 L10.1368421,17.7349398 C10.1368421,8.19277108 17.7157895,0.578313253 27,0.578313253 C36.3789474,0.578313253 43.8631579,8.28915663 43.8631579,17.7349398 L43.8631579,26.7951807" id="Shape" stroke="#405FF4" stroke-width="6"></path>
-                        </g>
-                        <path d="M22.896854,53.7534797 C21.141657,52.4733673 20,50.3933775 20,48.0450243 C20,44.1541648 23.1340068,41 27,41 C30.8659932,41 34,44.1541648 34,48.0450243 C34,50.3933775 32.858343,52.4733673 31.103146,53.7534797 L31.103146,59.4733388 C31.103146,61.3899244 29.5494464,62.943624 27.6328608,62.943624 L26.3671392,62.943624 C24.4505536,62.943624 22.896854,61.3899244 22.896854,59.4733388 L22.896854,53.7534797 Z" id="Combined-Shape" fill="#202020"></path>
-                    </g>
-                    <path d="M89,56 L89,71.5" id="Shape" stroke="#000000" stroke-width="3"></path>
                 </g>
-                <text id="保標" font-family="PingFangTC-bold, PingFang TC, Arial Bold" font-size="80" font-weight="600" fill="#000000">
-                    <tspan x="11" y="295">保標</tspan>
-                </text>
+            </g>
+            <g id="Group-20">
+                <g id="Group" fill-rule="nonzero">
+                    <polygon id="Shape" fill="url(#linearGradient-1)" points="104.5 120.3 0.1 60.4 0.1 180.9 104.5 241.2"></polygon>
+                    <polygon id="Shape" fill="#000000" points="208.9 60.4 104.5 0.1 0.1 60.4 104.5 120.3"></polygon>
+                    <polygon id="Shape" fill="url(#linearGradient-2)" points="104.5 120.3 104.5 241.2 208.9 180.9 208.9 60.4"></polygon>
+                </g>
+                <polygon id="Path-12" stroke="#405FF4" stroke-width="4" points="64 37.184581 66.1237989 36 145 81.4880447 142.452514 82.9427933"></polygon>
             </g>
         </g>
     </g>

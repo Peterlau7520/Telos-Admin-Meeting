@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="469px" height="337px" viewBox="0 0 469 337" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>tenderguard_2_eng</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50.7455939%" y1="19.078927%" x2="49.2148467%" y2="82.8036504%" id="linearGradient-1">
+            <stop stop-color="#333333" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50.2699234%" y1="24.2957412%" x2="49.6534483%" y2="82.0341261%" id="linearGradient-2">
+            <stop stop-color="#333333" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="tenderguard_2_eng">
+            <g id="Group-20" transform="translate(133.000000, 0.000000)">
+                <g id="Group" fill-rule="nonzero">
+                    <polygon id="Shape" fill="url(#linearGradient-1)" points="104.5 120.3 0.1 60.4 0.1 180.9 104.5 241.2"></polygon>
+                    <polygon id="Shape" fill="#000000" points="208.9 60.4 104.5 0.1 0.1 60.4 104.5 120.3"></polygon>
+                    <polygon id="Shape" fill="url(#linearGradient-2)" points="104.5 120.3 104.5 241.2 208.9 180.9 208.9 60.4"></polygon>
+                </g>
+                <polygon id="Path-12" stroke="#405FF4" stroke-width="4" points="64 37.184581 66.1237989 36 145 81.4880447 142.452514 82.9427933"></polygon>
+            </g>
+            <text id="Tenderguard" font-family="HelveticaNeue-Medium, Helvetica Neue,Helvetica" font-size="82" font-weight="400" fill="#000000">
+                <tspan x="0.00" y="320">Tenderguard</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

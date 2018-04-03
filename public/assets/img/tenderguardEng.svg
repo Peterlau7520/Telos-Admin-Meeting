@@ -1,38 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="469px" height="284px" viewBox="0 0 469 284" enable-background="new 0 0 469 284" xml:space="preserve">
-<title>tenderguard_1_eng</title>
-<desc>Created with Sketch.</desc>
-<g id="tenderguard_1_eng">
-	<g id="Group-24" transform="translate(148.000000, 0.000000)">
-		<g id="Group-25">
-			<g id="tenderguard_logo">
-				<g id="Group">
-					<polygon id="Shape" points="175.051,35.9 -2.051,35.9 16.249,0.8 158.25,0.8 					"/>
-					<rect id="Rectangle-path" x="-2.051" y="35.9" width="177.101" height="152.7"/>
-					<path id="Shape_1_" fill="none" stroke="#42BFFE" stroke-width="4" d="M-2.051,52h177.101"/>
-					<path id="Shape_2_" fill="none" stroke="#405FF4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="
-						M50.449,22h72.3"/>
-					<path id="Shape_3_" fill="none" stroke="#42BFFE" stroke-width="2.4" d="M89.554,73h-6.209c-3.223,0-5.896-2.787-5.896-6.147
-						V53h18v13.853C95.449,70.213,92.777,73,89.554,73z"/>
-				</g>
-				<g id="Group-19" transform="translate(62.000000, 66.000000)">
-					<g id="Group_1_">
-						<path id="Shape_4_" fill="#405FF4" d="M30.513,79.614H18.576c-11.18,0-20.274-9.253-20.274-20.626V29.783
-							c0-2.024,1.611-3.663,3.601-3.663h45.378c1.99,0,3.6,1.638,3.6,3.663v29.205C50.881,70.361,41.787,79.614,30.513,79.614z"/>
-						<path id="Shape_5_" fill="none" stroke="#405FF4" stroke-width="6" d="M7.586,26.795v-9.06
-							c0-9.542,7.579-17.157,16.863-17.157c9.378,0,16.863,7.711,16.863,17.157v9.06"/>
-					</g>
-					<path id="Combined-Shape" fill="#202020" d="M20.347,53.753c-1.756-1.28-2.897-3.36-2.897-5.708c0-3.891,3.134-7.045,7-7.045
-						c3.867,0,7,3.154,7,7.045c0,2.349-1.141,4.428-2.896,5.708v5.72c0,1.917-1.553,3.471-3.471,3.471h-1.265
-						c-1.916,0-3.47-1.554-3.47-3.471V53.753z"/>
-				</g>
-				<path id="Shape_6_" fill="none" stroke="#000000" stroke-width="3" d="M86.449,56v15.5"/>
-			</g>
-		</g>
-	</g>
-	<text transform="matrix(1 0 0 1 13.8225 267)" font-family="'Helvetica'" font-weight = "600" font-size="70">Tenderguard</text>
-</g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="753px" height="242px" viewBox="0 0 708 242" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>tenderguard_3_eng</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50.7455939%" y1="19.078927%" x2="49.2148467%" y2="82.8036504%" id="linearGradient-1">
+            <stop stop-color="#333333" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50.2699234%" y1="24.2957412%" x2="49.6534483%" y2="82.0341261%" id="linearGradient-2">
+            <stop stop-color="#333333" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="tenderguard_3_eng">
+            <g id="Group-20">
+                <g id="Group" fill-rule="nonzero">
+                    <polygon id="Shape" fill="url(#linearGradient-1)" points="104.5 120.3 0.1 60.4 0.1 180.9 104.5 241.2"></polygon>
+                    <polygon id="Shape" fill="#000000" points="208.9 60.4 104.5 0.1 0.1 60.4 104.5 120.3"></polygon>
+                    <polygon id="Shape" fill="url(#linearGradient-2)" points="104.5 120.3 104.5 241.2 208.9 180.9 208.9 60.4"></polygon>
+                </g>
+                <polygon id="Path-12" stroke="#405FF4" stroke-width="4" points="64 37.184581 66.1237989 36 145 81.4880447 142.452514 82.9427933"></polygon>
+            </g>
+            <text id="Tenderguard" font-family="HelveticaNeue-Medium, Helvetica Neue, Helvetica" font-size="90" font-weight="400" fill="#000000">
+                <tspan x="229.38" y="150">Tenderguard</tspan>
+            </text>
+        </g>
+    </g>
 </svg>
