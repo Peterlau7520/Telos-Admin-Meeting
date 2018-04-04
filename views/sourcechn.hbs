@@ -1,11 +1,12 @@
 <html>
 
 <head>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-</head>
+
 
 <style>
   h2 {
@@ -16,6 +17,43 @@ body{
 }
 
 
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
   @media screen and (max-width: 480px) {
     #hide {
       display: none;
@@ -131,7 +169,7 @@ body{
     top: 0px;
   }
 </style>
-
+</head>
 <body id="fontId" style="overflow: hidden;
     width: 100%;
     height: 100%;">
@@ -271,7 +309,22 @@ body{
           <a class="btn btn-solid btn-pill btn-primary btn-nl waves-effect waves-light scroll-to" style="color: #f2f2f2 !important;" href="https://tender.telos-technology.com/login">管理登入 / 註冊</a><a class="btn btn-solid btn-pill btn-primary btn-nl waves-effect waves-light scroll-to" style="color: #f2f2f2 !important;"
             href="https://tender.telos-technology.com/login">合約商登入 / 註冊</a>
         </div>
+        <div>
+          <a class="btn btn-solid btn-pill btn-primary btn-nl waves-effect waves-light scroll-to" id="popup" style="color: #f2f2f2 !important;" href="#demo_model">獲取Demo</a></div>
       </div>
+      <button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+
+</div>
+
     </section>
 
     <!--sponsors section-->
@@ -685,12 +738,9 @@ I類，II類和III類項目的40多種小型工程承包商。</span></p>
           </div>
         </div>
     </footer>
-
-
+   
   </main>
-</body>
-
-</html>
+ 
 
 <script>
   mixpanel.track("Video play");
@@ -729,6 +779,11 @@ I類，II類和III類項目的40多種小型工程承包商。</span></p>
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
+       $('#popup').click(function(event) {
+          console.log("helloooo")
+          $('#overlay').modal('open')
+      });
+
        $("#menu").click(function(event){
         console.log("hello")
         var open = $("#navBar").hasClass( "hide-menu" )
@@ -744,6 +799,10 @@ I類，II類和III類項目的40多種小型工程承包商。</span></p>
         }
        
       })
+        
     })
 
     </script>
+    </body>
+
+</html>
