@@ -28,16 +28,22 @@
     // margin-left: 33% !important;
 }
 .navinside-chn{
-    width: 100%;
+/*    width: 100%;
     min-width: 27% !important;
     max-width: 30% !important;
-    margin: 39px auto !important;
+    margin: 39px auto !important;*/
+    width: 100%;
+    text-align: center;
+    margin: 30px 0;
    }
    .navinside-eng{
+  /*  width: 100%;
+    min-width: 33%;
+    max-width: 30%;
+    margin: 39px auto;*/
     width: 100%;
-    min-width: 33% !important;
-    max-width: 30% !important;
-    margin: 39px auto !important;
+    text-align: center;
+    margin: 33px 0;
    }
 .contractors-btn{
     position: absolute;
@@ -113,7 +119,7 @@ display: inline-block;
   display: table;
   height: 100%;
   min-height: 100%;
-  float: left
+  display: inline-block;
 }
 
 .navbar-horizontal .menu-wrap .main-navigation>ul>li>a {
