@@ -8,7 +8,7 @@ module.exports = function(passport) {
   router.post('/register', (req, res) => {
     console.log(req.body, "dataaaaaaaa") 
     var PassCode = "telos-admin"
-    if(req.body.passcode == PassCode){
+    if(req.body.inviteCode == PassCode){
         //console.log("matched")
         const checkEstate = req.body.estateName.split(" ").join("").trim();
     Estate.findOne({"estateName" : checkEstate}, function(err, estate){
