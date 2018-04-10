@@ -52,9 +52,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.min.js"></script>
         <script type="text/javascript" src="assets/js/jquery.validate.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>
-
+        <script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.16/sorting/date-euro.js"></script>
                
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+             <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+            <script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.16/sorting/datetime-moment.js"></script>
 
 </head>
 <script type="text/javascript">
@@ -98,8 +99,8 @@
                                 for(var i = 0; i < response['Contacts'].length; i++) {
                                     var obj = response['Contacts'][i];
                                     var mPath = "http://localhost:4000/login"
-                                    var date = moment(obj['Tender_Deadline']).format("DD/MM/YYYY");
-                                    var datePosted =  moment(obj['Posted_On']).format("DD/MM/YYYY")
+                                    var date = moment(new Date(obj['Tender_Deadline'])).format("DD/MM/YYYY");
+                                    var datePosted =  moment(new Date(obj['Posted_On'])).format("MM/DD/YYYY")
                                     /*if(obj['category'] == categoryid) {*/
                                         var option =  "<tr onclick='redirect()' style='cursor: pointer;'><td>"+datePosted+"</td><td>"+date+"</td><td>"+obj['Notice_Title']+"</td></tr>"
                                         tblbody +=option;
@@ -111,7 +112,7 @@
                                 $('#tblbody').html(tblbody);
                                 $('#tablemain').DataTable({
                                     "scrollX": true,
-                                    "order": [[ 0, 'desc' ]],
+                                    "order": [],
                                     "oLanguage": {
                                        "sSearch": "搜尋",
                                         "sLengthMenu": '<span style="width: 57px">顯示</span>'+'<select>'+
