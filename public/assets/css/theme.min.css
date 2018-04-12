@@ -3785,7 +3785,7 @@ button[type=submit]:focus, input[type=button]:focus, input[type=file]:focus, inp
 .preloader-logo{
   width:90px !important;
 }
-.block-center{
+.textwidget .block-center{
   width: 80px !important;
 }
 .mobile-logo, .site-logo {
