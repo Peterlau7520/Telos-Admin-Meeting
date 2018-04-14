@@ -41,19 +41,20 @@ router.get('/termschn', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  res.render('sourcechn', {layout: 'homepageLayout.hbs'});
+  res.render('appchn', {layout: 'homepageLayout.hbs'});
 });
+//sourcechn
 
 router.get('/source', (req, res) => {
   res.render('source', {layout: 'homepageLayout.hbs'});
 });
 
 router.get('/contractor', (req, res) => {
-  res.render('contractor', {layout: 'privacyLayout.hbs'});
+  res.render('contractor', {layout: 'contractorLayout.hbs'});
 });
 
 router.get('/contractorchn', (req, res) => {
-  res.render('contractorchn', {layout: 'privacyLayout.hbs'});
+  res.render('contractorchn', {layout: 'contractorLayout.hbs'});
 });
 
 router.get('/contact', (req, res) => {

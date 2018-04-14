@@ -63,7 +63,6 @@ let currDate = new Date();
 let currentDate = currDate.getFullYear()+"-"+(currDate.getMonth()+1)+"-"+currDate.getDate()+" "+currDate.getHours()+":"+currDate.getMinutes()+":"+currDate.getSeconds();
 router.get('/allMeetings', (req, res) => {
     Meeting.find({estate: req.user.estateName}).populate('polls').lean().then(function(meetings, err){
-      console.log(meetings, "meetings")
         const promiseArr = []
         var currentMeetings = []
         var pastMeetings = []
@@ -337,20 +336,22 @@ router.post('/editMeeting', (req, res) => {
       })
     }
     else{
-        fileLinks.push(req.body.fileLinks)
-          removeFiles(req, res, GUID)
+/*        fileLinks.push(req.body.fileLinks)
+*/          removeFiles(req, res, GUID)
     }
     function removeFiles(req, res, GUID){
       const data = req.body
       var id = data.meeting_id
+      console.log(data, "data")
       if(data.removedfiles){
                  Meeting.findOneAndUpdate({_id: id
                 }, {
-                  $pull: { 
-                     fileLinks: data.removedfiles,
+                  $pop: { 
+                     fileLinks: 1,
                   }
                 })
                  .then(function(r, err){
+                  console.log(r, "rrr")
                   var titleLink = ''
                   var fileLinksLink = ''
                   if(data.title){
@@ -595,7 +596,6 @@ router.get('/addMeeting',(req,res) => {
             }
                     var startTime = moment.utc(new Date(item.startTime));
                     item.startTime =  startTime.format("MM/DD/YYYY hh:mm a");
-                    console.log(item.startTime, "heloooooooooooooooooooooooooooooooooooooo")
                     if(Date.parse(new Date(item.endTime)) > Date.parse(new Date)){
                       var endTime = moment.utc(new Date(item.endTime));
                     item.endTime =  endTime.format("MM/DD/YYYY hh:mm a");
@@ -742,7 +742,6 @@ function savePoll(req, res, fileLinks){
                 active: true
             });
             meeting.save(function(err, meeting){
-              console.log(meeting, "meeeeeee")
               MeetingGUID = ''
                 const message = '新會議已添加 | A New Meeting has just been added!'
                 sendNotification(message,  req.user.estateName)
@@ -790,7 +789,6 @@ function sendNotification(message, estateName){
                 note.payload = {};
                 note.topic = "com.telostechnology.telos";
                 apnProvider.send(note, item.deviceToken).then( (result) => {
-                console.log(result, "result");
                 //resolve(result)
                 });
                 let type = item.deviceType
@@ -839,7 +837,6 @@ var j = schedule.scheduleJob("*/1 * * * *", function(fireDate){
                 var hours = minutes / 60;
                  var one_day=1000*60*60*24;
                 var days = (diff/one_day).toFixed();
-                console.log(days, "days")
                 if(days == 1){
                 const message = '新會議已添加 | A Meeting is schedule tommorow!'
                 sendNotification(message,  req.user.estateName)
