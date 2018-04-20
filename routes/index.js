@@ -41,8 +41,9 @@ router.get('/termschn', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  res.render('sourcechn', {layout: 'homepageLayout.hbs'});
+  res.render('appchn', {layout: 'homepageLayout.hbs'});
 });
+//sourcechn
 
 router.get('/source', (req, res) => {
   res.render('source', {layout: 'homepageLayout.hbs'});
