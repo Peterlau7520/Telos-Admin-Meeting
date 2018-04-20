@@ -147,6 +147,11 @@ function saveSurvey(req, res, targetAudience){
         });
     survey.save()
     .then(function(survey){
+        Estate.findOneAndUpdate({estateName: req.user.estateName},
+            {$addtoset: {surveys: survey._id } },
+         { 
+            new: true 
+        })
     if(survey){
         const questions = req.body.questions
         var order = 0
