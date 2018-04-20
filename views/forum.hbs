@@ -168,7 +168,7 @@
                     </ul>
                 </nav> -->
                 <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="/telos">Telos</a> | The new standard in property management"
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="/">Telos</a> | The new standard in property management"
                 </p>
             </div>
         </footer>
@@ -216,6 +216,7 @@
 </div>
 
 <div id="newPost" class="modal  fade" role="dialog">
+
   <div class="modal-dialog  modal-lg newpost-model-dialog">
 
     <!-- Modal content-->
@@ -226,17 +227,19 @@
         <h4 class="modal-title new-model-title"> New Post | 新帖子</h4>
       </div>
       <div class="modal-body new-model-body">
+        
         <div class="output"></div>
-        <div class="check-icon text-center">
-          
+         <div id="loading" style="width: 50%;">
+          </div>
+        <div class="check-icon text-center" style="width: 50%;">
         </div>
       </div>
 
       <div class="modal-footer new-modal-footer">
+
       <span id="popupError" class="errorField" style="margin-left: 66px;"></span>
         <form role="form form-inline" action="/newPost" method="post" enctype="multipart/form-data"  name="#newpost" id="newpost" >
         <textarea id="text" name="content" class="new-post-text-box" placeholder="Type your post here..."></textarea>
-
         <button type="submit" class="btn btn-primary forum-btn-primary send_post add_new_post">Send</button>
 
         </form>
@@ -261,7 +264,7 @@
         <form class="form form-inline" role="form" action="/reportComment" method="post" enctype="multipart/form-data"  name="#poll_form" id="poll_form" >
         <div class="outputReport" id="outputReport"></div>
         
-        <textarea id="text" name="commentReport" class="comment-textbox" placeholder="Type here..."></textarea>
+        <textarea id="text" name="commentReport" class="comment-textbox" placeholder="Type here..." required="true"></textarea>
    
         <button type="submit" class="btn btn-primary forum-btn-primary send_post">Report</button>
         </form>
@@ -284,7 +287,7 @@
       <div class="modal-body">
         <form role="form form-inline" action="/reportPost" method="post" enctype="multipart/form-data"  name="#poll_form" id="poll_form" >
         <div class="outputPost" id="outputPost"></div>
-        <textarea id="text" class="comment-textbox" placeholder="Type here..." name="postReport"></textarea>
+        <textarea id="text" class="comment-textbox" placeholder="Type here..." name="postReport" required="true"></textarea>
         <button type="submit" class="btn btn-primary forum-btn-primary send_post">Send</button>
         </form>
       </div>
@@ -375,6 +378,7 @@ setTimeout(function(){
             const commentData = $('#comment_form').serializeArray();
             const comm = convertSerializeArrayToJson(commentData)
            $("#comments").prepend('<div class="col-lg-12 comment-width"><span class="pull-left estate">'+'admin'+'</span> <span class="comment-para">'+'hfghfg | 0 hours ago'+'</span><span class="report-link pull-right "><a href="#" class="report_comment"  id="">投訴 | Report Comment</a></span> </div><span class=" fa-marign pt-comment"><a href="#" class=""  id=""><div class="heart like-fa like_comment" aria-hidden="true" id=""><div class="fa-count inc-count" id="">'+0+'</div></div></a></span><span class="commentContent">'+comm.comment+'</span> <br>')
+           $("textarea[name='comment']").val('')
              $.ajax({
                         url: HostName + "/newComment",
                         data: comm,
@@ -383,6 +387,7 @@ setTimeout(function(){
                           var host = "https://54.254.183.221"//window.location.origin;
                           var socket =  io.connect(host)
                           socket.emit('comment', {data:'data'});
+
                           //  location.reload()
                         },
                         err: function(err){
@@ -460,6 +465,12 @@ setTimeout(function(){
                         url: HostName + "/newPost",
                         data: post,
                         type: 'POST',
+                         beforeSend: function() {
+                           $(".check-icon").html("");
+                        var html = '<img id="theImg" class ="forumloader" src= "assets/img/load.gif "/>'
+                          $(".check-icon").append(html);
+                          $(".add_new_post").prop('disabled', true); // disable button
+                        },
                          success: function (data) {
                         location.reload()
                         },

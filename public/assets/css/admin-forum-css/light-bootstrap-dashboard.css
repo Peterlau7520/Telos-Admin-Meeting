@@ -258,6 +258,13 @@
   margin-left: -96px
 }
 
+.forumloader {
+    width: 100px;
+    float: right;
+    position: relative;
+    margin-top: 6px;
+    margin: 0 auto;
+  }
 .chnRmDetailBtn {
   background: 0;
   border: 0;
@@ -4496,7 +4503,7 @@ textarea {
 }
 
 .check-icon img {
-  width: 48px;
+  width: 90px;
   margin: 115px 0 20px 0
 }
 

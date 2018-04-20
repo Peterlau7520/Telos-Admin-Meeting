@@ -62,7 +62,7 @@ MeetingGUID = guid()
 let currDate = new Date(); 
 let currentDate = currDate.getFullYear()+"-"+(currDate.getMonth()+1)+"-"+currDate.getDate()+" "+currDate.getHours()+":"+currDate.getMinutes()+":"+currDate.getSeconds();
 router.get('/allMeetings', (req, res) => {
-    Meeting.find({estate: req.user.estateName}).populate('polls').lean().then(function(meetings, err){
+    Meeting.find({estate: req.user.estateName}).populate('polls').sort({createdAt : -1}).lean().then(function(meetings, err){
         const promiseArr = []
         var currentMeetings = []
         var pastMeetings = []
@@ -342,7 +342,6 @@ router.post('/editMeeting', (req, res) => {
     function removeFiles(req, res, GUID){
       const data = req.body
       var id = data.meeting_id
-      console.log(data, "data")
       if(data.removedfiles){
                  Meeting.findOneAndUpdate({_id: id
                 }, {
@@ -351,7 +350,6 @@ router.post('/editMeeting', (req, res) => {
                   }
                 })
                  .then(function(r, err){
-                  console.log(r, "rrr")
                   var titleLink = ''
                   var fileLinksLink = ''
                   if(data.title){
@@ -742,6 +740,7 @@ function savePoll(req, res, fileLinks){
                 active: true
             });
             meeting.save(function(err, meeting){
+              console.log("helloooo")
               MeetingGUID = ''
                 const message = '新會議已添加 | A New Meeting has just been added!'
                 sendNotification(message,  req.user.estateName)
@@ -789,11 +788,13 @@ function sendNotification(message, estateName){
                 note.payload = {};
                 note.topic = "com.telostechnology.telos";
                 apnProvider.send(note, item.deviceToken).then( (result) => {
+                  console.log("helooo apn", item._id)
                 //resolve(result)
                 });
                 let type = item.deviceType
                 oneSignal.addDevice(item.deviceToken, type) 
                 .then(function(id){
+                  console.log("helooo onesignal")
                     resolve(id)
                 })
             }))

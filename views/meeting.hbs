@@ -550,7 +550,7 @@
                     </ul>
                 </nav> -->
                 <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="/telos">Telos</a> | The new standard in property management
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="/">Telos</a> | The new standard in property management
                 </p>
             </div>
         </footer>
@@ -572,7 +572,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add a Poll | 增加投票</h4>
+                <h4 class="modal-title">Edit a Poll | 增加投票</h4>
             </div>
             <div class="modal-body">
                 <form role="form" action="/editPoll" method="post" name="editpoll_form" id="editpoll_form" enctype="multipart/form-data" >
@@ -580,11 +580,11 @@
                         <label>Poll Title</label>
                         <input type = "hidden" name="meeting_title" id="meeting_title"/>
                         <input type = "hidden" name="id" id="id"/>
-                        <input type="text" name="pollName" id="title" class="form-control">
+                        <input type="text" name="pollName" id="title" class="form-control" required="true">
                     </div>
                     <div class="form-group col-sm-6">
                         <label>投票标题</label>
-                        <input type="text" name="pollNameChn" id="title_chinese" class="form-control">
+                        <input type="text" name="pollNameChn" id="title_chinese" class="form-control" required="true">
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-6">
@@ -602,7 +602,7 @@
                         <button class="add_field_button1 btn btn-primary pull-left">Add Options | 增加選項</button><br/><br/><br/>
                         <div class="input_fields_wrap voting_opt1 tls-Vot-box-main">
                             <div class="tls-Vot-box">   
-                                <input  class="pull-left tls-Voting-options" type="text" name="option" id="option" placeholder="E.g. Yes/是" required/>
+                                <input  class="pull-left tls-Voting-options" type="text" name="option" id="option" placeholder="E.g. Yes/是" required="true"/>
                             </div>
                         </div>
                     </div>
@@ -662,7 +662,7 @@
                         <br/><br/><br/>
                         <div class="input_fields_wrap voting_opt tls-Vot-box-main">
                             <div class="tls-Vot-box">
-                                 <input   class="pull-left tls-Voting-options"  type="text" name="option0" id="option" placeholder="E.g. Yes/是" required>
+                                 <input   class="pull-left tls-Voting-options"  type="text" name="option0" id="option" placeholder="E.g. Yes/是" required ="true">
                             </div>  
                         </div>
                     </div>
@@ -743,6 +743,7 @@
         $(".delete_meeting").click(function(event){
             event.preventDefault();
             const id = event.target.id
+            console.log("id,", id)
             var originalData = {{{json meetingsData}}};
             // originalData = JSON.parse(originalData);
              console.log(originalData[id])
@@ -758,6 +759,7 @@
             localStorage.removeItem("divTab");
           })
          
+        
         function convertSerializeArrayToJson(serilizeArray) {
             var form_json = {};
             serilizeArray.forEach(function (obj) {
@@ -804,7 +806,12 @@
             $( "#endhour" ).text('')
             var html = ''
              $('#headingBottom2').html('')
+             if(data[event.target.id].pollReport.length === 0){
+                html= `<a href=${data[event.target.id].pollReport} download="pollReport"><button class="btn btn-primary headingbtn dwn-btn download-btn"  type="button" id= "dwn-btn" disabled="true">Download Poll Report | 下載投票報告</button> </a>`
+             }
+             else{
              html= `<a href=${data[event.target.id].pollReport} download="pollReport"><button class="btn btn-primary headingbtn dwn-btn download-btn"  type="button" id= "dwn-btn">Download Poll Report | 下載投票報告</button> </a>`
+                 }
             $('#headingBottom2').append(html)
         }) 
 
@@ -880,7 +887,16 @@
         })    
 
         $("#close_model").click(function () {
+            var isValid= true
+             $('.voting_opt1 :input[type="text"]').each(function() {
+                 if ($.trim($(this).val()) == '') {
+                isValid = false;
+            }
+
+             })
+
             //optionEdit=[]
+            if($("#title").val() != "" && $("#title_chinese").val() != "" && isValid == true){
             var optionEdit = []
             $.each($(".voting_opt1 :input[name*='option1']"), function(data, key){ 
               optionEdit.push($(this).val())
@@ -891,20 +907,20 @@
                 $("#loader3").append(html);
               $(".voting_opt1").append('<input type ="text" name="options" value="'+newArray+'" hidden>')
         $("#poll").modal("hide");
-           
+           }
         })    
          var optionWrapper1 = $(".voting_opt1"); //Fields wrapper
         var add_option_button1 = $(".add_field_button1"); //Add button ID
         $(add_option_button1).click(function(e){ //on add input button click
             e.preventDefault();
-            $(optionWrapper1).append('<div class="input_div tls-Vot-box"><input class="pull-left tls-Voting-options" placeholder="E.g. Yes/是" type="text" name="option1"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            $(optionWrapper1).append('<div class="input_div tls-Vot-box"><input class="pull-left tls-Voting-options" placeholder="E.g. Yes/是" type="text" name="option1" required="true"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
         }); 
         var docWrapper = $(".documents_wrapper")
         var add_document_button = $(".add_documents");
         var index = 0 
         $(add_document_button).click(function (e) { //on add input button click
             e.preventDefault();
-            $(docWrapper).append(`<div style="padding-bottom: 10px;"><input type="file" name=${index} class=" fileValue" style ="width: 50%; display: inline;" id="fileValues" value=""  accept="application/pdf"/><a href="#" class="remove_field">Remove</a></div>`); //add choose file box
+            $(docWrapper).append(`<div style="padding-bottom: 10px;"><input type="file" name=${index} class=" fileValue" style ="width: 50%; display: inline;" id="fileValues" value=""  accept="application/pdf" required="true"/><a href="#" class="remove_field">Remove</a></div>`); //add choose file box
             index = index + 1
         });
 
@@ -932,9 +948,9 @@
             removedFilepolls.push(name)
             $('.added_files').append(`<input type = "hidden" name="removedfiles" value=${removedFilepolls}>`)
         })
-        function edit_popup(data){
+        function edit_popup(data, key){
             var html = '<div class="div-wrapper" style="padding: 10px;">'+
-            '<h3 class= "heading">' + "Upcoming Meeting | 近期會議"+ '</h3>' + '                                        <button class=" btn btn-danger deleteMeeting deletebtn btn-danger" type="submit" id={{data._id}} data-id={{data._id}} data-time="">Delete Meeting | 取消會議</button>' + '<hr>' +
+            '<h3 class= "heading">' + "Upcoming Meeting | 近期會議"+ '</h3>' + '                                        <button type="button" class="btn btn-danger delete_meetings deletebtn btn-danger"  id='+key+'>Delete Meeting | 取消會議</button>' + '<hr>' +
             
 '                                <form role="form" enctype="multipart/form-data" name="edit_meeting_popup" id="edit_meeting_popup" action="/editMeeting" method="post">'+
 '                                    <div class="form-group col-sm-6">'+
@@ -1011,11 +1027,12 @@
     
 
                 return html; 
+
         }
         $(document).on('click','.edit_meeting1',function(event){
             event.preventDefault();
             var data = originalData[event.target.id]
-             var modelhtml = edit_popup(originalData[event.target.id]);
+             var modelhtml = edit_popup(originalData[event.target.id], event.target.id );
 
               $("#edit_model .modal-dialog").html(modelhtml);
                 $("#edit_model").modal();
@@ -1033,6 +1050,26 @@
        
         $(document).on('click','.cancel_meeting',function(event){
             $("#edit_model").modal('hide');
+        })
+        $(document).on('click','.deletebtn',function(event){
+             console.log("hello")
+             const id = event.target.id
+            console.log("id,", id)
+            var originalData = {{{json meetingsData}}};
+            // originalData = JSON.parse(originalData);
+             console.log(originalData)
+            var m = new Date(originalData[id].startTime);
+            var diff = m - new Date()
+            var seconds = diff / 1000;
+            var minutes = (diff / 1000) / 60;
+            var hours = minutes / 60;
+            var one_day=1000*60*60*24;
+            console.log(diff,one_day)
+            $("#edit_model").modal('hide');
+            ShowCustomDialog2("Are you sure you want to delete this meeting? | 確定刪除會議 ？", originalData[id]._id)
+            localStorage.removeItem("tab");
+            localStorage.removeItem("divTab");
+            //$("#edit_model").modal('hide');
         })
         $(document).on('click','.save_meeting',function(event){
             $("#edit_model").modal('hide');
@@ -1114,7 +1151,7 @@
                 $(".voting_opt1 .remove_field").remove();
                 var optionWrapper = $(".voting_opt1");
                 $.each(poll.options, function( index, value ) {
-                $(optionWrapper).append('<div class="input_div tls-Vot-box"><input class="pull-left tls-Voting-options" type="text" value="'+value+'" name="option1"/><a href="#" class="remove_field">Remove</a></div>');
+                $(optionWrapper).append('<div class="input_div tls-Vot-box"><input class="pull-left tls-Voting-options voting_optInput" type="text" value="'+value+'" name="option1" required="true"/><a href="#" class="remove_field">Remove</a></div>');
                 });
                 $('.added_files').html('');
                 $.each(poll.fileLinks, function( index, value ) {
@@ -1205,7 +1242,11 @@
                                         click: function (event) {                                           
                                              $(this).dialog("close");                                          
                                            
-                                        }
+                                   
+
+
+
+                                       }
                                     },
                                 ]
                 });

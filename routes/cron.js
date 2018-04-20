@@ -88,7 +88,7 @@ function sendNotification(message){
                 note.payload = {};
                 note.topic = "com.telostechnology.telos";
                 apnProvider.send(note, item.deviceToken).then( (result) => {
-                console.log(result, "result");
+                //console.log(result, "result");
                 //resolve(result)
                 });
                 let type = item.deviceType
@@ -134,7 +134,7 @@ function sendNotificationForProxy(message, meeting){
                 note.payload = {};
                 note.topic = "com.telostechnology.telos";
                 apnProvider.send(note, item.deviceToken).then( (result) => {
-                console.log(result, "result");
+                //console.log(result, "result");
                 //resolve(result)
                 });
                 let type = item.deviceType
@@ -210,10 +210,10 @@ var k = schedule.scheduleJob("*/1 * * * *", function(fireDate){
                     NotificationStatus: true
                   }
                 }).then(function(mee, err){
-                  console.log(mee, "mee")
+                  //console.log(mee, "mee")
                 const message = ` 大會將於一小時後進行 | `+ item.title+ ` will start one hour later.`
                 sendNotification(message)
-                      console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
+                      //console.log('This job was supposed to run at ' + fireDate + ', but actually ran at ' + new Date());
                     })
                   }
              }))

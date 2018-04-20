@@ -262,14 +262,14 @@ router.get('/getSurveys', (req, res) => {
   if(!blocksFloors){
       blocksFloors = {};
   }
-  Survey.find({estate: req.user.estateName}).lean()
+  Survey.find({estate: req.user.estateName}).lean().sort({postDate: -1})
   .then(function(survey, err) {
     if(survey.length){
         var todayDate = new Date()
         promiseArr.push(new Promise(function(resolve, reject){
         _.forEach(survey, function(surv, index) {
             var finalQuestions = []
-        Question.find({surveyId: surv._id}).populate('optionIds').lean().sort( { order: 1 } )
+        Question.find({surveyId: surv._id}).populate('optionIds').lean().sort({order: 1 })
             .then(function(que, err){
             surv.question = que
             _.forEach(que, function(q, index1) {
