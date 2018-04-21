@@ -258,7 +258,8 @@
         const HostName = window.location.origin
         $(".flatpickr").flatpickr({
             enableTime: true,
-            dateFormat: "m/d/YTh:i:K"
+            dateFormat: "m/d/YTh:i:K",
+            minDate: "today"
         });
         const html = `<p class="close-calendar">Confirm | 確認</p>`;
         $(".flatpickr-calendar").append(html);
