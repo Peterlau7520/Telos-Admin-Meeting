@@ -42,14 +42,14 @@ body{
     display: block;
     margin: 0 auto;
   }
-  /* .sponsors-mobile-ch{
-    content:url("assets/img/landing-page/sponsors-mobile-ch.jpg") !important;
-    background-size: 134%;
-    padding-top: 25px;
-    width: 60%;
-    display: block;
-    margin: 0 auto;
-  } */
+  .sponsors-mobile {
+      content: url("assets/img/landing-page/sponsors-mobile-ch.jpg") !important;
+      background-size: 134%;
+      width: 60%;
+      padding-top: 25px;
+      display: block;
+      margin: 0 auto;
+    }
   .mobile-show{
     display: block;
   }
@@ -97,6 +97,7 @@ body{
     display: inline-block;
     box-sizing: content-box;
   }
+  
   </style>
   <div class="loading-screen">
     <div class="inner">
@@ -262,7 +263,10 @@ body{
           </div>
         </div>
       </section>
-
+       <section class="fw-section with-parallax  aws-img sponsors-mobile" id="aws-img" style=" background-size: 100% 100%;">
+      <img class="mobile-show" src="assets/img/landing-page/sponsors-mobile-ch.jpg" alt="Property management" />
+      <img class="mobile-hide" style="max-width: 75%;margin: 20px auto;" src="assets/img/landing-page/sponsors-ch.jpg" alt="Telos Technology Hong Kong" />
+    </section>
       <!-- noticeboard secion  -->
       <section class="fw-section padding-top-4x">
         <div class="container" data-aos="fade-up">
